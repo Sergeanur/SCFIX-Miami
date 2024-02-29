@@ -6308,6 +6308,7 @@ game_help_loop_inner:
 
 			IF IS_PLAYER_PLAYING player1
 				IF print_save_game_help = 0
+				AND flag_player_on_mission = 0 // FIXMIAMI: don't show this stuff on mission as it might break controls
 					IF view_of_ocean_view = 0
 						IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player1 240.4 -1280.2 10.0 4.0 4.0 3.0 FALSE
 						OR LOCATE_PLAYER_ON_FOOT_3D player1 240.4 -1280.2 10.0 4.0 4.0 3.0 FALSE

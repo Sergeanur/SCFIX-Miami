@@ -290,6 +290,7 @@ SET_CHAR_OBJ_NO_OBJ scplayer
 
 flag_player_on_mission = 0
 flag_hotel_mission1_passed = 1
+view_of_ocean_view = 1 // FIXMIAMI: don't ever show how to enter Ocean View
 
 RELEASE_WEATHER
 CLEAR_EXTRA_COLOURS FALSE
