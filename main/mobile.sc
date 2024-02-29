@@ -2201,7 +2201,7 @@ cell_phone_inner:
 								ENDIF
 								IF flag_player_answered_phone = 1	
 									flag_mob_63 = 1
-									call_delay = 60000
+									//call_delay = 60000 // FIXMIAMI: remove this
 									//ADD_SPRITE_BLIP_FOR_CONTACT_POINT cubanX cubanY cubanZ the_cuban_blip cuban_contact_blip
 									//START_NEW_SCRIPT cuban_mission1_loop
 								ENDIF
