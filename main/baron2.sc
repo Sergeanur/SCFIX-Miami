@@ -727,6 +727,7 @@ WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D Player1 89.1 1084.0 39.0 6.0 6.0 6.0 FALSE
 			PLAY_MISSION_AUDIO 1 //No. I'll get a bit of practice on the way 
 			PRINT_NOW ( COK2_6 ) 3000 2
 			IF HAS_MISSION_AUDIO_FINISHED 1
+				CLEAR_THIS_PRINT COK2_6 // FIXMIAMI
 				IF TIMERB > 12000
 					PLAY_MISSION_AUDIO 2 //Ok, we're almost there 
 					PRINT_NOW ( COK2_14 ) 5000 2
@@ -778,6 +779,7 @@ WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D Player1 89.1 1084.0 39.0 6.0 6.0 6.0 FALSE
 			PLAY_MISSION_AUDIO 1 //Then I'll set you down and you're on your own.
 			PRINT_NOW ( COK2_17 ) 4000 2
 			IF HAS_MISSION_AUDIO_FINISHED 1
+				CLEAR_THIS_PRINT COK2_17 // FIXMIAMI
 				nearly_at_site_samp = 1
 				GOSUB reset_audio_flags
 			ENDIF
@@ -823,6 +825,11 @@ WHILE NOT deathkills = 5 //First building (bottom right) (SWARM 1!!!)
 		IF audio_has_loaded   = 1
 			PLAY_MISSION_AUDIO 1 //Shit! This is a war zone! Take out some of those gunmen
 			PRINT_NOW ( COK2_20 ) 4000 2
+			// FIXMIAMI: START
+			IF HAS_MISSION_AUDIO_FINISHED 1
+				CLEAR_THIS_PRINT COK2_20
+			ENDIF
+			// FIXMIAMI: END
 		ENDIF
 	ENDIF
 
@@ -830,6 +837,15 @@ WHILE NOT deathkills = 5 //First building (bottom right) (SWARM 1!!!)
 ENDWHILE
 
 move_on1:
+
+// FIXMIAMI: START
+IF audio_has_loaded = 1
+	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+		WAIT 0
+	ENDWHILE
+	CLEAR_THIS_PRINT COK2_20
+ENDIF
+// FIXMIAMI: END
 
 
 IF NOT IS_CAR_DEAD buddy_heli
@@ -1222,12 +1238,25 @@ WHILE NOT deathkills > 9 //North of centre building (SWARM 3!!!)
 			PLAY_MISSION_AUDIO 1 //We're taking hits here man
 			PRINT_NOW ( COK2_21 ) 5000 2
 			taking_damage_samp1 = 1
+		ELSE // FIXMIAMI
+			IF HAS_MISSION_AUDIO_FINISHED 1 // FIXMIAMI
+				CLEAR_THIS_PRINT COK2_21 // FIXMIAMI
+			ENDIF // FIXMIAMI
 		ENDIF
 	ENDIF
 		
 ENDWHILE
 
 move_on3:
+
+// FIXMIAMI: START
+IF taking_damage_samp1 = 1
+	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+		WAIT 0
+	ENDWHILE
+	CLEAR_THIS_PRINT COK2_21
+ENDIF
+// FIXMIAMI: END
 
 IF NOT IS_CAR_DEAD buddy_heli
 	CLEAR_HELI_ORIENTATION buddy_heli
@@ -1279,12 +1308,25 @@ WHILE NOT deathkills > 9 //Next to basketball court (SWARM 3!!!)
 			PLAY_MISSION_AUDIO 1 //We're taking hits here man 
 			PRINT_NOW ( COK2_21 ) 5000 2
 			taking_damage_samp1 = 1
+		ELSE // FIXMIAMI
+			IF HAS_MISSION_AUDIO_FINISHED 1 // FIXMIAMI
+				CLEAR_THIS_PRINT COK2_21 // FIXMIAMI
+			ENDIF // FIXMIAMI
 		ENDIF
 	ENDIF
 		
 ENDWHILE
 
 move_on4:
+
+// FIXMIAMI: START
+IF taking_damage_samp1 = 1
+	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+		WAIT 0
+	ENDWHILE
+	CLEAR_THIS_PRINT COK2_21
+ENDIF
+// FIXMIAMI: END
 
 upped_to_ten_peds = 0
 
@@ -1399,12 +1441,27 @@ WHILE NOT deathkills = 5 //Second building (SWARM4)
 			PLAY_MISSION_AUDIO 1 //This thing ain't cheap to fix! Take 'em out
 			PRINT_NOW ( COK2_22 ) 5000 2
 			taking_damage_samp2 = 1
+// FIXMIAMI: START
+		ELSE
+			IF HAS_MISSION_AUDIO_FINISHED 1
+				CLEAR_THIS_PRINT COK2_22
+			ENDIF
+// FIXMIAMI: END
 		ENDIF
 	ENDIF
 		
 ENDWHILE
 
 move_on5:
+
+// FIXMIAMI: START
+IF taking_damage_samp2 = 1
+	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+		WAIT 0
+	ENDWHILE
+	CLEAR_THIS_PRINT COK2_22
+ENDIF
+// FIXMIAMI: END
 
 
 WAIT 1500
@@ -1571,7 +1628,7 @@ IF NOT IS_CHAR_DEAD sgang_boss //BOSS fight
 				PLAY_MISSION_AUDIO 1 //asshole
 				PRINT_NOW ( COK2_27 ) 2000 2
 				IF HAS_MISSION_AUDIO_FINISHED 1
-
+					CLEAR_THIS_PRINT COK2_27 // FIXMIAMI
 					IF NOT IS_CHAR_DEAD sgang_boss
 						IF NOT IS_CAR_DEAD buddy_heli
 							SET_CHAR_OBJ_DESTROY_CAR sgang_boss buddy_heli
@@ -1607,6 +1664,16 @@ IF NOT IS_CHAR_DEAD sgang_boss //BOSS fight
 	ENDIF
 
 WAIT 1000
+
+	// FIXMIAMI: START
+	IF first_two_samples = 1
+		WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
+			WAIT 0
+		ENDWHILE
+
+		CLEAR_THIS_PRINT COK2_28
+	ENDIF
+	// FIXMIAMI: END
 
 	RESTORE_CAMERA_JUMPCUT
 	IF NOT IS_CAR_DEAD buddy_heli
@@ -1692,12 +1759,30 @@ WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D Player1 33.7 1083.0 15.0 10.0 10.0 4.0 FALS
 		ENDIF
 	ENDIF
 
+	// FIXMIAMI: START
+	IF audio_has_loaded = 1
+	AND leaving_heli_samp = 0
+	AND HAS_MISSION_AUDIO_FINISHED 1
+		CLEAR_THIS_PRINT COK2_23
+	ENDIF
+	// FIXMIAMI: END
+
 ENDWHILE
 	
 
 IF NOT IS_CAR_DEAD buddy_heli
 	SET_HELI_ORIENTATION buddy_heli 180.0
 ENDIF
+
+// FIXMIAMI: START
+IF audio_has_loaded = 1
+AND leaving_heli_samp = 0
+	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+		WAIT 0
+	ENDIF
+	CLEAR_THIS_PRINT COK2_23
+ENDIF
+// FIXMIAMI: END
 
 WAIT 1000
 
