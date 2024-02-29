@@ -58,6 +58,7 @@ stored_any_vehicle = 0
 CLEAR_HELP
  
 IF NOT IS_CHAR_DEAD scplayer
+AND IS_PLAYER_WEARING player1 player2 // FIXMIAMI: add specific skin check
 
 	UNDRESS_CHAR scplayer player
 

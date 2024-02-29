@@ -157,6 +157,7 @@ WAIT 0
 WAIT 500
 
 IF NOT IS_CHAR_DEAD scplayer
+AND IS_PLAYER_WEARING player1 player4 // FIXMIAMI: add specific skin check
 
 	UNDRESS_CHAR scplayer player
 

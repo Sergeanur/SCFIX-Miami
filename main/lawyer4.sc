@@ -123,6 +123,7 @@ CLEAR_HELP
 clothes_cut_scene2_played = 0
 
 IF NOT IS_CHAR_DEAD scplayer
+AND IS_PLAYER_WEARING player1 player3 // FIXMIAMI: add specific skin check
 
 	UNDRESS_CHAR scplayer player
 
