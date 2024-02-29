@@ -1587,7 +1587,7 @@ SWITCH_CAR_GENERATOR gen_car98 101
 CREATE_CAR_GENERATOR -267.0 -303.6 9.5 160.0 COMET -1 -1 0 0 0 0 10000 gen_car99 //Mansion9
 SWITCH_CAR_GENERATOR gen_car99 101
 
-CREATE_CAR_GENERATOR -350.8 -534.9 11.4 86.5 PIZZABOY  -1 -1 0 0 0 0 10000 gen_car5 //Mansion after completing pizza missions
+CREATE_CAR_GENERATOR -350.8 -534.9 12.4 86.5 PIZZABOY  -1 -1 0 0 0 0 10000 gen_car5 //Mansion after completing pizza missions // FIXMIAMI: fix Z coord
 SWITCH_CAR_GENERATOR gen_car5 0
 
 
