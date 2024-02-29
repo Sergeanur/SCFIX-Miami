@@ -734,51 +734,10 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 		ENDWHILE
 	ENDIF
 
-	IF rampage_model_selection = 4
-		rampage_pedtype	= PEDTYPE_GANG_CUBAN
-		rampage_pedmodel_1 = CBa
-		rampage_pedmodel_2 = CBb
-		rampage_pedmodel_3 = HNa
-		rampage_pedmodel_4 = HNb
-		++ rampage_model_selection
-	ENDIF
-
-	IF rampage_model_selection = 3
-		rampage_pedtype	= PEDTYPE_GANG_HAITIAN
-		rampage_pedmodel_1 = HNa
-		rampage_pedmodel_2 = HNb
-		rampage_pedmodel_3 = CBa
-		rampage_pedmodel_4 = CBb
-		++ rampage_model_selection
-	ENDIF
-
-	IF rampage_model_selection = 2
-		rampage_pedtype	= PEDTYPE_GANG_BIKER
-		rampage_pedmodel_1 = BKa
-		rampage_pedmodel_2 = BKb
-		rampage_pedmodel_3 = CBa
-		rampage_pedmodel_4 = CBb
-		++ rampage_model_selection
-	ENDIF
-
-	IF rampage_model_selection = 1
-		rampage_pedtype	= PEDTYPE_GANG_DIAZ
-		rampage_pedmodel_1 = CLa
-		rampage_pedmodel_2 = CLb
-		rampage_pedmodel_3 = HNa
-		rampage_pedmodel_4 = HNb
-		++ rampage_model_selection
-	ENDIF
-
-	IF rampage_model_selection = 0
-		rampage_pedtype	= PEDTYPE_GANG_STREET
-		rampage_pedmodel_1 = SGa
-		rampage_pedmodel_2 = SGb
-		rampage_pedmodel_3 = HNa
-		rampage_pedmodel_4 = HNb
-		++ rampage_model_selection
-	ENDIF
-
+	// FIXMIAMI - Start: Fix rampage gang always being cubans, remove Diaz gang after Rub Out
+	{
+	LVAR_INT flag_are_pedmodels_picked
+	flag_are_pedmodels_picked = 0
 	IF IS_PLAYER_PLAYING player1
 		IF IS_PLAYER_IN_INFO_ZONE player1 STREET5
 			rampage_pedtype	= PEDTYPE_GANG_STREET
@@ -786,6 +745,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 			rampage_pedmodel_2 = SGb
 			rampage_pedmodel_3 = HNa
 			rampage_pedmodel_4 = HNb
+			flag_are_pedmodels_picked = 1
 		ENDIF
 		
 		IF IS_PLAYER_IN_INFO_ZONE player1 BIKAREA
@@ -794,6 +754,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 			rampage_pedmodel_2 = BKb
 			rampage_pedmodel_3 = CBa
 			rampage_pedmodel_4 = CBb
+			flag_are_pedmodels_picked = 1
 		ENDIF
 		
 		IF IS_PLAYER_IN_INFO_ZONE player1 GANG2
@@ -802,6 +763,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 			rampage_pedmodel_2 = HNb
 			rampage_pedmodel_3 = CBa
 			rampage_pedmodel_4 = CBb
+			flag_are_pedmodels_picked = 1
 		ENDIF
 		
 		IF IS_PLAYER_IN_INFO_ZONE player1 GHETTO1
@@ -810,6 +772,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 			rampage_pedmodel_2 = HNb
 			rampage_pedmodel_3 = CBa
 			rampage_pedmodel_4 = CBb
+			flag_are_pedmodels_picked = 1
 		ENDIF
 		
 		IF IS_PLAYER_IN_INFO_ZONE player1 GHETTO2
@@ -818,8 +781,58 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 			rampage_pedmodel_2 = CBb
 			rampage_pedmodel_3 = HNa
 			rampage_pedmodel_4 = HNb
+			flag_are_pedmodels_picked = 1
 		ENDIF
 	ENDIF
+
+	IF flag_are_pedmodels_picked = 0
+		IF flag_baron_mission5_passed = 1
+			GENERATE_RANDOM_INT_IN_RANGE 0 4 rampage_model_selection
+		ELSE
+			GENERATE_RANDOM_INT_IN_RANGE 0 5 rampage_model_selection
+		ENDIF
+		IF rampage_model_selection = 4
+			rampage_pedtype	= PEDTYPE_GANG_DIAZ
+			rampage_pedmodel_1 = CLa
+			rampage_pedmodel_2 = CLb
+			rampage_pedmodel_3 = HNa
+			rampage_pedmodel_4 = HNb
+		ENDIF
+
+		IF rampage_model_selection = 3
+			rampage_pedtype	= PEDTYPE_GANG_HAITIAN
+			rampage_pedmodel_1 = HNa
+			rampage_pedmodel_2 = HNb
+			rampage_pedmodel_3 = CBa
+			rampage_pedmodel_4 = CBb
+		ENDIF
+
+		IF rampage_model_selection = 2
+			rampage_pedtype	= PEDTYPE_GANG_BIKER
+			rampage_pedmodel_1 = BKa
+			rampage_pedmodel_2 = BKb
+			rampage_pedmodel_3 = CBa
+			rampage_pedmodel_4 = CBb
+		ENDIF
+
+		IF rampage_model_selection = 1
+			rampage_pedtype	= PEDTYPE_GANG_CUBAN
+			rampage_pedmodel_1 = CBa
+			rampage_pedmodel_2 = CBb
+			rampage_pedmodel_3 = HNa
+			rampage_pedmodel_4 = HNb
+		ENDIF
+
+		IF rampage_model_selection = 0
+			rampage_pedtype	= PEDTYPE_GANG_STREET
+			rampage_pedmodel_1 = SGa
+			rampage_pedmodel_2 = SGb
+			rampage_pedmodel_3 = HNa
+			rampage_pedmodel_4 = HNb
+		ENDIF
+	ENDIF
+	}
+	// FIXMIAMI - END: Fix rampage gang always being cubans, remove Diaz gang after Rub Out
 	
 	IF rampage_pickup = rampage_19
 		START_KILL_FRENZY PAGE_00 rampage_weapontype 120000 rampage_kills rampage_pedmodel_1 rampage_pedmodel_2 rampage_pedmodel_3 rampage_pedmodel_4 FALSE
