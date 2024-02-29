@@ -955,7 +955,7 @@ IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -562.5 782.3 21.8 2.0 2.0 2.0 TRUE
 			SET_CAR_COORDINATES players_lift_vehicle -562.5 782.3 21.8
 			SET_CAR_HEADING players_lift_vehicle 264.8 
 			
-			CREATE_CHAR PEDTYPE_CIVFEMALE WMOBU -556.2 783.0 21.8 lift_office1 //left when looking in
+			CREATE_CHAR PEDTYPE_CIVMALE WMOBU -556.2 783.0 21.8 lift_office1 //left when looking in // FIXMIAMI: was PEDTYPE_CIVFEMALE
 			SET_CHAR_HEADING lift_office1 204.7
 
 			CREATE_CHAR PEDTYPE_CIVFEMALE WFYBU -555.8 781.3 21.8 lift_office2  //right when looking in
@@ -1074,7 +1074,7 @@ IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -562.5 782.3 21.8 2.0 2.0 2.0 TRUE
 					IF setting_player_upstairs = 0
 						DELETE_CHAR lift_office1	
 						DELETE_CHAR lift_office2
-						CREATE_CHAR PEDTYPE_CIVFEMALE WMOBU -550.0 788.7 96.5 lift_office1 //left when looking in
+						CREATE_CHAR PEDTYPE_CIVMALE WMOBU -550.0 788.7 96.5 lift_office1 //left when looking in // FIXMIAMI: was PEDTYPE_CIVFEMALE
 						SET_CHAR_HEADING lift_office1 90.6
 
 						CREATE_CHAR PEDTYPE_CIVFEMALE WFYBU -550.0 787.2 96.5 lift_office2 //right when looking in
@@ -1125,15 +1125,15 @@ IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -562.5 782.3 21.8 2.0 2.0 2.0 TRUE
 			CREATE_CHAR PEDTYPE_CIVFEMALE HFYBU -524.0 811.6 96.5 top_office4 //standing at watercooler talknig to top_office5 (back to window)
 			SET_CHAR_HEADING top_office4 108.6
 		
-			CREATE_CHAR PEDTYPE_CIVFEMALE WMOBU -524.0 810.0 96.5 top_office5 //standing at watercooler talknig to top_office4 (facing window)
+			CREATE_CHAR PEDTYPE_CIVMALE WMOBU -524.0 810.0 96.5 top_office5 //standing at watercooler talknig to top_office4 (facing window) // FIXMIAMI: was PEDTYPE_CIVFEMALE
 			SET_CHAR_HEADING top_office5 0.0
 		
 			SET_CHARS_CHATTING top_office4 top_office5 86400000 
 		
-			CREATE_CHAR PEDTYPE_CIVFEMALE WMYBU -529.5 826.9 96.5 top_office6 //standing looking out of smashable glass window
+			CREATE_CHAR PEDTYPE_CIVMALE WMYBU -529.5 826.9 96.5 top_office6 //standing looking out of smashable glass window // FIXMIAMI: was PEDTYPE_CIVFEMALE
 			SET_CHAR_HEADING top_office6 358.0
 		
-			CREATE_CHAR PEDTYPE_CIVFEMALE WMYBU -539.2 768.6 96.5 top_office7 //sitting on chair talking to top_office7
+			CREATE_CHAR PEDTYPE_CIVMALE WMYBU -539.2 768.6 96.5 top_office7 //sitting on chair talking to top_office7 // FIXMIAMI: was PEDTYPE_CIVFEMALE
 			SET_CHAR_HEADING top_office7 6.5
 		
 			CREATE_CHAR PEDTYPE_CIVFEMALE HFYBU -540.2 769.3 96.5 top_office8 //standing talking to top_office8
@@ -1271,7 +1271,7 @@ IF LOCATE_PLAYER_ANY_MEANS_3D player1 -568.0 793.2 22.0 40.0 40.0 40.0 FALSE
 
 			SET_CHARS_CHATTING bottom_office1 bottom_office2 86400000 
 
-			CREATE_CHAR PEDTYPE_CIVFEMALE WMYBU -574.1 788.0 21.8 bottom_office3 //sitting on chairs as player goes in
+			CREATE_CHAR PEDTYPE_CIVMALE WMYBU -574.1 788.0 21.8 bottom_office3 //sitting on chairs as player goes in // FIXMIAMI: was PEDTYPE_CIVFEMALE
 			SET_CHAR_HEADING bottom_office3 278.0
 
 			CREATE_CHAR PEDTYPE_CIVFEMALE HFYBU -571.2 810.6 21.8 bottom_office4 //standing talking to guy sitting down (officeworker6)
@@ -1280,7 +1280,7 @@ IF LOCATE_PLAYER_ANY_MEANS_3D player1 -568.0 793.2 22.0 40.0 40.0 40.0 FALSE
 			CREATE_CHAR PEDTYPE_CIVFEMALE HFYBU -560.8 787.5 21.8 bottom_office5 //standing browsing books
 			SET_CHAR_HEADING bottom_office5 278.8
 
-			CREATE_CHAR PEDTYPE_CIVFEMALE WMOBU -569.4 810.5 21.8 bottom_office6 //sitting on chairs at left hand side of the office FACING WINDOW
+			CREATE_CHAR PEDTYPE_CIVMALE WMOBU -569.4 810.5 21.8 bottom_office6 //sitting on chairs at left hand side of the office FACING WINDOW // FIXMIAMI: was PEDTYPE_CIVFEMALE
 			SET_CHAR_HEADING bottom_office6 114.1
 		
 			SET_CHARS_CHATTING bottom_office4 bottom_office6 86400000 
