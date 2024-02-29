@@ -47,7 +47,7 @@ IF bollox = 1
 	CREATE_CLOTHES_PICKUP 97.5 -1133.6 10.4 2 clothes_pickup2
 	CREATE_CLOTHES_PICKUP 364.2 1086.1 19.0 3 clothes_pickup3
 	CREATE_CLOTHES_PICKUP 106.5 253.0 21.7 4 clothes_pickup4
-	CREATE_CLOTHES_PICKUP -1024.5 -433.9 10.9 5 clothes_pickup5
+	CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5 // FIXMIAMI: fix cuban skin pickup location
 	//CREATE_CLOTHES_PICKUP -1024.5 -433.9 10.9 5 clothes_pickup5
 	CREATE_CLOTHES_PICKUP 405.7 -485.6 12.3 6 clothes_pickup6
 	CREATE_CLOTHES_PICKUP 414.3 1042.0 25.4 8 clothes_pickup7
