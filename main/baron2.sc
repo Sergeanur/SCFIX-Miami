@@ -639,7 +639,7 @@ WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D Player1 89.1 1084.0 39.0 6.0 6.0 6.0 FALSE
 
 	IF first_two_samples = 1
 	AND second_two_samples = 0
-	AND TIMERB > 3000 
+	AND TIMERB > 4000 // FIXMIAMI: change 3000 to 4000
 		IF audio_is_loading = 0
 			LOAD_MISSION_AUDIO 1 COK2_3	
 			LOAD_MISSION_AUDIO 2 COK2_4	
