@@ -6837,3 +6837,45 @@ save_the_game2:
 RETURN
 
 
+
+// FIXMIAMI: Start - moved this stuff from porn3.sc to create a separate script thread
+load_camera_audio_loop: // FIXMIAMI
+{
+	SCRIPT_NAME PRN3CAM
+
+load_camera_audio_loop_inner:
+
+	WAIT 0
+	IF cam_audio1 = 0
+		// FIXMIAMI - START
+		WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+			WAIT 0
+		ENDWHILE 
+		CLEAR_MISSION_AUDIO 1
+		// FIXMIAMI - END
+		LOAD_MISSION_AUDIO 1 CAML
+		WHILE NOT HAS_MISSION_AUDIO_LOADED 1
+			WAIT 0
+		ENDWHILE 
+		cam_audio1 = 1
+	ENDIF
+
+	IF cam_audio2 = 0
+		// FIXMIAMI - START
+		WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
+			WAIT 0
+		ENDWHILE 
+		CLEAR_MISSION_AUDIO 2
+		// FIXMIAMI - END
+		LOAD_MISSION_AUDIO 2 CAMR
+		WHILE NOT HAS_MISSION_AUDIO_LOADED 2
+			WAIT 0
+		ENDWHILE 
+		cam_audio2 = 1
+	ENDIF
+
+	GOTO load_camera_audio_loop_inner // FIXMIAMI
+}
+
+RETURN
+// FIXMIAMI: End
