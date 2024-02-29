@@ -1566,7 +1566,9 @@ interiors_inner:
 										IF flag_eject = 0
 											SET_AREA_VISIBLE VIS_MANSION
 											flag_player_in_mansion = 1
-											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+											IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+												SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+											ENDIF // FIXMIAMI
 											SWITCH_RUBBISH OFF
 											LOAD_SCENE -378.5 -560.03 19.0
 											SET_PLAYER_COORDINATES player1 -378.5 -560.0 19.0
@@ -1590,7 +1592,9 @@ interiors_inner:
 									IF flag_eject = 0
 										GOSUB outgoing
 										flag_player_in_mansion = 0
-										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+										IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+											SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+										ENDIF // FIXMIAMI
 										CLEAR_AREA -377.06 -545.43 17.0 1.0 FALSE
 										LOAD_SCENE -377.06 -545.43 17.0
 										SET_PLAYER_COORDINATES player1 -377.06 -545.43 16.0
@@ -1641,7 +1645,9 @@ interiors_inner:
 									IF flag_eject = 0
 										SET_AREA_VISIBLE VIS_MANSION
 										flag_player_in_mansion = 1
-										SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+										IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+										ENDIF // FIXMIAMI
 										SWITCH_RUBBISH OFF
 										LOAD_SCENE -329.24 -582.5 34.5
 										SET_PLAYER_COORDINATES player1 -329.24 -582.5 34.5
@@ -1663,7 +1669,9 @@ interiors_inner:
 								IF flag_eject = 0
 									GOSUB outgoing
 									flag_player_in_mansion = 0
-									SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+									IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+									ENDIF // FIXMIAMI
 									CLEAR_AREA -343.3 -572.8 36.0 1.0 FALSE
 									LOAD_SCENE -343.3 -572.8 36.0
 									//SET_PLAYER_COORDINATES player1 -338.738 -573.984 35.305
@@ -1716,7 +1724,9 @@ interiors_inner:
 									IF flag_eject = 0
 										SET_AREA_VISIBLE VIS_MANSION
 										flag_player_in_mansion = 1
-										SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+										IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+										ENDIF // FIXMIAMI
 										SWITCH_RUBBISH OFF
 										LOAD_SCENE -338.5 -578.8 10.6
 										SET_PLAYER_COORDINATES player1 -338.5 -578.8 10.6
@@ -1740,7 +1750,9 @@ interiors_inner:
 								IF flag_eject = 0
 									GOSUB outgoing
 									flag_player_in_mansion = 0
-									SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+									IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
+									ENDIF // FIXMIAMI
 									CLEAR_AREA -354.0 -586.0 10.6 1.0 FALSE
 									LOAD_SCENE -354.0 -586.0 10.6
 									SET_PLAYER_COORDINATES player1 -354.0 -586.0 10.6
