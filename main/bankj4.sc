@@ -121,6 +121,21 @@ flag_player_in_malibu = 0
 REGISTER_MISSION_GIVEN 
 WAIT 0
 
+// FIXMIAMI - Start: remove robber clothes from player
+IF NOT IS_CHAR_DEAD scplayer
+AND IS_PLAYER_WEARING player1 player7
+
+	UNDRESS_CHAR scplayer player
+
+	LOAD_ALL_MODELS_NOW
+
+	IF NOT IS_CHAR_DEAD scplayer
+		DRESS_CHAR scplayer
+	ENDIF
+
+ENDIF
+// FIXMIAMI - End
+
 //flag_bank_job = 1
 audio_slot = 1
 
