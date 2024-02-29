@@ -1329,7 +1329,7 @@ cell_phone_inner:
 
 					// PAUL TELLS PLAYER ABOUT SWAT RETIREMENT FUND AT THE BANK -----------------------------------------------------
 					IF flag_mob_14 = 0
-					AND flag_first_asset_complete = 1
+					AND flag_bought_malibu = 1 // FIXMIAMI
 
 						//RING_PLAYER_PHONE TRUE
 						GOSUB mobile_rings
@@ -1379,8 +1379,10 @@ cell_phone_inner:
 						ENDIF
 						IF flag_player_answered_phone = 1	
 							flag_mob_14 = 1
-							//ADD_SPRITE_BLIP_FOR_CONTACT_POINT haitianX haitianY haitianZ the_haitian_blip haitian_contact_blip
-							//START_NEW_SCRIPT haitian_mission1_loop
+							// FIXMIAMI: Start
+							ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
+							START_NEW_SCRIPT bankjob_mission1_loop
+							// FIXMIAMI: END
 						ENDIF
 						mob_14_plonk:
 						GOSUB mobile_message_cleanup

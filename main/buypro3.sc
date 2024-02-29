@@ -22,8 +22,8 @@ WAIT 0
 	WHILE GET_FADING_STATUS
 		WAIT 0
 		IF NOT IS_PLAYER_PLAYING player1
-			ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
-			START_NEW_SCRIPT bankjob_mission1_loop
+			//ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip  // FIXMIAMI: moved into mobile.sc
+			//START_NEW_SCRIPT bankjob_mission1_loop // FIXMIAMI: moved into mobile.sc
 			flag_bought_malibu = 1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
@@ -43,8 +43,8 @@ WAIT 0
 	WHILE GET_FADING_STATUS
 		WAIT 0
 		IF NOT IS_PLAYER_PLAYING player1
-			ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
-			START_NEW_SCRIPT bankjob_mission1_loop
+			//ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip // FIXMIAMI: moved into mobile.sc
+			//START_NEW_SCRIPT bankjob_mission1_loop // FIXMIAMI: moved into mobile.sc
 			flag_bought_malibu = 1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
@@ -60,8 +60,8 @@ WAIT 0
 	
 	IF NOT IS_PLAYER_PLAYING player1
 		SET_MUSIC_DOES_FADE TRUE
-		ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
-		START_NEW_SCRIPT bankjob_mission1_loop
+		//ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip // FIXMIAMI: moved into mobile.sc
+		//START_NEW_SCRIPT bankjob_mission1_loop // FIXMIAMI: moved into mobile.sc
 		flag_bought_malibu = 1
 		TERMINATE_THIS_SCRIPT
 	ENDIF
@@ -73,8 +73,8 @@ WAIT 0
 		WAIT 0
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
-			ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
-			START_NEW_SCRIPT bankjob_mission1_loop
+			//ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip // FIXMIAMI: moved into mobile.sc
+			//START_NEW_SCRIPT bankjob_mission1_loop // FIXMIAMI: moved into mobile.sc
 			flag_bought_malibu = 1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
@@ -89,9 +89,9 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED TRUE
 	SWITCH_WIDESCREEN OFF
 	
-	ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
+	//ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip // FIXMIAMI: moved into mobile.sc
 	
-	START_NEW_SCRIPT bankjob_mission1_loop
+	//START_NEW_SCRIPT bankjob_mission1_loop // FIXMIAMI: moved into mobile.sc
 
 	flag_bought_malibu = 1
 	
