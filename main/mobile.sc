@@ -2293,6 +2293,7 @@ cell_phone_inner:
 					
 						IF flag_mob_73 = 0
 						AND IS_PLAYER_PLAYING player1
+						AND flag_porn_mission4_passed = 1 // FIXMIAMI: fix Steve calling even if you don't own the film studio
 							IF IS_PLAYER_IN_ZONE player1 PORNI
 								//RING_PLAYER_PHONE TRUE
 								GOSUB mobile_rings
