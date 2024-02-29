@@ -2768,6 +2768,7 @@ IF IS_PLAYER_PLAYING player1
 		SET_CAR_DENSITY_MULTIPLIER 0.1
 		SWITCH_RUBBISH OFF
 		flag_strip_asset_cutscene = 1
+		flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 		++ counter_60_percent
 		PLAYER_MADE_PROGRESS 1
 	ENDIF

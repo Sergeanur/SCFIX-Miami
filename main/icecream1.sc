@@ -705,6 +705,7 @@ IF assetnoticegot = 0
 		REGISTER_MISSION_PASSED CREAM
 		PLAY_MISSION_PASSED_TUNE 1
 		icecream_asset_acquired = 1
+		flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 		assetnoticegot = 1
 
 	ENDIF

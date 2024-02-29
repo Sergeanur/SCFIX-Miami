@@ -3573,6 +3573,7 @@ SWITCH_WIDESCREEN OFF
 
 REGISTER_MISSION_PASSED	BANK_4
 malibu_asset_acquired = 1 
+flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 ++ counter_60_percent
 flag_bankjob_mission4_passed = 1
 CLEAR_WANTED_LEVEL player1

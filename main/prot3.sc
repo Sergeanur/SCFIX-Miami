@@ -1554,6 +1554,7 @@ REMOVE_BLIP baron_contact_blip
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD -378.4 -536.9 17.2 RADAR_SPRITE_TOMMY baron_contact_blip
 ++ counter_60_percent
 flag_protect_mission3_passed = 1 
+flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 RETURN
 		
 

@@ -1522,6 +1522,7 @@ REMOVE_BLIP porn_contact_blip
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD porncashX porncashY porncashZ	the_porn_blip porn_contact_blip
 ++ counter_60_percent
 porn_asset_acquired = 1
+flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 flag_porn_mission4_passed = 1
 RETURN
 		

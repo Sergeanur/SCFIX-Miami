@@ -2473,6 +2473,7 @@ SWITCH_WIDESCREEN OFF
 REMOVE_BLIP counter_contact_blip
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD counterX counterY counterZ the_counter_blip counter_contact_blip
 flag_counter_mission2_passed = 1
+flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 ++ counter_60_percent
 REGISTER_MISSION_PASSED	CNT_2
 PLAYER_MADE_PROGRESS 1

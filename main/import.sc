@@ -64,6 +64,7 @@ import1_loop_inner:
 					DONT_REMOVE_OBJECT import_export_sign1
 					++ counter_60_percent
 					showroom_asset_acquired = 1
+					flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 					CREATE_PROTECTION_PICKUP carbuyX carbuyY carbuyZ showroom_revenue showroom_revenue showroom_cash_pickup
 					REGISTER_MISSION_GIVEN
 					REGISTER_ODDJOB_MISSION_PASSED

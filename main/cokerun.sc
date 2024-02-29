@@ -691,6 +691,7 @@ IF flag_cokerun_passed = 0
 	PLAYER_MADE_PROGRESS 1
 	REGISTER_ODDJOB_MISSION_PASSED
 	boatyard_asset_acquired	= 1
+	flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
 ENDIF
 
 IF flag_cokerun_passed = 1 
