@@ -182,43 +182,22 @@ shop_ammu1_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
-																IF IS_SCORE_GREATER player1 99
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
+															IF IS_SCORE_GREATER player1 99
+																IF ReturnedAmmo < 9999
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
+																	IF ReturnedAmmo > 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
 																	ENDIF
-																ELSE
-																	GOSUB denied_noise
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -100
+																	ADD_MONEY_SPENT_ON_WEAPONS 100
+																	WAIT 300
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
-																IF IS_SCORE_GREATER player1 99
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -263,43 +242,22 @@ shop_ammu1_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM ReturnedAmmo
-																IF IS_SCORE_GREATER player1 299
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 120
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -300
-																		ADD_MONEY_SPENT_ON_WEAPONS 300
-																		WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM ReturnedAmmo
+															IF IS_SCORE_GREATER player1 299
+																IF ReturnedAmmo < 9999
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 120
+																	IF ReturnedAmmo > 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 9999
 																	ENDIF
-																ELSE
-																	GOSUB denied_noise
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -300
+																	ADD_MONEY_SPENT_ON_WEAPONS 300
+																	WAIT 300
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM ReturnedAmmo
-																IF IS_SCORE_GREATER player1 299
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 120
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -300
-																		ADD_MONEY_SPENT_ON_WEAPONS 300
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -350,51 +308,26 @@ shop_ammu1_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF shotgun_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 499
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 32
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -500
-																			ADD_MONEY_SPENT_ON_WEAPONS 500
-																			WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF shotgun_in_stock = 1
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN ReturnedAmmo
+																IF IS_SCORE_GREATER player1 499
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 32
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 9999
 																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -500
+																		ADD_MONEY_SPENT_ON_WEAPONS 500
+																		WAIT 300
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF shotgun_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 499
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 32
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -500
-																			ADD_MONEY_SPENT_ON_WEAPONS 500
-																			WAIT 300
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -444,51 +377,26 @@ shop_ammu1_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF ruger_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_RUGER ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 999
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 150
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_RUGER
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -1000
-																			ADD_MONEY_SPENT_ON_WEAPONS 1000
-																			WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF ruger_in_stock = 1
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_RUGER ReturnedAmmo
+																IF IS_SCORE_GREATER player1 999
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 150
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 9999
 																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_RUGER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -1000
+																		ADD_MONEY_SPENT_ON_WEAPONS 1000
+																		WAIT 300
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF ruger_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_RUGER ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 999
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 150
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_RUGER
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -1000
-																			ADD_MONEY_SPENT_ON_WEAPONS 1000
-																			WAIT 300
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -531,63 +439,32 @@ shop_ammu1_inner:
 
 														GET_CHAR_ARMOUR scplayer players_armour
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF armour_in_stock = 1
-																	IF IS_SCORE_GREATER player1 199
-																		IF players_armour < 100
-																			ADD_ARMOUR_TO_PLAYER Player1 200
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -200
-																			ADD_MONEY_SPENT_ON_WEAPONS 200
-																			WAIT 300
-																		ELSE
-																			IF done_copcar_progress = 1
-																				IF players_armour < 200
-																					ADD_ARMOUR_TO_PLAYER Player1 200
-																					GOSUB buy_noise
-																					ADD_SCORE player1 -200
-																					ADD_MONEY_SPENT_ON_WEAPONS 200
-																					WAIT 300
-																				ENDIF
-																			ENDIF 
-																		ENDIF
-
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF armour_in_stock = 1
+																IF IS_SCORE_GREATER player1 199
+																	IF players_armour < 100
+																		ADD_ARMOUR_TO_PLAYER Player1 200
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -200
+																		ADD_MONEY_SPENT_ON_WEAPONS 200
+																		WAIT 300
 																	ELSE
-																		GOSUB denied_noise
+																		IF done_copcar_progress = 1
+																			IF players_armour < 200
+																				ADD_ARMOUR_TO_PLAYER Player1 200
+																				GOSUB buy_noise
+																				ADD_SCORE player1 -200
+																				ADD_MONEY_SPENT_ON_WEAPONS 200
+																				WAIT 300
+																			ENDIF
+																		ENDIF 
 																	ENDIF
+
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF armour_in_stock = 1
-																	IF IS_SCORE_GREATER player1 199
-																		IF players_armour < 100
-																			ADD_ARMOUR_TO_PLAYER Player1 200
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -200
-																			ADD_MONEY_SPENT_ON_WEAPONS 200
-																			WAIT 300
-																		ELSE
-																			IF done_copcar_progress = 1
-																				IF players_armour < 200
-																					ADD_ARMOUR_TO_PLAYER Player1 200
-																					GOSUB buy_noise
-																					ADD_SCORE player1 -200
-																					ADD_MONEY_SPENT_ON_WEAPONS 200
-																					WAIT 300
-																				ENDIF
-																			ENDIF 
-																		ENDIF
-
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -761,43 +638,22 @@ shop_ammu2_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
-																IF IS_SCORE_GREATER player1 99
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
+															IF IS_SCORE_GREATER player1 99
+																IF ReturnedAmmo < 9999
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
+																	IF ReturnedAmmo > 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
 																	ENDIF
-																ELSE
-																	GOSUB denied_noise
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -100
+																	ADD_MONEY_SPENT_ON_WEAPONS 100
+																	WAIT 300
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
-																IF IS_SCORE_GREATER player1 99
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -842,43 +698,22 @@ shop_ammu2_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 400 1000 1
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_UZI ReturnedAmmo
-																IF IS_SCORE_GREATER player1 399
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 120
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UZI
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -400
-																		ADD_MONEY_SPENT_ON_WEAPONS 400
-																		WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_UZI ReturnedAmmo
+															IF IS_SCORE_GREATER player1 399
+																IF ReturnedAmmo < 9999
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 120
+																	IF ReturnedAmmo > 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 9999
 																	ENDIF
-																ELSE
-																	GOSUB denied_noise
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UZI
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -400
+																	ADD_MONEY_SPENT_ON_WEAPONS 400
+																	WAIT 300
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_UZI ReturnedAmmo
-																IF IS_SCORE_GREATER player1 399
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 120
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UZI
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -400
-																		ADD_MONEY_SPENT_ON_WEAPONS 400
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -930,51 +765,26 @@ shop_ammu2_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF stubby_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 599
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 20
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -600
-																			ADD_MONEY_SPENT_ON_WEAPONS 600
-																			WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF stubby_in_stock = 1
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN ReturnedAmmo
+																IF IS_SCORE_GREATER player1 599
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 20
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 9999
 																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -600
+																		ADD_MONEY_SPENT_ON_WEAPONS 600
+																		WAIT 300
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF stubby_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 599
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 20
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -600
-																			ADD_MONEY_SPENT_ON_WEAPONS 600
-																			WAIT 300
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -1025,51 +835,26 @@ shop_ammu2_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF sniper_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 1499
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 40
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -1500
-																			ADD_MONEY_SPENT_ON_WEAPONS 1500
-																			WAIT 300
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF sniper_in_stock = 1
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE ReturnedAmmo
+																IF IS_SCORE_GREATER player1 1499
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 40
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 9999
 																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -1500
+																		ADD_MONEY_SPENT_ON_WEAPONS 1500
+																		WAIT 300
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF sniper_in_stock = 1
-																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE ReturnedAmmo
-																	IF IS_SCORE_GREATER player1 1499
-																		IF ReturnedAmmo < 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 40
-																			IF ReturnedAmmo > 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 9999
-																			ENDIF
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -1500
-																			ADD_MONEY_SPENT_ON_WEAPONS 1500
-																			WAIT 300
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -1115,8 +900,7 @@ shop_ammu2_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
 																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_GRENADE ReturnedAmmo
 																IF IS_SCORE_GREATER player1 299
 																	IF ReturnedAmmo < 9999
@@ -1134,26 +918,6 @@ shop_ammu2_inner:
 																	GOSUB denied_noise
 																ENDIF
 															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_GRENADE ReturnedAmmo
-																IF IS_SCORE_GREATER player1 299
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_GRENADE 8
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_GRENADE 9999
-																		ENDIF
-																		
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -300
-																		ADD_MONEY_SPENT_ON_WEAPONS 300
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ENDIF
-														ENDIF
 
 											   			IF in_shopping_mode1 = 1
 															GOTO shop_ammu2_inner
@@ -1195,61 +959,31 @@ shop_ammu2_inner:
 
 														GET_CHAR_ARMOUR scplayer players_armour
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF armour_in_stock = 1
-																	IF IS_SCORE_GREATER player1 199
-																		IF players_armour < 100
-																			ADD_ARMOUR_TO_PLAYER Player1 200
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -200
-																			ADD_MONEY_SPENT_ON_WEAPONS 200
-																			WAIT 300
-																		ELSE
-																			IF done_copcar_progress = 1
-																				IF players_armour < 200
-																					ADD_ARMOUR_TO_PLAYER Player1 200
-																					GOSUB buy_noise
-																					ADD_SCORE player1 -200
-																					ADD_MONEY_SPENT_ON_WEAPONS 200
-																					WAIT 300
-																				ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF armour_in_stock = 1
+																IF IS_SCORE_GREATER player1 199
+																	IF players_armour < 100
+																		ADD_ARMOUR_TO_PLAYER Player1 200
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -200
+																		ADD_MONEY_SPENT_ON_WEAPONS 200
+																		WAIT 300
+																	ELSE
+																		IF done_copcar_progress = 1
+																			IF players_armour < 200
+																				ADD_ARMOUR_TO_PLAYER Player1 200
+																				GOSUB buy_noise
+																				ADD_SCORE player1 -200
+																				ADD_MONEY_SPENT_ON_WEAPONS 200
+																				WAIT 300
 																			ENDIF
 																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF armour_in_stock = 1
-																	IF IS_SCORE_GREATER player1 199
-																		IF players_armour < 100
-																			ADD_ARMOUR_TO_PLAYER Player1 200
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -200
-																			ADD_MONEY_SPENT_ON_WEAPONS 200
-																			WAIT 300
-																		ELSE
-																			IF done_copcar_progress = 1
-																				IF players_armour < 200
-																					ADD_ARMOUR_TO_PLAYER Player1 200
-																					GOSUB buy_noise
-																					ADD_SCORE player1 -200
-																					ADD_MONEY_SPENT_ON_WEAPONS 200
-																					WAIT 300
-																				ENDIF
-																			ENDIF
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -1437,52 +1171,26 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-
-															IF IS_JAPANESE_GAME
-																IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																	IF python_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 1999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PYTHON 24
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PYTHON 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -2000
-																				ADD_MONEY_SPENT_ON_WEAPONS 2000
-																				WAIT 300
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+																IF python_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 1999
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PYTHON 24
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PYTHON 9999
 																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -2000
+																			ADD_MONEY_SPENT_ON_WEAPONS 2000
+																			WAIT 300
 																		ENDIF
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
-																ENDIF
-															ELSE
-																IF IS_BUTTON_PRESSED PAD1 CROSS
-																	IF python_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 1999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PYTHON 24
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PYTHON 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -2000
-																				ADD_MONEY_SPENT_ON_WEAPONS 2000
-																				WAIT 300
-																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+																ELSE
+																	GOSUB denied_noise
 																ENDIF
 															ENDIF
 
@@ -1534,51 +1242,26 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_JAPANESE_GAME
-																IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																	IF mp5_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_MP5 ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 2999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MP5 120
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MP5 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MP5
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -3000
-																				ADD_MONEY_SPENT_ON_WEAPONS 3000
-																				WAIT 300
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+																IF mp5_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_MP5 ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 2999
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MP5 120
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MP5 9999
 																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MP5
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -3000
+																			ADD_MONEY_SPENT_ON_WEAPONS 3000
+																			WAIT 300
 																		ENDIF
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
-																ENDIF
-															ELSE
-																IF IS_BUTTON_PRESSED PAD1 CROSS
-																	IF mp5_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_MP5 ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 2999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MP5 120
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MP5 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MP5
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -3000
-																				ADD_MONEY_SPENT_ON_WEAPONS 3000
-																				WAIT 300
-																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+																ELSE
+																	GOSUB denied_noise
 																ENDIF
 															ENDIF
 
@@ -1630,51 +1313,26 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_JAPANESE_GAME
-																IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																	IF spaz_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 3999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SPAS12_SHOTGUN 28
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SPAS12_SHOTGUN 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -4000
-																				ADD_MONEY_SPENT_ON_WEAPONS 4000
-																				WAIT 300
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+																IF spaz_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 3999
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SPAS12_SHOTGUN 28
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SPAS12_SHOTGUN 9999
 																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -4000
+																			ADD_MONEY_SPENT_ON_WEAPONS 4000
+																			WAIT 300
 																		ENDIF
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
-																ENDIF
-															ELSE
-																IF IS_BUTTON_PRESSED PAD1 CROSS
-																	IF spaz_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 3999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SPAS12_SHOTGUN 28
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SPAS12_SHOTGUN 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -4000
-																				ADD_MONEY_SPENT_ON_WEAPONS 4000
-																				WAIT 300
-																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+																ELSE
+																	GOSUB denied_noise
 																ENDIF
 															ENDIF
 
@@ -1725,51 +1383,26 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_JAPANESE_GAME
-																IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																	IF M4_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_M4 ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 4999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_M4 150
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_M4 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_M4
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -5000
-																				ADD_MONEY_SPENT_ON_WEAPONS 5000
-																				WAIT 300
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+																IF M4_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_M4 ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 4999
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_M4 150
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_M4 9999
 																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_M4
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -5000
+																			ADD_MONEY_SPENT_ON_WEAPONS 5000
+																			WAIT 300
 																		ENDIF
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
-																ENDIF
-															ELSE
-																IF IS_BUTTON_PRESSED PAD1 CROSS
-																	IF M4_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_M4 ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 4999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_M4 150
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_M4 9999
-																				ENDIF
-																				SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_M4
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -5000
-																				ADD_MONEY_SPENT_ON_WEAPONS 5000
-																				WAIT 300
-																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+																ELSE
+																	GOSUB denied_noise
 																ENDIF
 															ENDIF
 
@@ -1820,51 +1453,26 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_JAPANESE_GAME
-																IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																	IF laser_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_LASERSCOPE ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 5999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_LASERSCOPE 28
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_LASERSCOPE 9999
-																				ENDIF
-																				
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -6000
-																				ADD_MONEY_SPENT_ON_WEAPONS 6000
-																				WAIT 300
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+																IF laser_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_LASERSCOPE ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 5999
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_LASERSCOPE 28
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_LASERSCOPE 9999
 																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
+																			
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -6000
+																			ADD_MONEY_SPENT_ON_WEAPONS 6000
+																			WAIT 300
 																		ENDIF
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
-																ENDIF
-															ELSE
-																IF IS_BUTTON_PRESSED PAD1 CROSS
-																	IF laser_in_stock = 1
-																		GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_LASERSCOPE ReturnedAmmo
-																		IF IS_SCORE_GREATER player1 5999
-																			IF ReturnedAmmo < 9999
-																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_LASERSCOPE 28
-																				IF ReturnedAmmo > 9999
-																					GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_LASERSCOPE 9999
-																				ENDIF
-																				
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -6000
-																				ADD_MONEY_SPENT_ON_WEAPONS 6000
-																				WAIT 300
-																			ENDIF
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+																ELSE
+																	GOSUB denied_noise
 																ENDIF
 															ENDIF
 
@@ -1903,53 +1511,27 @@ shop_ammu3_inner:
 
 															GET_CHAR_ARMOUR scplayer players_armour
 
-															IF IS_JAPANESE_GAME
-																IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																	IF IS_SCORE_GREATER player1 199
-																		IF players_armour < 100
-																			ADD_ARMOUR_TO_PLAYER Player1 200
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -200
-																			ADD_MONEY_SPENT_ON_WEAPONS 200
-																			WAIT 300
-																		ELSE
-																			IF done_copcar_progress = 1
-																				IF players_armour < 200
-																					ADD_ARMOUR_TO_PLAYER Player1 200
-																					GOSUB buy_noise
-																					ADD_SCORE player1 -200
-																					ADD_MONEY_SPENT_ON_WEAPONS 200
-																					WAIT 300
-																				ENDIF
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 199
+																	IF players_armour < 100
+																		ADD_ARMOUR_TO_PLAYER Player1 200
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -200
+																		ADD_MONEY_SPENT_ON_WEAPONS 200
+																		WAIT 300
+																	ELSE
+																		IF done_copcar_progress = 1
+																			IF players_armour < 200
+																				ADD_ARMOUR_TO_PLAYER Player1 200
+																				GOSUB buy_noise
+																				ADD_SCORE player1 -200
+																				ADD_MONEY_SPENT_ON_WEAPONS 200
+																				WAIT 300
 																			ENDIF
 																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
 																	ENDIF
-																ENDIF
-															ELSE
-																IF IS_BUTTON_PRESSED PAD1 CROSS
-																	IF IS_SCORE_GREATER player1 199
-																		IF players_armour < 100
-																			ADD_ARMOUR_TO_PLAYER Player1 200
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -200
-																			ADD_MONEY_SPENT_ON_WEAPONS 200
-																			WAIT 300
-																		ELSE
-																			IF done_copcar_progress = 1
-																				IF players_armour < 200
-																					ADD_ARMOUR_TO_PLAYER Player1 200
-																					GOSUB buy_noise
-																					ADD_SCORE player1 -200
-																					ADD_MONEY_SPENT_ON_WEAPONS 200
-																					WAIT 300
-																				ENDIF
-																			ENDIF
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+																ELSE
+																	GOSUB denied_noise
 																ENDIF
 															ENDIF
 
@@ -2116,39 +1698,20 @@ shop_hardware_inner1:
 														cost_of_tool = 10 
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 9
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -10
-																		ADD_MONEY_SPENT_ON_WEAPONS 10
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 9
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -10
+																	ADD_MONEY_SPENT_ON_WEAPONS 10
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 9
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -10
-																		ADD_MONEY_SPENT_ON_WEAPONS 10
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2186,39 +1749,20 @@ shop_hardware_inner1:
 														cost_of_tool = 20
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 19
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -20
-																		ADD_MONEY_SPENT_ON_WEAPONS 20
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 19
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -20
+																	ADD_MONEY_SPENT_ON_WEAPONS 20
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 19
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -20
-																		ADD_MONEY_SPENT_ON_WEAPONS 20
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2256,39 +1800,20 @@ shop_hardware_inner1:
 														cost_of_tool = 50
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 49
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -50
-																		ADD_MONEY_SPENT_ON_WEAPONS 50
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 49
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -50
+																	ADD_MONEY_SPENT_ON_WEAPONS 50
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 49
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -50
-																		ADD_MONEY_SPENT_ON_WEAPONS 50
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2332,47 +1857,24 @@ shop_hardware_inner1:
 															GOSUB you_have_a_weapon
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF bbat_in_stock = 1
-																	IF IS_SCORE_GREATER player1 79
-																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_BASEBALLBAT 0
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -80
-																			ADD_MONEY_SPENT_ON_WEAPONS 80
-																			WAIT 300
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF bbat_in_stock = 1
+																IF IS_SCORE_GREATER player1 79
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_BASEBALLBAT 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -80
+																		ADD_MONEY_SPENT_ON_WEAPONS 80
+																		WAIT 300
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF bbat_in_stock = 1
-																	IF IS_SCORE_GREATER player1 79
-																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_BASEBALLBAT 0
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -80
-																			ADD_MONEY_SPENT_ON_WEAPONS 80
-																			WAIT 300
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2417,47 +1919,24 @@ shop_hardware_inner1:
 															GOSUB you_have_a_weapon
 														ENDIF
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF machete_in_stock	= 1
-																	IF IS_SCORE_GREATER player1 99
-																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -100
-																			ADD_MONEY_SPENT_ON_WEAPONS 100
-																			WAIT 300
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF machete_in_stock	= 1
+																IF IS_SCORE_GREATER player1 99
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -100
+																		ADD_MONEY_SPENT_ON_WEAPONS 100
+																		WAIT 300
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF machete_in_stock	= 1
-																	IF IS_SCORE_GREATER player1 99
-																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -100
-																			ADD_MONEY_SPENT_ON_WEAPONS 100
-																			WAIT 300
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2617,39 +2096,20 @@ shop_hardware2_inner:
 														cost_of_tool = 10
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 9
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -10
-																		ADD_MONEY_SPENT_ON_WEAPONS 10
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 9
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -10
+																	ADD_MONEY_SPENT_ON_WEAPONS 10
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 9
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -10
-																		ADD_MONEY_SPENT_ON_WEAPONS 10
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2687,39 +2147,20 @@ shop_hardware2_inner:
 														cost_of_tool = 20
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 19
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -20
-																		ADD_MONEY_SPENT_ON_WEAPONS 20
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 19
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -20
+																	ADD_MONEY_SPENT_ON_WEAPONS 20
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 19
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -20
-																		ADD_MONEY_SPENT_ON_WEAPONS 20
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2757,39 +2198,20 @@ shop_hardware2_inner:
 														cost_of_tool = 50
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 49
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -50
-																		ADD_MONEY_SPENT_ON_WEAPONS 50
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 49
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -50
+																	ADD_MONEY_SPENT_ON_WEAPONS 50
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 49
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -50
-																		ADD_MONEY_SPENT_ON_WEAPONS 50
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2826,39 +2248,20 @@ shop_hardware2_inner:
 														cost_of_tool = 90
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 89
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KNIFE 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -90
-																		ADD_MONEY_SPENT_ON_WEAPONS 90
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 89
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KNIFE 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -90
+																	ADD_MONEY_SPENT_ON_WEAPONS 90
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 89
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KNIFE 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -90
-																		ADD_MONEY_SPENT_ON_WEAPONS 90
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -2902,47 +2305,24 @@ shop_hardware2_inner:
 															GOSUB you_have_a_weapon
 														ENDIF
 													
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF katana_in_stock = 1
-																	IF IS_SCORE_GREATER player1 299
-																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KATANA 0
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -300
-																			ADD_MONEY_SPENT_ON_WEAPONS 300
-																			WAIT 300
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF katana_in_stock = 1
+																IF IS_SCORE_GREATER player1 299
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KATANA 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -300
+																		ADD_MONEY_SPENT_ON_WEAPONS 300
+																		WAIT 300
 																	ELSE
 																		GOSUB denied_noise
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF katana_in_stock = 1
-																	IF IS_SCORE_GREATER player1 299
-																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KATANA 0
-																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
-																			GOSUB buy_noise
-																			ADD_SCORE player1 -300
-																			ADD_MONEY_SPENT_ON_WEAPONS 300
-																			WAIT 300
-																		ELSE
-																			GOSUB denied_noise
-																		ENDIF
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -3107,39 +2487,20 @@ shop_hardware3_inner:
 														cost_of_tool = 10
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 9
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -10
-																		ADD_MONEY_SPENT_ON_WEAPONS 10
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 9
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -10
+																	ADD_MONEY_SPENT_ON_WEAPONS 10
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 9
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -10
-																		ADD_MONEY_SPENT_ON_WEAPONS 10
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -3177,39 +2538,20 @@ shop_hardware3_inner:
 														cost_of_tool = 20
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 19
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -20
-																		ADD_MONEY_SPENT_ON_WEAPONS 20
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 19
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -20
+																	ADD_MONEY_SPENT_ON_WEAPONS 20
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 19
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -20
-																		ADD_MONEY_SPENT_ON_WEAPONS 20
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -3247,39 +2589,20 @@ shop_hardware3_inner:
 														cost_of_tool = 50
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 49
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -50
-																		ADD_MONEY_SPENT_ON_WEAPONS 50
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 49
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -50
+																	ADD_MONEY_SPENT_ON_WEAPONS 50
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 49
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -50
-																		ADD_MONEY_SPENT_ON_WEAPONS 50
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -3316,39 +2639,20 @@ shop_hardware3_inner:
 														cost_of_tool = 100
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 99
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 99
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -100
+																	ADD_MONEY_SPENT_ON_WEAPONS 100
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 99
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -3385,39 +2689,20 @@ shop_hardware3_inner:
 														cost_of_tool = 500
 														GOSUB you_have_a_weapon
 
-														IF IS_JAPANESE_GAME
-															IF IS_BUTTON_PRESSED PAD1 CIRCLE
-																IF IS_SCORE_GREATER player1 499
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CHAINSAW 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -500
-																		ADD_MONEY_SPENT_ON_WEAPONS 500
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_SCORE_GREATER player1 499
+																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
+																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CHAINSAW 0
+																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
+																	GOSUB buy_noise
+																	ADD_SCORE player1 -500
+																	ADD_MONEY_SPENT_ON_WEAPONS 500
+																	WAIT 300
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ENDIF
-														ELSE
-															IF IS_BUTTON_PRESSED PAD1 CROSS
-																IF IS_SCORE_GREATER player1 499
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CHAINSAW 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -500
-																		ADD_MONEY_SPENT_ON_WEAPONS 500
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
+															ELSE
+																GOSUB denied_noise
 															ENDIF
 														ENDIF
 
@@ -3592,15 +2877,9 @@ IF IS_PLAYER_PLAYING player1
 	ADD_ONE_OFF_SOUND playera_x playera_y playera_z SOUND_AMMUNATION_BUY_WEAPON_DENIED 
 ENDIF
 
-IF IS_JAPANESE_GAME
-	WHILE IS_BUTTON_PRESSED	PAD1 CIRCLE
-		WAIT 0
-	ENDWHILE
-ELSE
-	WHILE IS_BUTTON_PRESSED	PAD1 cross
-		WAIT 0
-	ENDWHILE
-ENDIF
+WHILE IS_BUTTON_PRESSED	PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+	WAIT 0
+ENDWHILE
 
 RETURN
 
@@ -3611,15 +2890,9 @@ IF IS_PLAYER_PLAYING player1
 	ADD_ONE_OFF_SOUND playera_x playera_y playera_z SOUND_AMMUNATION_BUY_WEAPON
 ENDIF
 
-IF IS_JAPANESE_GAME
-	WHILE IS_BUTTON_PRESSED	PAD1 CIRCLE
-		WAIT 0
-	ENDWHILE
-ELSE
-	WHILE IS_BUTTON_PRESSED	PAD1 cross
-		WAIT 0
-	ENDWHILE
-ENDIF
+WHILE IS_BUTTON_PRESSED	PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+	WAIT 0
+ENDWHILE
 
 RETURN
 
@@ -3656,53 +2929,27 @@ check_dpad_state1:
 		dpad_stateX = 0
 	ENDIF
 
-	IF IS_JAPANESE_GAME
-		IF IS_BUTTON_PRESSED PAD1 CROSS
-				
-			WHILE IS_BUTTON_PRESSED PAD1 CROSS
-				WAIT 0
-				
-			ENDWHILE
+	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+			
+		WHILE IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+			WAIT 0
+			
+		ENDWHILE
 
-			IF IS_PLAYER_PLAYING player1
-				RESTORE_CAMERA_JUMPCUT
-				SET_CAMERA_BEHIND_PLAYER
-				CLEAR_HELP
-				SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-				//WAIT 1000
+		IF IS_PLAYER_PLAYING player1
+			RESTORE_CAMERA_JUMPCUT
+			SET_CAMERA_BEHIND_PLAYER
+			CLEAR_HELP
+			SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
+			//WAIT 1000
 
-				IF IS_PLAYER_PLAYING player1 
-					FREEZE_CHAR_POSITION scplayer FALSE
-					SET_PLAYER_CONTROL player1 ON
-				ENDIF
-
-				flag_cell_nation = 0
-				in_shopping_mode1 = 1
+			IF IS_PLAYER_PLAYING player1 
+				FREEZE_CHAR_POSITION scplayer FALSE
+				SET_PLAYER_CONTROL player1 ON
 			ENDIF
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 TRIANGLE
-				
-			WHILE IS_BUTTON_PRESSED PAD1 TRIANGLE
-				WAIT 0
-				
-			ENDWHILE
 
-			IF IS_PLAYER_PLAYING player1
-				RESTORE_CAMERA_JUMPCUT
-				SET_CAMERA_BEHIND_PLAYER
-				CLEAR_HELP
-				SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-				//WAIT 1000
-
-				IF IS_PLAYER_PLAYING player1 
-					FREEZE_CHAR_POSITION scplayer FALSE
-					SET_PLAYER_CONTROL player1 ON
-				ENDIF
-
-				flag_cell_nation = 0
-				in_shopping_mode1 = 1
-			ENDIF
+			flag_cell_nation = 0
+			in_shopping_mode1 = 1
 		ENDIF
 	ENDIF
 
@@ -3738,68 +2985,35 @@ check_dpad_state1_2:
 		dpad_stateX = 0
 	ENDIF
 
-	IF IS_JAPANESE_GAME
-		IF IS_BUTTON_PRESSED PAD1 CROSS
+	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+		
+		WHILE NOT IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+			WAIT 0
 			
-			WHILE NOT IS_BUTTON_PRESSED PAD1 CROSS
-				WAIT 0
-				
-			ENDWHILE
+		ENDWHILE
 
+		IF IS_PLAYER_PLAYING player1
+			RESTORE_CAMERA_JUMPCUT
+			SET_CAMERA_BEHIND_PLAYER
+			CLEAR_HELP
 			IF IS_PLAYER_PLAYING player1
-				RESTORE_CAMERA_JUMPCUT
-				SET_CAMERA_BEHIND_PLAYER
-				CLEAR_HELP
-				IF IS_PLAYER_PLAYING player1
-					IF IS_PLAYER_IN_ZONE player1 BEACH3
-						SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-					ENDIF
-					IF IS_PLAYER_IN_ZONE player1 DTOWN
-						SET_PLAYER_COORDINATES Player1 ammu3X ammu3Y ammu3Z
-					ENDIF
+				IF IS_PLAYER_IN_ZONE player1 BEACH3
+					SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
 				ENDIF
-
-				IF IS_PLAYER_PLAYING player1 
-					FREEZE_CHAR_POSITION scplayer FALSE
-					SET_PLAYER_CONTROL player1 ON
+				IF IS_PLAYER_IN_ZONE player1 DTOWN
+					SET_PLAYER_COORDINATES Player1 ammu3X ammu3Y ammu3Z
 				ENDIF
-
-				flag_cell_nation = 0
-				in_shopping_mode1 = 1
 			ENDIF
 
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 TRIANGLE
-			
-			WHILE NOT IS_BUTTON_PRESSED PAD1 TRIANGLE
-				WAIT 0
-				
-			ENDWHILE
-
-			IF IS_PLAYER_PLAYING player1
-				RESTORE_CAMERA_JUMPCUT
-				SET_CAMERA_BEHIND_PLAYER
-				CLEAR_HELP
-				IF IS_PLAYER_PLAYING player1
-					IF IS_PLAYER_IN_ZONE player1 BEACH3
-						SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-					ENDIF
-					IF IS_PLAYER_IN_ZONE player1 DTOWN
-						SET_PLAYER_COORDINATES Player1 ammu3X ammu3Y ammu3Z
-					ENDIF
-				ENDIF
-
-				IF IS_PLAYER_PLAYING player1 
-					FREEZE_CHAR_POSITION scplayer FALSE
-					SET_PLAYER_CONTROL player1 ON
-				ENDIF
-
-				flag_cell_nation = 0
-				in_shopping_mode1 = 1
+			IF IS_PLAYER_PLAYING player1 
+				FREEZE_CHAR_POSITION scplayer FALSE
+				SET_PLAYER_CONTROL player1 ON
 			ENDIF
 
+			flag_cell_nation = 0
+			in_shopping_mode1 = 1
 		ENDIF
+
 	ENDIF
 
 RETURN
@@ -3834,69 +3048,35 @@ check_dpad_state2:
 		dpad_stateX = 0
 	ENDIF
 
-	IF IS_JAPANESE_GAME
-		IF IS_BUTTON_PRESSED PAD1 CROSS
+	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+		
+		WHILE IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+			WAIT 0
 			
-			WHILE IS_BUTTON_PRESSED PAD1 CROSS
-				WAIT 0
-				
-			ENDWHILE
+		ENDWHILE
 
+		IF IS_PLAYER_PLAYING player1
+			RESTORE_CAMERA_JUMPCUT
+			SET_CAMERA_BEHIND_PLAYER
+			CLEAR_HELP
 			IF IS_PLAYER_PLAYING player1
-				RESTORE_CAMERA_JUMPCUT
-				SET_CAMERA_BEHIND_PLAYER
-				CLEAR_HELP
-				IF IS_PLAYER_PLAYING player1
-					IF IS_PLAYER_IN_ZONE player1 BEACH2
-						SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-					ENDIF
-					IF IS_PLAYER_IN_ZONE player1 BEACH3
-						SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-					ENDIF
-					IF IS_PLAYER_IN_ZONE player1 HAVANA
-						SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-					ENDIF
+				IF IS_PLAYER_IN_ZONE player1 BEACH2
+					SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
 				ENDIF
-				//WAIT 1000
-				IF IS_PLAYER_PLAYING player1
-					FREEZE_CHAR_POSITION scplayer FALSE 
-					SET_PLAYER_CONTROL player1 ON
+				IF IS_PLAYER_IN_ZONE player1 BEACH3
+					SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
 				ENDIF
-				flag_cell_nation = 0
-				in_shopping_mode2 = 1
+				IF IS_PLAYER_IN_ZONE player1 HAVANA
+					SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
+				ENDIF
 			ENDIF
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 TRIANGLE
-			
-			WHILE IS_BUTTON_PRESSED PAD1 TRIANGLE
-				WAIT 0
-				
-			ENDWHILE
-
+			//WAIT 1000
 			IF IS_PLAYER_PLAYING player1
-				RESTORE_CAMERA_JUMPCUT
-				SET_CAMERA_BEHIND_PLAYER
-				CLEAR_HELP
-				IF IS_PLAYER_PLAYING player1
-					IF IS_PLAYER_IN_ZONE player1 BEACH2
-						SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-					ENDIF
-					IF IS_PLAYER_IN_ZONE player1 BEACH3
-						SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-					ENDIF
-					IF IS_PLAYER_IN_ZONE player1 HAVANA
-						SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-					ENDIF
-				ENDIF
-				//WAIT 1000
-				IF IS_PLAYER_PLAYING player1
-					FREEZE_CHAR_POSITION scplayer FALSE 
-					SET_PLAYER_CONTROL player1 ON
-				ENDIF
-				flag_cell_nation = 0
-				in_shopping_mode2 = 1
+				FREEZE_CHAR_POSITION scplayer FALSE 
+				SET_PLAYER_CONTROL player1 ON
 			ENDIF
+			flag_cell_nation = 0
+			in_shopping_mode2 = 1
 		ENDIF
 	ENDIF
 

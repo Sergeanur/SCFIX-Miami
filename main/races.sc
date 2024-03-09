@@ -286,31 +286,16 @@ WAIT 0
 
 GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
-IF IS_JAPANESE_GAME
-	IF IS_BUTTON_PRESSED PAD1 CROSS
-		IF triangle_pressed_flag = 1
-			triangle_pressed_flag = 0
-			CLEAR_HELP
-			USE_TEXT_COMMANDS FALSE
-			GOTO mission_races_failed
-		ENDIF
-	ELSE
-		IF triangle_pressed_flag = 0
-			triangle_pressed_flag = 1
-		ENDIF
+IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+	IF triangle_pressed_flag = 1
+		triangle_pressed_flag = 0
+		CLEAR_HELP
+		USE_TEXT_COMMANDS FALSE
+		GOTO mission_races_failed
 	ENDIF
 ELSE
-	IF IS_BUTTON_PRESSED PAD1 TRIANGLE
-		IF triangle_pressed_flag = 1
-			triangle_pressed_flag = 0
-			CLEAR_HELP
-			USE_TEXT_COMMANDS FALSE
-			GOTO mission_races_failed
-		ENDIF
-	ELSE
-		IF triangle_pressed_flag = 0
-			triangle_pressed_flag = 1
-		ENDIF
+	IF triangle_pressed_flag = 0
+		triangle_pressed_flag = 1
 	ENDIF
 ENDIF
 
@@ -736,157 +721,79 @@ IF race_choice = 6
 	ENDIF
 ENDIF
 
-IF IS_JAPANESE_GAME
-	IF IS_BUTTON_PRESSED PAD1 CIRCLE
-		IF cross_pressed_flag = 1
-			cross_pressed_flag = 0
-			IF race_choice = 1
-				IF IS_SCORE_GREATER player1 99
-					ADD_SCORE player1 -100
-					DELETE_OBJECT race_route_1
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race1_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You cannot afford to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 2
-				IF IS_SCORE_GREATER player1 499
-					ADD_SCORE player1 -500
-					DELETE_OBJECT race_route_2
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race2_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 3
-				IF IS_SCORE_GREATER player1 999
-					ADD_SCORE player1 -1000
-					DELETE_OBJECT race_route_3
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race3_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 4
-				IF IS_SCORE_GREATER player1 1999
-					ADD_SCORE player1 -2000
-					DELETE_OBJECT race_route_4
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race4_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 5
-				IF IS_SCORE_GREATER player1 4999
-					ADD_SCORE player1 -5000
-					DELETE_OBJECT race_route_5
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race5_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 6
-				IF IS_SCORE_GREATER player1 9999
-					ADD_SCORE player1 -10000
-					DELETE_OBJECT race_route_6
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race6_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
+IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+	IF cross_pressed_flag = 1
+		cross_pressed_flag = 0
+		IF race_choice = 1
+			IF IS_SCORE_GREATER player1 99
+				ADD_SCORE player1 -100
+				DELETE_OBJECT race_route_1
+				CLEAR_HELP
+				USE_TEXT_COMMANDS FALSE
+				GOTO race1_route_checkpoints
+			ELSE
+				PRINT_NOW RACES19 3000 1//You cannot afford to enter this race.
 			ENDIF
 		ENDIF
-	ELSE
-		IF cross_pressed_flag = 0
-			cross_pressed_flag = 1
+		IF race_choice = 2
+			IF IS_SCORE_GREATER player1 499
+				ADD_SCORE player1 -500
+				DELETE_OBJECT race_route_2
+				CLEAR_HELP
+				USE_TEXT_COMMANDS FALSE
+				GOTO race2_route_checkpoints
+			ELSE
+				PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
+			ENDIF
+		ENDIF
+		IF race_choice = 3
+			IF IS_SCORE_GREATER player1 999
+				ADD_SCORE player1 -1000
+				DELETE_OBJECT race_route_3
+				CLEAR_HELP
+				USE_TEXT_COMMANDS FALSE
+				GOTO race3_route_checkpoints
+			ELSE
+				PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
+			ENDIF
+		ENDIF
+		IF race_choice = 4
+			IF IS_SCORE_GREATER player1 1999
+				ADD_SCORE player1 -2000
+				DELETE_OBJECT race_route_4
+				CLEAR_HELP
+				USE_TEXT_COMMANDS FALSE
+				GOTO race4_route_checkpoints
+			ELSE
+				PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
+			ENDIF
+		ENDIF
+		IF race_choice = 5
+			IF IS_SCORE_GREATER player1 4999
+				ADD_SCORE player1 -5000
+				DELETE_OBJECT race_route_5
+				CLEAR_HELP
+				USE_TEXT_COMMANDS FALSE
+				GOTO race5_route_checkpoints
+			ELSE
+				PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
+			ENDIF
+		ENDIF
+		IF race_choice = 6
+			IF IS_SCORE_GREATER player1 9999
+				ADD_SCORE player1 -10000
+				DELETE_OBJECT race_route_6
+				CLEAR_HELP
+				USE_TEXT_COMMANDS FALSE
+				GOTO race6_route_checkpoints
+			ELSE
+				PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
+			ENDIF
 		ENDIF
 	ENDIF
 ELSE
-	IF IS_BUTTON_PRESSED PAD1 CROSS
-		IF cross_pressed_flag = 1
-			cross_pressed_flag = 0
-			IF race_choice = 1
-				IF IS_SCORE_GREATER player1 99
-					ADD_SCORE player1 -100
-					DELETE_OBJECT race_route_1
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race1_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You cannot afford to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 2
-				IF IS_SCORE_GREATER player1 499
-					ADD_SCORE player1 -500
-					DELETE_OBJECT race_route_2
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race2_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 3
-				IF IS_SCORE_GREATER player1 999
-					ADD_SCORE player1 -1000
-					DELETE_OBJECT race_route_3
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race3_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 4
-				IF IS_SCORE_GREATER player1 1999
-					ADD_SCORE player1 -2000
-					DELETE_OBJECT race_route_4
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race4_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 5
-				IF IS_SCORE_GREATER player1 4999
-					ADD_SCORE player1 -5000
-					DELETE_OBJECT race_route_5
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race5_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-			IF race_choice = 6
-				IF IS_SCORE_GREATER player1 9999
-					ADD_SCORE player1 -10000
-					DELETE_OBJECT race_route_6
-					CLEAR_HELP
-					USE_TEXT_COMMANDS FALSE
-					GOTO race6_route_checkpoints
-				ELSE
-					PRINT_NOW RACES19 3000 1//You do noy have enough money to enter this race.
-				ENDIF
-			ENDIF
-		ENDIF
-	ELSE
-		IF cross_pressed_flag = 0
-			cross_pressed_flag = 1
-		ENDIF
+	IF cross_pressed_flag = 0
+		cross_pressed_flag = 1
 	ENDIF
 ENDIF
 
