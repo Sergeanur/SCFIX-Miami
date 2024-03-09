@@ -648,6 +648,15 @@ AND cust_coordy	> -1007.371
 AND cust_coordy	< -784.753
 	GOTO get_rnd_locations
 ENDIF
+// FIXMIAMI: START
+//G-SPOTLIGHT OFFICE
+IF cust_coordx >  -570.1256
+AND cust_coordx < -453.1256
+AND cust_coordy	> 888.7261 
+AND cust_coordy	< 1018.3261
+	GOTO get_rnd_locations
+ENDIF
+// FIXMIAMI: END
 
 //if player1s too close to customers
 
