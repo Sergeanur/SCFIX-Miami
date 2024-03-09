@@ -1699,6 +1699,13 @@ CREATE_CLOTHES_PICKUP -384.5 -591.9 25.3 1 mansion_clothes
 mansion_clothes_created = 1
 SWITCH_CAR_GENERATOR gen_car51 0
 SWITCH_CAR_GENERATOR buddys_lambo 101
+
+// FIXMIAMI: Start
+IF flag_pizza_mission_passed = 1
+	SWITCH_CAR_GENERATOR gen_car5 101
+ENDIF
+// FIXMIAMI: End
+
 M4_in_stock = 1
 mp5_in_stock = 1
 python_in_stock = 1
