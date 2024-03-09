@@ -252,6 +252,7 @@ SET_PED_DENSITY_MULTIPLIER 1.0
 SET_CAR_DENSITY_MULTIPLIER 1.0
 SET_AREA_VISIBLE VIS_MAIN_MAP
 flag_player_in_mansion = 0
+CLEAR_EXTRA_COLOURS FALSE // FIXMIAMI
 
 // ******************************************END OF CUTSCENE********************************
 SET_FADING_COLOUR 0 0 0
