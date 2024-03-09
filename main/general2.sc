@@ -998,6 +998,9 @@ mall_shootout_loop:
 						audio_2_flag = 0
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_2_flag = 2
@@ -1034,6 +1037,9 @@ mall_shootout_loop:
 						audio_3_flag = 0
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_3_flag = 2
@@ -1070,6 +1076,9 @@ mall_shootout_loop:
 						audio_4_flag = 4
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_4_flag = 2
@@ -1106,6 +1115,9 @@ mall_shootout_loop:
 						audio_5_flag = 4
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_5_flag = 2
@@ -1150,12 +1162,15 @@ mall_shootout_loop:
 						audio_6_flag = 3
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_6_flag = 1
 					IF HAS_MISSION_AUDIO_LOADED 1
-//						GET_CHAR_COORDINATES the_seller x y z
-//						SET_MISSION_AUDIO_POSITION 1 x y z
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI: uncommented
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI: uncommented
 						PLAY_MISSION_AUDIO 1
 						//IF print_timer < game_timer
 							//PRINT_NOW COL2_14 10000 1 //You got to do better, Mr. Snail!
@@ -1183,12 +1198,15 @@ mall_shootout_loop:
 						audio_7_flag = 3
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_7_flag = 1
 					IF HAS_MISSION_AUDIO_LOADED 1
-//						GET_CHAR_COORDINATES the_seller x y z
-//						SET_MISSION_AUDIO_POSITION 1 x y z
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI: uncommented
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI: uncommented
 						PLAY_MISSION_AUDIO 1
 						//IF print_timer < game_timer
 							//PRINT_NOW COL2_15 10000 1 //Ha! You eat my dirt!
@@ -1216,12 +1234,15 @@ mall_shootout_loop:
 						audio_8_flag = 3
 						is_audio_in_use = 0
 						GOTO mall_shootout_loop
+					ELSE // FIXMIAMI
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					ENDIF
 				ENDIF
 				IF audio_8_flag = 1
 					IF HAS_MISSION_AUDIO_LOADED 1
-//						GET_CHAR_COORDINATES the_seller x y z
-//						SET_MISSION_AUDIO_POSITION 1 x y z
+						GET_CHAR_COORDINATES the_seller x y z // FIXMIAMI: uncommented
+						SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI: uncommented
 						PLAY_MISSION_AUDIO 1
 						//IF print_timer < game_timer
 							//PRINT_NOW COL2_16 10000 1 //You got to do better, Mr. Snail!
