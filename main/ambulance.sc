@@ -1137,6 +1137,7 @@ injured_ped_checks:
 
 	IF ped_var_for_gosub_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player1 ped_var_for_gosub 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // FIXMIAMI
 			GET_NUMBER_OF_PASSENGERS players_ambulance peds_in_car
 			GET_MAXIMUM_NUMBER_OF_PASSENGERS players_ambulance max_peds_in_car
 
