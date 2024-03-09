@@ -1149,10 +1149,13 @@ IF frame_counter = 2
 							SET_CHAR_OBJ_FLEE_PLAYER_ON_FOOT_TILL_SAFE tank_dude2 player1
 						ENDIF
 					ENDIF
-					IF audio_7_flag = 0
-						audio_7_flag = 1
-						audio_7_timeout = game_timer + 6000
-					ENDIF
+					IF NOT IS_CHAR_DEAD tank_dude1 // FIXMIAMI
+					OR NOT IS_CHAR_DEAD tank_dude2 // FIXMIAMI
+						IF audio_7_flag = 0
+							audio_7_flag = 1
+							audio_7_timeout = game_timer + 6000
+						ENDIF
+					ENDIF // FIXMIAMI
 					LOCK_CAR_DOORS tank CARLOCK_UNLOCKED
 					unlock_tank_flag = 2
 					IF attack_player = 0
@@ -1902,7 +1905,8 @@ IF frame_counter = 2
 			ENDIF
 			IF tank_mission_flag = 0
 				IF audio_4_flag = 0
-					audio_4_flag = 1
+					//audio_4_flag = 1 // FIXMIAMI: removed
+					GOSUB check_any_alive_soldier_near_tank // FIXMIAMI
 					audio_4_timeout = game_timer + 6000
 				ENDIF
 				initiate_seft_destruct_timer = game_timer + 6000
@@ -3980,4 +3984,164 @@ ELSE
 ENDIF
 
 RETURN
+
+// FIXMIAMI: BEGIN
+check_any_alive_soldier_near_tank:
+
+	IF NOT IS_CHAR_DEAD escort1_dude1
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort1_dude1 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort1_dude2
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort1_dude2 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort2_dude1
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort2_dude1 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort2_dude2
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort2_dude2 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort2_attached_01
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort2_attached_01 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort2_attached_02
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort2_attached_02 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort2_attached_03
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort2_attached_03 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort2_attached_04
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort2_attached_04 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD tank_dude1
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 tank_dude1 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD tank_dude2
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 tank_dude2 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort3_dude1
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort3_dude1 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort3_dude2
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort3_dude2 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort3_attached_01
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort3_attached_01 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort3_attached_02
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort3_attached_02 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort3_attached_04
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort3_attached_04 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD escort3_attached_04
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 escort3_attached_04 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD formation_ped1
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 formation_ped1 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD formation_ped2
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 formation_ped2 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD formation_ped3
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 formation_ped3 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD formation_ped4
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 formation_ped4 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD formation_ped5
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 formation_ped5 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	IF NOT IS_CHAR_DEAD formation_ped6
+		IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 formation_ped6 20.0 20.0 FALSE
+			audio_4_flag = 1
+			RETURN
+		ENDIF
+	ENDIF
+
+	RETURN
+// FIXMIAMI: END
 }
