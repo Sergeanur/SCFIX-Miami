@@ -282,6 +282,12 @@ VAR_INT flag_baron_mission4_passed
 VAR_INT flag_baron_mission5_passed
 VAR_INT start_baron1_script_flag
 
+// FIXMIAMI: START
+VAR_INT fastest_boat_col1 fastest_boat_col2
+fastest_boat_col1 = -1
+fastest_boat_col2 = -1
+// FIXMIAMI: END
+
 //Kent missions
 VAR_INT kent_contact_blip
 VAR_INT flag_kent_mission1_passed

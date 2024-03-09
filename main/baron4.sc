@@ -337,6 +337,13 @@ CREATE_CAR squalo -378.5 -660.0 5.6 fastest_boat
 
 SET_CAR_HEADING fastest_boat 270.0
 
+// FIXMIAMI: START
+IF NOT fastest_boat_col1 = -1
+AND NOT fastest_boat_col2 = -1
+	CHANGE_CAR_COLOUR fastest_boat fastest_boat_col1 fastest_boat_col2
+ENDIF
+
+// FIXMIAMI: END
 
 WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D player1 -378.5 -660.0 5.6 16.5 11.5 8.0 FALSE
 	WAIT 0

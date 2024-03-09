@@ -1038,6 +1038,13 @@ CLEAR_WANTED_LEVEL player1
 ADD_SCORE player1 4000 
 REGISTER_MISSION_PASSED	COK_3
 PLAYER_MADE_PROGRESS 1
+
+// FIXMIAMI: START - save boat colour for the next mission
+IF NOT IS_CAR_DEAD fastest_boat
+	GET_CAR_COLOURS fastest_boat fastest_boat_col1 fastest_boat_col2
+ENDIF
+// FIXMIAMI: END
+
 START_NEW_SCRIPT baron_mission4_loop
 RETURN
 	
