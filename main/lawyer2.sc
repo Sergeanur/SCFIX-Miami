@@ -29,6 +29,7 @@ VAR_FLOAT blokeX blokeY blokeZ bud_Heading
 LVAR_INT cs_bounca cs_ganga cs_gangb cs_gangc hotel_blip set_buddys_threat short_malibu_cut gun_blip_help
 LVAR_INT ambush_blokes_obj_set cs_guncolt players_cellphone players_cellphone_blip on_the_phone_again
 LVAR_INT set_players_control_back_on counter_badguys kent_paul1
+VAR_INT law2_broken_car_audio1_played law2_broken_car_audio2_played buddycar_health // FIXMIAMI
 
 // ***************************************Mission Start*************************************
 
@@ -71,6 +72,10 @@ gun_blip_help = 0
 set_players_control_back_on = 0
 played_sprint_help = 0
 drove_in_from_south = 0
+
+law2_broken_car_audio1_played = 0 // FIXMIAMI
+law2_broken_car_audio2_played = 0 // FIXMIAMI
+buddycar_health = 2000 // FIXMIAMI
 
 
 CLEAR_HELP
@@ -1428,6 +1433,8 @@ WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 
    		IF NOT IS_CAR_DEAD buddycar
 			IF NOT IS_CHAR_IN_CAR buddy buddycar
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER buddy buddycar
+			ELSE // FIXMIAMI
+				GOSUB law2_broken_car_audio // FIXMIAMI
 			ENDIF
 			IF IS_PLAYER_IN_CAR	player1 buddycar
 				REMOVE_BLIP buddy_blip
@@ -1943,4 +1950,37 @@ REMOVE_BLIP buddycar_blip
 MISSION_HAS_FINISHED
 RETURN
 
+// FIXMIAMI: START
+law2_broken_car_audio:
+	IF HAS_CAR_BEEN_DAMAGED_BY_WEAPON buddycar WEAPONTYPE_RAMMEDBYCAR
+		GET_CAR_HEALTH buddycar buddycar_health
+		IF buddycar_health < 1500
+		AND law2_broken_car_audio1_played = 0
+			law2_broken_car_audio1_played = 1
+			LOAD_MISSION_AUDIO 1 LAW2_7
+			WHILE NOT HAS_MISSION_AUDIO_LOADED 1
+				WAIT 0
+			ENDWHILE
+			PLAY_MISSION_AUDIO 1
+			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+				WAIT 0
+			ENDWHILE
+			RETURN
+		ENDIF
+		IF buddycar_health < 1000
+		AND law2_broken_car_audio2_played = 0
+			law2_broken_car_audio2_played = 1
+			LOAD_MISSION_AUDIO 1 LAW2_8
+			WHILE NOT HAS_MISSION_AUDIO_LOADED 1
+				WAIT 0
+			ENDWHILE
+			PLAY_MISSION_AUDIO 1
+			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
+				WAIT 0
+			ENDWHILE
+			RETURN
+		ENDIF
+	ENDIF
+	RETURN
+// FIXMIAMI: END
 }
