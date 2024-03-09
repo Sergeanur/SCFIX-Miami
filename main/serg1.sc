@@ -751,7 +751,7 @@ IF has_player_been_to_clothes_shop = 1
 
 		IF niceaudio_s1 = 1
 			IF isnotme_s1 = 0
-				SET_MISSION_AUDIO_POSITION 1 311.06 218.27 11.74
+				SET_MISSION_AUDIO_POSITION 2 311.06 218.27 11.74 // FIXMIAMI: fix mission audio slot
 				PRINT_NOW ( TEX1_6 ) 5000 2
 				IF playingaudiostate2_s1 = 0
 						PLAY_MISSION_AUDIO 2
@@ -759,9 +759,9 @@ IF has_player_been_to_clothes_shop = 1
 					ENDIF
 					
 					IF playingaudiostate2_s1 = 1
-						IF HAS_MISSION_AUDIO_FINISHED 1
+						IF HAS_MISSION_AUDIO_FINISHED 2 // FIXMIAMI: fix mission audio slot
 							playingaudiostate2_s1 = 0
-							CLEAR_MISSION_AUDIO 1
+							CLEAR_MISSION_AUDIO 2 // FIXMIAMI: fix mission audio slot
 							playingaudio2_s1 = 1
 							isnotme_s1 = 1
 						ENDIF
