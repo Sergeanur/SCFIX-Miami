@@ -1198,7 +1198,8 @@ IF disguise_goals = 2
 		
 	IF timer_flag = 1
 		IF speech_played3 = 0
-			
+			REQUEST_MODEL ml_tarbrushdamage // FIXMIAMI
+
 			PRINT_NOW ( PRO3_17 ) 5000 1 //Ok, timers are set, 5 seconds and ticking.
 			PLAY_MISSION_AUDIO 1
 			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
@@ -1305,7 +1306,16 @@ IF disguise_goals = 2
 			
 			IF NOT IS_PLAYER_DEAD player1
 				IF NOT IS_CHAR_DEAD buddy
+
+					WHILE NOT HAS_MODEL_LOADED ml_tarbrushdamage // FIXMIAMI
+						WAIT 0 // FIXMIAMI
+					ENDWHILE // FIXMIAMI
+
 					SWAP_NEAREST_BUILDING_MODEL 468.882 1006.67 20.681 80.0 ml_tarbrush ml_tarbrushdamage
+
+					MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // FIXMIAMI
+					REQUEST_MODEL ml_tarbrush // FIXMIAMI
+
 					IF player_in_coffee_shop = 0
 						player_in_coffee_shop = 1
 					ENDIF
@@ -1529,6 +1539,9 @@ mission_failed_protec3:
 
 PRINT_BIG ( M_FAIL ) 5000 1	//"Mission Failed!"
 IF player_in_coffee_shop = 1
+	WHILE NOT HAS_MODEL_LOADED ml_tarbrush // FIXMIAMI
+		WAIT 0 // FIXMIAMI
+	ENDWHILE // FIXMIAMI
 	SWAP_NEAREST_BUILDING_MODEL 468.882 1006.67 20.681 80.0 ml_tarbrushdamage ml_tarbrush
 ENDIF
 
@@ -1577,6 +1590,8 @@ MARK_MODEL_AS_NO_LONGER_NEEDED police
 MARK_MODEL_AS_NO_LONGER_NEEDED dynamite							
 MARK_MODEL_AS_NO_LONGER_NEEDED nitestick
 MARK_MODEL_AS_NO_LONGER_NEEDED colt45
+MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrush // FIXMIAMI
+MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // FIXMIAMI
 DELETE_OBJECT dyn1
 DELETE_OBJECT dyn2
 DELETE_OBJECT dyn3
