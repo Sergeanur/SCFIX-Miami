@@ -1801,12 +1801,16 @@ IF NOT IS_CHAR_DEAD builder1
 			ENDIF
 
 			IF playingaudio_s3state = 2
+				GET_CHAR_COORDINATES builder1 x y z // FIXMIAMI
+				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
+					GET_CHAR_COORDINATES builder1 x y z // FIXMIAMI
+					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -1859,12 +1863,16 @@ IF NOT IS_CHAR_DEAD builder3
 			ENDIF
 
 			IF playingaudio_s3state = 2
+				GET_CHAR_COORDINATES builder3 x y z // FIXMIAMI
+				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
+					GET_CHAR_COORDINATES builder3 x y z // FIXMIAMI
+					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -1915,12 +1923,16 @@ IF NOT IS_CHAR_DEAD builder7
 			ENDIF
 
 			IF playingaudio_s3state = 2
+				GET_CHAR_COORDINATES builder7 x y z // FIXMIAMI
+				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
+					GET_CHAR_COORDINATES builder7 x y z // FIXMIAMI
+					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -1971,12 +1983,16 @@ IF NOT IS_CHAR_DEAD builder13
 			ENDIF
 
 			IF playingaudio_s3state = 2
+				GET_CHAR_COORDINATES builder13 x y z // FIXMIAMI
+				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
+					GET_CHAR_COORDINATES builder13 x y z // FIXMIAMI
+					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -2027,12 +2043,16 @@ IF NOT IS_CHAR_DEAD builder9
 			ENDIF
 
 			IF playingaudio_s3state = 2
+				GET_CHAR_COORDINATES builder9 x y z // FIXMIAMI
+				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
+					GET_CHAR_COORDINATES builder9 x y z // FIXMIAMI
+					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -2083,12 +2103,16 @@ IF NOT IS_CHAR_DEAD security2_s3
 			ENDIF
 
 			IF playingaudio_s3state = 2
+				GET_CHAR_COORDINATES security2_s3 x y z // FIXMIAMI
+				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
+					GET_CHAR_COORDINATES security2_s3 x y z // FIXMIAMI
+					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
