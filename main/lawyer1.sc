@@ -1489,7 +1489,29 @@ OR NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 strip_clubX strip_clubY strip_
 			ENDIF
 	   	ENDIF
 	   	
-	   	IF IS_CHAR_IN_ANY_CAR cols_daughter
+		// FIXMIAMI: Start
+		VAR_INT flag_play_dialogue, flag_play_dialogue2 // TODO: make LVAR
+		flag_play_dialogue = 0
+		flag_play_dialogue2 = 0
+		IF IS_CHAR_IN_ANY_CAR cols_daughter
+		AND IS_PLAYER_IN_ANY_CAR player1
+			VAR_INT lCar1, lCar2 // TODO: make LVAR
+			STORE_CAR_CHAR_IS_IN_NO_SAVE cols_daughter lCar1
+			STORE_CAR_PLAYER_IS_IN_NO_SAVE player1 lCar2
+
+			IF lCar1 = lCar2
+				flag_play_dialogue = 1
+				IF NOT IS_CHAR_ON_ANY_BIKE cols_daughter
+				AND NOT IS_CAR_PASSENGER_SEAT_FREE lCar1 0 // Assuming it's Mercedes... why the hell they cut GET_CHAR_IN_CAR_PASSENGER_SEAT?
+					flag_play_dialogue2 = 1
+				ENDIF
+			ENDIF
+			
+		ENDIF
+		// FIXMIAMI: End
+
+	   	//IF IS_CHAR_IN_ANY_CAR cols_daughter
+		IF flag_play_dialogue = 1 // FIXMIAMI
 			
 			IF first_two_samples = 0
 
@@ -1509,7 +1531,8 @@ OR NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 strip_clubX strip_clubY strip_
 			ENDIF
 
 			IF NOT IS_CHAR_DEAD cols_daughter
-				IF NOT IS_CHAR_ON_ANY_BIKE cols_daughter
+				//IF NOT IS_CHAR_ON_ANY_BIKE cols_daughter
+				IF flag_play_dialogue2 = 1 // FIXMIAMI
 					IF second_two_samples = 0
 					AND first_two_samples = 1
 					AND TIMERB > 500 
