@@ -448,7 +448,7 @@ ATTACH_CHAR_TO_OBJECT colonel_goon4 the_yacht -4.225 -12.46 4.179 0 360.0 WEAPON
 
 SET_OBJECT_PATH_SPEED the_path_spline 0.0
 
-IF flag_player_on_mission = 0
+GOTO gen5_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CAR HUNTER 36.0195 -447.5407 15.0170	heli1
 	CREATE_CAR HUNTER 36.0195 -447.5407 15.0170	killer_chopper
 	CREATE_CHAR PEDTYPE_GANG_STREET HMOST 36.0195 -447.5407 15.0170 killer_chopper_pilot
@@ -473,7 +473,7 @@ IF flag_player_on_mission = 0
    	CREATE_CAR WASHING -238.2693 -1361.3296 7.0786 car02
 	CREATE_CAR WASHING -238.2693 -1361.3296 7.0786 car01
 
-ENDIF
+gen5_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 //Boats at jetty
 CREATE_CAR MARQUIS -327.2818 -1207.3 6.0000 boat01

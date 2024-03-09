@@ -461,7 +461,7 @@ OR NOT HAS_MODEL_LOADED dynamite
 ENDWHILE
 
 //cheating the compilier into thinking i have created something which i havent (so it can be used later)
-IF flag_player_on_mission = 0
+GOTO cuban4_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD -1181.2 83.8 11.3 parking_place
 	ADD_BLIP_FOR_COORD -1198.4 104.8 11.1 bombplace1 
 	ADD_BLIP_FOR_COORD -1198.4 106.6 11.1 bombplace2
@@ -471,7 +471,7 @@ IF flag_player_on_mission = 0
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa -1197.9 82.5 10.1 random_haitian1
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa -1189.0 83.6 10.1 random_haitian2
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa -1190.5 68.5 10.1 random_haitian3
-ENDIF  
+cuban4_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 //closing gate
 WHILE NOT SLIDE_OBJECT haitian_gate -1114.5 67.0 10.1 10.0 10.0 0.0 FALSE

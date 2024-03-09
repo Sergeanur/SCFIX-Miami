@@ -473,13 +473,13 @@ CLEAR_CHAR_THREAT_SEARCH cuban_dude13
 SET_CHAR_WAIT_STATE cuban_dude13 WAITSTATE_USE_ATM 100
 //ADD_BLIP_FOR_CHAR cuban_dude13 cuban_dude13_blip
 
-IF flag_player_on_mission = 0
+GOTO hait2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_OBJECT rcbomb 0.0 0.0 0.0 primed_bomb_1
 	GET_REMOTE_CONTROLLED_CAR player1 rc_plane
 	ADD_BLIP_FOR_CAR cuban_jetmax cuban_jetmax_blip
 	ADD_BLIP_FOR_CAR cuban_speeder cuban_speeder_blip
 	ADD_BLIP_FOR_CAR cuban_coastg cuban_coastg_blip
-ENDIF
+hait2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 SET_PLAYER_CONTROL player1 OFF
 SET_POLICE_IGNORE_PLAYER player1 ON

@@ -175,7 +175,7 @@ add_pizza_score = 0
 {
 
 //impossible if comment
-IF flag_player_on_mission = 0 
+GOTO pizza_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer1
 	ADD_BLIP_FOR_CHAR customer1 customer1_blip
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer2
@@ -197,7 +197,7 @@ IF flag_player_on_mission = 0
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer10
 	ADD_BLIP_FOR_CHAR customer10 customer10_blip
 	ADD_BLIP_FOR_COORD pizza_shopx pizza_shopy -100.0 pizza_hut_blip
-ENDIF
+pizza_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 // *****************************************Start cutscene************************************
 // *****************************************End cutscene**************************************
@@ -221,9 +221,9 @@ ELSE
 ENDIF 
 	
 
-IF flag_player_on_mission = 0 
+GOTO pizza_fool_compiler2 // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_CAR pizza_moped pizza_moped_blip
-ENDIF
+pizza_fool_compiler2: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 DISPLAY_ONSCREEN_TIMER customer_complaint_time TIMER_DOWN
 DISPLAY_ONSCREEN_COUNTER_WITH_STRING total_pizzas_thrown 0 PIZ1_12

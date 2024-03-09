@@ -582,7 +582,7 @@ CREATE_OBJECT gunbox -674.9 777.1 10.3 box4
 SET_OBJECT_COLLISION box4 FALSE
 
 //impossible IF statement - IGNORE
-IF flag_player_on_mission = 0
+GOTO phil1_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CAR faggio -844.0 -325.0 10.0 press_moped1  
 	CREATE_CHAR_INSIDE_CAR press_moped1 PEDTYPE_CIVMALE WMYCR press_driver1
 	CREATE_CAR faggio -844.0 -325.0 10.0 press_moped2  
@@ -591,7 +591,7 @@ IF flag_player_on_mission = 0
 	CREATE_CHAR_INSIDE_CAR press_moped3 PEDTYPE_CIVMALE WMYCR press_driver3
 	CREATE_CAR faggio -844.0 -325.0 10.0 press_moped4  
 	CREATE_CHAR_INSIDE_CAR press_moped4 PEDTYPE_CIVMALE WMYCR press_driver4
-ENDIF
+phil1_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 //DISPLAY_ONSCREEN_COUNTER mexican_car_health COUNTER_DISPLAY_NUMBER
 

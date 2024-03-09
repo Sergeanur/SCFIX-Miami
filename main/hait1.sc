@@ -924,6 +924,7 @@ WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 ENDWHILE
 
 // Need this to stop compiler complaining
+GOTO hait1_fool_compiler // FIXMIAMI
 
 CREATE_CHAR PEDTYPE_CIVMALE SWAT cop2_x_case2_hait1 cop2_y_case2_hait1 cop2_z_case2_hait1 cop2_case2_hait1
 
@@ -992,6 +993,8 @@ DELETE_CHAR cop4_case1_hait1
 CREATE_CHAR PEDTYPE_COP SWAT -1168.36 -8.738 15.72 cop5_case1_hait1
 
 DELETE_CHAR cop5_case1_hait1  
+
+hait1_fool_compiler: // FIXMIAMI
 
 // fades the screen in 
 

@@ -316,7 +316,7 @@ SET_ENTER_CAR_RANGE_MULTIPLIER 6.0
 
 ADD_BLIP_FOR_CHAR the_seller the_seller_blip
 
-IF flag_player_on_mission = 0
+GOTO gen2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CHAR PEDTYPE_CIVMALE	SPECIAL01 18.9999 -928.7729 15.0727	french_security1
 	CREATE_CHAR PEDTYPE_CIVMALE	SPECIAL01 18.9999 -928.7729 15.0727	french_security2
 	CREATE_CHAR PEDTYPE_CIVMALE	SPECIAL01 18.9999 -928.7729 15.0727	french_security3
@@ -326,7 +326,7 @@ IF flag_player_on_mission = 0
 	CREATE_CHAR PEDTYPE_CIVMALE	SPECIAL01 -10.2667 -937.9695 9.4077 french_security7
 	CREATE_CHAR PEDTYPE_CIVMALE	SPECIAL01 -9.9934 -939.7717 9.4492  french_security8
 	CREATE_CHAR PEDTYPE_CIVMALE	SPECIAL01 -15.2250 -949.0593 15.072 french_security9
-ENDIF
+gen2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 button_pressed = 0
 

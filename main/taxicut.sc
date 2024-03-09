@@ -22,9 +22,9 @@ WAIT 0
 
 LOAD_MISSION_TEXT TAXICUT
 
-IF flag_player_on_mission = 0
+GOTO taxicut_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT taxibuyX taxibuyY taxibuyZ RADAR_SPRITE_PROPERTY taxibuy_blip
-ENDIF
+taxicut_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 SET_EVERYONE_IGNORE_PLAYER player1 TRUE
 SET_PLAYER_CONTROL player1 OFF

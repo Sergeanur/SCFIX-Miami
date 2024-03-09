@@ -451,7 +451,7 @@ ENDWHILE
 
 DO_FADE 1500 FADE_IN
 //cheating the compilier into thinking i have created something which i havent (so it can be used later)
-IF flag_player_on_mission = 0
+GOTO cuban2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian1x haitian1y haitian_z haitian_defender1
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian2x haitian2y haitian_z haitian_defender2
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian3x haitian3y haitian_z haitian_defender3
@@ -464,7 +464,7 @@ IF flag_player_on_mission = 0
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian5x haitian5y haitian_z haitian_defender10
 	STORE_CAR_PLAYER_IS_IN player1 cuban_carry_car
 	ADD_BLIP_FOR_CAR cuban_carry_car radar_blip_cuban_carry_car
-ENDIF  
+cuban2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 //opening haitian gate
 //andy_has_control = 1

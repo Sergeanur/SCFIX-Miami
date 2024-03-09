@@ -153,9 +153,9 @@ plyr_rndx = 0.0
 plyr_rndy = 0.0
 plyr_rndz = 0.0
 
-IF flag_player_on_mission = 0 
+GOTO mm_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD plyr_rndx plyr_rndy plyr_rndz plyr_checkpoint_blip
-ENDIF
+mm_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 //------------------REQUEST_MODELS ------------------------------
 REQUEST_MODEL bloodrb
 REQUEST_MODEL bloodra

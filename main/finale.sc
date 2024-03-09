@@ -754,7 +754,7 @@ SET_CAR_MISSION	mafia_limo_3 MISSION_STOP_FOREVER
 SET_FADING_COLOUR 0 0 1
 DO_FADE 1500 FADE_IN
 
-IF flag_player_on_mission = 0
+GOTO finale_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CHAR_AS_PASSENGER mafia_limo_1 PEDTYPE_GANG_STREET SPECIAL03 1 random_mafia
 	CREATE_CHAR_AS_PASSENGER mafia_limo_1 PEDTYPE_GANG_STREET SPECIAL03 1 mafia_1
 	CREATE_CHAR_AS_PASSENGER mafia_limo_1 PEDTYPE_GANG_STREET SPECIAL03 1 mafia_2
@@ -782,7 +782,7 @@ IF flag_player_on_mission = 0
 	CREATE_PICKUP_WITH_AMMO TEC9 PICKUP_ON_STREET 120 -336.6208 -572.9940 11.6022 python_pickup2
 	CREATE_PICKUP HEALTH PICKUP_ON_STREET -336.6208 -568.9940 11.6022 health_pickup2
 	CREATE_PICKUP HEALTH PICKUP_ON_STREET -336.6208 -568.9940 11.6022 health_pickup_on_roof
-ENDIF
+finale_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 REMOVE_PICKUP health_pickup
 REMOVE_PICKUP armour_pickup

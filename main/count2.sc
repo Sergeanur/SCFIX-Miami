@@ -675,9 +675,9 @@ SET_CHAR_PERSONALITY docks_guard PEDSTAT_TOUGH_GUY
 TIMERA = 3000
 TIMERB = 3000
 
-IF flag_player_on_mission = 0
+GOTO count2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CAR MAVERICK 408.1980 -1726.1954 84.1376 courier_heli
-ENDIF
+count2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 	
 mission_counter2_loop:
 

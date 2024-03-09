@@ -447,10 +447,10 @@ OR NOT HAS_MODEL_LOADED GDa
 	WAIT 0
 ENDWHILE
 
-IF flag_player_on_mission = 0
+GOTO porn4_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD -483.5 853.0 9.9 gate_blip
 	ADD_BLIP_FOR_COORD -526.2 886.2 70.0 corona_blip
-ENDIF
+porn4_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 CREATE_CAR pcj600 -6.4 957.1 9.4 prawn_bike
 CREATE_CHAR PEDTYPE_CIVMALE GDa 0.3 958.3 9.9 door_guard

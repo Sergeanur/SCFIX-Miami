@@ -292,9 +292,9 @@ OR NOT HAS_MODEL_LOADED securica
 	WAIT 0
 ENDWHILE
 
-IF flag_player_on_mission = 0 
+GOTO prot2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD 240.9 -1241.8 10.8 news_cafe_blip
-ENDIF
+prot2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 CREATE_CHAR PEDTYPE_GANG_PLAYER SPECIAL03 -368.8 -544.8 16.2 prot_cuban1
 SET_CHAR_AS_PLAYER_FRIEND prot_cuban1 player1 TRUE

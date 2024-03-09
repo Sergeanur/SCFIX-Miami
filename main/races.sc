@@ -270,13 +270,13 @@ POINT_CAMERA_AT_POINT -970.9708 -825.7308 8.6162 JUMP_CUT
 
 PRINT_HELP_FOREVER RACEHLP
 
-IF flag_player_on_mission = 0
+GOTO races_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_OBJECT_NO_OFFSET lh_race02 -965.584 -827.217 8.631 race_route_2
 	CREATE_OBJECT_NO_OFFSET lh_race03 -965.584 -827.217 8.631 race_route_3
 	CREATE_OBJECT_NO_OFFSET lh_race04 -965.584 -827.217 8.631 race_route_4
 	CREATE_OBJECT_NO_OFFSET lh_race05 -965.584 -827.217 8.631 race_route_5
 	CREATE_OBJECT_NO_OFFSET lh_race06 -965.584 -827.217 8.631 race_route_6
-ENDIF
+races_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 CREATE_OBJECT_NO_OFFSET lh_race01 -965.584 -827.217 8.631 race_route_1
 

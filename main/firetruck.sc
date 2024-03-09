@@ -98,7 +98,7 @@ onfire_ped_9_fire = 0
 
 SET_WANTED_MULTIPLIER 0.5
 
-IF flag_player_on_mission = 0
+GOTO firetruck_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD x y z onfire_car_blip
 	ADD_BLIP_FOR_COORD x y z onfire_car_1_blip
 	ADD_BLIP_FOR_COORD x y z onfire_car_2_blip
@@ -113,7 +113,7 @@ IF flag_player_on_mission = 0
 	ADD_BLIP_FOR_COORD x y z onfire_ped_7_blip
 	ADD_BLIP_FOR_COORD x y z onfire_ped_8_blip
 	ADD_BLIP_FOR_COORD x y z onfire_ped_9_blip
-ENDIF
+firetruck_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 fire_generation_start:
 

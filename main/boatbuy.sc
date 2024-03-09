@@ -24,9 +24,9 @@ LOAD_SPECIAL_CHARACTER 3 csjetro
 CREATE_OBJECT_NO_OFFSET dk_reef -651.0 -1481.21 16.647 cutscene_boat
 DONT_REMOVE_OBJECT cutscene_boat
 
-IF flag_player_on_mission = 0
+GOTO boatbuy_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD -664.1 -1476.3 13.8 RADAR_SPRITE_LAWYER boatbuy_blip 
-ENDIF
+boatbuy_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 WAIT 0
 
 LOAD_SCENE -649.7202 -1482.0997 14.9076//-640.3344 -1488.8250 14.2185

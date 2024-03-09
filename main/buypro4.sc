@@ -6,10 +6,10 @@ mission_start_buypro4:
 SCRIPT_NAME	buypro4
 
 flag_player_on_mission = 1
-IF flag_player_on_mission = 0
+GOTO buypro4 // FIXMIAMI: remove flag_player_on_mission = 0 check
 	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT strpbuyX strpbuyY strpbuyZ RADAR_SPRITE_STRIPCLUB strpbuy_blip 
 	CHANGE_BLIP_DISPLAY strpbuy_blip BLIP_ONLY
-ENDIF
+buypro4: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 WAIT 0
 {
