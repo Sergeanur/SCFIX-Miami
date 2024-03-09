@@ -1845,6 +1845,12 @@ SWITCH_CAR_GENERATOR gen_car110 0
 CREATE_CAR_GENERATOR -614.0 804.0 30.0 0.0 polmav -1 -1 0 0 0 0 10000 police_chopper //at south beach
 SWITCH_CAR_GENERATOR police_chopper 101
 
+// FIXMIAMI: start - add colonel's Speeder spawn at mansion
+VAR_INT col_speeder
+CREATE_CAR_GENERATOR -378.5 -660.0 5.6 270.0 SPEEDER CARCOLOUR_RED2 CARCOLOUR_LIGHT10 TRUE 0 0 0 10000 col_speeder //Mansion
+SWITCH_CAR_GENERATOR col_speeder 0
+// FIXMIAMI: end
+
 // ***************************************************PICKUPS********************************************************
 /*
 X runs from -2400 to 1600

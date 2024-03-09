@@ -1701,6 +1701,9 @@ SWITCH_CAR_GENERATOR gen_car51 0
 SWITCH_CAR_GENERATOR buddys_lambo 101
 
 // FIXMIAMI: Start
+IF flag_general_mission5_passed = 1
+	SWITCH_CAR_GENERATOR col_speeder 101
+ENDIF
 IF flag_pizza_mission_passed = 1
 	SWITCH_CAR_GENERATOR gen_car5 101
 ENDIF
