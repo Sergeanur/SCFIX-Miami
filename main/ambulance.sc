@@ -649,6 +649,22 @@ AND ped_coord_y	> 32.1217
 AND ped_coord_y	< 126.1341
 	GOTO generate_random_coord
 ENDIF
+// FIXMIAMI: START
+//G-SPOTLIGHT OFFICE
+IF ped_coord_x >  -570.1256
+AND ped_coord_x < -453.1256
+AND ped_coord_y	> 888.7261 
+AND ped_coord_y	< 1018.3261
+	GOTO generate_random_coord
+ENDIF
+//STADUM STAIRS
+IF ped_coord_x >  -1117.3256
+AND ped_coord_x < -1047.1256
+AND ped_coord_y	> 1250.5261 
+AND ped_coord_y	< 1419.7261
+	GOTO generate_random_coord
+ENDIF
+// FIXMIAMI: END
  
  
   
