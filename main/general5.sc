@@ -3279,6 +3279,7 @@ GET_OFFSET_FROM_OBJECT_IN_WORLD_COORDS the_yacht 0.0 -50.0 0.0 the_yacht_x the_y
 CREATE_CAR SPEEDER the_yacht_x the_yacht_y 6.0 colonels_launch
 //CREATE_CAR DINGHY 132.5211 1277.7527 6.0 colonels_launch
 SET_CAR_HEADING colonels_launch 270.0
+CHANGE_CAR_COLOUR colonels_launch CARCOLOUR_RED2 CARCOLOUR_LIGHT10 // FIXMIAMI: set the same colour as the cutscene
 
 IF NOT IS_PLAYER_IN_ANY_CAR player1
 	WARP_PLAYER_INTO_CAR player1 colonels_launch
