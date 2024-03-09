@@ -39,7 +39,7 @@ VAR_INT	flag_mob_47
 VAR_INT	flag_mob_52
 //VAR_INT	flag_mob_54
 //VAR_INT	flag_mob_55
-//VAR_INT	flag_mob_56
+VAR_INT	flag_mob_56 // FIXMIAMI
 //VAR_INT	flag_mob_57
 //VAR_INT	flag_mob_58
 VAR_INT flag_mob_62
@@ -119,7 +119,7 @@ flag_mob_47	= 0
 flag_mob_52	= 0
 //flag_mob_54	= 0
 //flag_mob_55	= 0
-//flag_mob_56	= 0
+flag_mob_56	= 0 // FIXMIAMI
 //flag_mob_57	= 0
 //flag_mob_58	= 0
 flag_mob_62 = 0
@@ -704,6 +704,53 @@ cell_phone_inner:
 							GOSUB mobile_message_cleanup
 							GOTO cell_phone_inner
 						ENDIF
+					// FIXMIAMI: START
+					ELSE
+						IF flag_mob_56 = 0
+							//RING_PLAYER_PHONE TRUE
+							GOSUB mobile_rings
+							IF flag_player_answered_phone = 1	
+								audio_slot_mobile = 1
+								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56a
+								GOSUB loading_and_playing_audio
+								PRINT_NOW ( MOB56_a ) 10000 1//rhubarb rhubarb
+								GOSUB has_audio_finished
+								
+								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56b
+								GOSUB loading_and_playing_audio
+								PRINT_NOW ( MOB56_b ) 10000 1//rhubarb rhubarb
+								GOSUB has_audio_finished
+								
+								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56c
+								GOSUB loading_and_playing_audio
+								PRINT_NOW ( MOB56_c ) 10000 1//rhubarb rhubarb
+								GOSUB has_audio_finished
+
+								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56d
+								GOSUB loading_and_playing_audio
+								PRINT_NOW ( MOB5_6d ) 10000 1//rhubarb rhubarb
+								GOSUB has_audio_finished
+								
+								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56e
+								GOSUB loading_and_playing_audio
+								PRINT_NOW ( MOB56_e ) 10000 1//rhubarb rhubarb
+								GOSUB has_audio_finished
+								
+								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56f
+								GOSUB loading_and_playing_audio
+								PRINT_NOW ( MOB56_f ) 10000 1//rhubarb rhubarb
+								GOSUB has_audio_finished
+								
+								CLEAR_PRINTS
+							ENDIF
+							IF flag_player_answered_phone = 1	
+								flag_mob_56 = 1
+							ENDIF
+							mob_56_plonk:
+							GOSUB mobile_message_cleanup
+							GOTO cell_phone_inner
+						ENDIF
+					// FIXMIAMI: END
 					ENDIF
 						
 					
