@@ -104,6 +104,20 @@ junkfud_inner:
 
 	WAIT 0
 
+		// FIXMIAMI: START
+		VAR_INT max_health max_health_minus_one
+		max_health = 100
+		max_health_minus_one = 99
+		IF flag_pizza_mission_passed = 1
+			max_health += 50
+			max_health_minus_one += 50
+		ENDIF
+		IF created_final_shirt = 1
+			max_health += 50
+			max_health_minus_one += 50
+		ENDIF
+		// FIXMIAMI: END
+
 		IF IS_PLAYER_PLAYING player1
 			++ fud_count
 			GET_PLAYER_COORDINATES player1 fud_x fud_y fud_z
@@ -118,7 +132,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_1
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	445.66 1100.54 18.3 1.0 1.0 2.0 FALSE
 											IF flag_fud1_area = 0
 												flag_fud1_area = 1
@@ -144,7 +158,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_2
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	436.75 1105.8 18.2 1.0 1.0 2.0 FALSE
 											IF flag_fud2_area = 0
 												flag_fud2_area = 1
@@ -170,7 +184,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_3
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	434.5 1139.3 18.2 1.0 1.0 2.0 FALSE
 											IF flag_fud3_area = 0
 												flag_fud3_area = 1
@@ -196,7 +210,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_4
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	451.24 1146.5 18.24 1.0 1.0 2.0 FALSE
 											IF flag_fud4_area = 0
 												flag_fud4_area = 1
@@ -275,7 +289,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_5
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	375.76 1147.7 18.6 1.0 1.0 2.0 FALSE
 											IF flag_fud5_area = 0
 												flag_fud5_area = 1
@@ -302,7 +316,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_6
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	394.16 1139.12 18.6 1.0 1.0 2.0 FALSE
 											IF flag_fud6_area = 0
 												flag_fud6_area = 1
@@ -329,7 +343,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_7
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	392.96 1108.7 18.55 1.0 1.0 2.0 FALSE
 											IF flag_fud7_area = 0
 												flag_fud7_area = 1
@@ -355,7 +369,7 @@ junkfud_inner:
 								IF IS_PLAYER_PLAYING player1
 									IF NOT IS_CHAR_DEAD fastfud_8
 									AND IS_SCORE_GREATER player1 0
-									AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+									AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	376.47 1101.7 18.58 1.0 1.0 2.0 FALSE
 											IF flag_fud8_area = 0
 												flag_fud8_area = 1
@@ -470,7 +484,7 @@ junkfud_inner:
 						AND flag_cell_nation = 0
 							IF IS_PLAYER_PLAYING player1
 								IF IS_SCORE_GREATER player1 0
-								AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+								AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 								AND NOT IS_CHAR_DEAD fastfud_ht1
 									//IF IS_CHAR_HEALTH_GREATER fastfud_1 95
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	-1041.3 80.45 10.6 1.0 1.0 2.0 FALSE
@@ -568,7 +582,7 @@ junkfud_inner:
 						AND flag_cell_nation = 0
 							IF IS_PLAYER_PLAYING player1
 								IF IS_SCORE_GREATER player1 0
-								AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+								AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 								AND NOT IS_CHAR_DEAD fastfud_dt
 									//IF IS_CHAR_HEALTH_GREATER fastfud_1 95
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	-903.0 800.3 10.5 1.0 1.0 2.0 FALSE
@@ -649,7 +663,7 @@ junkfud_inner:
 						AND flag_cell_nation = 0
 							IF IS_PLAYER_PLAYING player1
 								IF IS_SCORE_GREATER player1 0
-								AND NOT IS_PLAYER_HEALTH_GREATER player1 99 
+								AND NOT IS_PLAYER_HEALTH_GREATER player1 max_health_minus_one // FIXMIAMI: use max_health_minus_one 
 								AND NOT IS_CHAR_DEAD fastfud_vp
 									//IF IS_CHAR_HEALTH_GREATER fastfud_1 95
 										IF LOCATE_PLAYER_ON_FOOT_3D player1	421.1 88.8 10.5 1.0 1.0 2.0 FALSE
@@ -1225,14 +1239,14 @@ transaction:
 	AND NOT IS_CHAR_DEAD ped_control
 		GET_PLAYER_HEALTH player1 fud_health
 		fud_health = fud_health * -1
-		fud_health = fud_health + 100
+		fud_health = fud_health + max_health // FIXMIAMI: use max_health
 		STORE_SCORE player1 player_score_fud
 		IF fud_health > player_score_fud
 			fud_health = player_score_fud
 		ENDIF
 		fud_health = fud_health * -1
 		ADD_SCORE player1 fud_health
-		SET_PLAYER_HEALTH player1 100
+		SET_PLAYER_HEALTH player1 max_health // FIXMIAMI: use max_health
 		ADD_ONE_OFF_SOUND fud_x fud_y fud_z SOUND_PART_MISSION_COMPLETE
 	ENDIF
 RETURN
