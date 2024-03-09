@@ -738,7 +738,7 @@ fud_audio_gimme:
 	
 	IF IS_PLAYER_PLAYING player1
 	AND NOT IS_CHAR_DEAD ped_control	
-		GENERATE_RANDOM_INT_IN_RANGE 1 15 player_gimme_int
+		GENERATE_RANDOM_INT_IN_RANGE 1 16 player_gimme_int // FIXMIAMI: fix upper bound
 		IF player_gimme_int = 1
 			LOAD_MISSION_AUDIO 2 GIMME01
 			GOSUB fud_audio_loading
@@ -837,10 +837,10 @@ IF IS_PLAYER_PLAYING player1
 AND NOT IS_CHAR_DEAD ped_control
 AND flag_player_on_mission = 0	
 
-	GENERATE_RANDOM_INT_IN_RANGE 1 30 fastfud_reply_int
+	GENERATE_RANDOM_INT_IN_RANGE 1 31 fastfud_reply_int // FIXMIAMI: fix upper bound
 	IF fastfud_reply_int < 11
 		IF flag_fud_audio = 1 //burger shot
-			GENERATE_RANDOM_INT_IN_RANGE 1 12 fastfud_reply_int
+			GENERATE_RANDOM_INT_IN_RANGE 1 13 fastfud_reply_int // FIXMIAMI: fix upper bound
 			IF fastfud_reply_int = 1
 				LOAD_MISSION_AUDIO 2 BURG_01
 				GOSUB fud_audio_loading
@@ -915,7 +915,7 @@ AND flag_player_on_mission = 0
 			ENDIF	
 		ENDIF
 		IF flag_fud_audio = 2 //cheezy crust
-			GENERATE_RANDOM_INT_IN_RANGE 1 9 fastfud_reply_int
+			GENERATE_RANDOM_INT_IN_RANGE 1 10 fastfud_reply_int // FIXMIAMI: fix upper bound
 			IF fastfud_reply_int = 1
 				LOAD_MISSION_AUDIO 2 CRUST01
 				GOSUB fud_audio_loading
@@ -972,7 +972,7 @@ AND flag_player_on_mission = 0
 			ENDIF	
 		ENDIF
 		IF flag_fud_audio = 3 //shaft
-			GENERATE_RANDOM_INT_IN_RANGE 1 8 fastfud_reply_int
+			GENERATE_RANDOM_INT_IN_RANGE 1 9 fastfud_reply_int // FIXMIAMI: fix upper bound
 			IF fastfud_reply_int = 1
 				LOAD_MISSION_AUDIO 2 SHAFT01
 				GOSUB fud_audio_loading
@@ -1023,7 +1023,7 @@ AND flag_player_on_mission = 0
 			ENDIF	
 		ENDIF
 		IF flag_fud_audio = 4 //bandit
-			GENERATE_RANDOM_INT_IN_RANGE 1 8 fastfud_reply_int
+			GENERATE_RANDOM_INT_IN_RANGE 1 9 fastfud_reply_int // FIXMIAMI: fix upper bound
 			IF fastfud_reply_int = 1
 				LOAD_MISSION_AUDIO 2 BAND_01
 				GOSUB fud_audio_loading
@@ -1074,7 +1074,7 @@ AND flag_player_on_mission = 0
 			ENDIF	
 		ENDIF
 	ELSE
-		GENERATE_RANDOM_INT_IN_RANGE 1 20 fastfud_reply_int
+		GENERATE_RANDOM_INT_IN_RANGE 1 21 fastfud_reply_int // FIXMIAMI: fix upper bound
 		IF fastfud_reply_int = 1
 			LOAD_MISSION_AUDIO 2 FUD_01
 			GOSUB fud_audio_loading
