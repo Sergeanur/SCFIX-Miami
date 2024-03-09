@@ -798,6 +798,7 @@ ENDIF
 
 //get to golf club
 IF has_player_been_to_clothes_shop = 2
+	hack_play_on_a_mission = 1 // FIXMIAMI
 	IF TIMERA > 4000
 		STOP_PLAYER_LOOKING Player1
 		SET_CAMERA_IN_FRONT_OF_PLAYER
@@ -1693,7 +1694,10 @@ REMOVE_BLIP golfped_target_blip
 REMOVE_BLIP clothesblip
 REMOVE_BLIP golfblip
 CLEAR_MISSION_AUDIO 1
-CLEAR_MISSION_AUDIO 2
+IF hack_play_on_a_mission = 0 // FIXMIAMI
+	CLEAR_MISSION_AUDIO 2
+ENDIF // FIXMIAMI
+hack_play_on_a_mission = 0 // FIXMIAMI
 
 IF mansion_clothes_created = 1
 	CREATE_CLOTHES_PICKUP -384.5 -591.9 25.3 1 mansion_clothes   

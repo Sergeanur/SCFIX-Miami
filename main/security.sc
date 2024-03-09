@@ -59,6 +59,11 @@ VAR_FLOAT cent_x cent_y theta_security theta_mod
 
 VAR_INT sec_counter
 
+VAR_INT security_disturbed // FIXMIAMI
+VAR_INT hack_play_on_a_mission // FIXMIAMI
+security_disturbed = 0 // FIXMIAMI
+hack_play_on_a_mission = 0 // FIXMIAMI
+
 flag_player_been_frisked = 0
 flag_zone = 0
 flag_gate = 0
@@ -90,6 +95,7 @@ mission_start_security:
 	START_NEW_SCRIPT security
 	//START_NEW_SCRIPT airport_security
 	//START_NEW_SCRIPT aport2_security
+	START_NEW_SCRIPT play_golf_security_audio // FIXMIAMI
 
 	MISSION_END
 }
@@ -205,6 +211,43 @@ security_inner:
 							GOSUB get_ammo
 							GOSUB security_pickups
 							GOSUB is_player_on_bike
+							// FIXMIAMI: START
+							LVAR_INT flag_has_any_firearm
+							VAR_INT flag_playing_security_audio
+							flag_has_any_firearm = 0
+							flag_playing_security_audio = 0
+							IF weapon_model_slot_3 > 0
+							OR weapon_model_slot_4 > 0
+							OR weapon_model_slot_5 > 0
+							OR weapon_model_slot_6 > 0
+							OR weapon_model_slot_7 > 0
+								flag_has_any_firearm = 1
+							ENDIF
+							IF weapon_model_slot_8 > 0
+							OR weapon_model_slot_9 > 0
+								flag_has_any_firearm = 1
+							ENDIF
+							IF flag_has_any_firearm = 1
+							AND flag_goons_created = 1
+							AND security_disturbed = 0
+							AND flag_cam_switch = 1
+								IF NOT IS_CHAR_DEAD security_bloke1
+								AND LOCATE_CHAR_ON_FOOT_3D security_bloke1 metal_detector_x metal_detector_y metal_detector_z 5.0 5.0 5.0 FALSE
+									IF flag_player_on_mission = 0
+									OR hack_play_on_a_mission = 1
+										flag_playing_security_audio = 1
+									ENDIF
+								ELSE
+									IF NOT IS_CHAR_DEAD security_bloke2
+									AND LOCATE_CHAR_ON_FOOT_3D security_bloke2 metal_detector_x metal_detector_y metal_detector_z 5.0 5.0 5.0 FALSE
+										IF flag_player_on_mission = 0
+										OR hack_play_on_a_mission = 1
+											flag_playing_security_audio = 1
+										ENDIF
+									ENDIF
+								ENDIF
+							ENDIF
+							// FIXMIAMI: END
 						ENDIF
 					ELSE
 					
@@ -275,12 +318,13 @@ security_inner:
 									WAIT 0
 								ENDWHILE
 							ENDIF
-							CREATE_CHAR PEDTYPE_CIVMALE GDa gate_security_1_x gate_security_1_y gate_security_1_z security_bloke1
+							security_disturbed = 0 // FIXMIAMI
+							CREATE_CHAR PEDTYPE_GANG_SECURITY GDa gate_security_1_x gate_security_1_y gate_security_1_z security_bloke1 // FIXMIAMI: use PEDTYPE_GANG_SECURITY
 							SET_CHAR_PERSONALITY security_bloke1 PEDSTAT_TOUGH_GUY
 							SET_CHAR_HEADING security_bloke1 300.0
 							CHAR_SET_IDLE security_bloke1 
 							
-							CREATE_CHAR PEDTYPE_CIVMALE GDa gate_security_2_x gate_security_2_y gate_security_2_z security_bloke2
+							CREATE_CHAR PEDTYPE_GANG_SECURITY GDa gate_security_2_x gate_security_2_y gate_security_2_z security_bloke2 // FIXMIAMI: use PEDTYPE_GANG_SECURITY
 							SET_CHAR_PERSONALITY security_bloke2 PEDSTAT_TOUGH_GUY
 							SET_CHAR_HEADING security_bloke2 130.0
 							CHAR_SET_IDLE security_bloke2
@@ -538,6 +582,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_3 > 0
+	AND ammo_slot_3 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_3
@@ -553,6 +598,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_4 > 0
+	AND ammo_slot_4 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_4
@@ -567,6 +613,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_5 > 0
+	AND ammo_slot_5 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_5
@@ -581,6 +628,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_6 > 0
+	AND ammo_slot_6 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_6
@@ -595,6 +643,7 @@ security_pickups:
 	ENDIF
 
 	IF weapon_model_slot_7 > 0
+	AND ammo_slot_7 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_7
@@ -609,6 +658,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_8 > 0
+	AND ammo_slot_8 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_8
@@ -623,6 +673,7 @@ security_pickups:
 	ENDIF
 
 	IF weapon_model_slot_9 > 0
+	AND ammo_slot_9 > 0 // FIXMIAMI
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_8
@@ -651,34 +702,21 @@ quick_stepping_inner:
 	++ outer_switch_quickstep
 	IF flag_zone = 1
 		IF outer_switch_quickstep > 1
-			IF counter_quickstep = 4
-				pickup_x = pickup_x + 3.7
-				pickup_y = pickup_y + 1.5
-				++ counter_quickstep
-			ENDIF
-			IF counter_quickstep = 3
-				pickup_y = pickup_y - 1.85
-				pickup_x = pickup_x + 0.75
-				++ counter_quickstep
-			ENDIF
-			IF counter_quickstep = 2
+			// FIXMIAMI: START - simplified and fixed this bit
+			IF counter_quickstep = 1
 				pickup_x = pickup_x - 3.7
 				pickup_y = pickup_y - 1.5
-				++ counter_quickstep
-			ENDIF
-			IF counter_quickstep = 1
 				pickup_y = pickup_y - 1.85
 				pickup_x = pickup_x + 0.75
-				++ counter_quickstep
-			ENDIF
-			IF counter_quickstep = 0
-				pickup_x = pickup_x + 3.7
-				pickup_y = pickup_y + 1.5
-				++ counter_quickstep
-			ENDIF
-			IF counter_quickstep > 4
 				counter_quickstep = 0
+			ELSE
+				IF counter_quickstep = 0
+					pickup_x = pickup_x + 3.7
+					pickup_y = pickup_y + 1.5
+					++ counter_quickstep
+				ENDIF
 			ENDIF
+			// FIXMIAMI: END
 		ELSE
 			pickup_x = metal_detector_x - 1.4
 			pickup_y = metal_detector_y - 2.6
@@ -832,6 +870,7 @@ kill_them_all_1:
 	IF NOT IS_CHAR_DEAD security_bloke1
 		IF IS_PLAYER_PLAYING player1
 			SET_CHAR_OBJ_KILL_PLAYER_ANY_MEANS security_bloke1 player1
+			security_disturbed = 1 // FIXMIAMI
 			IF flag_1_tooled = 0
 			AND HAS_MODEL_LOADED nitestick
 				GIVE_WEAPON_TO_CHAR security_bloke1 WEAPONTYPE_NIGHTSTICK 0	
@@ -848,6 +887,7 @@ kill_them_all_2:
 	IF NOT IS_CHAR_DEAD security_bloke2
 		IF IS_PLAYER_PLAYING player1
 			SET_CHAR_OBJ_KILL_PLAYER_ANY_MEANS security_bloke2 player1
+			security_disturbed = 1 // FIXMIAMI
 			IF flag_2_tooled = 0
 				GIVE_WEAPON_TO_CHAR security_bloke2 WEAPONTYPE_NIGHTSTICK 0	
 				flag_2_tooled = 1
@@ -855,6 +895,34 @@ kill_them_all_2:
 		ENDIF
 	ENDIF
 RETURN
+
+// FIXMIAMI: START
+play_golf_security_audio:
+	IF flag_playing_security_audio = 1
+		GENERATE_RANDOM_INT_IN_RANGE 1 4 random_int
+		IF random_int = 1
+			LOAD_MISSION_AUDIO 2 golf_1
+		ENDIF
+		IF random_int = 2
+			LOAD_MISSION_AUDIO 2 golf_2
+		ENDIF
+		IF random_int = 3
+			LOAD_MISSION_AUDIO 2 golf_3
+		ENDIF
+		WHILE NOT HAS_MISSION_AUDIO_LOADED 2
+			WAIT 0
+		ENDWHILE
+		PLAY_MISSION_AUDIO 2
+		WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
+			WAIT 0
+		ENDWHILE
+		CLEAR_MISSION_AUDIO 2
+		flag_playing_security_audio = 0
+	ENDIF
+	WAIT 0
+	GOTO play_golf_security_audio
+	RETURN
+// FIXMIAMI: END
 
 
 }
