@@ -291,6 +291,7 @@ SET_PED_DENSITY_MULTIPLIER 1.0
 // ******************************************END OF CUTSCENE********************************
 SET_FADING_COLOUR 0 0 0
 WAIT 500
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
 SET_CAMERA_BEHIND_PLAYER
 {
 //------------------ REQUEST_MODELS ------------------------------
@@ -345,6 +346,7 @@ DONT_REMOVE_OBJECT top_sexpad_doors_open
 
 CREATE_OBJECT_NO_OFFSET sexypoolcover 470.68 30.336 30.19 pool_cover
 DONT_REMOVE_OBJECT pool_cover 
+SET_PLAYER_CONTROL player1 ON // FIXMIAMI
 
 DO_FADE 1500 FADE_IN
 
