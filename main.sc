@@ -141,7 +141,7 @@ SWITCH_CAR_GENERATOR gen_car149 0
 CREATE_CAR_GENERATOR -1681.2 -103.7 14.7 180.0 hunter -1 -1 0 0 0 0 10000 gen_car150 //at army barracks
 SWITCH_CAR_GENERATOR gen_car150 0
 
-CREATE_CAR_GENERATOR -72.4 -1607.9 12.7 0.0 hunter -1 -1 0 0 0 0 10000 south_beach_hunter //at south beach
+CREATE_CAR_GENERATOR -70.3 -1607.0 12.7 0.0 hunter -1 -1 0 0 0 0 10000 south_beach_hunter //at south beach // FIXMIAMI: fixed position a bit
 SWITCH_CAR_GENERATOR south_beach_hunter 0
 
 // *************************************LOCATE BLOB VARIABLE STUFF****************************
