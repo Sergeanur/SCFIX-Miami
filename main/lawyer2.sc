@@ -1410,15 +1410,19 @@ PRINT_NOW ( LAW2_15 ) 10000 2  //Drive to AMMUNATION
 
 TIMERA = 0
 
-WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 3.0 TRUE
+VAR_INT gunstore_sphere // FIXMIAMI
+ADD_SPHERE -53.7 -1482.9 10.4 4.0 gunstore_sphere // FIXMIAMI
+WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 3.0 FALSE // FIXMIAMI: last arg was TRUE
 	WAIT 0
 
 	IF IS_CHAR_DEAD	buddy
 		PRINT_NOW ( COK2_26 ) 5000 2 //YOUR BUDDY IS DEAD!
+		REMOVE_SPHERE gunstore_sphere // FIXMIAMI
 		GOTO mission_lawyer2_failed
 	ENDIF
 
 	IF IS_CAR_DEAD buddycar
+		REMOVE_SPHERE gunstore_sphere // FIXMIAMI
 		GOTO mission_lawyer2_failed
 	ENDIF
 
@@ -1518,10 +1522,12 @@ WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 
 
 					IF IS_CHAR_DEAD	buddy
 						PRINT_NOW ( COK2_26 ) 5000 2 //YOUR BUDDY IS DEAD!
+						REMOVE_SPHERE gunstore_sphere // FIXMIAMI
 						GOTO mission_lawyer2_failed
 					ENDIF
 
 					IF IS_CAR_DEAD buddycar
+						REMOVE_SPHERE gunstore_sphere // FIXMIAMI
 						GOTO mission_lawyer2_failed
 					ENDIF
   
@@ -1533,6 +1539,7 @@ WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 
 	ENDIF
 
 ENDWHILE
+REMOVE_SPHERE gunstore_sphere // FIXMIAMI
 
 LOAD_MISSION_AUDIO 2 LAW2_5
 
