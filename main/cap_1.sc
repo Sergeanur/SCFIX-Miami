@@ -83,7 +83,7 @@ WAIT 0
 
 LOAD_MISSION_TEXT CAP_1
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -1045.726 -292.454 9.758 97.607  // On road outside of Print Works
-
+/*
 malibu_asset_acquired = 1 //debug!!!!!!
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD bankbuyx bankbuyy bankbuyz the_bankjob_blip bankjob_contact_blip
 CREATE_PROTECTION_PICKUP bankbuyX bankbuyY bankbuyZ malibu_revenue malibu_revenue malibu_cash_pickup 
@@ -117,7 +117,7 @@ SET_ZONE_PED_INFO CARYRD DAY   (13) 0 0 0 0 0 0 1000 0 0 0
 SET_ZONE_PED_INFO CARYRD NIGHT (5 ) 0 0 0 0 0 0 1000 0 0 0
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT carbuyX carbuyY carbuyZ RADAR_SPRITE_SUNYARD carbuy_blip
 CREATE_PROTECTION_PICKUP carbuyX carbuyY carbuyZ showroom_revenue showroom_revenue showroom_cash_pickup 
-
+*/
 
 VAR_INT current_place
 current_place = 0
@@ -200,7 +200,7 @@ route_point_count = 0
 
 flag_audio_just_noticed_player = 0
 
-
+/*
 //////////////////// TEMP!!!!!!!
 SWITCH_PED_ROADS_ON 189.8 230.3 0.0 248.0 258.5 30.0 //  Golf course road block
 SWITCH_PED_ROADS_ON -38.0 84.3 0.0 -102.3 95.1 30.0 //  Golf course road block
@@ -240,7 +240,7 @@ DELETE_OBJECT jetty_door_closed
 CREATE_OBJECT_NO_OFFSET ci_jetygatesopen -115.825 1028.55 11.334 jetty_door_open
 DONT_REMOVE_OBJECT jetty_door_open
 //////////////////// TEMP!!!!!!!
-
+*/
 GOTO cap_1_fool_compiler
 	CREATE_PROTECTION_PICKUP x y z porn_revenue porn_revenue taxifirm_cash_pickup
 	CREATE_PROTECTION_PICKUP x y z porn_revenue porn_revenue porn_cash_pickup
