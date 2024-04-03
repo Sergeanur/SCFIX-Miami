@@ -2749,7 +2749,7 @@ taxibuy_loop_inner:
 					SWITCH_STREAMING OFF
 					PRINT_BIG KAUFCAB 6000 2 //"Taxi Firm purchased: $ 15000"
 					GOSUB get_fading_status
-					START_NEW_SCRIPT taxiwar_mission1_loop
+					//START_NEW_SCRIPT taxiwar_mission1_loop // FIXMIAMI: moved to taxicut1.sc now
 					LOAD_AND_LAUNCH_MISSION taxicut.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF

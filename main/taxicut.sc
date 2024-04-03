@@ -6,17 +6,36 @@ MISSION_START
 // ****************************************Mission Start************************************
 
 {
+	
+// FIXMIAMI: START - SSU fix
+
+GOSUB mission_start_taxi_cut
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB taxicut_set1
+ENDIF
+
+GOSUB mission_cleanup_taxi_cut
+
+MISSION_END
+
+// FIXMIAMI: END
 
 LVAR_INT cs_disp cs_cdrivra cs_cdrivrb kaufman_cab
+LVAR_INT flag_taxicut_set1 // FIXMIAMI
 
 mission_start_taxi_cut:
 
 flag_player_on_mission = 1
 //skip_flag = 0
 
+flag_taxicut_set1 = 0 // FIXMIAMI
+
 DELETE_OBJECT taxi_closed
 
 SCRIPT_NAME TAXCUT
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
 
 WAIT 0
 
@@ -323,6 +342,8 @@ UNLOAD_SPECIAL_CHARACTER 3
 UNLOAD_SPECIAL_CHARACTER 4
 MARK_MODEL_AS_NO_LONGER_NEEDED kaufman
 
+DELETE_CAR kaufman_cab // FIXMIAMI: delete cutscene car after the cutscene
+
 flag_taxicut_mission1_passed = 1
 
 
@@ -339,11 +360,27 @@ POINT_CAMERA_AT_POINT -1017.904 207.165 15.090 JUMP_CUT
 PLAY_MISSION_PASSED_TUNE 1
 
 PRINT_WITH_NUMBER_BIG TAXIBUY taxibuy_price 7000 6 //
-ADD_MONEY_SPENT_ON_PROPERTY taxibuy_price
-SET_PROPERTY_AS_OWNED PROP_TAXICO
+GOSUB taxicut_set1 // FIXMIAMI: moved stuff into a subroutine
 
 WAIT 7000
+// FIXMIAMI: START
+SET_PLAYER_CONTROL player1 ON
+SWITCH_WIDESCREEN OFF
+SET_CAMERA_BEHIND_PLAYER
+RESTORE_CAMERA_JUMPCUT
+RETURN
 
+taxicut_set1:
+IF flag_taxicut_set1 = 0
+	ADD_MONEY_SPENT_ON_PROPERTY taxibuy_price
+	SET_PROPERTY_AS_OWNED PROP_TAXICO
+	flag_taxicut_set1 = 1
+ENDIF
+RETURN
+
+// FIXMIAMI: END
+
+mission_cleanup_taxi_cut: // FIXMIAMI
 flag_player_on_mission = 0
 
 GET_GAME_TIMER timer_mobile_start
@@ -353,6 +390,7 @@ REMOVE_BLIP taxiwar_contact_blip
 ADD_SPRITE_BLIP_FOR_CONTACT_POINT taxiwarX taxiwarY taxiwarZ the_taxiwar_blip taxiwar_contact_blip
 
 START_NEW_SCRIPT taxiwar_save_loop
+START_NEW_SCRIPT taxiwar_mission1_loop // FIXMIAMI: moved here from main.sc
 PLAYER_MADE_PROGRESS 1
 RESTORE_CAMERA_JUMPCUT
 
@@ -361,7 +399,8 @@ SET_ZONE_PED_INFO KAUFCAB NIGHT (10) 0 0 0 0 0 0 1000 0 0 0
 SWITCH_PED_ROADS_ON -1012.06 181.561 0.0 -982.06 216.561 30.0//TAXIFIRM
 
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
+RETURN // FIXMIAMI
 
 
 }
