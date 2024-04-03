@@ -788,6 +788,7 @@ SWITCH_PED_ROADS_OFF 376.66 -453.85 -10.00 328.91 -504.02 30.0 //Cop Shop (Used 
 ADD_CONTINUOUS_SOUND 385.49 -509.0 9.6 SOUND_BANK_ALARM_LOOP door_sliding_bankjob1
 REMOVE_SOUND door_sliding_bankjob1
 
+/* FIXMIAMI: remove this
 IF NOT IS_CHAR_DEAD scplayer
 		   
 	UNDRESS_CHAR scplayer player
@@ -799,6 +800,7 @@ IF NOT IS_CHAR_DEAD scplayer
 	ENDIF
 
 ENDIF
+*/
  
 LOAD_SPECIAL_CHARACTER 1 CSplay
 LOAD_SPECIAL_CHARACTER 2 CSken
@@ -1027,7 +1029,7 @@ ADD_BLIP_FOR_CHAR safecracker_bankjob1 radar_blip_ped1_bankjob1
 
 // creates cop1 at the info desk ground floor 
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 388.30 -473.90 11.34 cop1_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 388.30 -473.90 11.34 cop1_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1043,7 +1045,7 @@ SET_CHAR_OBJ_GUARD_SPOT cop1_bankjob1 388.30 -473.90 11.34
 
 // creates cop2 in info desk sitting at computer
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 387.58 -471.051 11.35 cop2_bankjob1 // 387.988 -471.397 11.35 cop2_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 387.58 -471.051 11.35 cop2_bankjob1 // 387.988 -471.397 11.35 cop2_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1059,7 +1061,7 @@ SET_CHAR_WAIT_STATE cop2_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop3 at info desk sitting a computer on left hand side cowardly cop ducks most of the time
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 384.196 -472.554 11.35 cop3_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 384.196 -472.554 11.35 cop3_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1075,7 +1077,7 @@ SET_CHAR_WAIT_STATE cop3_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop4 guy with key for cells in upstrairs office left hand side - large office
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 363.709 -475.485 12.83 cop4_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 363.709 -475.485 12.83 cop4_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1091,7 +1093,7 @@ SET_CHAR_WAIT_STATE cop4_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop5 in sitting at desk
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 362.483 -485.782 12.83 cop5_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 362.483 -485.782 12.83 cop5_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1107,7 +1109,7 @@ SET_CHAR_WAIT_STATE cop5_bankjob1 WAITSTATE_PLAYANIM_CHAT 1000000
 
 // creates cop6 in holding room down stairs left hand side
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 400.053 -493.559 9.87 cop6_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 400.053 -493.559 9.87 cop6_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1123,7 +1125,7 @@ SET_CHAR_WAIT_STATE cop6_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop8 in middle of floor chats
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 360.686 -487.4 12.8 cop8_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 360.686 -487.4 12.8 cop8_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1139,7 +1141,7 @@ SET_CHAR_WAIT_STATE cop8_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop9 in top floor in office in chair next to cop 10
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 369.358 -477.192 12.83 cop9_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 369.358 -477.192 12.83 cop9_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1153,7 +1155,7 @@ SET_CHAR_WAIT_STATE cop9_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop10 seat facing into office right hand side
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 373.331 -477.744 12.8 cop10_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 373.331 -477.744 12.8 cop10_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1167,7 +1169,7 @@ SET_CHAR_WAIT_STATE cop10_bankjob1 WAITSTATE_SIT_DOWN 1000000
 
 // Creates cop 7 filing cabinet in the middle of the floor
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 371.0 -482.2 12.8 cop7_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 371.0 -482.2 12.8 cop7_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1183,7 +1185,7 @@ cop7_sitting_bankjob1 = 1
 
 // Creates cop11 on the right hand side by file cabinet.
 
-CREATE_CHAR PEDTYPE_CIVMALE COP 372.118 -490.603 12.831 cop11_bankjob1
+CREATE_CHAR PEDTYPE_COP COP 372.118 -490.603 12.831 cop11_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 
 ++ counter_blokes_alive_bankjob1
 
@@ -1206,6 +1208,13 @@ ADD_SPHERE 407.90 -486.35 11.35 1.0 sphere_bankjob1
 ADD_CONTINUOUS_SOUND 405.565 -488.547 12.69 SOUND_SNORING_LOOP snore_bank1 
 
 blob_flag = 1
+
+// FIXMIAMI: START - check if player is already in cop uniform
+IF IS_PLAYER_WEARING player1 player6
+	REMOVE_SPHERE sphere_bankjob1
+	uniform_pickedup_bankjob1 = 1
+ENDIF
+// FIXMIAMI: END
 
 
 timera = 0
@@ -1318,6 +1327,7 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 	GET_GAME_TIMER game_time_bank1
 
 	IF kill_player_flag_bankjob1 = 1
+		GOSUB player_force_wanted_level_bj1 // FIXMIAMI
 
 		IF timer_guards_react_bank1 = 0
 			timer_started_bank1 = game_time_bank1
@@ -1394,6 +1404,7 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 	ENDIF
 	
 	IF kill_player_flag_bankjob1 = 0
+		GOSUB player_entered_wanted_bankjob1 // FIXMIAMI
 		GOSUB player_shooting_bankjob1
 		GOSUB player_armed_bankjob1
 		GOSUB player_in_station_bankjob1
@@ -1433,6 +1444,9 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 					
 					GIVE_WEAPON_TO_CHAR safecracker_bankjob1 WEAPONTYPE_UZI 30000 // set to infinate ammo 
 					SET_CHAR_RUNNING safecracker_bankjob1 TRUE
+					SET_CHAR_PERSONALITY safecracker_bankjob1 PEDSTAT_TOUGH_GUY // FIXMIAMI
+					SET_CHAR_THREAT_SEARCH safecracker_bankjob1 THREAT_COP // FIXMIAMI
+					SET_CHAR_HEED_THREATS safecracker_bankjob1 TRUE // FIXMIAMI
 					
 					REMOVE_BLIP radar_blip_ped1_bankjob1
 					kill_player_flag_bankjob1 = 1
@@ -1489,7 +1503,7 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 // Safecracker in group
 
 		IF flag_safecracker_in_group_bankjob1 = 1
-			
+			SET_CHAR_RUNNING safecracker_bankjob1 TRUE // FIXMIAMI: make sure he's always running
 			IF flag_bloke_in_group_bankjob1 = 1
 			
 				IF IS_WANTED_LEVEL_GREATER player1 0
@@ -3882,6 +3896,63 @@ ENDIF
 
 RETURN
 
+// FIXMIAMI: START
+player_force_wanted_level_bj1:
+IF kill_player_flag_bankjob1 = 1
+	IF NOT IS_WANTED_LEVEL_GREATER player1 3
+		IF IS_PLAYER_IN_ANGLED_AREA_3D player1 393.174 -470.686 10.0 386.992 -478.052 15.0 8.20 FALSE // Entrance
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 389.12 -478.56 10.34 379.50 -489.40 14.0 4.0 FALSE // over counter
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 397.983 -479.156 10.0 394.546 -483.252 15.0 3.30 FALSE // Corridor to changing room
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 401.651 -480.614 10.0 397.416 -485.66 15.0 9.40 FALSE // Changing room	
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 407.682 -480.576 10.0 405.289 -483.392 15.0 4.80 FALSE //shower room
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 389.12 -478.56 10.34 379.50 -489.40 14.0 4.0 FALSE // link corridor to back of station
+			ALTER_WANTED_LEVEL_NO_DROP player1 4
+		ENDIF
+		
+		IF IS_PLAYER_IN_ANGLED_AREA_3D player1 387.811 -486.137 10.0 386.424 -487.79 15.0 4.20 FALSE //Link corridor to charging desk
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 393.073 -495.966 8.0 390.441 -499.103 15.0 2.20 FALSE // Link coridor to cells
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 378.554 -485.414 11.0 377.167 -487.068 15.0 4.20 FALSE // Link corridor to keycard rooms
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 395.032 -484.093 8.0 388.44 -491.948 15.0 11.60 FALSE // Charging desk area
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 396.233 -504.359 7.0 386.533 -496.22 15.0 12.70 FALSE // Police cells
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 368.888 -465.922 11.0 353.713 -484.155 20.0 19.80 FALSE // Upper room with keycard
+			ALTER_WANTED_LEVEL_NO_DROP player1 4
+		ENDIF
+	ENDIF
+ENDIF
+
+RETURN
+
+player_entered_wanted_bankjob1:
+
+IF kill_player_flag_bankjob1 = 0
+
+	IF IS_WANTED_LEVEL_GREATER player1 0
+		IF IS_PLAYER_IN_ANGLED_AREA_3D player1 393.174 -470.686 10.0 386.992 -478.052 15.0 8.20 FALSE // Entrance
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 389.12 -478.56 10.34 379.50 -489.40 14.0 4.0 FALSE // over counter
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 397.983 -479.156 10.0 394.546 -483.252 15.0 3.30 FALSE // Corridor to changing room
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 401.651 -480.614 10.0 397.416 -485.66 15.0 9.40 FALSE // Changing room	
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 407.682 -480.576 10.0 405.289 -483.392 15.0 4.80 FALSE //shower room
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 389.12 -478.56 10.34 379.50 -489.40 14.0 4.0 FALSE // link corridor to back of station
+			kill_player_flag_bankjob1 = 1
+		ENDIF
+		
+		IF IS_PLAYER_IN_ANGLED_AREA_3D player1 387.811 -486.137 10.0 386.424 -487.79 15.0 4.20 FALSE //Link corridor to charging desk
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 393.073 -495.966 8.0 390.441 -499.103 15.0 2.20 FALSE // Link coridor to cells
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 378.554 -485.414 11.0 377.167 -487.068 15.0 4.20 FALSE // Link corridor to keycard rooms
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 395.032 -484.093 8.0 388.44 -491.948 15.0 11.60 FALSE // Charging desk area
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 396.233 -504.359 7.0 386.533 -496.22 15.0 12.70 FALSE // Police cells
+		OR IS_PLAYER_IN_ANGLED_AREA_3D player1 368.888 -465.922 11.0 353.713 -484.155 20.0 19.80 FALSE // Upper room with keycard
+			kill_player_flag_bankjob1 = 1
+		ENDIF
+						
+	ENDIF
+	
+ENDIF	 
+
+RETURN
+
+// FIXMIAMI: END
+
 // If the alarm has been raised this will create guys from the stations interior
 
 alarm_guard_creation_bankjob1:
@@ -3908,7 +3979,7 @@ IF player_gone_out_bank1 = 0
 						IF flag_guard1_state_bankjob1 = 0
 						OR flag_guard1_state_bankjob1 = 2
 							CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE 
-							CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard1_bankjob1
+							CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard1_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 							guard_number_bankjob1 = created_guard1_bankjob1
 							flag_guard1_state_bankjob1 = 1
 						ELSE
@@ -3916,7 +3987,7 @@ IF player_gone_out_bank1 = 0
 							IF flag_guard2_state_bankjob1 = 0
 							OR flag_guard2_state_bankjob1 = 2
 								CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE
-								CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard2_bankjob1
+								CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard2_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 								guard_number_bankjob1 = created_guard2_bankjob1
 								flag_guard2_state_bankjob1 = 1
 							ELSE
@@ -3924,7 +3995,7 @@ IF player_gone_out_bank1 = 0
 								IF flag_guard3_state_bankjob1 = 0
 								OR flag_guard3_state_bankjob1 = 2
 									CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE 
-									CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard3_bankjob1
+									CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard3_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 									guard_number_bankjob1 = created_guard3_bankjob1
 									flag_guard3_state_bankjob1 = 1
 								ELSE	
@@ -3932,7 +4003,7 @@ IF player_gone_out_bank1 = 0
 									IF flag_guard4_state_bankjob1 = 0
 									OR flag_guard4_state_bankjob1 = 2
 										CLEAR_AREA -379.88 -493.05 11.34 4.0 FALSE 
-										CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard4_bankjob1
+										CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard4_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 										guard_number_bankjob1 = created_guard4_bankjob1
 										flag_guard4_state_bankjob1 = 1
 									ELSE
@@ -3940,7 +4011,7 @@ IF player_gone_out_bank1 = 0
 										IF flag_guard5_state_bankjob1 = 0
 										OR flag_guard5_state_bankjob1 = 2
 											CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE 
-											CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard5_bankjob1
+											CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard5_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 											guard_number_bankjob1 = created_guard5_bankjob1
 											flag_guard5_state_bankjob1 = 1
 										ELSE
@@ -3948,7 +4019,7 @@ IF player_gone_out_bank1 = 0
 											IF flag_guard6_state_bankjob1 = 0
 											OR flag_guard6_state_bankjob1 = 2
 												CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE 
-												CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard6_bankjob1
+												CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard6_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 												guard_number_bankjob1 = created_guard6_bankjob1
 												flag_guard6_state_bankjob1 = 1
 											ELSE
@@ -3956,7 +4027,7 @@ IF player_gone_out_bank1 = 0
 												IF flag_guard7_state_bankjob1 = 0
 												OR flag_guard7_state_bankjob1 = 2
 													CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE 
-													CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard7_bankjob1
+													CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard7_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 													guard_number_bankjob1 = created_guard7_bankjob1
 													flag_guard7_state_bankjob1 = 1
 												ELSE
@@ -3964,7 +4035,7 @@ IF player_gone_out_bank1 = 0
 													IF flag_guard8_state_bankjob1 = 0
 													OR flag_guard8_state_bankjob1 = 2
 														CLEAR_AREA 379.88 -493.05 11.34 4.0 FALSE 
-														CREATE_CHAR PEDTYPE_CIVMALE COP 379.88 -493.05 11.34 created_guard8_bankjob1
+														CREATE_CHAR PEDTYPE_COP COP 379.88 -493.05 11.34 created_guard8_bankjob1 // FIXMIAMI: was PEDTYPE_CIVMALE
 														guard_number_bankjob1 = created_guard8_bankjob1
 														flag_guard8_state_bankjob1 = 1
 													ENDIF
