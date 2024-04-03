@@ -186,6 +186,8 @@ LOAD_MISSION_TEXT BANKJ2
 
 SHUT_PLAYER_UP player1 TRUE
 
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+
 REQUEST_MODEL COLT45
 
 REQUEST_MODEL tar_frame
@@ -237,8 +239,20 @@ SET_OBJECT_HEADING object1_bankjob2 90.0
 
 GET_CHAR_WEAPON_IN_SLOT scplayer 4 slot4_weapon_type_bank2 slot4_ammo_bank2 slot4_model_bank2
 
+// FIXMIAMI: START - make sure the model is not unloaded (COLT45 is already requested for the mission)
+IF NOT slot4_model_bank2 = COLT45
+AND slot4_ammo_bank2 > 0
+	REQUEST_MODEL slot4_model_bank2
+ENDIF
+// FIXMIAMI: END
+
+// FIXMIAMI: START - nil player's ammo before attach
+SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0
+// FIXMIAMI: END
+
+SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // FIXMIAMI: moved before attach
 ATTACH_CHAR_TO_OBJECT scplayer object1_bankjob2 0.0 -2.0 1.0 FACING_FORWARD 60.0 WEAPONTYPE_PISTOL
-SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED
 SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
 SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 100
 ammo_given_round1_bankjob2 = 100
@@ -251,6 +265,67 @@ WAIT 500
 
 DO_FADE 1500 FADE_IN
 
+// FIXMIAMI: START - tidy up this big ass chunk
+LVAR_INT range_tutor_state
+range_tutor_state = 0
+
+WHILE range_tutor_state < 6
+	WAIT 0
+
+	IF range_tutor_state > 0
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+		OR IS_BUTTON_PRESSED PAD1 START
+			GOTO mission_skip_range
+		ENDIF
+	ENDIF
+
+	IF LOCATE_PLAYER_ANY_MEANS_3D player1 -667.8 1210.0 10.5 3.0 3.0 3.0 FALSE
+		PRINT_NOW ( BJM2_22 ) 5000 1 //"You have left the competition!
+		GOTO mission_range_failed
+	ENDIF
+
+	IF range_tutor_state = 0
+		IF NOT GET_FADING_STATUS
+			range_tutor_state = 1
+		ENDIF
+	ENDIF
+
+	IF range_tutor_state = 1
+		PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
+		timera = 0
+		range_tutor_state = 2
+	ENDIF
+
+	IF range_tutor_state = 2
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_20 ) 8000 1 //"When you run out of time or ammo the round is over!
+		timera = 0
+		range_tutor_state = 3
+	ENDIF
+
+	IF range_tutor_state = 3
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_2 ) 8000 1 //"To exit the round press the ^ button."
+		timera = 0
+		range_tutor_state = 4
+	ENDIF
+
+	IF range_tutor_state = 4
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_23 ) 8000 1 //"If you leave the shooting range during the competition, you will fail the mission."
+		timera = 0
+		range_tutor_state = 5
+	ENDIF
+
+	IF range_tutor_state = 5
+	AND timera >= 5000
+		range_tutor_state = 6
+	ENDIF
+
+ENDWHILE
+// FIXMIAMI: END
+
+/* FIXMIAMI: all this was rewritten above
 WHILE GET_FADING_STATUS
 
 	WAIT 0
@@ -348,6 +423,7 @@ WHILE timera < 5000
 	ENDIF
 
 ENDWHILE
+*/
 
 mission_skip_range:
 
@@ -1161,14 +1237,16 @@ DELETE_OBJECT target3_part5_bankjob2
 DETACH_CHAR_FROM_CAR scplayer
 
 IF slot4_ammo_bank2 > 0
-	REQUEST_MODEL slot4_model_bank2
+	//REQUEST_MODEL slot4_model_bank2 // FIXMIAMI: removed now, we leave the model loaded
+
+	//LOAD_ALL_MODELS_NOW // FIXMIAMI: removed now, we leave the model loaded
+
+	GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // FIXMIAMI: moved into if block
+
+	IF NOT slot4_model_bank2 = COLT45 // FIXMIAMI: COLT45 will be unloaded below
+		MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2 // FIXMIAMI: moved into if block
+	ENDIF // FIXMIAMI
 ENDIF
-
-LOAD_ALL_MODELS_NOW
-
-GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2
-
-MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2
 
 flag_player_on_mission = 0
 flag_player_on_bank_2 = 0 // Used for interior loading stu
