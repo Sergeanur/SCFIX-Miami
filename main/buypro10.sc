@@ -1,18 +1,38 @@
 MISSION_START
 			  
+// FIXMIAMI: START - fix SSU shit
+GOSUB mission_start_vcptbuy
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB mission_deatharrest_vcptbuy
+ENDIF
+
+GOSUB mission_cleanup_vcptbuy
+
+MISSION_END
+// FIXMIAMI: END
 
 mission_start_vcptbuy:
 
 SCRIPT_NAME	vcptbuy
 
 flag_player_on_mission = 1
+{ // FIXMIAMI: scope moved up, was after WAIT 0
 
+// FIXMIAMI: START
+LVAR_INT flag_vcptbuy_set1
+LVAR_INT flag_vcptbuy_set2
+LVAR_INT flag_vcptbuy_set3
+flag_vcptbuy_set1 = 0
+flag_vcptbuy_set2 = 0
+flag_vcptbuy_set3 = 0
+// FIXMIAMI: END
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
 
 WAIT 0
-{
 
-	REMOVE_BLIP vcptbuy_blip
-	PLAYER_MADE_PROGRESS 1
+	GOSUB vcptbuy_set1 // FIXMIAMI: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -21,17 +41,17 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT vcptbuyX vcptbuyY vcptbuyZ RADAR_SPRITE_SAVEHOUSE vcptbuy_blip 
 			CHANGE_BLIP_DISPLAY vcptbuy_blip BLIP_ONLY
 			START_NEW_SCRIPT vcptsave1_save_loop
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT vcptbuyX vcptbuyY vcptbuyZ RADAR_SPRITE_SAVEHOUSE vcptbuy_blip 
-	CHANGE_BLIP_DISPLAY vcptbuy_blip BLIP_ONLY
-	START_NEW_SCRIPT vcptsave1_save_loop
+	GOSUB vcptbuy_set2 // FIXMIAMI: moved stuff into a subroutine
 
 	CLEAR_AREA 529.6626 1272.1550 16.8220 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 529.6626 1272.1550 16.8220
@@ -46,19 +66,15 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	vice_point_3321_bought = 1
-	//CREATE_CLOTHES_PICKUP 529.3 1276.0 18.1 1 safehouse_clothes4   
-	safehouse_created4 = 1
 	PRINT_WITH_NUMBER_BIG VCPTBUY vcptbuy_price 5000 6 //3321 Vice Point purchased: $ ~1~
-	ADD_MONEY_SPENT_ON_PROPERTY vcptbuy_price
-	SET_PROPERTY_AS_OWNED PROP_VICEPOINT
-	//vcptbuy_price *= -1
-	//ADD_SCORE player1 vcptbuy_price
+	GOSUB vcptbuy_set3 // FIXMIAMI: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
@@ -81,10 +97,12 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
 	SET_CAMERA_BEHIND_PLAYER
@@ -100,13 +118,54 @@ WAIT 0
 
 	GOSUB get_fading_status
 
+	RETURN // FIXMIAMI
+
+// FIXMIAMI: START
+vcptbuy_set1:
+IF flag_vcptbuy_set1 = 0
+	REMOVE_BLIP vcptbuy_blip
+	PLAYER_MADE_PROGRESS 1
+	flag_vcptbuy_set1 = 1
+ENDIF
+RETURN
+
+vcptbuy_set2:
+IF flag_vcptbuy_set2 = 0
+	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT vcptbuyX vcptbuyY vcptbuyZ RADAR_SPRITE_SAVEHOUSE vcptbuy_blip 
+	CHANGE_BLIP_DISPLAY vcptbuy_blip BLIP_ONLY
+	START_NEW_SCRIPT vcptsave1_save_loop
+	flag_vcptbuy_set2 = 1
+ENDIF
+RETURN
+
+vcptbuy_set3:
+IF flag_vcptbuy_set3 = 0
+	vice_point_3321_bought = 1
+	//CREATE_CLOTHES_PICKUP 529.3 1276.0 18.1 1 safehouse_clothes4   
+	safehouse_created4 = 1
+	ADD_MONEY_SPENT_ON_PROPERTY vcptbuy_price
+	SET_PROPERTY_AS_OWNED PROP_VICEPOINT
+	//vcptbuy_price *= -1
+	//ADD_SCORE player1 vcptbuy_price
+	flag_vcptbuy_set3 = 1
+ENDIF
+RETURN
+
+mission_deatharrest_vcptbuy:
+GOSUB vcptbuy_set1
+GOSUB vcptbuy_set2
+GOSUB vcptbuy_set3
+RETURN
+// FIXMIAMI: END
+
+mission_cleanup_vcptbuy: // FIXMIAMI
 	SET_MUSIC_DOES_FADE TRUE
 					
 												
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
 
 }
 RETURN 

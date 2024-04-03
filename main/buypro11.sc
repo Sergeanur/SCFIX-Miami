@@ -1,18 +1,39 @@
 MISSION_START
 			  
+// FIXMIAMI: START - fix SSU shit
+GOSUB mission_start_skumbuy
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB mission_deatharrest_skumbuy
+ENDIF
+
+GOSUB mission_cleanup_skumbuy
+
+MISSION_END
+// FIXMIAMI: END
 
 mission_start_skumbuy:
 
 SCRIPT_NAME	skumbuy
 
 flag_player_on_mission = 1
+{ // FIXMIAMI: scope moved up, was after WAIT 0
 
+// FIXMIAMI: START
+LVAR_INT flag_skumbuy_set1
+LVAR_INT flag_skumbuy_set2
+LVAR_INT flag_skumbuy_set3
+flag_skumbuy_set1 = 0
+flag_skumbuy_set2 = 0
+flag_skumbuy_set3 = 0
+// FIXMIAMI: END
+
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
 
 WAIT 0
-{
 
-	REMOVE_BLIP skumbuy_blip
-	PLAYER_MADE_PROGRESS 1
+	GOSUB skumbuy_set1 // FIXMIAMI: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -21,17 +42,17 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT skumbuyX skumbuyY skumbuyZ RADAR_SPRITE_SAVEHOUSE skumbuy_blip 
 			CHANGE_BLIP_DISPLAY skumbuy_blip BLIP_ONLY
 			START_NEW_SCRIPT skumsave1_save_loop
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT skumbuyX skumbuyY skumbuyZ RADAR_SPRITE_SAVEHOUSE skumbuy_blip
-	CHANGE_BLIP_DISPLAY skumbuy_blip BLIP_ONLY 
-	START_NEW_SCRIPT skumsave1_save_loop
+	GOSUB skumbuy_set2 // FIXMIAMI: moved stuff into a subroutine
 
     CLEAR_AREA -559.9 705.4 19.8 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 -559.9 705.4 19.8
@@ -46,19 +67,15 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	skumole_bought = 1
-	//CREATE_CLOTHES_PICKUP -556.3 697.4 20.5 1 safehouse_clothes1   
-	safehouse_created1 = 1
 	PRINT_WITH_NUMBER_BIG SKUMBUY skumbuy_price 5000 6 //Skumole shack purchased: $ ~1~
-	ADD_MONEY_SPENT_ON_PROPERTY skumbuy_price
-	SET_PROPERTY_AS_OWNED PROP_SKUMOLESHACK
-	//skumbuy_price *= -1
-	//ADD_SCORE player1 skumbuy_price
+	GOSUB skumbuy_set3 // FIXMIAMI: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
@@ -81,10 +98,12 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
 	SET_CAMERA_BEHIND_PLAYER
@@ -100,12 +119,54 @@ WAIT 0
 
 	GOSUB get_fading_status
 
+	RETURN // FIXMIAMI
+
+// FIXMIAMI: START
+skumbuy_set1:
+IF flag_skumbuy_set1 = 0
+	REMOVE_BLIP skumbuy_blip
+	PLAYER_MADE_PROGRESS 1
+	flag_skumbuy_set1 = 1
+ENDIF
+RETURN
+
+skumbuy_set2:
+IF flag_skumbuy_set2 = 0
+	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT skumbuyX skumbuyY skumbuyZ RADAR_SPRITE_SAVEHOUSE skumbuy_blip
+	CHANGE_BLIP_DISPLAY skumbuy_blip BLIP_ONLY 
+	START_NEW_SCRIPT skumsave1_save_loop
+	flag_skumbuy_set2 = 1
+ENDIF
+RETURN
+
+skumbuy_set3:
+IF flag_skumbuy_set3 = 0
+	skumole_bought = 1
+	//CREATE_CLOTHES_PICKUP -556.3 697.4 20.5 1 safehouse_clothes1   
+	safehouse_created1 = 1
+	ADD_MONEY_SPENT_ON_PROPERTY skumbuy_price
+	SET_PROPERTY_AS_OWNED PROP_SKUMOLESHACK
+	//skumbuy_price *= -1
+	//ADD_SCORE player1 skumbuy_price
+	flag_skumbuy_set3 = 1
+ENDIF
+RETURN
+
+mission_deatharrest_skumbuy:
+	GOSUB skumbuy_set1
+	GOSUB skumbuy_set2
+	GOSUB skumbuy_set3
+	RETURN
+// FIXMIAMI: END
+
+mission_cleanup_skumbuy: // FIXMIAMI
+
 	SET_MUSIC_DOES_FADE TRUE
 																	
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
 
 }
 RETURN 

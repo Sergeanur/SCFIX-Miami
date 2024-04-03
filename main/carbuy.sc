@@ -7,13 +7,25 @@ MISSION_START
 
 // Mission start stuff
 
+// FIXMIAMI: START - SSU fix
+GOSUB mission_start_carbuy
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB carbuy_set_as_owned
+ENDIF
+
+GOSUB mission_cleanup_carbuy
+
+MISSION_END
+// FIXMIAMI: END
 
 
 // Variables for mission
-
+{ // FIXMIAMI: add scope
 //CARS PEDS OBJECTS PICKUPS
-VAR_INT csbj csplay
+LVAR_INT csbj csplay // FIXMIAMI: make LVAR
 //FLAGS COUNTERS TIMERS
+LVAR_INT flag_carbuy_set_as_owned // FIXMIAMI
 //BLIPS
 //COORDS MATHS
 //VAR_FLOAT
@@ -24,7 +36,11 @@ mission_start_carbuy:
 
 flag_player_on_mission = 1
 
+flag_carbuy_set_as_owned = 0 // FIXMIAMI
+
 SCRIPT_NAME carbuy1
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
 
 WAIT 0
 
@@ -46,7 +62,7 @@ OR NOT HAS_MODEL_LOADED SENTINEL
 	WAIT 0
 ENDWHILE
 
-VAR_INT showroom_car1
+LVAR_INT showroom_car1 // FIXMIAMI: make LVAR
 CREATE_CAR SENTINEL -1033.2114 -856.8564 12.0452 showroom_car1
 SET_CAR_HEADING showroom_car1 210.2780
 MARK_MODEL_AS_NO_LONGER_NEEDED SENTINEL
@@ -211,12 +227,13 @@ MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
 
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: moved up before WAIT
+
 //////////////////////////
 //////////////////////////
 WAIT 0
 WAIT 0
 
-SET_PLAYER_CONTROL player1 OFF
 SWITCH_WIDESCREEN ON
 SET_ALL_CARS_CAN_BE_DAMAGED	FALSE
 
@@ -232,12 +249,7 @@ ENDWHILE
 
 PLAY_MISSION_PASSED_TUNE 1
 PRINT_WITH_NUMBER_BIG CARBUY carbuy_price 7000 6 //
-ADD_MONEY_SPENT_ON_PROPERTY carbuy_price
-SET_PROPERTY_AS_OWNED PROP_CARSHOWROOM
-CHANGE_GARAGE_TYPE carbuy_save_garage1 GARAGE_HIDEOUT_SEVEN 
-CHANGE_GARAGE_TYPE carbuy_save_garage2 GARAGE_HIDEOUT_EIGHT 
-CHANGE_GARAGE_TYPE carbuy_save_garage3 GARAGE_HIDEOUT_NINE 
-CHANGE_GARAGE_TYPE carbuy_save_garage4 GARAGE_HIDEOUT_TEN 
+GOSUB carbuy_set_as_owned // FIXMIAMI: moved stuff into a subroutine
 
 WAIT 5000
 
@@ -248,7 +260,14 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-VAR_INT races_blip
+SWITCH_WIDESCREEN OFF // FIXMIAMI
+SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+
+RETURN // FIXMIAMI
+
+mission_cleanup_carbuy: // FIXMIAMI
+
+LVAR_INT races_blip // FIXMIAMI: make LVAR
 ADD_BLIP_FOR_CONTACT_POINT -967.7050 -827.3005 5.7702 races_blip
 CHANGE_BLIP_DISPLAY races_blip MARKER_ONLY
 
@@ -277,5 +296,21 @@ SET_GENERATE_CARS_AROUND_CAMERA FALSE
 RESTORE_CAMERA_JUMPCUT
 flag_player_on_mission = 0
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
+RETURN
 
+// FIXMIAMI: START - stuff moved from above
+carbuy_set_as_owned:
+IF flag_carbuy_set_as_owned = 0
+	ADD_MONEY_SPENT_ON_PROPERTY carbuy_price
+	SET_PROPERTY_AS_OWNED PROP_CARSHOWROOM
+	CHANGE_GARAGE_TYPE carbuy_save_garage1 GARAGE_HIDEOUT_SEVEN 
+	CHANGE_GARAGE_TYPE carbuy_save_garage2 GARAGE_HIDEOUT_EIGHT 
+	CHANGE_GARAGE_TYPE carbuy_save_garage3 GARAGE_HIDEOUT_NINE 
+	CHANGE_GARAGE_TYPE carbuy_save_garage4 GARAGE_HIDEOUT_TEN 
+	flag_carbuy_set_as_owned = 1
+ENDIF
+RETURN
+// FIXMIAMI: END
+
+} // FIXMIAMI: add scope

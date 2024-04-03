@@ -1,19 +1,42 @@
 MISSION_START
 			  
+// FIXMIAMI: START - fix SSU shit
+GOSUB mission_start_lnkvbuy
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB mission_deatharrest_lnkvbuy
+ENDIF
+
+GOSUB mission_cleanup_lnkvbuy
+
+MISSION_END
+// FIXMIAMI: END
 
 mission_start_lnkvbuy:
 
 SCRIPT_NAME	lnkvbuy
 
 flag_player_on_mission = 1
+{ // FIXMIAMI: scope moved up, was after WAIT 0
+
+// FIXMIAMI: START
+LVAR_INT flag_lnkvbuy_set1
+LVAR_INT flag_lnkvbuy_set2
+LVAR_INT flag_lnkvbuy_set3
+LVAR_INT flag_lnkvbuy_set4
+flag_lnkvbuy_set1 = 0
+flag_lnkvbuy_set2 = 0
+flag_lnkvbuy_set3 = 0
+flag_lnkvbuy_set4 = 0
+// FIXMIAMI: END
 
 //304.5807 376.3138 12.1856 269.8422 
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
   
 WAIT 0
-{
 
-	REMOVE_BLIP lnkvbuy_blip
-	PLAYER_MADE_PROGRESS 1
+	GOSUB lnkvbuy_set1 // FIXMIAMI: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -22,17 +45,17 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT lnkvbuyX lnkvbuyY lnkvbuyZ RADAR_SPRITE_SAVEHOUSE lnkvbuy_blip 
 			CHANGE_BLIP_DISPLAY lnkvbuy_blip BLIP_ONLY
 			START_NEW_SCRIPT lnkvsave1_save_loop
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT lnkvbuyX lnkvbuyY lnkvbuyZ RADAR_SPRITE_SAVEHOUSE lnkvbuy_blip 
-	CHANGE_BLIP_DISPLAY lnkvbuy_blip BLIP_ONLY
-	START_NEW_SCRIPT lnkvsave1_save_loop
+	GOSUB lnkvbuy_set2 // FIXMIAMI: moved stuff into a subroutine
 
 	CLEAR_AREA 306.5728 376.2928 12.1856 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 306.5728 376.2928 12.1856
@@ -47,19 +70,15 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	links_view_bought = 1
-	//CREATE_CLOTHES_PICKUP 304.6 372.2 13.2 1 safehouse_clothes6   
-	safehouse_created6 = 1
 	PRINT_WITH_NUMBER_BIG LNKVBUY lnkvbuy_price 5000 6 //"Links View Apartment purchased: $ 15000"
-	ADD_MONEY_SPENT_ON_PROPERTY lnkvbuy_price
-	SET_PROPERTY_AS_OWNED PROP_LINKSVIEW
-	//lnkvbuy_price *= -1
-	//ADD_SCORE player1 lnkvbuy_price
+	GOSUB lnkvbuy_set3 // FIXMIAMI: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
@@ -81,7 +100,7 @@ WAIT 0
 	POINT_CAMERA_AT_POINT 313.0024 391.7380 14.5534 JUMP_CUT
 
 	PRINT_NOW BUYGARG 3000 1//~g~You can also store vehicles in this garage.
-	CHANGE_GARAGE_TYPE lnkvbuy_save_garage GARAGE_HIDEOUT_SIX 
+	GOSUB lnkvbuy_set4 // FIXMIAMI: moved stuff into a subroutine
 
 	WAIT 3000
 
@@ -90,10 +109,12 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
 	SET_CAMERA_BEHIND_PLAYER
@@ -109,13 +130,64 @@ WAIT 0
 
 	GOSUB get_fading_status
 
+	RETURN // FIXMIAMI
+
+// FIXMIAMI: START
+
+lnkvbuy_set1:
+IF flag_lnkvbuy_set1 = 0
+	REMOVE_BLIP lnkvbuy_blip
+	PLAYER_MADE_PROGRESS 1
+	flag_lnkvbuy_set1 = 1
+ENDIF
+RETURN
+
+lnkvbuy_set2:
+IF flag_lnkvbuy_set2 = 0
+	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT lnkvbuyX lnkvbuyY lnkvbuyZ RADAR_SPRITE_SAVEHOUSE lnkvbuy_blip 
+	CHANGE_BLIP_DISPLAY lnkvbuy_blip BLIP_ONLY
+	START_NEW_SCRIPT lnkvsave1_save_loop
+	flag_lnkvbuy_set2 = 1
+ENDIF
+RETURN
+
+lnkvbuy_set3:
+IF flag_lnkvbuy_set3 = 0
+	links_view_bought = 1
+	//CREATE_CLOTHES_PICKUP 304.6 372.2 13.2 1 safehouse_clothes6   
+	safehouse_created6 = 1
+	ADD_MONEY_SPENT_ON_PROPERTY lnkvbuy_price
+	SET_PROPERTY_AS_OWNED PROP_LINKSVIEW
+	//lnkvbuy_price *= -1
+	//ADD_SCORE player1 lnkvbuy_price
+	flag_lnkvbuy_set3 = 1
+ENDIF
+RETURN
+
+lnkvbuy_set4:
+IF flag_lnkvbuy_set4 = 0
+	CHANGE_GARAGE_TYPE lnkvbuy_save_garage GARAGE_HIDEOUT_SIX 
+	flag_lnkvbuy_set4 = 1
+ENDIF
+RETURN
+
+mission_deatharrest_lnkvbuy:
+GOSUB lnkvbuy_set1
+GOSUB lnkvbuy_set2
+GOSUB lnkvbuy_set3
+GOSUB lnkvbuy_set4
+RETURN
+
+// FIXMIAMI: END
+
+mission_cleanup_lnkvbuy: // FIXMIAMI
 	SET_MUSIC_DOES_FADE TRUE
 					
 												
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
 
 }
 RETURN 

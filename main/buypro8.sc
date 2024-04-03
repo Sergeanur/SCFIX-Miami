@@ -1,18 +1,40 @@
 MISSION_START
 			  
+// FIXMIAMI: START - fix SSU shit
+GOSUB mission_start_ochebuy
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB mission_deatharrest_ochebuy
+ENDIF
+
+GOSUB mission_cleanup_ochebuy
+
+MISSION_END
+// FIXMIAMI: END
 
 mission_start_ochebuy:
 
 SCRIPT_NAME	ochebuy
 
 flag_player_on_mission = 1
+{ // FIXMIAMI: scope moved up, was after WAIT 0
 
+// FIXMIAMI: START
+LVAR_INT flag_ochebuy_set1
+LVAR_INT flag_ochebuy_set2
+LVAR_INT flag_ochebuy_set3
+LVAR_INT flag_ochebuy_set4
+flag_ochebuy_set1 = 0
+flag_ochebuy_set2 = 0
+flag_ochebuy_set3 = 0
+flag_ochebuy_set4 = 0
+// FIXMIAMI: END
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
 
 WAIT 0
-{
 
-	REMOVE_BLIP ochebuy_blip
-	PLAYER_MADE_PROGRESS 1
+	GOSUB ochebuy_set1 // FIXMIAMI: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -21,17 +43,17 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT ochebuyX ochebuyY ochebuyZ RADAR_SPRITE_SAVEHOUSE ochebuy_blip 
 			CHANGE_BLIP_DISPLAY ochebuy_blip BLIP_ONLY
 			START_NEW_SCRIPT ochesave1_save_loop
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT ochebuyX ochebuyY ochebuyZ RADAR_SPRITE_SAVEHOUSE ochebuy_blip 
-	CHANGE_BLIP_DISPLAY ochebuy_blip BLIP_ONLY
-	START_NEW_SCRIPT ochesave1_save_loop
+	GOSUB ochebuy_set2 // FIXMIAMI: moved stuff into a subroutine
 
 	CLEAR_AREA 14.4571 -1498.5939 12.1974 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 14.4571 -1498.5939 12.1974
@@ -46,19 +68,15 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
-	ocean_heights_bought = 1
-	//CREATE_CLOTHES_PICKUP 19.4 -1501.1 13.2 1 safehouse_clothes7   
-	safehouse_created7 = 1
 	PRINT_WITH_NUMBER_BIG OCHEBUY ochebuy_price 5000 6 //Ocean Heights Apartment purchased: $ ~1~
-	ADD_MONEY_SPENT_ON_PROPERTY ochebuy_price
-	SET_PROPERTY_AS_OWNED PROP_OCEANHEIGHTS
-	//ochebuy_price *= -1
-	//ADD_SCORE player1 ochebuy_price
+	GOSUB ochebuy_set3 // FIXMIAMI: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
@@ -80,7 +98,7 @@ WAIT 0
 	POINT_CAMERA_AT_POINT 18.0802 -1468.5117 18.2106 JUMP_CUT
 
 	PRINT_NOW BUYGARG 3000 1//~g~You can also store vehicles in this garage.
-	CHANGE_GARAGE_TYPE ochebuy_save_garage GARAGE_HIDEOUT_FIVE 
+	GOSUB ochebuy_set4 // FIXMIAMI: moved stuff into a subroutine
 
 	WAIT 3000
 
@@ -89,10 +107,12 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
+		/* FIXMIAMI: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
 		ENDIF
+		*/
 	ENDWHILE
 
 	SET_CAMERA_BEHIND_PLAYER
@@ -108,13 +128,63 @@ WAIT 0
 
 	GOSUB get_fading_status
 
+	RETURN // FIXMIAMI
+
+// FIXMIAMI: START
+
+ochebuy_set1:
+IF flag_ochebuy_set1 = 0
+	REMOVE_BLIP ochebuy_blip
+	PLAYER_MADE_PROGRESS 1
+	flag_ochebuy_set1 = 1
+ENDIF
+RETURN
+
+ochebuy_set2:
+IF flag_ochebuy_set2 = 0
+	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT ochebuyX ochebuyY ochebuyZ RADAR_SPRITE_SAVEHOUSE ochebuy_blip 
+	CHANGE_BLIP_DISPLAY ochebuy_blip BLIP_ONLY
+	START_NEW_SCRIPT ochesave1_save_loop
+	flag_ochebuy_set2 = 1
+ENDIF
+RETURN
+
+ochebuy_set3:
+IF flag_ochebuy_set3 = 0
+	ocean_heights_bought = 1
+	//CREATE_CLOTHES_PICKUP 19.4 -1501.1 13.2 1 safehouse_clothes7   
+	safehouse_created7 = 1
+	ADD_MONEY_SPENT_ON_PROPERTY ochebuy_price
+	SET_PROPERTY_AS_OWNED PROP_OCEANHEIGHTS
+	//ochebuy_price *= -1
+	//ADD_SCORE player1 ochebuy_price
+	flag_ochebuy_set3 = 1
+ENDIF
+RETURN
+
+ochebuy_set4:
+IF flag_ochebuy_set4 = 0
+	CHANGE_GARAGE_TYPE ochebuy_save_garage GARAGE_HIDEOUT_FIVE 
+	flag_ochebuy_set4 = 1
+ENDIF
+RETURN
+
+mission_deatharrest_ochebuy:
+	GOSUB ochebuy_set1
+	GOSUB ochebuy_set2
+	GOSUB ochebuy_set3
+	GOSUB ochebuy_set4
+	RETURN
+// FIXMIAMI: END
+
+mission_cleanup_ochebuy: // FIXMIAMI
 	SET_MUSIC_DOES_FADE TRUE
 					
 												
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
 
 }
 RETURN 
