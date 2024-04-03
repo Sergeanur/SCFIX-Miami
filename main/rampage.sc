@@ -715,6 +715,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 	WAIT 0
 	
 	IF flag_cell_nation = 1
+	OR flag_player_on_mission = 1 // FIXMIAMI: paranoid check
 		CREATE_PICKUP killfrenzy PICKUP_ONCE rampage_pickup_x rampage_pickup_y rampage_pickup_z rampage_pickup
 		RETURN
 	ENDIF
