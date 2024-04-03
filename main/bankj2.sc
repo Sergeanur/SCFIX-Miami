@@ -1591,7 +1591,7 @@ ADD_SPHERE -667.85 1211.9 10.08 1.5 sphere_bankjob2
 
 flag_player_on_bank_2 = 1 // Used for interior loading stuff   
 
-WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -667.8 1221.0 10.5 1.5 1.5 3.0 TRUE 
+WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -667.8 1221.0 10.5 1.5 1.5 3.0 FALSE // FIXMIAMI: last arg was TRUE 
 
 	WAIT 0
 
@@ -1909,7 +1909,7 @@ SET_CAMERA_BEHIND_PLAYER
 UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
 UNLOAD_SPECIAL_CHARACTER 3
-UNLOAD_SPECIAL_CHARACTER 4
+//UNLOAD_SPECIAL_CHARACTER 4 // FIXMIAMI: using this guy in gameplay now
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ02
 
@@ -1923,7 +1923,9 @@ SET_PLAYER_MOOD player1 PLAYER_MOOD_CALM 60000
 
 SHUT_PLAYER_UP player1 TRUE
 
-REQUEST_MODEL MALE01
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+
+//REQUEST_MODEL MALE01 // FIXMIAMI: not used anymore
 
 REQUEST_MODEL tar_gun1
 
@@ -1951,8 +1953,8 @@ LOAD_MISSION_AUDIO 1 ( BNK2_1 ) // Live Ammo
 
 LOAD_MISSION_AUDIO 2 ( BNK2_2 ) // Aim 3-2-1 fire 
 
-WHILE NOT HAS_MODEL_LOADED MALE01
-OR NOT HAS_MODEL_LOADED COLT45
+//WHILE NOT HAS_MODEL_LOADED MALE01 // FIXMIAMI: not used anymore
+WHILE NOT HAS_MODEL_LOADED COLT45 // FIXMIAMI: OR became WHILE
 OR NOT HAS_MODEL_LOADED tar_gun1
 OR NOT HAS_SPECIAL_CHARACTER_LOADED 5
 OR NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1993,7 +1995,7 @@ SET_CHAR_HEADING phil_bankjob2 90.0
 
 // creates other shooters
 
-CREATE_CHAR PEDTYPE_CIVMALE MALE01 -666.29 1229.32 10.08 gunner1_bankjob2
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL04 -666.29 1229.32 10.08 gunner1_bankjob2 // FIXMIAMI: was MALE01
 
 CLEAR_CHAR_THREAT_SEARCH gunner1_bankjob2
 
@@ -2019,8 +2021,20 @@ SET_OBJECT_HEADING object3_bankjob2 0.0
 
 GET_CHAR_WEAPON_IN_SLOT scplayer 4 slot4_weapon_type_bank2 slot4_ammo_bank2 slot4_model_bank2
 
+// FIXMIAMI: START - make sure the model is not unloaded (COLT45 is already requested for the mission)
+IF NOT slot4_model_bank2 = COLT45
+AND slot4_ammo_bank2 > 0
+	REQUEST_MODEL slot4_model_bank2
+ENDIF
+// FIXMIAMI: END
+
+// FIXMIAMI: START - nil player's ammo before attach
+SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0
+// FIXMIAMI: END
+
+SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // FIXMIAMI: moved before attach
 ATTACH_CHAR_TO_OBJECT scplayer object1_bankjob2 0.0 -2.0 1.0 FACING_FORWARD 60.0 WEAPONTYPE_PISTOL
-SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED
 SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
 SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 100
 ammo_given_round1_bankjob2 = 100
@@ -2033,6 +2047,101 @@ WAIT 500
 
 DO_FADE 2000 FADE_IN
 
+// FIXMIAMI: START - tidy up this big ass chunk
+LVAR_INT bank2_tutor_state
+bank2_tutor_state = 0
+
+WHILE bank2_tutor_state < 9
+	WAIT 0
+
+	IF flag_played_bank2_before = 1
+	AND bank2_tutor_state > 0
+
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+		OR IS_BUTTON_PRESSED PAD1 START
+			GOTO mission_skip_bank2
+		ENDIF
+
+	ENDIF
+
+	IF IS_CHAR_DEAD phil_bankjob2
+		PRINT_NOW ( BJM2_11 ) 5000 1 //"Phil's dead!" 
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF IS_CHAR_DEAD gunner1_bankjob2
+		PRINT_NOW ( BJM2_12 ) 5000 1 //"One of the competitors is dead" 
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF LOCATE_PLAYER_ANY_MEANS_3D player1 -667.8 1210.0 10.5 3.0 3.0 3.0 FALSE
+		PRINT_NOW ( BJM2_22 ) 5000 1 //"You have left the competition!
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF bank2_tutor_state = 0
+		IF NOT GET_FADING_STATUS
+			bank2_tutor_state = 1
+		ENDIF
+	ENDIF
+
+	IF bank2_tutor_state = 1
+		PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
+		timera = 0
+		bank2_tutor_state = 2
+	ENDIF
+
+	IF bank2_tutor_state = 2
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_20 ) 8000 1 //"When you run out of time or ammo the round is over!
+		timera = 0
+		bank2_tutor_state = 3
+	ENDIF
+
+	IF bank2_tutor_state = 3
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_24 ) 8000 1 //The first target is worth one point.
+		timera = 0
+		bank2_tutor_state = 4
+	ENDIF
+
+	IF bank2_tutor_state = 4
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_25 ) 8000 1 //The second target is worth two points.
+		timera = 0
+		bank2_tutor_state = 5
+	ENDIF
+
+	IF bank2_tutor_state = 5
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_26 ) 8000 1 //The third target is worth three points.
+		timera = 0
+		bank2_tutor_state = 6
+	ENDIF
+
+	IF bank2_tutor_state = 6
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_2 ) 8000 1 //"To exit the round press the ^ button."
+		timera = 0
+		bank2_tutor_state = 7
+	ENDIF
+
+	IF bank2_tutor_state = 7
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_23 ) 8000 1 //"If you leave the shooting range during the competition, you will fail the mission."
+		timera = 0
+		bank2_tutor_state = 8
+	ENDIF
+
+	IF bank2_tutor_state = 8
+	AND timera >= 5000
+		bank2_tutor_state = 9
+	ENDIF
+
+ENDWHILE
+// FIXMIAMI: END
+
+/* FIXMIAMI: all this was rewritten above
 WHILE GET_FADING_STATUS
 
 	WAIT 0
@@ -2300,6 +2409,7 @@ WHILE timera < 5000
 	ENDIF
 
 ENDWHILE
+*/
 
 flag_played_bank2_before = 1
 
@@ -3126,9 +3236,11 @@ CLEAR_THIS_PRINT ( BNK2_3 ) // Area clear
 
 ammo_used_round1_bankjob2 = ammo_given_round1_bankjob2 - ammo_round1_bankjob 
 
-SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED
-
 DETACH_CHAR_FROM_CAR scplayer
+
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // FIXMIAMI
+
+SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // FIXMIAMI: move after detach since detach restores previous weapon
 
 DELETE_OBJECT object1_bankjob2
 
@@ -3172,9 +3284,11 @@ REMOVE_BLIP radar_blip_coord3_bankjob2
 
 SET_PLAYER_CONTROL player1 OFF
 
-IF NOT IS_CHAR_DEAD gunner1_bankjob2
-	MARK_CHAR_AS_NO_LONGER_NEEDED gunner1_bankjob2 
-ENDIF
+// FIXMIAMI: START - remove this and delete char later
+//IF NOT IS_CHAR_DEAD gunner1_bankjob2
+//	MARK_CHAR_AS_NO_LONGER_NEEDED gunner1_bankjob2 
+//ENDIF
+// FIXMIAMI: END
 
 IF NOT IS_CHAR_DEAD phil_bankjob2
 	SET_CHAR_HEADING phil_bankjob2 270.0
@@ -3197,6 +3311,8 @@ IF LOCATE_PLAYER_ANY_MEANS_3D player1 -667.8 1210.0 10.5 3.0 3.0 3.0 FALSE
 	PRINT_NOW ( BJM2_22 ) 5000 1 //"You have left the competition!
 	GOTO mission_bankjob2_failed
 ENDIF
+
+DELETE_CHAR gunner1_bankjob2 // FIXMIAMI
 
 // sets up player1 in 1st person camera mode and locks him in position.
 
@@ -3223,6 +3339,59 @@ DELETE_OBJECT target3_part3_bankjob2
 DELETE_OBJECT target3_part4_bankjob2
 DELETE_OBJECT target3_part5_bankjob2
 
+// FIXMIAMI: START - tidy up this big ass chunk
+bank2_tutor_state = 0
+
+WHILE bank2_tutor_state < 4
+	WAIT 0
+
+	IF flag_played_bank2_before = 1
+
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+		OR IS_BUTTON_PRESSED PAD1 START
+			GOTO mission_skip2_bank2
+		ENDIF
+
+	ENDIF
+
+	IF IS_CHAR_DEAD phil_bankjob2
+		PRINT_NOW ( BJM2_11 ) 5000 1 //"Phil's dead!" 
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF LOCATE_PLAYER_ANY_MEANS_3D player1 -667.8 1210.0 10.5 3.0 3.0 3.0 FALSE
+		PRINT_NOW ( BJM2_22 ) 5000 1 //"You have left the competition!
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF bank2_tutor_state = 0
+		PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
+		timera = 0
+		bank2_tutor_state = 1
+	ENDIF
+
+	IF bank2_tutor_state = 1
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_20 ) 8000 1 //"When you run out of time or ammo the round is over!
+		timera = 0
+		bank2_tutor_state = 2
+	ENDIF
+
+	IF bank2_tutor_state = 2
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_27 ) 8000 1 //"All targets in this round are worth one point.
+		timera = 0
+		bank2_tutor_state = 3
+	ENDIF
+
+	IF bank2_tutor_state = 3
+	AND timera >= 5000
+		bank2_tutor_state = 4
+	ENDIF
+ENDWHILE
+// FIXMIAMI: END
+
+/* FIXMIAMI: all this was rewritten above
 PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
 
 timera = 0
@@ -3309,6 +3478,7 @@ WHILE timera < 5000
 	ENDIF
 
 ENDWHILE
+*/
 
 mission_skip2_bank2:
 
@@ -3995,9 +4165,11 @@ ammo_used_round2_bankjob2 = ammo_given_round2_bankjob2 - ammo_round2_bankjob2
 
 // removes the wepaon from the player1
 
-SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED
-
 DETACH_CHAR_FROM_CAR scplayer
+
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // FIXMIAMI
+
+SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // FIXMIAMI: move after detach since detach restores previous weapon
 
 DELETE_OBJECT object2_bankjob2
 
@@ -4072,6 +4244,60 @@ DELETE_OBJECT target5_round2_bankjob2
 
 DELETE_OBJECT target6_round2_bankjob2
 
+// FIXMIAMI: START - tidy up this big ass chunk
+bank2_tutor_state = 0
+
+WHILE bank2_tutor_state < 4
+	WAIT 0
+
+	IF flag_played_bank2_before = 1
+
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+		OR IS_BUTTON_PRESSED PAD1 START
+			GOTO mission_skip3_bank2
+		ENDIF
+
+	ENDIF
+
+	IF IS_CHAR_DEAD phil_bankjob2
+		PRINT_NOW ( BJM2_11 ) 5000 1 //"Phil's dead!" 
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF LOCATE_PLAYER_ANY_MEANS_3D player1 -667.8 1210.0 10.5 3.0 3.0 3.0 FALSE
+		PRINT_NOW ( BJM2_22 ) 5000 1 //"You have left the competition!
+		GOTO mission_bankjob2_failed
+	ENDIF
+
+	IF bank2_tutor_state = 0
+		PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
+		timera = 0
+		bank2_tutor_state = 1
+	ENDIF
+
+	IF bank2_tutor_state = 1
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_20 ) 8000 1 //"When you run out of time or ammo the round is over!
+		timera = 0
+		bank2_tutor_state = 2
+	ENDIF
+
+	IF bank2_tutor_state = 2
+	AND timera >= 5000
+		PRINT_NOW ( BJM2_27 ) 8000 1 //"All targets in this round are worth one point.
+		timera = 0
+		bank2_tutor_state = 3
+	ENDIF
+
+	IF bank2_tutor_state = 3
+	AND timera >= 5000
+		bank2_tutor_state = 4
+	ENDIF
+ENDWHILE
+
+// FIXMIAMI: END
+
+/* FIXMIAMI: all this was rewritten above
 PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
 
 timera = 0
@@ -4158,6 +4384,7 @@ WHILE timera < 5000
 	ENDIF
 
 ENDWHILE
+*/
 
 mission_skip3_bank2:
 
@@ -4920,6 +5147,10 @@ CLEAR_THIS_BIG_PRINT ( BJM2_3 )
 
 DETACH_CHAR_FROM_CAR scplayer
 
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // FIXMIAMI
+
+SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // FIXMIAMI: move after detach since detach restores previous weapon
+
 DELETE_OBJECT object3_bankjob2 
 
 SET_CHAR_COORDINATES scplayer -677.75 1272.03 9.81 
@@ -5242,6 +5473,7 @@ mission_cleanup_bankjob2:
 
 REMOVE_SOUND target_moving_sound_bank2
 REMOVE_CHAR_ELEGANTLY phil_bankjob2 
+REMOVE_CHAR_ELEGANTLY gunner1_bankjob2 // FIXMIAMI
 
 DELETE_OBJECT target1_frame_bankjob2
 DELETE_OBJECT target1_part1_bankjob2
@@ -5279,13 +5511,18 @@ DELETE_OBJECT target13_round3_bankjob2
 DETACH_CHAR_FROM_CAR scplayer
 
 IF slot4_ammo_bank2 > 0
-	REQUEST_MODEL slot4_model_bank2
+	//REQUEST_MODEL slot4_model_bank2 // FIXMIAMI: removed now, we leave the model loaded
+	
+	//LOAD_ALL_MODELS_NOW // FIXMIAMI: removed now, we leave the model loaded
+
+	GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // FIXMIAMI: moved into if block
+	
+	IF NOT slot4_model_bank2 = COLT45 // FIXMIAMI: COLT45 will be unloaded below
+		MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2 // FIXMIAMI: moved into if block
+	ENDIF // FIXMIAMI
+
+	SET_PLAYER_AMMO player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // FIXMIAMI: make sure we aren't duping ammo
 ENDIF
-
-LOAD_ALL_MODELS_NOW
-
-GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2
-MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2
 
 flag_player_on_mission = 0
 flag_player_on_bank_2 = 0 // Used for interior loading stuff
@@ -5303,7 +5540,7 @@ CLEAR_ONSCREEN_COUNTER score_to_beat_bankjob2
 CLEAR_ONSCREEN_TIMER timer_round1_bankjob2
 CLEAR_ONSCREEN_TIMER timer_round2_bankjob2
 CLEAR_ONSCREEN_TIMER timer_round3_bankjob2
-MARK_MODEL_AS_NO_LONGER_NEEDED MALE01
+//MARK_MODEL_AS_NO_LONGER_NEEDED MALE01 // FIXMIAMI: not used anymore
 MARK_MODEL_AS_NO_LONGER_NEEDED COLT45
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_gun1
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_gun2
@@ -5314,6 +5551,7 @@ MARK_MODEL_AS_NO_LONGER_NEEDED tar_top
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_upleft
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_upright
 MARK_MODEL_AS_NO_LONGER_NEEDED faketarget
+UNLOAD_SPECIAL_CHARACTER 4 // FIXMIAMI: cutscene ped used in gameplay now
 UNLOAD_SPECIAL_CHARACTER 5
 GET_GAME_TIMER timer_mobile_start
 MISSION_HAS_FINISHED
