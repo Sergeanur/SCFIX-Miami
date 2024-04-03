@@ -585,6 +585,7 @@ SET_PED_DENSITY_MULTIPLIER 1.0
 // ******************************************END OF CUTSCENE********************************
 SET_FADING_COLOUR 0 0 0
 
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: moved from below because of cutscene
 WAIT 500
 
 SET_TIME_OF_DAY 10 0  
@@ -624,6 +625,9 @@ SWITCH_ROADS_OFF 130.4 368.4 50.7 -228.4 724.5 0.0
 LOAD_SCENE -74.17 90.20 9.67
 REQUEST_COLLISION -67.7 91.2 
 SET_PLAYER_COORDINATES player1 -67.7 91.2 9.5
+TURN_CHAR_TO_FACE_COORD scplayer -74.17 90.20 8.6 // FIXMIAMI
+WAIT 300 // FIXMIAMI
+
 //creating boat and waiting for player to reach it 
 CREATE_CHAR PEDTYPE_GANG_CUBAN CBb -74.17 90.20 8.6 rico_passenger 
 SET_CHAR_AS_PLAYER_FRIEND rico_passenger player1 TRUE
@@ -655,7 +659,7 @@ SET_CHARS_CHATTING fake_golfer3 fake_golfer4 86400000
 
 DO_FADE 1500 FADE_IN
 // ******************************************START OF PLAYER GETTING INTO BOAT*******************************************
-SET_PLAYER_CONTROL player1 OFF
+//SET_PLAYER_CONTROL player1 OFF // FIXMIAMI - moved up
 
 SWITCH_WIDESCREEN ON
 
@@ -1062,6 +1066,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE 
 				PRINT_NOW CUB1_05 4000 1//Amigo, you a man, man.
 				
@@ -1074,6 +1079,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				AND NOT IS_CHAR_DEAD rico_passenger  
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE
 				CLEAR_MISSION_AUDIO 1
 				
@@ -1092,6 +1098,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE 
 				PRINT_NOW CUB1_06 4000 1//Call yourself a man, man?
 				
@@ -1104,6 +1111,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				AND NOT IS_CHAR_DEAD rico_passenger  
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE
 				CLEAR_MISSION_AUDIO 1
 				
@@ -1122,8 +1130,9 @@ IF NOT IS_CAR_DEAD pred_boat
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE 
-				PRINT_NOW CUB1_07 4000 1//You a little scaredy kitten, baby boy, go cry to your mommy?
+				PRINT_NOW CUB1_07 5000 1//You a little scaredy kitten, baby boy, go cry to your mommy? // FIXMIAMI: change 4000 to 5000
 				
 				IF NOT IS_CHAR_DEAD rico_passenger 
 					SET_CHAR_WAIT_STATE rico_passenger WAITSTATE_PLAYANIM_CHAT 10000
@@ -1134,6 +1143,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				AND NOT IS_CHAR_DEAD rico_passenger  
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE
 				CLEAR_MISSION_AUDIO 1
 				
@@ -1152,6 +1162,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE 
 				PRINT_NOW CUB1_03 4000 1//Not bad, you a real man.
 				
@@ -1164,6 +1175,7 @@ IF NOT IS_CAR_DEAD pred_boat
 				AND NOT IS_CHAR_DEAD rico_passenger  
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE
 				CLEAR_MISSION_AUDIO 1
 				
@@ -1182,8 +1194,9 @@ IF NOT IS_CAR_DEAD pred_boat
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE 
-				PRINT_NOW CUB1_09 4000 1//Man, you the man, man. I like you, man. I like you a lot.
+				PRINT_NOW CUB1_09 6000 1//Man, you the man, man. I like you, man. I like you a lot. // FIXMIAMI: change 4000 to 6000
 				
 
 				/*
@@ -1216,8 +1229,9 @@ IF NOT IS_CAR_DEAD pred_boat
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 					WAIT 0
 					DRAW_CORONA boatcheck_blipx boatcheck_blipy boatcheck_blipz 5.0 CORONATYPE_CIRCLE FLARETYPE_NONE 150 150 0
+					GOSUB set_ricos_heading // FIXMIAMI
 				ENDWHILE 
-				PRINT_NOW CUB1_10 4000 1//Any time, man. 'cause you got cajones. And all my friends have big cajones.
+				PRINT_NOW CUB1_10 6000 1//Any time, man. 'cause you got cajones. And all my friends have big cajones. // FIXMIAMI: change 4000 to 6000
 				
 				/*
 				IF NOT IS_CHAR_DEAD rico_passenger 
@@ -1244,6 +1258,8 @@ IF NOT IS_CAR_DEAD pred_boat
 		ENDIF
 	ENDIF
 ENDIF
+
+GOSUB set_ricos_heading // FIXMIAMI
 
 IF NOT IS_CAR_DEAD pred_boat
 	IF NOT IS_CHAR_DEAD rico_passenger  
@@ -1561,6 +1577,13 @@ IF NOT IS_CAR_DEAD pred_boat
 							CREATE_CHAR_INSIDE_CAR pred_boat PEDTYPE_GANG_CUBAN CBb rico_passenger 
 						ENDIF 
 					ENDIF
+
+					// FIXMIAMI: START - stop the boat again cuz dude might take off randomly
+					IF NOT IS_CAR_DEAD pred_boat
+						SET_BOAT_CRUISE_SPEED pred_boat 0.0
+						ANCHOR_BOAT pred_boat TRUE 
+					ENDIF 
+					// FIXMIAMI: END - stop the boat again cuz dude might take off randomly
 	
 
 					DO_FADE 1500 FADE_IN
@@ -1591,9 +1614,12 @@ IF NOT IS_CAR_DEAD pred_boat
 						SET_CAR_FORWARD_SPEED pred_boat 40.0 
 					ENDIF
 
+					WAIT 1500 // FIXMIAMI
+
 					MARK_MODEL_AS_NO_LONGER_NEEDED speeder
 					MARK_MODEL_AS_NO_LONGER_NEEDED CBb
 					
+					SET_CAMERA_BEHIND_PLAYER // FIXMIAMI
 					RESTORE_CAMERA_JUMPCUT
 					
 					SET_PLAYER_CONTROL player1 ON
@@ -1603,11 +1629,15 @@ IF NOT IS_CAR_DEAD pred_boat
 				ENDIF
 
 				ADD_BLIP_FOR_COORD boatcheck_blipx boatcheck_blipy boatcheck_blipz boatcheck_blip
-				CHANGE_BLIP_COLOUR boatcheck_blip YELLOW
-				ADD_BLIP_FOR_COORD next_boatcheck_blipx next_boatcheck_blipy next_boatcheck_blipz next_boatcheck_blip
-				CHANGE_BLIP_COLOUR next_boatcheck_blip YELLOW
-				CHANGE_BLIP_SCALE next_boatcheck_blip 2
-				DIM_BLIP next_boatcheck_blip TRUE
+				IF boat_check_counter < 26 // FIXMIAMI
+					CHANGE_BLIP_COLOUR boatcheck_blip YELLOW
+					ADD_BLIP_FOR_COORD next_boatcheck_blipx next_boatcheck_blipy next_boatcheck_blipz next_boatcheck_blip
+					CHANGE_BLIP_COLOUR next_boatcheck_blip YELLOW
+					CHANGE_BLIP_SCALE next_boatcheck_blip 2
+					DIM_BLIP next_boatcheck_blip TRUE
+				ELSE // FIXMIAMI
+					CHANGE_BLIP_COLOUR boatcheck_blip RED // FIXMIAMI
+				ENDIF // FIXMIAMI
 				
 			ENDIF
 		ELSE
@@ -1678,7 +1708,8 @@ RETURN
 
 // mission passed
 mission_passed_cuban1:
-
+DELETE_CHAR rico_passenger // FIXMIAMI
+DELETE_CAR pred_boat // FIXMIAMI
 CLEAR_PRINTS
 PRINT_WITH_NUMBER_BIG ( M_PASS ) 1000 5000 1 //"Mission Passed!"
 PLAY_MISSION_PASSED_TUNE 1 
@@ -1694,7 +1725,7 @@ RETURN
 
 // mission cleanup
 mission_cleanup_cuban1:
-
+CLEAR_THIS_PRINT CUB1_13 // FIXMIAMI
 flag_player_on_mission = 0
 SWITCH_ROADS_ON 130.4 368.4 50.7 -228.4 724.5 0.0  
 SET_PLAYER_CONTROL player1 on
@@ -1721,4 +1752,15 @@ RETURN
 
 		 
  
-
+// FIXMIAMI: START
+set_ricos_heading:
+{
+	LVAR_FLOAT temp_boat_heading
+	IF NOT IS_CHAR_DEAD rico_passenger
+	AND NOT IS_CAR_DEAD pred_boat
+		GET_CAR_HEADING pred_boat temp_boat_heading
+		SET_CHAR_HEADING rico_passenger temp_boat_heading
+	ENDIF
+	RETURN
+}
+// FIXMIAMI: END
