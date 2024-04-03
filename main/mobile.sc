@@ -76,6 +76,7 @@ VAR_INT flag_mobile_timer flag_player_answered_phone
 VAR_INT flag_cell_nation
 VAR_INT flag_new_cont
 VAR_INT call_delay
+VAR_INT players_skipping_the_call // FIXMIAMI
    
 //VAR_FLOAT player_heading
 
@@ -158,6 +159,7 @@ flag_colonel_left_town = 0
 flag_cell_nation = 0
 
 call_delay = 20000
+players_skipping_the_call = 0 // FIXMIAMI
 
 SCRIPT_NAME	CELLFON
 
@@ -2602,6 +2604,7 @@ mobile_rings:
 
 		WAIT 0
 		LOAD_MISSION_AUDIO audio_slot_mobile MOBRING
+		players_skipping_the_call = 0 // FIXMIAMI
 		GOSUB loading_and_playing_audio
 		++ ring_a_ding_ding
 
@@ -2635,6 +2638,7 @@ mobile_rings:
 //	IF IS_PLAYER_PLAYING player1
 //		SET_PLAYER_CONTROL player1 OFF
 //	ENDIF
+	players_skipping_the_call = 1 // FIXMIAMI
 	GET_GAME_TIMER timer_mobile_start
 	WHILE IS_BUTTON_PRESSED PAD1 LEFTSHOULDER1
 		WAIT 0
@@ -2684,6 +2688,11 @@ RETURN
 
 
 loading_and_playing_audio:
+	// FIXMIAMI: START - call skip
+	IF players_skipping_the_call = 2
+		RETURN
+	ENDIF
+	// FIXMIAMI: END
 	WHILE NOT HAS_MISSION_AUDIO_LOADED audio_slot_mobile
 		WAIT 0
 
@@ -2706,6 +2715,15 @@ loading_and_playing_audio:
 					RETURN
 				ENDIF
 			ENDIF
+		
+			// FIXMIAMI: START - call skip
+			IF players_skipping_the_call = 1
+				IF IS_BUTTON_PRESSED PAD1 TRIANGLE
+					players_skipping_the_call = 2
+					RETURN	
+				ENDIF
+			ENDIF
+			// FIXMIAMI: END
 		ENDIF
 	ENDWHILE
 	PLAY_MISSION_AUDIO audio_slot_mobile
@@ -2714,11 +2732,18 @@ RETURN
 
 
 has_audio_finished:
+	// FIXMIAMI: START - call skip
+	IF players_skipping_the_call = 2
+		CLEAR_PRINTS
+		RETURN
+	ENDIF
+	// FIXMIAMI: END
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED audio_slot_mobile
 		WAIT 0
 
 		IF NOT IS_PLAYER_PLAYING player1
 			flag_player_answered_phone = 2
+			CLEAR_PRINTS // FIXMIAMI
 			RETURN
 		ELSE
 			//GOSUB pickup_checker
@@ -2726,6 +2751,7 @@ has_audio_finished:
 			OR NOT IS_CHAR_ON_FOOT scplayer
 			//OR flag_player_on_mission = 1
 				flag_player_answered_phone = 2
+				CLEAR_PRINTS // FIXMIAMI
 				RETURN
 			ENDIF
 			IF flag_player_answered_phone = 0
@@ -2737,6 +2763,16 @@ has_audio_finished:
 				ENDIF
 			ENDIF
 		ENDIF
+		
+		// FIXMIAMI: START - call skip
+		IF players_skipping_the_call = 1
+			IF IS_BUTTON_PRESSED PAD1 TRIANGLE
+				players_skipping_the_call = 2
+				CLEAR_PRINTS
+				RETURN	
+			ENDIF
+		ENDIF
+		// FIXMIAMI: END
 	ENDWHILE
 RETURN
 
@@ -2762,6 +2798,15 @@ death_checker:
 				RETURN
 			ENDIF
 		ENDIF
+		
+		// FIXMIAMI: START - call skip
+		IF players_skipping_the_call = 1
+			IF IS_BUTTON_PRESSED PAD1 TRIANGLE
+				players_skipping_the_call = 2
+				RETURN	
+			ENDIF
+		ENDIF
+		// FIXMIAMI: END
 	ENDIF
 RETURN
 
