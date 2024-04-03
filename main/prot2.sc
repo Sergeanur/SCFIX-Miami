@@ -261,6 +261,7 @@ SET_PLAYER_COORDINATES player1 -375.9 -544.6 16.2
 LOAD_SCENE -375.9 -510.6 16.2 
 SET_PLAYER_HEADING player1 360.0
 SET_CAMERA_BEHIND_PLAYER
+PRINT_BIG ( STARI ) 3000 2 // FIXMIAMI: we are teleported out of the interior
 //------------------REQUEST_MODELS ------------------------------
 {
 SET_PLAYER_MOOD player1 PLAYER_MOOD_PISSED_OFF 60000
