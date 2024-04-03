@@ -2454,6 +2454,11 @@ RETURN
 
 // mission cleanup
 mission_cleanup_cuban4:
+// FIXMIAMI: START
+CLEAR_THIS_PRINT CUB4_02
+CLEAR_THIS_PRINT CUB4_30
+CLEAR_THIS_PRINT CUB4_31
+// FIXMIAMI: END
 flag_player_on_mission = 0
 SET_PLAYER_CONTROL player1 on
 //andy_has_control = 0 //reseting gate
