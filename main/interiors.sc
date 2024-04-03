@@ -1976,6 +1976,7 @@ interiors_cleanup:
 		flag_player_in_shooting_range = 0
 		flag_player_in_apartment3c = 0
 		flag_player_in_mansion = 0
+		flag_player_in_bank = 0 // FIXMIAMI
 		SET_CAR_DENSITY_MULTIPLIER 1.0
 		flag_interiors_cleanup = 1
 	ENDIF
