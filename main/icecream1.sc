@@ -38,6 +38,7 @@ VAR_INT icecreamped3_flag
 VAR_INT icecreamped4_flag
 VAR_INT assetnoticegot // do not reset this flag
 VAR_INT dealsdone_ice
+VAR_INT total_dealsdone_ice // FIXMIAMI
 //player score
 VAR_INT player_icescore
 //wanted level counter
@@ -362,6 +363,7 @@ IF icecreamped1_flag = 1
 				IF HAS_CHAR_ATTEMPTED_ATTRACTOR icecreamped1
 					IF HAS_CHAR_BOUGHT_ICE_CREAM icecreamped1
 						dealsdone_ice = dealsdone_ice + 1
+						total_dealsdone_ice ++ // FIXMIAMI
 						wanted_level_counter_ice = wanted_level_counter_ice + 1
 						IF IS_PLAYER_IN_ZONE player1 A_PORT
 							ADD_SCORE player1 10
@@ -428,6 +430,7 @@ IF icecreamped2_flag = 1
 				IF HAS_CHAR_ATTEMPTED_ATTRACTOR icecreamped2
 					IF HAS_CHAR_BOUGHT_ICE_CREAM icecreamped2
 						dealsdone_ice = dealsdone_ice + 1
+						total_dealsdone_ice ++ // FIXMIAMI
 						wanted_level_counter_ice = wanted_level_counter_ice + 1
 						IF IS_PLAYER_IN_ZONE player1 A_PORT
 							ADD_SCORE player1 10
@@ -493,6 +496,7 @@ IF icecreamped3_flag = 1
 				IF HAS_CHAR_ATTEMPTED_ATTRACTOR icecreamped3
 					IF HAS_CHAR_BOUGHT_ICE_CREAM icecreamped3
 						dealsdone_ice = dealsdone_ice + 1
+						total_dealsdone_ice ++ // FIXMIAMI
 						wanted_level_counter_ice = wanted_level_counter_ice + 1
 						IF IS_PLAYER_IN_ZONE player1 A_PORT
 							ADD_SCORE player1 10
@@ -559,6 +563,7 @@ IF icecreamped4_flag = 1
 				IF HAS_CHAR_ATTEMPTED_ATTRACTOR icecreamped4
 					IF HAS_CHAR_BOUGHT_ICE_CREAM icecreamped4
 						dealsdone_ice = dealsdone_ice + 1
+						total_dealsdone_ice ++ // FIXMIAMI
 						wanted_level_counter_ice = wanted_level_counter_ice + 1
 						IF IS_PLAYER_IN_ZONE player1 A_PORT
 							ADD_SCORE player1 10
@@ -644,7 +649,7 @@ RETURN
 mission_icecream1_passed:
 	
 IF assetnoticegot = 0
-	IF dealsdone_ice > 49
+	IF total_dealsdone_ice > 49  // FIXMIAMI: change dealsdone_ice to total_dealsdone_ice
 	
 		SET_PLAYER_CONTROL player1 OFF
 		SWITCH_WIDESCREEN ON

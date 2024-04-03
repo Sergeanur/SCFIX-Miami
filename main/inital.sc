@@ -194,6 +194,9 @@ flag_played_rock3_before = 0
 player_had_reload_award = 0 // used to give the player the fast reload award form the Range oddjob
 flag_played_bank2_before = 0 // used for a skip for the shooting range
 
+assetnoticegot = 0 // FIXMIAMI: make sure this var from icecream1.sc is initialized
+total_dealsdone_ice = 0 // FIXMIAMI: make sure this var from icecream1.sc is initialized
+
 heli1X = -569.1451  
 heli1Y = 851.0923 
 heli1Z = 22.8402
