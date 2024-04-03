@@ -3,6 +3,20 @@ MISSION_START
 // *******************************   icecut phone call cut scene    ************************* 
 // *****************************************************************************************
 
+// FIXMIAMI: START - SSU fix
+
+GOSUB mission_start_icecut
+
+IF HAS_DEATHARREST_BEEN_EXECUTED
+	GOSUB icecut_set1
+ENDIF
+
+GOSUB mission_cleanup_icecut
+
+MISSION_END
+
+// FIXMIAMI: END
+
 // ****************************************Mission Start************************************
 
 mission_start_icecut:
@@ -13,11 +27,16 @@ flag_player_on_mission = 1
 
 //skip_flag = 0
 
+{ // FIXMIAMI: MOVED SCOPE UP HERE
+
+LVAR_INT flag_icecut_set1
+flag_icecut_set1 = 0
+
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+
 WAIT 0
 
 LOAD_MISSION_TEXT icecut
-
-{
 
 SET_EVERYONE_IGNORE_PLAYER player1 TRUE
 SET_PLAYER_CONTROL player1 OFF
@@ -25,10 +44,10 @@ SET_PLAYER_CONTROL player1 OFF
 SWITCH_STREAMING OFF
 SWITCH_RUBBISH OFF
 
-VAR_INT cs_maude
-VAR_INT mcane
-VAR_INT icecut_van1
-//VAR_INT icecut_van2
+LVAR_INT cs_maude // FIXMIAMI: made LVAR
+LVAR_INT mcane // FIXMIAMI: made LVAR
+LVAR_INT icecut_van1 // FIXMIAMI: made LVAR
+//LVAR_INT icecut_van2 // FIXMIAMI: made LVAR
 
 
 
@@ -389,32 +408,12 @@ MARK_CAR_AS_NO_LONGER_NEEDED icecut_van1
 DELETE_CAR icecut_van1
 //DELETE_CAR icecut_van2
 
-flag_icecut_mission1_passed = 1
-
-
-
-//REGISTER_MISSION_PASSED ICEBUY
-
-ADD_MONEY_SPENT_ON_PROPERTY icebuy_price
-SWITCH_CAR_GENERATOR gen_car12 101
-
-REMOVE_BLIP icebuy_blip
-ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT -878.5 -575.1 11.2 RADAR_SPRITE_ICE icebuy_blip
-CHANGE_BLIP_DISPLAY icebuy_blip BLIP_ONLY
-SET_ZONE_PED_INFO ICCREAM DAY   (13) 0 0 0 0 0 0 1000 0 0 0
-SET_ZONE_PED_INFO ICCREAM NIGHT (10) 0 0 0 0 0 0 1000 0 0 0 
-SWITCH_PED_ROADS_ON -896.098 -593.101 0.0 -855.09 -548.64 30.0//ICECREAM
-
-SET_PROPERTY_AS_OWNED PROP_ICECREAM
-
-
-
-START_NEW_SCRIPT icecream_save_loop
-
-
+GOSUB icecut_set1 // FIXMIAMI: moved stuff into a subroutine
+SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
 
 WAIT 1000
 DO_FADE 1500 FADE_IN
+SWITCH_WIDESCREEN ON // FIXMIAMI
 
 SET_OBJECT_COORDINATES ice_door -866.689 -572.095 15.573 // FIXMIAMI: remove SLIDE_OBJECT
 
@@ -431,15 +430,51 @@ PLAY_MISSION_PASSED_TUNE 1
 PRINT_WITH_NUMBER_BIG ICEBUY icebuy_price 7000 6 //purchased text
 WAIT 7000
 
+SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+SWITCH_WIDESCREEN OFF // FIXMIAMI
+SET_EVERYONE_IGNORE_PLAYER player1 FALSE // FIXMIAMI
 
+RETURN // FIXMIAMI
+
+// FIXMIAMI: START
+icecut_set1:
+IF flag_icecut_set1 = 0
+	flag_icecut_mission1_passed = 1
+
+
+
+	//REGISTER_MISSION_PASSED ICEBUY
+
+	ADD_MONEY_SPENT_ON_PROPERTY icebuy_price
+	SWITCH_CAR_GENERATOR gen_car12 101
+
+	REMOVE_BLIP icebuy_blip
+	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT -878.5 -575.1 11.2 RADAR_SPRITE_ICE icebuy_blip
+	CHANGE_BLIP_DISPLAY icebuy_blip BLIP_ONLY
+	SET_ZONE_PED_INFO ICCREAM DAY   (13) 0 0 0 0 0 0 1000 0 0 0
+	SET_ZONE_PED_INFO ICCREAM NIGHT (10) 0 0 0 0 0 0 1000 0 0 0 
+	SWITCH_PED_ROADS_ON -896.098 -593.101 0.0 -855.09 -548.64 30.0//ICECREAM
+
+	SET_PROPERTY_AS_OWNED PROP_ICECREAM
+
+
+
+	START_NEW_SCRIPT icecream_save_loop
+	START_NEW_SCRIPT icecream_mission1_loop // FIXMIAMI: moved here from main.sc
+	flag_icecut_set1 = 1
+ENDIF
+RETURN
+// FIXMIAMI: END
+
+mission_cleanup_icecut: // FIXMIAMI
 flag_player_on_mission = 0
 
 PLAYER_MADE_PROGRESS 1
+SET_CAMERA_BEHIND_PLAYER // FIXMIAMI: moved before jumpcut
 RESTORE_CAMERA_JUMPCUT
-SET_CAMERA_BEHIND_PLAYER
 
 MISSION_HAS_FINISHED
-MISSION_END
+//MISSION_END // FIXMIAMI: moved up
  
 }
 RETURN

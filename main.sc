@@ -2715,7 +2715,7 @@ icebuy_loop_inner:
 					SWITCH_STREAMING OFF
 					PRINT_BIG CHERRYP 6000 2 //"CHERRY POPPER ICECREAMS"
 					GOSUB get_fading_status
-					START_NEW_SCRIPT icecream_mission1_loop
+					//START_NEW_SCRIPT icecream_mission1_loop // FIXMIAMI: moved to icecut.sc
 					LOAD_AND_LAUNCH_MISSION icecut.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
