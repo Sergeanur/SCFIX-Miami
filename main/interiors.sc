@@ -195,6 +195,7 @@ interiors_inner:
 	WAIT 0
 	++ pooz_counter
 
+	GOSUB force_extra_colors // FIXMIAMI
 
 		// **************************** THE STRIP CLUB ********************************************
 		IF IS_PLAYER_PLAYING player1
@@ -3574,6 +3575,52 @@ WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 ENDWHILE
 
 RETURN
+
+force_extra_colors: // FIXMIAMI
+
+IF flag_player_in_malibu = 1
+	SET_EXTRA_COLOURS 1 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_stripclub = 1
+	SET_EXTRA_COLOURS 2 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_hotel = 1
+OR flag_player_in_apartment3c = 1
+	SET_EXTRA_COLOURS 3 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_bank = 1
+	SET_EXTRA_COLOURS 4 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_cop_shop = 1
+	SET_EXTRA_COLOURS 5 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_mall = 1
+	SET_EXTRA_COLOURS 6 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_shooting_range = 1
+	SET_EXTRA_COLOURS 7 FALSE
+	RETURN
+ENDIF
+
+IF flag_player_in_mansion = 1
+	SET_EXTRA_COLOURS 8 FALSE
+	RETURN
+ENDIF
+
+RETURN
+
 // FIXMIAMI: END
 
 
