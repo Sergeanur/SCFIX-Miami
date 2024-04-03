@@ -1201,7 +1201,8 @@ cancel_player_kill:
 
 mission_finale1_failed:
 PRINT_BIG M_FAIL 5000 1
-IF play_audio_1 = 2
+// no waits on deatharrest..?
+/*IF play_audio_1 = 2
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 		WAIT 0
 	ENDWHILE
@@ -1210,7 +1211,7 @@ IF play_audio_2 = 2
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 		WAIT 0
 	ENDWHILE
-ENDIF
+ENDIF*/
 RETURN
 
    
