@@ -83,11 +83,13 @@ REGISTER_MISSION_GIVEN
 WAIT 0
 LOAD_MISSION_TEXT PROT3 
 IF NOT IS_CHAR_DEAD scplayer
-    UNDRESS_CHAR scplayer player
-    LOAD_ALL_MODELS_NOW
-    IF NOT IS_CHAR_DEAD scplayer
-        DRESS_CHAR scplayer
-    ENDIF
+	IF IS_PLAYER_WEARING player1 player6 // FIXMIAMI
+		UNDRESS_CHAR scplayer player
+		LOAD_ALL_MODELS_NOW
+		IF NOT IS_CHAR_DEAD scplayer
+			DRESS_CHAR scplayer
+		ENDIF
+	ENDIF // FIXMIAMI
 ENDIF
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -288.2 -487.5 9.8 275.0
 // *****************************************Set Flags/variables************************************
@@ -1306,6 +1308,7 @@ IF disguise_goals = 2
 			
 			IF NOT IS_PLAYER_DEAD player1
 				IF NOT IS_CHAR_DEAD buddy
+					REQUEST_MODEL ml_tarbrush // FIXMIAMI
 
 					WHILE NOT HAS_MODEL_LOADED ml_tarbrushdamage // FIXMIAMI
 						WAIT 0 // FIXMIAMI
@@ -1314,7 +1317,6 @@ IF disguise_goals = 2
 					SWAP_NEAREST_BUILDING_MODEL 468.882 1006.67 20.681 80.0 ml_tarbrush ml_tarbrushdamage
 
 					MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // FIXMIAMI
-					REQUEST_MODEL ml_tarbrush // FIXMIAMI
 
 					IF player_in_coffee_shop = 0
 						player_in_coffee_shop = 1
@@ -1539,9 +1541,6 @@ mission_failed_protec3:
 
 PRINT_BIG ( M_FAIL ) 5000 1	//"Mission Failed!"
 IF player_in_coffee_shop = 1
-	WHILE NOT HAS_MODEL_LOADED ml_tarbrush // FIXMIAMI
-		WAIT 0 // FIXMIAMI
-	ENDWHILE // FIXMIAMI
 	SWAP_NEAREST_BUILDING_MODEL 468.882 1006.67 20.681 80.0 ml_tarbrushdamage ml_tarbrush
 ENDIF
 
