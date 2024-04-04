@@ -5581,6 +5581,25 @@ hotel_save_loop_inner:
 								SET_PLAYER_HEADING player1 121.0
 								SET_FIXED_CAMERA_POSITION 223.301 -1277.655 13.822 0.0 0.0 0.0
 								POINT_CAMERA_AT_POINT 222.563 -1278.279 13.565 JUMP_CUT
+							ELSE
+								CLEAR_AREA 223.1 -1276.7 11.0 1.0 TRUE
+								SET_PLAYER_COORDINATES player1 223.1 -1276.7 11.0
+								SET_PLAYER_HEADING player1 258.0
+							ENDIF
+
+							IF NOT flag_hotel_mission1_passed = 0
+								RESTORE_CAMERA_JUMPCUT
+								SET_CAMERA_BEHIND_PLAYER
+							ENDIF
+						ENDIF
+
+						WAIT 500
+
+						IF IS_PLAYER_PLAYING player1
+							flag_player_on_mission = 0 // FIXMIAMI: moved up
+
+							// FIXMIAMI: START - moved stuff from above so that marker would actually be shown
+							IF flag_hotel_mission1_passed = 0
 							    PRINT_HELP ( HELP19 ) //Continue the game
 								TIMERA = 0
 
@@ -5594,24 +5613,15 @@ hotel_save_loop_inner:
 									ENDIF
 
 								ENDWHILE
-
 								skip_pink_help:		
-							ELSE
-								CLEAR_AREA 223.1 -1276.7 11.0 1.0 TRUE
-								SET_PLAYER_COORDINATES player1 223.1 -1276.7 11.0
-								SET_PLAYER_HEADING player1 258.0
+								RESTORE_CAMERA_JUMPCUT
+								SET_CAMERA_BEHIND_PLAYER
 							ENDIF
-
-							
-							RESTORE_CAMERA_JUMPCUT
-							SET_CAMERA_BEHIND_PLAYER
 						ENDIF
+						// FIXMIAMI: END
 
-						WAIT 500
-
-						IF IS_PLAYER_PLAYING player1
+						IF IS_PLAYER_PLAYING player1 // FIXMIAMI: check again because of possible wait
 							SET_PLAYER_CONTROL player1 on
-							flag_player_on_mission = 0
 						ENDIF
 							
 					ENDIF
