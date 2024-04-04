@@ -739,7 +739,7 @@ ENDWHILE
 
 // waiting for the player1 to get to the starting grid					
 
-WHILE NOT LOCATE_STOPPED_PLAYER_IN_CAR_3D player1 player1_start_x_bankjob3 player1_start_y_bankjob3 player1_start_z_bankjob3 2.0 2.0 2.0 TRUE
+WHILE NOT LOCATE_STOPPED_PLAYER_IN_CAR_3D player1 player1_start_x_bankjob3 player1_start_y_bankjob3 player1_start_z_bankjob3 2.0 2.0 2.0 FALSE // FIXMIAMI: last arg was TRUE
 OR IS_PLAYER_IN_ANY_BOAT player1
 OR IS_PLAYER_IN_FLYING_VEHICLE player1
 							   
