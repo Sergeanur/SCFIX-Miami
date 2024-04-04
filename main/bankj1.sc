@@ -758,6 +758,9 @@ LOAD_MISSION_TEXT BANKJ1
 
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION 512.591 -74.900 9.573 189.24
 
+// FIXMIAMI: remove wanted level
+CLEAR_WANTED_LEVEL player1
+
 {
 
 // ****************************************START OF CUTSCENE********************************
