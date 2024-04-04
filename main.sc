@@ -7002,7 +7002,18 @@ save_the_game:
 	DO_FADE 1000 FADE_OUT
 
 	IF IS_PLAYER_PLAYING player1
-		SET_PLAYER_HEALTH Player1 200
+		// FIXMIAMI: START
+		max_health = 100
+		IF flag_pizza_mission_passed = 1
+			max_health += 50
+		ENDIF
+		IF created_final_shirt = 1
+			max_health += 50
+		ENDIF
+		IF NOT IS_PLAYER_HEALTH_GREATER player1 max_health
+		// FIXMIAMI: END
+			SET_PLAYER_HEALTH Player1 200
+		ENDIF // FIXMIAMI
 		SET_PLAYER_CONTROL player1 OFF
 	ENDIF
 
