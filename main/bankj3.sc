@@ -177,6 +177,11 @@ SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION 512.591 -74.900 9.573 189.24
 
 {
 
+// FIXMIAMI: START
+LVAR_INT flag_hilary_won
+flag_hilary_won = 0
+// FIXMIAMI: END
+
 // ****************************************START OF CUTSCENE********************************
 // Player is talking about needing a getaway driver, Phil says that he knows someone
   
@@ -1049,8 +1054,12 @@ WHILE player1_cpcounter_bankjob3 < total_checkpoints_bankjob3
 			ENDIF
 
 			IF racer1_cpcounter_bankjob3 = total_checkpoints_bankjob3
-				PRINT_NOW ( RACEFA ) 5000 1 //"~r~You failed to win the race!"
-				GOTO mission_bankjob3_failed		
+				//PRINT_NOW ( RACEFA ) 5000 1 //"~r~You failed to win the race!" // FIXMIAMI: moved
+				//GOTO mission_bankjob3_failed		// FIXMIAMI: moved
+				// FIXMIAMI: START - restore unused line
+				flag_hilary_won = 1
+				GOTO mini_cutscene_bankjob3
+				// FIXMIAMI: END
 			ENDIF
 			
 			IF racer1_locate_size_bankjob3 = 7.0
@@ -1159,7 +1168,11 @@ SET_CAR_CRUISE_SPEED racer1_bankjob3 0.0
 CAR_SET_IDLE racer1_bankjob3 
 
 IF flag_load_audio_bankjob3 = 0
-	LOAD_MISSION_AUDIO 1 ( BNK3_1 )  // Hilary message 
+	IF flag_hilary_won = 1 // FIXMIAMI: restore cut line
+		LOAD_MISSION_AUDIO 1 ( BNK3_2 )  // FIXMIAMI: restore cut line
+	ELSE // FIXMIAMI: restore cut line
+		LOAD_MISSION_AUDIO 1 ( BNK3_1 )  // Hilary message 
+	ENDIF // FIXMIAMI: restore cut line
 	flag_load_audio_bankjob3 = 1
 ENDIF
 
@@ -1207,10 +1220,14 @@ ELSE
 	GOTO mission_bankjob3_failed
 ENDIF
 
-IF player1_cpcounter_bankjob3 = total_checkpoints_bankjob3
+//IF player1_cpcounter_bankjob3 = total_checkpoints_bankjob3 // FIXMIAMI: removed
 	PLAY_MISSION_AUDIO 1 // Hilary talk stuff
-	PRINT_NOW ( BNK3_1 ) 6000 1 //"Ok. I'll drive for you, but please, treat me bad."
-ENDIF 
+	IF flag_hilary_won = 1 // FIXMIAMI: restore cut line
+		PRINT_NOW ( BNK3_2 ) 6000 1 //"I'm not driving for you, no way, I'm sharing this at group." // FIXMIAMI: restore cut line
+	ELSE // FIXMIAMI: restore cut line
+		PRINT_NOW ( BNK3_1 ) 6000 1 //"Ok. I'll drive for you, but please, treat me bad."
+	ENDIF // FIXMIAMI: restore cut line
+//ENDIF // FIXMIAMI: removed
 
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 
@@ -1237,7 +1254,11 @@ WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 ENDWHILE
 
 CLEAR_MISSION_AUDIO 1
-CLEAR_THIS_PRINT ( BNK3_1 )
+IF flag_hilary_won = 1 // FIXMIAMI: restore cut line
+	CLEAR_THIS_PRINT ( BNK3_2 )
+ELSE // FIXMIAMI: restore cut line
+	CLEAR_THIS_PRINT ( BNK3_1 )
+ENDIF // FIXMIAMI: restore cut line
 
 IF NOT IS_CHAR_DEAD driver_bankjob3 
 	STOP_PLAYER_LOOKING player1
@@ -1314,7 +1335,12 @@ SET_EVERYONE_IGNORE_PLAYER player1 OFF
 SET_PLAYER_CONTROL player1 ON
 RESTORE_CAMERA_JUMPCUT 
 
-GOTO mission_bankjob3_passed
+IF flag_hilary_won = 1 // FIXMIAMI
+	PRINT_NOW ( RACEFA ) 5000 1 //"~r~You failed to win the race!" // FIXMIAMI: moved here
+	GOTO mission_bankjob3_failed		// FIXMIAMI: moved here
+ELSE // FIXMIAMI
+	GOTO mission_bankjob3_passed
+ENDIF // FIXMIAMI
 
 // ****************************************** Mission Failed *******************************
 
