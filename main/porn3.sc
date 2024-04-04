@@ -954,7 +954,7 @@ IF cam_audio2 = 0
 	cam_audio2 = 1
 ENDIF
 
-START_NEW_SCRIPT load_camera_audio_loop
+START_NEW_SCRIPT load_camera_audio_loop // FIXMIAMI
 
 GET_PLAYER_COORDINATES player1 player_x player_y player_z
 LOAD_SCENE player_x player_y player_z 
