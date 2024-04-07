@@ -194,8 +194,8 @@ flag_played_rock3_before = 0
 player_had_reload_award = 0 // used to give the player the fast reload award form the Range oddjob
 flag_played_bank2_before = 0 // used for a skip for the shooting range
 
-assetnoticegot = 0 // FIXMIAMI: make sure this var from icecream1.sc is initialized
-total_dealsdone_ice = 0 // FIXMIAMI: make sure this var from icecream1.sc is initialized
+assetnoticegot = 0 // SCFIX: make sure this var from icecream1.sc is initialized
+total_dealsdone_ice = 0 // SCFIX: make sure this var from icecream1.sc is initialized
 
 heli1X = -569.1451  
 heli1Y = 851.0923 
@@ -997,8 +997,8 @@ SET_GANG_WEAPONS GANG_PLAYER WEAPONTYPE_PISTOL WEAPONTYPE_PISTOL
 
 //SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_COLOMBIAN THREAT_PLAYER1	
 
-//SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_CUBAN THREAT_GANG_HAITIAN // FIXMIAMI: serg2.sc does this
-//SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_GANG_CUBAN // FIXMIAMI: serg2.sc does this
+//SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_CUBAN THREAT_GANG_HAITIAN // SCFIX: serg2.sc does this
+//SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_GANG_CUBAN // SCFIX: serg2.sc does this
 
 //SET_GANG_PLAYER_ATTITUDE GANG_PLAYER LOVES Player1 
 
@@ -1286,7 +1286,7 @@ VAR_INT gen_car161 gen_car162 gen_car163 gen_car164
 
 //CREATE_CAR_GENERATOR Remap1 Remap2 ParkedFlag ChanceOfCarAlarm ChanceOfLocked MinDelay MaxDelay CarGenID
 
-CREATE_CAR_GENERATOR -403.2715 -534.6655 11.7534 149.2032 ADMIRAL CARCOLOUR_LIGHTBLUEGREY CARCOLOUR_LIGHTBLUEGREY 0 50 0 0 10000 gen_car163//mansion // FIXMIAMI: moved a bit to fix conflict with a stretch nearby
+CREATE_CAR_GENERATOR -403.2715 -534.6655 11.7534 149.2032 ADMIRAL CARCOLOUR_LIGHTBLUEGREY CARCOLOUR_LIGHTBLUEGREY 0 50 0 0 10000 gen_car163//mansion // SCFIX: moved a bit to fix conflict with a stretch nearby
 SWITCH_CAR_GENERATOR gen_car163 101
 
 CREATE_CAR_GENERATOR -870.4673 -717.2427 10.1069 94.1213 VICECHEE -1 -1 0 0 0 0 10000 gen_car162//little haiti cop shop
@@ -1502,7 +1502,7 @@ SWITCH_CAR_GENERATOR gen_car6 101
 CREATE_CAR_GENERATOR 483.9 -42.8 9.1 0.0 RUMPO -1 -1 0 0 0 0 10000 gen_car84 //Behind Malibu
 SWITCH_CAR_GENERATOR gen_car84 101
 
-CREATE_CAR_GENERATOR 307.2 265.6 15.3 278.4 FREEWAY -1 -1 0 0 0 0 10000 gen_car109 // // FIXMIAMI: moved from under the helipad
+CREATE_CAR_GENERATOR 307.2 265.6 15.3 278.4 FREEWAY -1 -1 0 0 0 0 10000 gen_car109 // // SCFIX: moved from under the helipad
 SWITCH_CAR_GENERATOR gen_car109 101
 
 CREATE_CAR_GENERATOR 286.3 394.4 12.3 265.2 -1 -1 -1 0 0 0 0 10000 gen_car111 // Pull away from the edge for large vehicles
@@ -1581,7 +1581,7 @@ SWITCH_CAR_GENERATOR gen_car95 101
 CREATE_CAR_GENERATOR -593.6 -318.3 10.4 130.0 LANDSTAL -1 -1 0 0 0 0 10000 gen_car96 //Mansion6
 SWITCH_CAR_GENERATOR gen_car96 101
 
-CREATE_CAR_GENERATOR -523.8 -305.8 10.7 180.0 INFERNUS -1 -1 0 0 0 0 10000 gen_car97 //Mansion7 // FIXMIAMI: moved from the locked garage
+CREATE_CAR_GENERATOR -523.8 -305.8 10.7 180.0 INFERNUS -1 -1 0 0 0 0 10000 gen_car97 //Mansion7 // SCFIX: moved from the locked garage
 SWITCH_CAR_GENERATOR gen_car97 101
 
 CREATE_CAR_GENERATOR -388.6 -287.7 9.6 270.0 PHEONIX -1 -1 0 0 0 0 10000 gen_car98 //Mansion8
@@ -1590,7 +1590,7 @@ SWITCH_CAR_GENERATOR gen_car98 101
 CREATE_CAR_GENERATOR -267.0 -303.6 9.5 160.0 COMET -1 -1 0 0 0 0 10000 gen_car99 //Mansion9
 SWITCH_CAR_GENERATOR gen_car99 101
 
-CREATE_CAR_GENERATOR -350.8 -534.9 12.4 86.5 PIZZABOY  -1 -1 0 0 0 0 10000 gen_car5 //Mansion after completing pizza missions // FIXMIAMI: fix Z coord
+CREATE_CAR_GENERATOR -350.8 -534.9 12.4 86.5 PIZZABOY  -1 -1 0 0 0 0 10000 gen_car5 //Mansion after completing pizza missions // SCFIX: fix Z coord
 SWITCH_CAR_GENERATOR gen_car5 0
 
 
@@ -1848,11 +1848,11 @@ SWITCH_CAR_GENERATOR gen_car110 0
 CREATE_CAR_GENERATOR -614.0 804.0 30.0 0.0 polmav -1 -1 0 0 0 0 10000 police_chopper //at south beach
 SWITCH_CAR_GENERATOR police_chopper 101
 
-// FIXMIAMI: start - add colonel's Speeder spawn at mansion
+// SCFIX: start - add colonel's Speeder spawn at mansion
 VAR_INT col_speeder
 CREATE_CAR_GENERATOR -378.5 -660.0 5.6 270.0 SPEEDER CARCOLOUR_RED2 CARCOLOUR_LIGHT10 TRUE 0 0 0 10000 col_speeder //Mansion
 SWITCH_CAR_GENERATOR col_speeder 0
-// FIXMIAMI: end
+// SCFIX: end
 
 // ***************************************************PICKUPS********************************************************
 /*

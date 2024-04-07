@@ -1,6 +1,6 @@
 MISSION_START
 			  
-// FIXMIAMI: START - fix SSU shit
+// SCFIX: START - fix SSU shit
 GOSUB mission_start_buypro5
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
@@ -10,16 +10,16 @@ ENDIF
 GOSUB mission_cleanup_buypro5
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
 
 mission_start_buypro5:
 
 SCRIPT_NAME	buypro5
 
 flag_player_on_mission = 1
-{ // FIXMIAMI: scope moved up, was after WAIT 0
+{ // SCFIX: scope moved up, was after WAIT 0
 
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT flag_buypro5_set1
 LVAR_INT flag_buypro5_set2
 LVAR_INT flag_buypro5_set3
@@ -28,13 +28,13 @@ flag_buypro5_set1 = 0
 flag_buypro5_set2 = 0
 flag_buypro5_set3 = 0
 flag_buypro5_set4 = 0
-// FIXMIAMI: END
+// SCFIX: END
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
-	GOSUB buypro5_set1 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro5_set1 // SCFIX: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -43,7 +43,7 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT nbmnbuyX nbmnbuyY nbmnbuyZ RADAR_SPRITE_SAVEHOUSE nbmnbuy_blip 
 			CHANGE_BLIP_DISPLAY nbmnbuy_blip BLIP_ONLY
@@ -53,7 +53,7 @@ WAIT 0
 		*/
 	ENDWHILE
 
-	GOSUB buypro5_set2 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro5_set2 // SCFIX: moved stuff into a subroutine
 
 	CLEAR_AREA 428.3730 608.9806 11.6898 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 428.3730 608.9806 11.6898
@@ -68,7 +68,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
@@ -76,7 +76,7 @@ WAIT 0
 	ENDWHILE
 
 	PRINT_WITH_NUMBER_BIG NBMNBUY nbmnbuy_price 5000 6 //"Elswanko Casa purchased: $ 15000"
-	GOSUB buypro5_set3 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro5_set3 // SCFIX: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
@@ -98,7 +98,7 @@ WAIT 0
 	POINT_CAMERA_AT_POINT 428.6758 650.2003 15.1346 JUMP_CUT
 
 	PRINT_NOW BUYGARG 3000 1//~g~You can also store vehicles in this garage.
-	GOSUB buypro5_set4 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro5_set4 // SCFIX: moved stuff into a subroutine
 
 	WAIT 3000
 
@@ -107,7 +107,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
@@ -128,9 +128,9 @@ WAIT 0
 
 	GOSUB get_fading_status
 
-	RETURN // FIXMIAMI
+	RETURN // SCFIX
 
-// FIXMIAMI: START
+// SCFIX: START
 buypro5_set1:
 IF flag_buypro5_set1 = 0
 	REMOVE_BLIP nbmnbuy_blip
@@ -174,9 +174,9 @@ GOSUB buypro5_set2
 GOSUB buypro5_set3
 GOSUB buypro5_set4
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-mission_cleanup_buypro5: // FIXMIAMI
+mission_cleanup_buypro5: // SCFIX
 
 	SET_MUSIC_DOES_FADE TRUE
 					
@@ -184,7 +184,7 @@ mission_cleanup_buypro5: // FIXMIAMI
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
+//MISSION_END // SCFIX: moved up
 
 }
 RETURN 

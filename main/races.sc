@@ -270,13 +270,13 @@ POINT_CAMERA_AT_POINT -970.9708 -825.7308 8.6162 JUMP_CUT
 
 PRINT_HELP_FOREVER RACEHLP
 
-GOTO races_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO races_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_OBJECT_NO_OFFSET lh_race02 -965.584 -827.217 8.631 race_route_2
 	CREATE_OBJECT_NO_OFFSET lh_race03 -965.584 -827.217 8.631 race_route_3
 	CREATE_OBJECT_NO_OFFSET lh_race04 -965.584 -827.217 8.631 race_route_4
 	CREATE_OBJECT_NO_OFFSET lh_race05 -965.584 -827.217 8.631 race_route_5
 	CREATE_OBJECT_NO_OFFSET lh_race06 -965.584 -827.217 8.631 race_route_6
-races_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+races_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 CREATE_OBJECT_NO_OFFSET lh_race01 -965.584 -827.217 8.631 race_route_1
 
@@ -286,7 +286,7 @@ WAIT 0
 
 GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
-IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 	IF triangle_pressed_flag = 1
 		triangle_pressed_flag = 0
 		CLEAR_HELP
@@ -721,7 +721,7 @@ IF race_choice = 6
 	ENDIF
 ENDIF
 
-IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 	IF cross_pressed_flag = 1
 		cross_pressed_flag = 0
 		IF race_choice = 1

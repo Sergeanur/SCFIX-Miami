@@ -174,16 +174,16 @@ player_z = 0.0
 add_pizza_score = 0
 {
 
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT pizza_audio_speech
 LVAR_INT pizza_audio_state
 pizza_audio_speech = 0
 pizza_audio_state = 5
-// FIXMIAMI: END
+// SCFIX: END
 
 
 //impossible if comment
-GOTO pizza_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO pizza_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer1
 	ADD_BLIP_FOR_CHAR customer1 customer1_blip
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer2
@@ -205,7 +205,7 @@ GOTO pizza_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer10
 	ADD_BLIP_FOR_CHAR customer10 customer10_blip
 	ADD_BLIP_FOR_COORD pizza_shopx pizza_shopy -100.0 pizza_hut_blip
-pizza_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+pizza_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 // *****************************************Start cutscene************************************
 // *****************************************End cutscene**************************************
@@ -229,9 +229,9 @@ ELSE
 ENDIF 
 	
 
-GOTO pizza_fool_compiler2 // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO pizza_fool_compiler2 // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_CAR pizza_moped pizza_moped_blip
-pizza_fool_compiler2: // FIXMIAMI: remove flag_player_on_mission = 0 check
+pizza_fool_compiler2: // SCFIX: remove flag_player_on_mission = 0 check
 
 DISPLAY_ONSCREEN_TIMER customer_complaint_time TIMER_DOWN
 DISPLAY_ONSCREEN_COUNTER_WITH_STRING total_pizzas_thrown 0 PIZ1_12
@@ -326,7 +326,7 @@ WHILE customers_created < pizza_goals
 	GOSUB plyr_off_moped
 	GOSUB plyr_quit_game
 	GOSUB dying_customers
-	GOSUB pizza_audio_process // FIXMIAMI
+	GOSUB pizza_audio_process // SCFIX
 ENDWHILE
 
 
@@ -353,12 +353,12 @@ ENDWHILE
 
 IF go_back_to_pizza_hut_flag = 0
 	IF pizza_delivered = pizza_goals
-		// FIXMIAMI: START - cosider mission passed as soon as the last pizza is delivered
+		// SCFIX: START - cosider mission passed as soon as the last pizza is delivered
 		IF pizza_goals = 10 
 		AND flag_pizza_mission_passed = 0
 			GOTO mission_passed_pizza
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 		IF flag_player_not_in_pizza_moped = 0
 			PRINT_NOW ( PIZ1_33 ) 7000 1 //Return to the restaurant for more orders.
 			REMOVE_BLIP pizza_hut_blip 
@@ -456,7 +456,7 @@ ELSE
 	ENDIF
 ENDIF   
 
-GOSUB pizza_audio_process // FIXMIAMI
+GOSUB pizza_audio_process // SCFIX
 
 GOTO start_pizza_mission 
 
@@ -477,9 +477,9 @@ PRINT_WITH_NUMBER_BIG ( M_PASS ) 5000 5000 1 //"Mission Passed!"
 PLAY_MISSION_PASSED_TUNE 1 
 ADD_SCORE player1 5000
 IF flag_pizza_mission_passed = 0
-	IF flag_baron_mission5_passed = 1 // FIXMIAMI
+	IF flag_baron_mission5_passed = 1 // SCFIX
 		SWITCH_CAR_GENERATOR gen_car5 101
-	ENDIF // FIXMIAMI
+	ENDIF // SCFIX
 	REGISTER_ODDJOB_MISSION_PASSED
 	PRINT_NOW ( PIZ_WON ) 5000 1 //	Pizza Mission Complete.  
 	PLAYER_MADE_PROGRESS 1
@@ -665,7 +665,7 @@ AND cust_coordy	> -1007.371
 AND cust_coordy	< -784.753
 	GOTO get_rnd_locations
 ENDIF
-// FIXMIAMI: START
+// SCFIX: START
 //G-SPOTLIGHT OFFICE
 IF cust_coordx >  -570.1256
 AND cust_coordx < -453.1256
@@ -673,7 +673,7 @@ AND cust_coordy	> 888.7261
 AND cust_coordy	< 1018.3261
 	GOTO get_rnd_locations
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 //if player1s too close to customers
 
@@ -1623,7 +1623,7 @@ MARK_OBJECT_AS_NO_LONGER_NEEDED pizza_box6
 GENERATE_RANDOM_INT_IN_RANGE 1 20 random_speech
 
 IF pizza_speech_played = 0
-	/* FIXMIAMI: removed
+	/* SCFIX: removed
 	IF random_speech = 1 
 		LOAD_MISSION_AUDIO 1 PISS_01
 		WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1872,12 +1872,12 @@ IF pizza_speech_played = 0
 		CLEAR_THIS_PRINT PIZ1_31 
 	ENDIF
 	*/
-	// FIXMIAMI: START
+	// SCFIX: START
 	pizza_speech_played = 1
 	GOSUB pizza_audio_clear
 	pizza_audio_speech = random_speech
 	pizza_audio_state = 0
-	// FIXMIAMI: END
+	// SCFIX: END
 ENDIF
 //////////////////////////////////////////////////////////////////////
 RETURN////////////////////////////////////////////////////////////////
@@ -2058,7 +2058,7 @@ ENDIF
 RETURN////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-// FIXMIAMI: START
+// SCFIX: START
 pizza_audio_process:
 IF pizza_audio_state = 0
 	GOSUB pizza_audio_load
@@ -2324,7 +2324,7 @@ IF pizza_audio_speech = 19
 	RETURN
 ENDIF
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 }
 

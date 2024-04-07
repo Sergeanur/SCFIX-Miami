@@ -448,7 +448,7 @@ ATTACH_CHAR_TO_OBJECT colonel_goon4 the_yacht -4.225 -12.46 4.179 0 360.0 WEAPON
 
 SET_OBJECT_PATH_SPEED the_path_spline 0.0
 
-GOTO gen5_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO gen5_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_CAR HUNTER 36.0195 -447.5407 15.0170	heli1
 	CREATE_CAR HUNTER 36.0195 -447.5407 15.0170	killer_chopper
 	CREATE_CHAR PEDTYPE_GANG_STREET HMOST 36.0195 -447.5407 15.0170 killer_chopper_pilot
@@ -473,7 +473,7 @@ GOTO gen5_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
    	CREATE_CAR WASHING -238.2693 -1361.3296 7.0786 car02
 	CREATE_CAR WASHING -238.2693 -1361.3296 7.0786 car01
 
-gen5_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+gen5_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 //Boats at jetty
 CREATE_CAR MARQUIS -327.2818 -1207.3 6.0000 boat01
@@ -3279,7 +3279,7 @@ GET_OFFSET_FROM_OBJECT_IN_WORLD_COORDS the_yacht 0.0 -50.0 0.0 the_yacht_x the_y
 CREATE_CAR SPEEDER the_yacht_x the_yacht_y 6.0 colonels_launch
 //CREATE_CAR DINGHY 132.5211 1277.7527 6.0 colonels_launch
 SET_CAR_HEADING colonels_launch 270.0
-CHANGE_CAR_COLOUR colonels_launch CARCOLOUR_RED2 CARCOLOUR_LIGHT10 // FIXMIAMI: set the same colour as the cutscene
+CHANGE_CAR_COLOUR colonels_launch CARCOLOUR_RED2 CARCOLOUR_LIGHT10 // SCFIX: set the same colour as the cutscene
 
 IF NOT IS_PLAYER_IN_ANY_CAR player1
 	WARP_PLAYER_INTO_CAR player1 colonels_launch
@@ -3709,11 +3709,11 @@ REMOVE_BLIP general_contact_blip
 REGISTER_MISSION_PASSED COL_5
 PLAY_MISSION_PASSED_TUNE 1
 PLAYER_MADE_PROGRESS 1
-// FIXMIAMI: START
+// SCFIX: START
 IF flag_baron_mission5_passed = 1
 	SWITCH_CAR_GENERATOR col_speeder 101
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 RETURN
 		
 

@@ -406,7 +406,7 @@ SET_CAMERA_BEHIND_PLAYER
 SET_PLAYER_MOOD player1 PLAYER_MOOD_PISSED_OFF 60000
 SET_WANTED_MULTIPLIER 0.2
 
-flag_is_on_cuban_mission = 1 // FIXMIAMI
+flag_is_on_cuban_mission = 1 // SCFIX
 SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1
 
 REQUEST_MODEL CBa
@@ -452,7 +452,7 @@ ENDWHILE
 
 DO_FADE 1500 FADE_IN
 //cheating the compilier into thinking i have created something which i havent (so it can be used later)
-GOTO cuban2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO cuban2_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian1x haitian1y haitian_z haitian_defender1
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian2x haitian2y haitian_z haitian_defender2
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian3x haitian3y haitian_z haitian_defender3
@@ -465,7 +465,7 @@ GOTO cuban2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa haitian5x haitian5y haitian_z haitian_defender10
 	STORE_CAR_PLAYER_IS_IN player1 cuban_carry_car
 	ADD_BLIP_FOR_CAR cuban_carry_car radar_blip_cuban_carry_car
-cuban2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+cuban2_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 //opening haitian gate
 //andy_has_control = 1
@@ -684,9 +684,9 @@ WHILE NOT cubans_in_cars = 3
 		ENDIF
 	ENDIF
    
-	IF TIMERB > 5000 // FIXMIAMI: was 2000
+	IF TIMERB > 5000 // SCFIX: was 2000
 		IF NOT IS_CAR_DEAD cuban_carry_car
-			/* FIXMIAMI: yeah all this is pointless and results in ghosts coming out of the car
+			/* SCFIX: yeah all this is pointless and results in ghosts coming out of the car
 			IF NOT IS_CHAR_DEAD cuban_pickup1  
 				IF IS_CHAR_IN_CAR cuban_pickup1 cuban_carry_car 
 					WARP_CHAR_FROM_CAR_TO_COORD cuban_pickup1 -862.0 -607.4 11.1
@@ -718,11 +718,11 @@ WHILE NOT cubans_in_cars = 3
 			ENDIF  
 			*/
 
-			// FIXMIAMI: START - just delete chars instead
+			// SCFIX: START - just delete chars instead
 			DELETE_CHAR cuban_pickup1
 			DELETE_CHAR cuban_pickup2
 			DELETE_CHAR cuban_pickup3
-			// FIXMIAMI: END
+			// SCFIX: END
 
 			CREATE_CHAR_AS_PASSENGER cuban_carry_car PEDTYPE_GANG_CUBAN CBa 0 cuban_pickup1 
 			SET_CHAR_AS_PLAYER_FRIEND cuban_pickup1 player1 TRUE
@@ -1134,7 +1134,7 @@ WAIT 0
 IF IS_CHAR_DEAD cuban_attacker1
 OR IS_CHAR_DEAD cuban_attacker2
 OR IS_CHAR_DEAD cuban_attacker3
-OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+OR body_count_cub2 > 0 // SCFIX: was = 1
 	GOSUB nutters
 	PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 	GOTO mission_failed_cuban2
@@ -1301,14 +1301,14 @@ SET_CHAR_HEADING target2 270.0
 GIVE_WEAPON_TO_CHAR target2 WEAPONTYPE_SNIPERRIFLE 30000
 CLEAR_CHAR_THREAT_SEARCH target2
 SET_CHAR_PERSONALITY target2 PEDSTAT_TOUGH_GUY  
-/* FIXMIAMI: remove
+/* SCFIX: remove
 SET_CHAR_THREAT_SEARCH target2 THREAT_GANG_CUBAN
 SET_CHAR_THREAT_SEARCH target2 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH target2 THREAT_COP
 */
 SET_CHAR_ACCURACY target2 100 
 SET_CHAR_OBJ_RUN_TO_COORD target2 -1173.4 71.3 
-SET_ANIM_GROUP_FOR_CHAR target2 ANIM_PLAYER_2ARMED_PED // FIXMIAMI
+SET_ANIM_GROUP_FOR_CHAR target2 ANIM_PLAYER_2ARMED_PED // SCFIX
 
 
 SET_FIXED_CAMERA_POSITION -1074.47 70.88 14.36 0.0 0.0 0.0 
@@ -1329,7 +1329,7 @@ ENDIF
 IF NOT IS_CHAR_DEAD cuban_pickup2
 	CLEAR_CHAR_THREAT_SEARCH cuban_pickup2 
 	//SET_CHAR_STOP_SHOOT_DONT_SEEK_ENTITY cuban_pickup2 FALSE
-	SET_CHAR_OBJ_RUN_TO_COORD  cuban_pickup2 -1130.2 73.5  // FIXMIAMI: was 70.5
+	SET_CHAR_OBJ_RUN_TO_COORD  cuban_pickup2 -1130.2 73.5  // SCFIX: was 70.5
 ENDIF
 WAIT 2000
 
@@ -1351,11 +1351,11 @@ ENDIF
 
 IF NOT IS_CHAR_DEAD cuban_pickup2
 	SET_CHAR_COORDINATES cuban_pickup2 -1106.7 71.9 10.4  
-	SET_CHAR_OBJ_RUN_TO_COORD  cuban_pickup2 -1130.2 73.5 // FIXMIAMI: was 70.5
+	SET_CHAR_OBJ_RUN_TO_COORD  cuban_pickup2 -1130.2 73.5 // SCFIX: was 70.5
 ENDIF
 
 timera = 0
-timerb = 0 // FIXMIAMI
+timerb = 0 // SCFIX
 
 LOAD_MISSION_AUDIO 2 snipsh
 WHILE NOT HAS_MISSION_AUDIO_LOADED 2
@@ -1371,14 +1371,14 @@ ENDWHILE
 snipey_loop:
 
 WAIT 0
-	IF NOT IS_CHAR_DEAD target2 // FIXMIAMI
-		IF LOCATE_CHAR_ANY_MEANS_2D target2 -1173.4 71.3 1.0 1.0 FALSE // FIXMIAMI
+	IF NOT IS_CHAR_DEAD target2 // SCFIX
+		IF LOCATE_CHAR_ANY_MEANS_2D target2 -1173.4 71.3 1.0 1.0 FALSE // SCFIX
 			SET_CHAR_STAY_IN_SAME_PLACE target2 TRUE
 			IF NOT IS_CHAR_DEAD cuban_attacker3
-				IF IS_CHAR_IN_AREA_2D cuban_attacker3 -1140.0 59.9 -1114.1 82.1 FALSE // FIXMIAMI: was -1130.4 59.9 -1114.1 82.1
-				AND timerb > 1500 // FIXMIAMI
-					timerb = 0 // FIXMIAMI
-					SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_attacker3 // FIXMIAMI
+				IF IS_CHAR_IN_AREA_2D cuban_attacker3 -1140.0 59.9 -1114.1 82.1 FALSE // SCFIX: was -1130.4 59.9 -1114.1 82.1
+				AND timerb > 1500 // SCFIX
+					timerb = 0 // SCFIX
+					SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_attacker3 // SCFIX
 					IF sniper_shot > 0 
 						LOAD_MISSION_AUDIO 1 sniper
 						WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1403,10 +1403,10 @@ WAIT 0
 			ENDIF
 
 			IF NOT IS_CHAR_DEAD cuban_pickup1
-				IF IS_CHAR_IN_AREA_2D cuban_pickup1 -1140.0 59.9 -1114.1 82.1 FALSE // FIXMIAMI: was -1130.4 59.9 -1119.1 82.1 FALSE
-				AND timerb > 1500 // FIXMIAMI
-					timerb = 0 // FIXMIAMI
-					SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup1 // FIXMIAMI
+				IF IS_CHAR_IN_AREA_2D cuban_pickup1 -1140.0 59.9 -1114.1 82.1 FALSE // SCFIX: was -1130.4 59.9 -1119.1 82.1 FALSE
+				AND timerb > 1500 // SCFIX
+					timerb = 0 // SCFIX
+					SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup1 // SCFIX
 					PLAY_MISSION_AUDIO 2
 					
 					IF NOT IS_CHAR_DEAD cuban_pickup1
@@ -1421,10 +1421,10 @@ WAIT 0
 			ENDIF
 
 			IF NOT IS_CHAR_DEAD cuban_pickup2
-				IF IS_CHAR_IN_AREA_2D cuban_pickup2 -1140.0 59.9 -1114.1 82.1 FALSE // FIXMIAMI: was -1130.4 59.9 -1125.1 82.1 FALSE
-				AND timerb > 1500 // FIXMIAMI
-					timerb = 0 // FIXMIAMI
-					SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup2 // FIXMIAMI
+				IF IS_CHAR_IN_AREA_2D cuban_pickup2 -1140.0 59.9 -1114.1 82.1 FALSE // SCFIX: was -1130.4 59.9 -1125.1 82.1 FALSE
+				AND timerb > 1500 // SCFIX
+					timerb = 0 // SCFIX
+					SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup2 // SCFIX
 					IF sniper_shot > 0 
 						LOAD_MISSION_AUDIO 1 sniper
 						WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1463,8 +1463,8 @@ WAIT 0
 					ENDIF
 				ENDIF
 			ENDIF
-		ENDIF // FIXMIAMI
-	// FIXMIAMI: START - sniper somehow died, recreate... just paranoid stuff, this really shouldn't happen
+		ENDIF // SCFIX
+	// SCFIX: START - sniper somehow died, recreate... just paranoid stuff, this really shouldn't happen
 	ELSE 
 		DELETE_CHAR target2
 		CREATE_CHAR PEDTYPE_GANG_HAITIAN HNb -1173.4 71.3 23.9 target2
@@ -1473,7 +1473,7 @@ WAIT 0
 		GIVE_WEAPON_TO_CHAR target2 WEAPONTYPE_SNIPERRIFLE 30000
 		CLEAR_CHAR_THREAT_SEARCH target2
 		SET_CHAR_PERSONALITY target2 PEDSTAT_TOUGH_GUY  
-		/* FIXMIAMI: remove
+		/* SCFIX: remove
 		SET_CHAR_THREAT_SEARCH target2 THREAT_GANG_CUBAN
 		SET_CHAR_THREAT_SEARCH target2 THREAT_PLAYER1
 		SET_CHAR_THREAT_SEARCH target2 THREAT_COP
@@ -1481,8 +1481,8 @@ WAIT 0
 		SET_CHAR_ACCURACY target2 100 
 		SET_ANIM_GROUP_FOR_CHAR target2 ANIM_PLAYER_2ARMED_PED
 		SET_CHAR_STAY_IN_SAME_PLACE target2 TRUE
-	ENDIF // FIXMIAMI
-	// FIXMIAMI: END
+	ENDIF // SCFIX
+	// SCFIX: END
 GOTO snipey_loop
 
 cuntlips:
@@ -1506,7 +1506,7 @@ WAIT 1000
 SET_FIXED_CAMERA_POSITION -1175.9 70.3 24.3 0.0 0.0 0.0 
 POINT_CAMERA_AT_POINT -1135.9 66.3 18.6 JUMP_CUT
 
-// FIXMIAMI: START
+// SCFIX: START
 IF NOT IS_CHAR_DEAD cuban_attacker2
 	SET_CHAR_OBJ_RUN_TO_COORD cuban_attacker2 -1112.98 66.92
 	SET_CHAR_USE_PEDNODE_SEEK cuban_attacker2 FALSE
@@ -1523,7 +1523,7 @@ IF NOT IS_CHAR_DEAD scplayer
 	SET_CHAR_OBJ_RUN_TO_COORD scplayer -1110.95 67.38
 	SET_CHAR_USE_PEDNODE_SEEK scplayer FALSE
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 PRINT_NOW ( CUB2_09 ) 4000 1 //Sniper on the roof!
 PLAY_MISSION_AUDIO 1
@@ -1548,29 +1548,29 @@ WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 	WAIT 0
 ENDWHILE 
 
-// FIXMIAMI: START
+// SCFIX: START
 IF NOT IS_CHAR_DEAD target2
 	CHAR_SET_IDLE target2
 	SET_CHAR_OBJ_NO_OBJ target2
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 IF NOT IS_CHAR_DEAD cuban_attacker2
 	CLEAR_CHAR_THREAT_SEARCH cuban_attacker2
-	SET_CHAR_OBJ_NO_OBJ cuban_attacker2 // FIXMIAMI
+	SET_CHAR_OBJ_NO_OBJ cuban_attacker2 // SCFIX
 	SET_CHAR_COORDINATES cuban_attacker2 -1112.98 66.92 10.4
 ENDIF
 
 IF NOT IS_CHAR_DEAD cuban_attacker1
 	CLEAR_CHAR_THREAT_SEARCH cuban_attacker1
-	SET_CHAR_OBJ_NO_OBJ cuban_attacker1 // FIXMIAMI
-	SET_CHAR_COORDINATES cuban_attacker1 -1112.2 73.0 10.4 // FIXMIAMI: change coords, was -1112.2 74.5 10.4
+	SET_CHAR_OBJ_NO_OBJ cuban_attacker1 // SCFIX
+	SET_CHAR_COORDINATES cuban_attacker1 -1112.2 73.0 10.4 // SCFIX: change coords, was -1112.2 74.5 10.4
 	SET_CHAR_HEADING cuban_attacker1 302.4
 ENDIF
 
 IF NOT IS_CHAR_DEAD cuban_pickup3
 	CLEAR_CHAR_THREAT_SEARCH cuban_pickup3
-	SET_CHAR_OBJ_NO_OBJ cuban_pickup3 // FIXMIAMI
+	SET_CHAR_OBJ_NO_OBJ cuban_pickup3 // SCFIX
 	SET_CHAR_COORDINATES cuban_pickup3 -1112.5 65.2 10.4
 	SET_CHAR_HEADING cuban_pickup3 357.4
 ENDIF
@@ -1716,14 +1716,14 @@ WHILE NOT LOCATE_CHAR_ON_FOOT_3D cuban_pickup6 -1112.9 66.7 10.4 2.0 2.0 2.0 FAL
 				SET_CHAR_OBJ_NO_OBJ cuban_pickup4
 			ENDIF
 		ELSE
-			IF LOCATE_CHAR_ON_FOOT_3D cuban_pickup4 -1112.0 74.5 10.4 1.0 1.0 1.0 FALSE // FIXMIAMI: change Y, was 73.0
+			IF LOCATE_CHAR_ON_FOOT_3D cuban_pickup4 -1112.0 74.5 10.4 1.0 1.0 1.0 FALSE // SCFIX: change Y, was 73.0
 				SET_CHAR_OBJ_NO_OBJ cuban_pickup4
 				SET_CHAR_HEADING cuban_pickup4 78.5
 				cuban_attacker_doingstuff1 = 1
 			ELSE
 				IF cuban_attacker_doingstuff1 = 0
-					SET_CHAR_OBJ_RUN_TO_COORD cuban_pickup4 -1112.0 74.5  // FIXMIAMI: change Y, was 73.0
-					SET_CHAR_USE_PEDNODE_SEEK cuban_pickup6 FALSE // FIXMIAMI
+					SET_CHAR_OBJ_RUN_TO_COORD cuban_pickup4 -1112.0 74.5  // SCFIX: change Y, was 73.0
+					SET_CHAR_USE_PEDNODE_SEEK cuban_pickup6 FALSE // SCFIX
 				ENDIF
 			ENDIF
 		ENDIF	
@@ -1745,7 +1745,7 @@ WHILE NOT LOCATE_CHAR_ON_FOOT_3D cuban_pickup6 -1112.9 66.7 10.4 2.0 2.0 2.0 FAL
 			ELSE
 				IF cuban_attacker_doingstuff2 = 0
 					SET_CHAR_OBJ_RUN_TO_COORD cuban_pickup5 -1112.9 73.3 
-					SET_CHAR_USE_PEDNODE_SEEK cuban_pickup6 FALSE // FIXMIAMI
+					SET_CHAR_USE_PEDNODE_SEEK cuban_pickup6 FALSE // SCFIX
 				ENDIF
 			ENDIF
 		ENDIF	
@@ -1767,7 +1767,7 @@ WHILE NOT LOCATE_CHAR_ON_FOOT_3D cuban_pickup6 -1112.9 66.7 10.4 2.0 2.0 2.0 FAL
 			ELSE
 				IF cuban_attacker_doingstuff3 = 0
 					SET_CHAR_OBJ_RUN_TO_COORD cuban_pickup6 -1112.9 66.7 
-					SET_CHAR_USE_PEDNODE_SEEK cuban_pickup6 FALSE // FIXMIAMI
+					SET_CHAR_USE_PEDNODE_SEEK cuban_pickup6 FALSE // SCFIX
 				ENDIF
 			ENDIF
 		ENDIF	
@@ -1821,8 +1821,8 @@ IF NOT IS_CHAR_DEAD cuban_pickup6
 ENDIF
 IF NOT IS_CHAR_DEAD target2  
 	ADD_BLIP_FOR_CHAR target2 sniper_blip
-	SET_CHAR_COORDINATES target2 -1173.4 71.3 23.0 // FIXMIAMI
-	SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 scplayer // FIXMIAMI
+	SET_CHAR_COORDINATES target2 -1173.4 71.3 23.0 // SCFIX
+	SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 scplayer // SCFIX
 ENDIF
 
 IF NOT IS_CHAR_DEAD cuban_attacker2
@@ -1892,7 +1892,7 @@ ENDIF
 
 IF IS_CHAR_DEAD cuban_attacker1
 OR IS_CHAR_DEAD cuban_attacker2
-OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+OR body_count_cub2 > 0 // SCFIX: was = 1
 	GOSUB nutters
 	PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 	GOTO mission_failed_cuban2
@@ -1923,55 +1923,55 @@ GOSUB player_killing_cubans
 IF NOT IS_CHAR_DEAD target2
 	IF NOT IS_PLAYER_IN_ANY_CAR player1 
 		IF IS_PLAYER_IN_AREA_2D player1 -1136.4 61.1 -1158.1 78.6 FALSE
-			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 scplayer // FIXMIAMI
+			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 scplayer // SCFIX
 			LOAD_MISSION_AUDIO 2 sniper
 			WHILE NOT HAS_MISSION_AUDIO_LOADED 2
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			PLAY_MISSION_AUDIO 2
 			EXPLODE_PLAYER_HEAD player1
 			WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			//CLEAR_MISSION_AUDIO 1
 		ENDIF
 	ENDIF
 	IF NOT IS_CHAR_DEAD cuban_pickup3 
 		IF IS_CHAR_IN_AREA_2D cuban_pickup3 -1131.4 59.9 -1158.1 78.6 FALSE
-			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup3 // FIXMIAMI
+			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup3 // SCFIX
 			LOAD_MISSION_AUDIO 1 sniper
 			WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			PLAY_MISSION_AUDIO 1
 			
@@ -1981,37 +1981,37 @@ IF NOT IS_CHAR_DEAD target2
 			
 			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			//CLEAR_MISSION_AUDIO 1
 		ENDIF
 	ENDIF
 	IF NOT IS_CHAR_DEAD cuban_pickup4 
 		IF IS_CHAR_IN_AREA_2D cuban_pickup4 -1133.4 59.9 -1158.1 78.6 FALSE
-			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup4 // FIXMIAMI
+			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup4 // SCFIX
 
 			LOAD_MISSION_AUDIO 1 sniper
 			WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			PLAY_MISSION_AUDIO 1
 			
@@ -2021,37 +2021,37 @@ IF NOT IS_CHAR_DEAD target2
 			
 			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			//CLEAR_MISSION_AUDIO 1
 		ENDIF
 	ENDIF
 	IF NOT IS_CHAR_DEAD cuban_pickup5 
 		IF IS_CHAR_IN_AREA_2D cuban_pickup5 -1135.4 59.9 -1158.1 78.6 FALSE
-			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup5 // FIXMIAMI
+			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup5 // SCFIX
 			
 			LOAD_MISSION_AUDIO 1 sniper
 			WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			PLAY_MISSION_AUDIO 1
 			
@@ -2062,37 +2062,37 @@ IF NOT IS_CHAR_DEAD target2
 			
 			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			//CLEAR_MISSION_AUDIO 1
 		ENDIF
 	ENDIF
 	IF NOT IS_CHAR_DEAD cuban_pickup6 
 		IF IS_CHAR_IN_AREA_2D cuban_pickup6 -1137.4 59.9 -1158.1 78.6 FALSE
-			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup6 // FIXMIAMI
+			SET_CHAR_OBJ_AIM_GUN_AT_CHAR target2 cuban_pickup6 // SCFIX
 
 			LOAD_MISSION_AUDIO 1 sniper
 			WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			PLAY_MISSION_AUDIO 1
 			
@@ -2103,16 +2103,16 @@ IF NOT IS_CHAR_DEAD target2
 			
 			WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 				WAIT 0
-				// FIXMIAMI: START
+				// SCFIX: START
 				GOSUB player_killing_cubans
 				IF IS_CHAR_DEAD cuban_attacker1
 				OR IS_CHAR_DEAD cuban_attacker2
-				OR body_count_cub2 > 0 // FIXMIAMI: was = 1
+				OR body_count_cub2 > 0 // SCFIX: was = 1
 					GOSUB nutters
 					PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.	
 					GOTO mission_failed_cuban2
 				ENDIF  
-				// FIXMIAMI: END
+				// SCFIX: END
 			ENDWHILE
 			//CLEAR_MISSION_AUDIO 1
 		ENDIF
@@ -2214,7 +2214,7 @@ SET_CAR_HEADING escape_car 90.7
 SET_CAR_ONLY_DAMAGED_BY_PLAYER escape_car TRUE
 CREATE_OBJECT gunbox -1161.5 76.5 11.2 escape_car_drugs
 SET_OBJECT_COLLISION escape_car_drugs FALSE
-PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // FIXMIAMI: fix Z coord
+PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // SCFIX: fix Z coord
 
 haitian1x = -1183.9 
 haitian1y = 101.7
@@ -2467,14 +2467,14 @@ RESTORE_CAMERA_JUMPCUT
 SET_PLAYER_CONTROL player1 ON
 SWITCH_WIDESCREEN OFF
 timera = 0
-PRINT_NOW ( CUB2_16 ) 5000 1 //Tommy, we have proved our manful bravery! // FIXMIAMI: replace PRINT with PRINT_NOW
+PRINT_NOW ( CUB2_16 ) 5000 1 //Tommy, we have proved our manful bravery! // SCFIX: replace PRINT with PRINT_NOW
 IF NOT IS_CHAR_DEAD cuban_attacker2 
 	PLAY_MISSION_AUDIO 1
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 	AND NOT IS_CHAR_DEAD cuban_attacker2 
 		WAIT 0
 		IF NOT IS_CAR_DEAD escape_car
-			PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // FIXMIAMI: fix Z coord
+			PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // SCFIX: fix Z coord
 		ENDIF
 	ENDWHILE
 	CLEAR_MISSION_AUDIO 1
@@ -2482,21 +2482,21 @@ ELSE
 	CLEAR_MISSION_AUDIO 1
 ENDIF
 CLEAR_THIS_PRINT CUB2_16 
-PRINT_NOW ( CUB2_17 ) 10000 1 //Let us steal that van full of drugs and make good our escape! // FIXMIAMI: replace PRINT with PRINT_NOW
+PRINT_NOW ( CUB2_17 ) 10000 1 //Let us steal that van full of drugs and make good our escape! // SCFIX: replace PRINT with PRINT_NOW
 IF NOT IS_CHAR_DEAD cuban_attacker2 
 	PLAY_MISSION_AUDIO 2
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 	AND NOT IS_CHAR_DEAD cuban_attacker2 
 		WAIT 0
 		IF NOT IS_CAR_DEAD escape_car
-			PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // FIXMIAMI: fix Z coord
+			PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // SCFIX: fix Z coord
 		ENDIF
 	ENDWHILE
 	CLEAR_MISSION_AUDIO 2
 ELSE
 	CLEAR_MISSION_AUDIO 2	
 ENDIF
-CLEAR_THIS_PRINT CUB2_17 // FIXMIAMI
+CLEAR_THIS_PRINT CUB2_17 // SCFIX
 
 ALTER_WANTED_LEVEL_NO_DROP player1 2
 
@@ -2506,7 +2506,7 @@ final_wave_part1:
 WAIT 0
  
 IF NOT IS_CAR_DEAD escape_car
-	PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // FIXMIAMI: fix Z coord
+	PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // SCFIX: fix Z coord
 
 	IF blob_flag = 0
 		ADD_BLIP_FOR_CAR escape_car escape_car_blip
@@ -2514,7 +2514,7 @@ IF NOT IS_CAR_DEAD escape_car
 	ENDIF
 
 	IF IS_PLAYER_IN_CAR player1 escape_car
-		/* FIXMIAMI: removed, what was the point of this?
+		/* SCFIX: removed, what was the point of this?
 		IF timera < 15000
 			CLEAR_PRINTS 
 			PRINT ( CUB2_16 ) 5000 1 //Tommy, we have proved our manful bravery!
@@ -2564,7 +2564,7 @@ final_wave_part2:
 WAIT 0
 
 IF NOT IS_CAR_DEAD escape_car
-	PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // FIXMIAMI: fix Z coord
+	PLACE_OBJECT_RELATIVE_TO_CAR escape_car_drugs escape_car 0.0 -1.0 0.0 // SCFIX: fix Z coord
 	
 	IF IS_PLAYER_IN_CAR player1 escape_car
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player1 -1160.0 -605.9 10.7 10.0 10.0 10.0 TRUE
@@ -2618,7 +2618,7 @@ IF IS_CHAR_DEAD cuban_pickup6
 	MARK_CHAR_AS_NO_LONGER_NEEDED cuban_pickup6 
 ENDIF 
 
-IF body_count_cub2 > 0 // FIXMIAMI: was = 1
+IF body_count_cub2 > 0 // SCFIX: was = 1
 	GOSUB nutters
 ENDIF  
 GOTO final_wave_part2
@@ -2646,30 +2646,30 @@ PLAYER_MADE_PROGRESS 1
 REGISTER_MISSION_PASSED CUB_2
 START_NEW_SCRIPT cuban_mission3_loop
 flag_cuban_mission2_passed = 1
-// FIXMIAMI: START - moved here from cleanup, also not using SLIDE_OBJECT anymore
+// SCFIX: START - moved here from cleanup, also not using SLIDE_OBJECT anymore
 //closing gate
 SET_OBJECT_COORDINATES haitian_gate -1114.5 67.0 10.1
-// FIXMIAMI: END
+// SCFIX: END
 RETURN
 		
 
 
 // mission cleanup
 mission_cleanup_cuban2:
-// FIXMIAMI: START
+// SCFIX: START
 CLEAR_THIS_PRINT CUB2_04
 CLEAR_THIS_PRINT CUB2_05
 IF NOT IS_CHAR_DEAD target2
 	REMOVE_CHAR_ELEGANTLY target2
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 flag_player_on_mission = 0
 CLEAR_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1
-flag_is_on_cuban_mission = 0 // FIXMIAMI
+flag_is_on_cuban_mission = 0 // SCFIX
 SET_PLAYER_CONTROL player1 on
 //andy_has_control = 0 //reseting gate
 //closing gate
-/* FIXMIAMI: closing only if mission passed now
+/* SCFIX: closing only if mission passed now
 WHILE NOT SLIDE_OBJECT haitian_gate -1114.5 67.0 10.1 10.0 10.0 0.0 FALSE
 	WAIT 0
 ENDWHILE*/

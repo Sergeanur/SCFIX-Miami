@@ -169,7 +169,7 @@ mission_start_interiors:
 	START_NEW_SCRIPT interiors
 	//START_NEW_SCRIPT airport_security
 	//START_NEW_SCRIPT aport2_security
-	START_NEW_SCRIPT force_extra_colors_script // FIXMIAMI
+	START_NEW_SCRIPT force_extra_colors_script // SCFIX
 
 	MISSION_END
 }
@@ -1566,9 +1566,9 @@ interiors_inner:
 										IF flag_eject = 0
 											SET_AREA_VISIBLE VIS_MANSION
 											flag_player_in_mansion = 1
-											IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+											IF flag_ped_roads_off_in_finale = 0 // SCFIX
 												SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
-											ENDIF // FIXMIAMI
+											ENDIF // SCFIX
 											SWITCH_RUBBISH OFF
 											LOAD_SCENE -378.5 -560.03 19.0
 											SET_PLAYER_COORDINATES player1 -378.5 -560.0 19.0
@@ -1592,9 +1592,9 @@ interiors_inner:
 									IF flag_eject = 0
 										GOSUB outgoing
 										flag_player_in_mansion = 0
-										IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+										IF flag_ped_roads_off_in_finale = 0 // SCFIX
 											SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
-										ENDIF // FIXMIAMI
+										ENDIF // SCFIX
 										CLEAR_AREA -377.06 -545.43 17.0 1.0 FALSE
 										LOAD_SCENE -377.06 -545.43 17.0
 										SET_PLAYER_COORDINATES player1 -377.06 -545.43 16.0
@@ -1645,9 +1645,9 @@ interiors_inner:
 									IF flag_eject = 0
 										SET_AREA_VISIBLE VIS_MANSION
 										flag_player_in_mansion = 1
-										IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+										IF flag_ped_roads_off_in_finale = 0 // SCFIX
 											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
-										ENDIF // FIXMIAMI
+										ENDIF // SCFIX
 										SWITCH_RUBBISH OFF
 										LOAD_SCENE -329.24 -582.5 34.5
 										SET_PLAYER_COORDINATES player1 -329.24 -582.5 34.5
@@ -1669,9 +1669,9 @@ interiors_inner:
 								IF flag_eject = 0
 									GOSUB outgoing
 									flag_player_in_mansion = 0
-									IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+									IF flag_ped_roads_off_in_finale = 0 // SCFIX
 										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
-									ENDIF // FIXMIAMI
+									ENDIF // SCFIX
 									CLEAR_AREA -343.3 -572.8 36.0 1.0 FALSE
 									LOAD_SCENE -343.3 -572.8 36.0
 									//SET_PLAYER_COORDINATES player1 -338.738 -573.984 35.305
@@ -1724,9 +1724,9 @@ interiors_inner:
 									IF flag_eject = 0
 										SET_AREA_VISIBLE VIS_MANSION
 										flag_player_in_mansion = 1
-										IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+										IF flag_ped_roads_off_in_finale = 0 // SCFIX
 											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
-										ENDIF // FIXMIAMI
+										ENDIF // SCFIX
 										SWITCH_RUBBISH OFF
 										LOAD_SCENE -338.5 -578.8 10.6
 										SET_PLAYER_COORDINATES player1 -338.5 -578.8 10.6
@@ -1750,9 +1750,9 @@ interiors_inner:
 								IF flag_eject = 0
 									GOSUB outgoing
 									flag_player_in_mansion = 0
-									IF flag_ped_roads_off_in_finale = 0 // FIXMIAMI
+									IF flag_ped_roads_off_in_finale = 0 // SCFIX
 										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
-									ENDIF // FIXMIAMI
+									ENDIF // SCFIX
 									CLEAR_AREA -354.0 -586.0 10.6 1.0 FALSE
 									LOAD_SCENE -354.0 -586.0 10.6
 									SET_PLAYER_COORDINATES player1 -354.0 -586.0 10.6
@@ -1948,11 +1948,11 @@ RETURN
 interiors_cleanup:
 			
 	IF flag_interiors_cleanup = 0
-		// FIXMIAMI: START - wait until wasted/busted cam is over
+		// SCFIX: START - wait until wasted/busted cam is over
 		WHILE NOT IS_PLAYER_PLAYING player1
 			WAIT 0
 		ENDWHILE
-		// FIXMIAMI: END
+		// SCFIX: END
 
 		//SET_AREA_VISIBLE VIS_MAIN_MAP
 		SWITCH_RUBBISH ON
@@ -1982,7 +1982,7 @@ interiors_cleanup:
 		flag_player_in_shooting_range = 0
 		flag_player_in_apartment3c = 0
 		flag_player_in_mansion = 0
-		flag_player_in_bank = 0 // FIXMIAMI
+		flag_player_in_bank = 0 // SCFIX
 		SET_CAR_DENSITY_MULTIPLIER 1.0
 		flag_interiors_cleanup = 1
 	ENDIF
@@ -2691,7 +2691,7 @@ IF IS_PLAYER_PLAYING player1
 			IF counter_strip_cam = 1
 				SET_FIXED_CAMERA_POSITION 68.45 -1456.37 12.0 0.0 0.0 0.0
 				POINT_CAMERA_AT_POINT 66.0 -1454.5 10.5 JUMP_CUT
-				GOSUB play_stripper_line // FIXMIAMI
+				GOSUB play_stripper_line // SCFIX
 			ENDIF
 			IF counter_strip_cam = 2
 				SET_FIXED_CAMERA_POSITION 65.21 -1454.1 9.56 0.0 0.0 0.0
@@ -2788,7 +2788,7 @@ IF IS_PLAYER_PLAYING player1
 		SET_CAR_DENSITY_MULTIPLIER 0.1
 		SWITCH_RUBBISH OFF
 		flag_strip_asset_cutscene = 1
-		flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
+		flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
 		++ counter_60_percent
 		PLAYER_MADE_PROGRESS 1
 	ENDIF
@@ -3537,7 +3537,7 @@ IF IS_PLAYER_PLAYING player1
 ENDIF
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 play_stripper_line:
 LVAR_INT stripper_line
 GENERATE_RANDOM_INT_IN_RANGE 1 10 stripper_line
@@ -3588,7 +3588,7 @@ ENDWHILE
 
 RETURN
 
-force_extra_colors: // FIXMIAMI
+force_extra_colors: // SCFIX
 
 IF flag_player_in_malibu = 1
 	SET_EXTRA_COLOURS 1 FALSE
@@ -3638,7 +3638,7 @@ force_extra_colors_script:
 	WAIT 0
 	GOTO force_extra_colors_script
 
-// FIXMIAMI: END
+// SCFIX: END
 
 
 }

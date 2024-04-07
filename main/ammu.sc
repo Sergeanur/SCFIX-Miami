@@ -182,7 +182,7 @@ shop_ammu1_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
 															IF IS_SCORE_GREATER player1 99
 																IF ReturnedAmmo < 9999
@@ -242,7 +242,7 @@ shop_ammu1_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM ReturnedAmmo
 															IF IS_SCORE_GREATER player1 299
 																IF ReturnedAmmo < 9999
@@ -308,7 +308,7 @@ shop_ammu1_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF shotgun_in_stock = 1
 																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN ReturnedAmmo
 																IF IS_SCORE_GREATER player1 499
@@ -377,7 +377,7 @@ shop_ammu1_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF ruger_in_stock = 1
 																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_RUGER ReturnedAmmo
 																IF IS_SCORE_GREATER player1 999
@@ -439,7 +439,7 @@ shop_ammu1_inner:
 
 														GET_CHAR_ARMOUR scplayer players_armour
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF armour_in_stock = 1
 																IF IS_SCORE_GREATER player1 199
 																	IF players_armour < 100
@@ -638,7 +638,7 @@ shop_ammu2_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
 															IF IS_SCORE_GREATER player1 99
 																IF ReturnedAmmo < 9999
@@ -698,7 +698,7 @@ shop_ammu2_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 400 1000 1
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_UZI ReturnedAmmo
 															IF IS_SCORE_GREATER player1 399
 																IF ReturnedAmmo < 9999
@@ -765,7 +765,7 @@ shop_ammu2_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF stubby_in_stock = 1
 																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN ReturnedAmmo
 																IF IS_SCORE_GREATER player1 599
@@ -835,7 +835,7 @@ shop_ammu2_inner:
 															ENDIF
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF sniper_in_stock = 1
 																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE ReturnedAmmo
 																IF IS_SCORE_GREATER player1 1499
@@ -900,7 +900,7 @@ shop_ammu2_inner:
 															PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
 														ENDIF
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_GRENADE ReturnedAmmo
 																IF IS_SCORE_GREATER player1 299
 																	IF ReturnedAmmo < 9999
@@ -959,7 +959,7 @@ shop_ammu2_inner:
 
 														GET_CHAR_ARMOUR scplayer players_armour
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF armour_in_stock = 1
 																IF IS_SCORE_GREATER player1 199
 																	IF players_armour < 100
@@ -1171,7 +1171,7 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																IF python_in_stock = 1
 																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PYTHON ReturnedAmmo
 																	IF IS_SCORE_GREATER player1 1999
@@ -1242,7 +1242,7 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																IF mp5_in_stock = 1
 																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_MP5 ReturnedAmmo
 																	IF IS_SCORE_GREATER player1 2999
@@ -1313,7 +1313,7 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																IF spaz_in_stock = 1
 																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SPAS12_SHOTGUN ReturnedAmmo
 																	IF IS_SCORE_GREATER player1 3999
@@ -1383,7 +1383,7 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																IF M4_in_stock = 1
 																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_M4 ReturnedAmmo
 																	IF IS_SCORE_GREATER player1 4999
@@ -1453,7 +1453,7 @@ shop_ammu3_inner:
 																ENDIF
 															ENDIF
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																IF laser_in_stock = 1
 																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_LASERSCOPE ReturnedAmmo
 																	IF IS_SCORE_GREATER player1 5999
@@ -1511,7 +1511,7 @@ shop_ammu3_inner:
 
 															GET_CHAR_ARMOUR scplayer players_armour
 
-															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 																IF IS_SCORE_GREATER player1 199
 																	IF players_armour < 100
 																		ADD_ARMOUR_TO_PLAYER Player1 200
@@ -1698,7 +1698,7 @@ shop_hardware_inner1:
 														cost_of_tool = 10 
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 9
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
@@ -1749,7 +1749,7 @@ shop_hardware_inner1:
 														cost_of_tool = 20
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 19
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
@@ -1800,7 +1800,7 @@ shop_hardware_inner1:
 														cost_of_tool = 50
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 49
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
@@ -1857,7 +1857,7 @@ shop_hardware_inner1:
 															GOSUB you_have_a_weapon
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF bbat_in_stock = 1
 																IF IS_SCORE_GREATER player1 79
 																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
@@ -1919,7 +1919,7 @@ shop_hardware_inner1:
 															GOSUB you_have_a_weapon
 														ENDIF
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF machete_in_stock	= 1
 																IF IS_SCORE_GREATER player1 99
 																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
@@ -2096,7 +2096,7 @@ shop_hardware2_inner:
 														cost_of_tool = 10
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 9
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
@@ -2147,7 +2147,7 @@ shop_hardware2_inner:
 														cost_of_tool = 20
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 19
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
@@ -2198,7 +2198,7 @@ shop_hardware2_inner:
 														cost_of_tool = 50
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 49
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
@@ -2248,7 +2248,7 @@ shop_hardware2_inner:
 														cost_of_tool = 90
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 89
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KNIFE 0
@@ -2305,7 +2305,7 @@ shop_hardware2_inner:
 															GOSUB you_have_a_weapon
 														ENDIF
 													
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF katana_in_stock = 1
 																IF IS_SCORE_GREATER player1 299
 																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
@@ -2487,7 +2487,7 @@ shop_hardware3_inner:
 														cost_of_tool = 10
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 9
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
@@ -2538,7 +2538,7 @@ shop_hardware3_inner:
 														cost_of_tool = 20
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 19
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
@@ -2589,7 +2589,7 @@ shop_hardware3_inner:
 														cost_of_tool = 50
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 49
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
@@ -2639,7 +2639,7 @@ shop_hardware3_inner:
 														cost_of_tool = 100
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 99
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
@@ -2689,7 +2689,7 @@ shop_hardware3_inner:
 														cost_of_tool = 500
 														GOSUB you_have_a_weapon
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 															IF IS_SCORE_GREATER player1 499
 																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
 																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CHAINSAW 0
@@ -2877,7 +2877,7 @@ IF IS_PLAYER_PLAYING player1
 	ADD_ONE_OFF_SOUND playera_x playera_y playera_z SOUND_AMMUNATION_BUY_WEAPON_DENIED 
 ENDIF
 
-WHILE IS_BUTTON_PRESSED	PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+WHILE IS_BUTTON_PRESSED	PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 	WAIT 0
 ENDWHILE
 
@@ -2890,7 +2890,7 @@ IF IS_PLAYER_PLAYING player1
 	ADD_ONE_OFF_SOUND playera_x playera_y playera_z SOUND_AMMUNATION_BUY_WEAPON
 ENDIF
 
-WHILE IS_BUTTON_PRESSED	PAD1 PAD_BTN_ACCEPT // FIXMIAMI: use button variables instead of copypasted code for JP version
+WHILE IS_BUTTON_PRESSED	PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
 	WAIT 0
 ENDWHILE
 
@@ -2929,9 +2929,9 @@ check_dpad_state1:
 		dpad_stateX = 0
 	ENDIF
 
-	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 			
-		WHILE IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+		WHILE IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 			WAIT 0
 			
 		ENDWHILE
@@ -2985,9 +2985,9 @@ check_dpad_state1_2:
 		dpad_stateX = 0
 	ENDIF
 
-	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 		
-		WHILE NOT IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+		WHILE NOT IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 			WAIT 0
 			
 		ENDWHILE
@@ -3048,9 +3048,9 @@ check_dpad_state2:
 		dpad_stateX = 0
 	ENDIF
 
-	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+	IF IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 		
-		WHILE IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // FIXMIAMI: use button variables instead of copypasted code for JP version
+		WHILE IS_BUTTON_PRESSED PAD1 PAD_BTN_CANCEL // SCFIX: use button variables instead of copypasted code for JP version
 			WAIT 0
 			
 		ENDWHILE

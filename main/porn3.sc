@@ -453,7 +453,7 @@ CREATE_CAR sparrow -61.7 1019.0 9.9 fake_heli
 SET_CAR_HEADING fake_heli 356.2 
 ADD_BLIP_FOR_CAR fake_heli fake_heli_blip 
 
-// FIXMIAMI - START
+// SCFIX - START
 LOAD_MISSION_AUDIO 1 CAML
 LOAD_MISSION_AUDIO 2 CAMR
 WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -466,7 +466,7 @@ ENDWHILE
 cam_audio2 = 1
 
 START_NEW_SCRIPT load_camera_audio_loop
-// FIXMIAMI - END
+// SCFIX - END
 
 DO_FADE 1500 FADE_IN
 
@@ -840,13 +840,13 @@ POINT_CAMERA_AT_POINT 429.69 57.30 24.51 JUMP_CUT
 timera = 0
 
 waiting_for_candy_to_reach_alex:
-// FIXMIAMI: START
+// SCFIX: START
 TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM
 CLEAR_MISSION_AUDIO 1
 CLEAR_MISSION_AUDIO 2
 cam_audio1 = 0
 cam_audio2 = 0
-// FIXMIAMI: END
+// SCFIX: END
 WAIT 0
 
 IF timera > 12000
@@ -954,7 +954,7 @@ IF cam_audio2 = 0
 	cam_audio2 = 1
 ENDIF
 
-START_NEW_SCRIPT load_camera_audio_loop // FIXMIAMI
+START_NEW_SCRIPT load_camera_audio_loop // SCFIX
 
 GET_PLAYER_COORDINATES player1 player_x player_y player_z
 LOAD_SCENE player_x player_y player_z 
@@ -1028,12 +1028,12 @@ IF NOT IS_CHAR_DEAD congressman
 			SET_CHAR_HEALTH doorman_2 150    
 		ENDIF 
 		IF speech_played_porn3 = 0
-			// FIXMIAMI - START: wait till camera sound is done
+			// SCFIX - START: wait till camera sound is done
 			TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM
 			CLEAR_MISSION_AUDIO 1
 			CLEAR_MISSION_AUDIO 2
 			cam_audio2 = 0
-			// FIXMIAMI - END: wait till camera sound is done
+			// SCFIX - END: wait till camera sound is done
 
 			cam_audio1 = 0
 			LOAD_MISSION_AUDIO 1 PORN3_3
@@ -1055,7 +1055,7 @@ IF NOT IS_CHAR_DEAD congressman
 				ENDWHILE 
 				cam_audio1 = 1
 			ENDIF
-			// FIXMIAMI - START
+			// SCFIX - START
 			IF cam_audio2 = 0
 				LOAD_MISSION_AUDIO 2 CAMR
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 2
@@ -1063,8 +1063,8 @@ IF NOT IS_CHAR_DEAD congressman
 				ENDWHILE 
 				cam_audio2 = 1
 			ENDIF
-			// FIXMIAMI - END
-			START_NEW_SCRIPT load_camera_audio_loop // FIXMIAMI
+			// SCFIX - END
+			START_NEW_SCRIPT load_camera_audio_loop // SCFIX
 			REMOVE_BLIP pic_blip 
 			speech_played_porn3 = 1
 		ENDIF
@@ -1211,12 +1211,12 @@ IF NOT IS_CHAR_DEAD lookoutleader
 	IF lookoutleader_moved = 1
 		IF IS_CHAR_ON_SCREEN lookoutleader
 			IF speech_played_porn3 = 1
-				// FIXMIAMI - START: wait till camera sound is done
+				// SCFIX - START: wait till camera sound is done
 				TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM
 				CLEAR_MISSION_AUDIO 1
 				CLEAR_MISSION_AUDIO 2
 				cam_audio2 = 0
-				// FIXMIAMI - END: wait till camera sound is done
+				// SCFIX - END: wait till camera sound is done
 				cam_audio1 = 0
 				LOAD_MISSION_AUDIO 1 PORN3_4
 				WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1237,7 +1237,7 @@ IF NOT IS_CHAR_DEAD lookoutleader
 					ENDWHILE 
 					cam_audio1 = 1
 				ENDIF
-				// FIXMIAMI - START
+				// SCFIX - START
 				IF cam_audio2 = 0
 					LOAD_MISSION_AUDIO 2 CAMR
 					WHILE NOT HAS_MISSION_AUDIO_LOADED 2
@@ -1245,9 +1245,9 @@ IF NOT IS_CHAR_DEAD lookoutleader
 					ENDWHILE 
 					cam_audio2 = 1
 				ENDIF
-				// FIXMIAMI - END
+				// SCFIX - END
 				speech_played_porn3 = 2	
-				START_NEW_SCRIPT load_camera_audio_loop // FIXMIAMI
+				START_NEW_SCRIPT load_camera_audio_loop // SCFIX
 			ENDIF
 		ENDIF
 	ENDIF
@@ -1390,7 +1390,7 @@ RETURN
 // mission cleanup
 mission_cleanup_porn3:
 
-TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM // FIXMIAMI
+TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM // SCFIX
 flag_player_on_mission = 0
 SET_PLAYER_CONTROL player1 on
 help_cam = 3
@@ -1564,18 +1564,18 @@ IF timerb > 280
 						cam_audio2 = 0
 						
 						timerb = 0
-						IF camera_film = 1 // FIXMIAMI
-							TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM // FIXMIAMI
-							IF HAS_MISSION_AUDIO_LOADED 1 // FIXMIAMI
+						IF camera_film = 1 // SCFIX
+							TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME PRN3CAM // SCFIX
+							IF HAS_MISSION_AUDIO_LOADED 1 // SCFIX
 								WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 									WAIT 0
 								ENDWHILE
-							ENDIF // FIXMIAMI
-							IF HAS_MISSION_AUDIO_LOADED 2 // FIXMIAMI
+							ENDIF // SCFIX
+							IF HAS_MISSION_AUDIO_LOADED 2 // SCFIX
 								WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 									WAIT 0
 								ENDWHILE
-							ENDIF // FIXMIAMI
+							ENDIF // SCFIX
 						ENDIF
 					ENDIF
 				ENDIF

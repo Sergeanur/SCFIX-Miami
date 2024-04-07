@@ -7,7 +7,7 @@ MISSION_START
 
 {
 	
-// FIXMIAMI: START - SSU fix
+// SCFIX: START - SSU fix
 
 GOSUB mission_start_taxi_cut
 
@@ -19,31 +19,31 @@ GOSUB mission_cleanup_taxi_cut
 
 MISSION_END
 
-// FIXMIAMI: END
+// SCFIX: END
 
 LVAR_INT cs_disp cs_cdrivra cs_cdrivrb kaufman_cab
-LVAR_INT flag_taxicut_set1 // FIXMIAMI
+LVAR_INT flag_taxicut_set1 // SCFIX
 
 mission_start_taxi_cut:
 
 flag_player_on_mission = 1
 //skip_flag = 0
 
-flag_taxicut_set1 = 0 // FIXMIAMI
+flag_taxicut_set1 = 0 // SCFIX
 
 DELETE_OBJECT taxi_closed
 
 SCRIPT_NAME TAXCUT
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
 LOAD_MISSION_TEXT TAXICUT
 
-GOTO taxicut_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO taxicut_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT taxibuyX taxibuyY taxibuyZ RADAR_SPRITE_PROPERTY taxibuy_blip
-taxicut_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+taxicut_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 SET_EVERYONE_IGNORE_PLAYER player1 TRUE
 SET_PLAYER_CONTROL player1 OFF
@@ -342,7 +342,7 @@ UNLOAD_SPECIAL_CHARACTER 3
 UNLOAD_SPECIAL_CHARACTER 4
 MARK_MODEL_AS_NO_LONGER_NEEDED kaufman
 
-DELETE_CAR kaufman_cab // FIXMIAMI: delete cutscene car after the cutscene
+DELETE_CAR kaufman_cab // SCFIX: delete cutscene car after the cutscene
 
 flag_taxicut_mission1_passed = 1
 
@@ -360,10 +360,10 @@ POINT_CAMERA_AT_POINT -1017.904 207.165 15.090 JUMP_CUT
 PLAY_MISSION_PASSED_TUNE 1
 
 PRINT_WITH_NUMBER_BIG TAXIBUY taxibuy_price 7000 6 //
-GOSUB taxicut_set1 // FIXMIAMI: moved stuff into a subroutine
+GOSUB taxicut_set1 // SCFIX: moved stuff into a subroutine
 
 WAIT 7000
-// FIXMIAMI: START
+// SCFIX: START
 SET_PLAYER_CONTROL player1 ON
 SWITCH_WIDESCREEN OFF
 SET_CAMERA_BEHIND_PLAYER
@@ -378,9 +378,9 @@ IF flag_taxicut_set1 = 0
 ENDIF
 RETURN
 
-// FIXMIAMI: END
+// SCFIX: END
 
-mission_cleanup_taxi_cut: // FIXMIAMI
+mission_cleanup_taxi_cut: // SCFIX
 flag_player_on_mission = 0
 
 GET_GAME_TIMER timer_mobile_start
@@ -390,7 +390,7 @@ REMOVE_BLIP taxiwar_contact_blip
 ADD_SPRITE_BLIP_FOR_CONTACT_POINT taxiwarX taxiwarY taxiwarZ the_taxiwar_blip taxiwar_contact_blip
 
 START_NEW_SCRIPT taxiwar_save_loop
-START_NEW_SCRIPT taxiwar_mission1_loop // FIXMIAMI: moved here from main.sc
+START_NEW_SCRIPT taxiwar_mission1_loop // SCFIX: moved here from main.sc
 PLAYER_MADE_PROGRESS 1
 RESTORE_CAMERA_JUMPCUT
 
@@ -399,8 +399,8 @@ SET_ZONE_PED_INFO KAUFCAB NIGHT (10) 0 0 0 0 0 0 1000 0 0 0
 SWITCH_PED_ROADS_ON -1012.06 181.561 0.0 -982.06 216.561 30.0//TAXIFIRM
 
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
-RETURN // FIXMIAMI
+//MISSION_END // SCFIX: moved up
+RETURN // SCFIX
 
 
 }

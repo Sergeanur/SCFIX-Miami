@@ -31,7 +31,7 @@ CREATE_PLAYER 0 83.0 -849.8 9.3 player1 //Miami Ocean Drive
 
 GET_PLAYER_CHAR player1 scplayer 							   
 
-//FIXMIAMI: START
+//SCFIX: START
 VAR_INT PAD_BTN_ACCEPT PAD_BTN_CANCEL
 PAD_BTN_ACCEPT = CROSS
 PAD_BTN_CANCEL = TRIANGLE
@@ -39,7 +39,7 @@ IF IS_JAPANESE_GAME
 	PAD_BTN_ACCEPT = CIRCLE
 	PAD_BTN_CANCEL = CROSS
 ENDIF
-//FIXMIAMI: END
+//SCFIX: END
 
 LOAD_AND_LAUNCH_MISSION inital.sc
 //LOAD_AND_LAUNCH_MISSION_EXCLUSIVE inital.sc
@@ -141,7 +141,7 @@ SWITCH_CAR_GENERATOR gen_car149 0
 CREATE_CAR_GENERATOR -1681.2 -103.7 14.7 180.0 hunter -1 -1 0 0 0 0 10000 gen_car150 //at army barracks
 SWITCH_CAR_GENERATOR gen_car150 0
 
-CREATE_CAR_GENERATOR -70.3 -1607.0 12.7 0.0 hunter -1 -1 0 0 0 0 10000 south_beach_hunter //at south beach // FIXMIAMI: fixed position a bit
+CREATE_CAR_GENERATOR -70.3 -1607.0 12.7 0.0 hunter -1 -1 0 0 0 0 10000 south_beach_hunter //at south beach // SCFIX: fixed position a bit
 SWITCH_CAR_GENERATOR south_beach_hunter 0
 
 // *************************************LOCATE BLOB VARIABLE STUFF****************************
@@ -282,11 +282,11 @@ VAR_INT flag_baron_mission4_passed
 VAR_INT flag_baron_mission5_passed
 VAR_INT start_baron1_script_flag
 
-// FIXMIAMI: START
+// SCFIX: START
 VAR_INT fastest_boat_col1 fastest_boat_col2
 fastest_boat_col1 = -1
 fastest_boat_col2 = -1
-// FIXMIAMI: END
+// SCFIX: END
 
 //Kent missions
 VAR_INT kent_contact_blip
@@ -1301,8 +1301,8 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 hotelX hotelY hotelZ 1.4 1.8 1.5 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX
 					SWITCH_WIDESCREEN ON
 					SET_FIXED_CAMERA_POSITION 219.726 -1282.485 12.530 0.0 0.0 0.0
 					POINT_CAMERA_AT_POINT 218.872 -1282.988 12.392 JUMP_CUT
@@ -1354,8 +1354,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 lawyerX lawyerY lawyerZ 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB lawyer_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( LAW_1 ) 15000 2 //"Lawyer mission 1"
@@ -1505,8 +1505,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 generalX generalY generalZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB general_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COL_1 ) 15000 2 //"general mission 1"
@@ -1540,8 +1540,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 generalX generalY generalZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB general_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COL_2 ) 15000 2 //"general mission 2"
@@ -1575,8 +1575,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 generalX generalY generalZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB general_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COL_3 ) 15000 2 //"general mission 3"
@@ -1611,8 +1611,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 generalX generalY generalZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB general_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COL_4 ) 15000 2 //"general mission 4"
@@ -1646,8 +1646,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 generalX generalY generalZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB general_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COL_5 ) 15000 2 //"general mission 5"
@@ -1686,8 +1686,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 baronX baronY baronZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB baron_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COK_1 ) 15000 2 //"baron mission 1"
@@ -1723,8 +1723,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 baronX baronY baronZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB baron_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COK_2 ) 15000 2 //"baron mission 2"
@@ -1759,8 +1759,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 baronX baronY baronZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB baron_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COK_3 ) 15000 2 //"baron mission 3"
@@ -1796,8 +1796,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 baronX baronY baronZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB baron_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( COK_4 ) 15000 2 //"baron mission 4"
@@ -1872,8 +1872,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 491.0 -77.7 10.4 2.5 2.5 2.5 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB kent_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( KENT_1 ) 15000 2 //"kent mission 1"
@@ -1911,8 +1911,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 sergioX sergioY sergioZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB make_player_safe
 					PRINT_BIG ( TEX_1 ) 15000 2 //"sergio mission 1"
 					GOSUB get_fading_status
@@ -1947,8 +1947,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 sergioX sergioY sergioZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB make_player_safe
 					PRINT_BIG ( TEX_3 ) 15000 2 //"sergio mission 2"
 					GOSUB get_fading_status
@@ -1983,8 +1983,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 sergioX sergioY sergioZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB make_player_safe
 					PRINT_BIG ( TEX_2 ) 15000 2 //"sergio mission 3"
 					GOSUB get_fading_status
@@ -2023,8 +2023,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bankjobX bankjobY bankjobZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB bankjob_script_cut 
 					GOSUB make_player_safe
 					PRINT_BIG ( BANK_1 ) 15000 2 //"bankjob mission 1"
@@ -2059,8 +2059,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bankjobX bankjobY bankjobZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB bankjob_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( BANK_2 ) 15000 2 //"bankjob mission 2"
@@ -2097,8 +2097,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bankjobX bankjobY bankjobZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB bankjob_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( BANK_3 ) 15000 2 //"bankjob mission 3"
@@ -2134,8 +2134,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bankjobX bankjobY bankjobZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB bankjob_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( BANK_4 ) 15000 2 //"bankjob mission 4"
@@ -2218,8 +2218,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 philX philY philZ 1.5 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB phil_script_cut 
 					GOSUB make_player_safe
 					PRINT_BIG ( PHIL_1 ) 15000 2 //"phil mission 1"
@@ -2254,8 +2254,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 philX philY philZ 1.5 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB phil_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( PHIL_2 ) 15000 2 //"phil mission 2"
@@ -2293,8 +2293,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 pornX pornY pornZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB porn_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( PORN_1 ) 15000 2 //"porn mission 1"
@@ -2329,8 +2329,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 pornX pornY pornZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB porn_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( PORN_2 ) 15000 2 //"porn mission 2"
@@ -2366,8 +2366,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 pornX pornY pornZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB porn_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( PORN_3 ) 15000 2 //"porn mission 3"
@@ -2402,8 +2402,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 pornX pornY pornZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB porn_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( PORN_4 ) 15000 2 //"porn mission 4"
@@ -2441,8 +2441,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 -378.3 -579.8 24.5 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB make_player_safe
 					PRINT_BIG ( BUD_1 ) 15000 2 //"protect mission 1"
 					GOSUB get_fading_status
@@ -2477,8 +2477,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 -397.4 -561.3 18.7 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB make_player_safe
 					PRINT_BIG ( BUD_2 ) 15000 2 //"protect mission 2"
 				    GOSUB get_fading_status
@@ -2513,8 +2513,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 -348.5 -541.8 16.4 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB make_player_safe
 					PRINT_BIG ( BUD_3 ) 15000 2 //"protect mission 3"
 					GOSUB get_fading_status
@@ -2553,8 +2553,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 counterX counterY counterZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB counter_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CNT_1 ) 15000 2 //"counter mission 1"
@@ -2591,8 +2591,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 counterX counterY counterZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB counter_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CNT_2 ) 15000 2 //"counter mission 2"
@@ -2625,7 +2625,7 @@ print_buy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED print_works_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro1.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2651,7 +2651,7 @@ property_car_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED carbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1
 					SET_FADING_COLOUR 0 0 0
 					DO_FADE 1500 FADE_OUT
@@ -2683,7 +2683,7 @@ pornbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED pornbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro2.sc
 					TERMINATE_THIS_SCRIPT	
 				ENDIF
@@ -2709,14 +2709,14 @@ icebuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED icebuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1
 					SET_FADING_COLOUR 0 0 0
 					DO_FADE 1500 FADE_OUT
 					SWITCH_STREAMING OFF
 					PRINT_BIG CHERRYP 6000 2 //"CHERRY POPPER ICECREAMS"
 					GOSUB get_fading_status
-					//START_NEW_SCRIPT icecream_mission1_loop // FIXMIAMI: moved to icecut.sc
+					//START_NEW_SCRIPT icecream_mission1_loop // SCFIX: moved to icecut.sc
 					LOAD_AND_LAUNCH_MISSION icecut.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2742,14 +2742,14 @@ taxibuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED taxibuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1
 					SET_FADING_COLOUR 0 0 0
 					DO_FADE 1500 FADE_OUT
 					SWITCH_STREAMING OFF
 					PRINT_BIG KAUFCAB 6000 2 //"Taxi Firm purchased: $ 15000"
 					GOSUB get_fading_status
-					//START_NEW_SCRIPT taxiwar_mission1_loop // FIXMIAMI: moved to taxicut1.sc now
+					//START_NEW_SCRIPT taxiwar_mission1_loop // SCFIX: moved to taxicut1.sc now
 					LOAD_AND_LAUNCH_MISSION taxicut.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2775,7 +2775,7 @@ bankbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED bankbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro3.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2801,7 +2801,7 @@ boatbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED boatbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1
 					SET_FADING_COLOUR 0 0 0
 					DO_FADE 1500 FADE_OUT
@@ -2835,7 +2835,7 @@ strpbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED strpbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro4.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2861,7 +2861,7 @@ nbmnbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED nbmnbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro5.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2887,7 +2887,7 @@ lnkvbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED lnkvbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro6.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2914,7 +2914,7 @@ hycobuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED hycobuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro7.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2941,7 +2941,7 @@ ochebuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED ochebuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro8.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2968,7 +2968,7 @@ washbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED washbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro9.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -2995,7 +2995,7 @@ vcptbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED vcptbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro10.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -3022,7 +3022,7 @@ skumbuy_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF HAS_PICKUP_BEEN_COLLECTED skumbuy_pickup
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION buypro11.sc
 					TERMINATE_THIS_SCRIPT
 				ENDIF
@@ -3059,8 +3059,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 counterX counterY counterZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB counter_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CAP_1 ) 15000 2 //"finale mission 1"
@@ -3098,8 +3098,8 @@ WAIT mission_trigger_wait_time
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
 					IF IS_SCORE_GREATER	player1 1000
-						flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-						MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+						flag_player_on_mission = 1 // SCFIX: paranoid set
+						MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 						GOSUB make_player_safe
 						PRINT_BIG ( FIN_1 ) 15000 2 //"finale mission 2"
 						GOSUB get_fading_status
@@ -3373,8 +3373,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bikersX bikersY bikersZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB biker_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( BIKE_1 ) 15000 2 //"bikers mission 1"
@@ -3409,8 +3409,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bikersX bikersY bikersZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB biker_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( BIKE_2 ) 15000 2 //"bikers mission 2"
@@ -3445,8 +3445,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 bikersX bikersY bikersZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB biker_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( BIKE_3 ) 15000 2 //"bikers mission 3"
@@ -3484,9 +3484,9 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 cubanX cubanY cubanZ 2.0 2.2 3.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
-					SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
+					SET_AREA_VISIBLE VIS_MAIN_MAP // SCFIX: you could start the mission while being in the cafe
 					GOSUB cuban_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CUB_1 ) 15000 2 //"cuban mission 1"
@@ -3522,9 +3522,9 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 cubanX cubanY cubanZ 2.0 2.2 3.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
-					SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
+					SET_AREA_VISIBLE VIS_MAIN_MAP // SCFIX: you could start the mission while being in the cafe
 					GOSUB cuban_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CUB_2 ) 15000 2 //"cuban mission 2"
@@ -3560,9 +3560,9 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 cubanX cubanY cubanZ 2.0 2.2 3.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
-					SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
+					SET_AREA_VISIBLE VIS_MAIN_MAP // SCFIX: you could start the mission while being in the cafe
 					GOSUB cuban_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CUB_3 ) 15000 2 //"cuban mission 3"
@@ -3596,14 +3596,14 @@ WAIT 0
 	
 	IF IS_PLAYER_PLAYING player1
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 cubanX cubanY cubanZ 2.0 2.2 3.0 FALSE
-			/* FIXMIAMI: remove german censorshit
+			/* SCFIX: remove german censorshit
 			IF IS_GERMAN_GAME
 				IF flag_haitian_mission2_passed = 1
 					IF flag_player_on_mission = 0
 						IF CAN_PLAYER_START_MISSION player1
-							flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-							MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
-							SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
+							flag_player_on_mission = 1 // SCFIX: paranoid set
+							MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
+							SET_AREA_VISIBLE VIS_MAIN_MAP // SCFIX: you could start the mission while being in the cafe
 							GOSUB cuban_script_cut
 							GOSUB make_player_safe
 							PRINT_BIG ( CUB_4 ) 15000 2 //"cuban mission 4"
@@ -3625,9 +3625,9 @@ WAIT 0
 				IF flag_haitian_mission3_passed = 1
 					IF flag_player_on_mission = 0
 						IF CAN_PLAYER_START_MISSION player1
-							flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-							MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
-							SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
+							flag_player_on_mission = 1 // SCFIX: paranoid set
+							MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
+							SET_AREA_VISIBLE VIS_MAIN_MAP // SCFIX: you could start the mission while being in the cafe
 							GOSUB cuban_script_cut
 							GOSUB make_player_safe
 							PRINT_BIG ( CUB_4 ) 15000 2 //"cuban mission 4"
@@ -3644,7 +3644,7 @@ WAIT 0
 						ENDIF
 					ENDWHILE
 				ENDIF
-			//ENDIF // FIXMIAMI: removed
+			//ENDIF // SCFIX: removed
 		ENDIF
 	ENDIF
 	
@@ -3676,8 +3676,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 haitianX haitianY haitianZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB haitian_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( HAT_1 ) 15000 2 //"haitian mission 1"
@@ -3713,8 +3713,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 haitianX haitianY haitianZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB haitian_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( HAT_2 ) 15000 2 //"haitian mission 2"
@@ -3750,8 +3750,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 haitianX haitianY haitianZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB haitian_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( HAT_3 ) 15000 2 //"haitian mission 3"
@@ -3790,8 +3790,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 rockX rockY rockZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB rock_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( ROCK_1 ) 15000 2 //"rock mission 1"
@@ -3827,8 +3827,8 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 rockX rockY rockZ 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
+					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB rock_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( ROCK_2 ) 15000 2 //"rock mission 2"
@@ -3865,8 +3865,8 @@ WAIT mission_trigger_wait_time
 			IF flag_bikers_mission3_passed = 1
 				IF flag_player_on_mission = 0
 					IF CAN_PLAYER_START_MISSION player1
-						flag_player_on_mission = 1 // FIXMIAMI: paranoid set
-						MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+						flag_player_on_mission = 1 // SCFIX: paranoid set
+						MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 						GOSUB rock_script_cut
 						GOSUB make_player_safe
 						PRINT_BIG ( ROCK_3 ) 15000 2 //"rock mission 3"
@@ -4265,7 +4265,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 taxiwarX taxiwarY taxiwarZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
 					been_in_a_taxi_before = 1
 					GOSUB taxiwar_script_cut
 					PRINT_BIG ( TAXI_1 ) 15000 2 //"taxiwar mission 1"
@@ -4322,7 +4322,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 taxiwarX taxiwarY taxiwarZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
 					been_in_a_taxi_before = 1
 					GOSUB taxiwar_script_cut
 					PRINT_BIG ( TAXI_2 ) 15000 2 //"taxiwar mission 2"
@@ -4376,7 +4376,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 taxiwarX taxiwarY taxiwarZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
+					flag_player_on_mission = 1 // SCFIX: paranoid set
 					been_in_a_taxi_before = 1
 					GOSUB taxiwar_script_cut
 
@@ -4449,11 +4449,11 @@ SCRIPT_NAME	taxi_l
 						IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 								WAIT 0
-								// FIXMIAMI: START
+								// SCFIX: START
 								IF flag_player_on_mission = 1
 									GOTO taxi_mission1_loop
 								ENDIF
-								// FIXMIAMI: END
+								// SCFIX: END
 								IF NOT IS_PLAYER_PLAYING player1
 								OR NOT IS_PLAYER_IN_TAXI player1
 									GOTO taxi_mission1_loop
@@ -4463,7 +4463,7 @@ SCRIPT_NAME	taxi_l
 							PRINT_BIG ( TAXI_M ) 6000 5
 							WAIT 0
 							IF flag_taxi1_mission_launched = 0
-							AND flag_player_on_mission = 0 // FIXMIAMI
+							AND flag_player_on_mission = 0 // SCFIX
 								LOAD_AND_LAUNCH_MISSION taxi1.sc	//	this doesn't have a fade - maybe should always be loaded?
 								flag_taxi1_mission_launched = 1
 							ENDIF
@@ -4472,11 +4472,11 @@ SCRIPT_NAME	taxi_l
 						IF IS_BUTTON_PRESSED PAD1 SQUARE
 							WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 								WAIT 0
-								// FIXMIAMI: START
+								// SCFIX: START
 								IF flag_player_on_mission = 1
 									GOTO taxi_mission1_loop
 								ENDIF
-								// FIXMIAMI: END
+								// SCFIX: END
 								IF NOT IS_PLAYER_PLAYING player1
 								OR NOT IS_PLAYER_IN_TAXI player1
 									GOTO taxi_mission1_loop
@@ -4486,7 +4486,7 @@ SCRIPT_NAME	taxi_l
 							PRINT_BIG ( TAXI_M ) 6000 5
 							WAIT 0
 							IF flag_taxi1_mission_launched = 0
-							AND flag_player_on_mission = 0 // FIXMIAMI
+							AND flag_player_on_mission = 0 // SCFIX
 								LOAD_AND_LAUNCH_MISSION taxi1.sc	//	this doesn't have a fade - maybe should always be loaded?
 								flag_taxi1_mission_launched = 1
 							ENDIF
@@ -4542,18 +4542,18 @@ SCRIPT_NAME ambula
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
-							// FIXMIAMI: START
+							// SCFIX: START
 							IF flag_player_on_mission = 1
 								GOTO ambulance_mission_loop_inner
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player1
 							OR NOT IS_PLAYER_IN_MODEL player1 ambulan
 								GOTO ambulance_mission_loop
 							ENDIF
 						ENDWHILE
 
-						flag_player_on_mission = 1 // FIXMIAMI
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( AMBUL_M ) 6000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION ambulance.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -4563,18 +4563,18 @@ SCRIPT_NAME ambula
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
-							// FIXMIAMI: START
+							// SCFIX: START
 							IF flag_player_on_mission = 1
 								GOTO ambulance_mission_loop_inner
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player1
 							OR NOT IS_PLAYER_IN_MODEL player1 ambulan
 								GOTO ambulance_mission_loop
 							ENDIF
 						ENDWHILE
 
-						flag_player_on_mission = 1 // FIXMIAMI
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( AMBUL_M ) 6000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION ambulance.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -4629,18 +4629,18 @@ SCRIPT_NAME fire
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
-							// FIXMIAMI: START
+							// SCFIX: START
 							IF flag_player_on_mission = 1
 								GOTO fire_truck_mission_loop_inner
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player1
 							OR NOT IS_PLAYER_IN_MODEL player1 firetruk
 								GOTO fire_truck_mission_loop
 							ENDIF
 						ENDWHILE
 
-						flag_player_on_mission = 1 // FIXMIAMI
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( FIRE_M ) 6000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION firetruck.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -4650,18 +4650,18 @@ SCRIPT_NAME fire
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
-							// FIXMIAMI: START
+							// SCFIX: START
 							IF flag_player_on_mission = 1
 								GOTO fire_truck_mission_loop_inner
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player1
 							OR NOT IS_PLAYER_IN_MODEL player1 firetruk
 								GOTO fire_truck_mission_loop
 							ENDIF
 						ENDWHILE
 
-						flag_player_on_mission = 1 // FIXMIAMI
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( FIRE_M ) 6000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION firetruck.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -4717,11 +4717,11 @@ SCRIPT_NAME cop
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
-							// FIXMIAMI: START
+							// SCFIX: START
 							IF flag_player_on_mission = 1
 								GOTO cop_mission_loop
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player1
 								GOTO cop_mission_loop
 							ENDIF
@@ -4742,7 +4742,7 @@ SCRIPT_NAME cop
 							ENDIF
 						ENDIF
 
-						flag_player_on_mission = 1 // FIXMIAMI
+						flag_player_on_mission = 1 // SCFIX
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION copcar.sc
 						been_in_a_copcar_before = 1
@@ -4751,11 +4751,11 @@ SCRIPT_NAME cop
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
-							// FIXMIAMI: START
+							// SCFIX: START
 							IF flag_player_on_mission = 1
 								GOTO cop_mission_loop
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player1
 								GOTO cop_mission_loop
 							ENDIF
@@ -4776,7 +4776,7 @@ SCRIPT_NAME cop
 							ENDIF
 						ENDIF
 
-						flag_player_on_mission = 1 // FIXMIAMI
+						flag_player_on_mission = 1 // SCFIX
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION copcar.sc
 						been_in_a_copcar_before = 1
@@ -4916,7 +4916,7 @@ races_loop_inner:
 		IF flag_player_on_mission = 0
 			IF CAN_PLAYER_START_MISSION player1
 				IF LOCATE_PLAYER_ON_FOOT_3D player1 -967.7050 -827.3005 5.7702 1.5 2.0 2.0 FALSE
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					WAIT 0
 					LOAD_AND_LAUNCH_MISSION races.sc
 				ENDIF
@@ -4951,7 +4951,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 icecreamX icecreamY icecreamZ 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG ( CREAM ) 15000 2 //"icecream mission 1"
 					SET_PLAYER_CONTROL player1 OFF
 					SWITCH_WIDESCREEN ON		 
@@ -4999,7 +4999,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 heli1X heli1Y heli1Z 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG HELI_1 15000 5 //"heli mission 1"
 					LOAD_AND_LAUNCH_MISSION heli1.sc
 				ENDIF
@@ -5044,7 +5044,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 heli2X heli2Y heli2Z 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG HELI_2 15000 5 //"heli mission 2"
 					LOAD_AND_LAUNCH_MISSION heli2.sc
 				ENDIF
@@ -5090,7 +5090,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 heli3X heli3Y heli3Z 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG HELI_3 15000 5 //"heli mission 3"
 					LOAD_AND_LAUNCH_MISSION heli3.sc
 				ENDIF
@@ -5136,7 +5136,7 @@ WAIT mission_trigger_wait_time
 		AND LOCATE_PLAYER_IN_CAR_3D player1 heli4X heli4Y heli4Z 2.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG HELI_4 15000 5 //"heli mission 4"
 					LOAD_AND_LAUNCH_MISSION heli4.sc
 				ENDIF
@@ -5188,13 +5188,13 @@ SCRIPT_NAME BMXLOOP
 			 
 			IF bmx_1_trigger = 0 
 				IF IS_PLAYER_IN_MODEL player1 sanchez
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG (BMX_1) 15000 2
 					//WAIT 0
 					LOAD_AND_LAUNCH_MISSION bmx_1.sc	//	ask James about the fades in this one?
 				ENDIF
 				IF IS_PLAYER_IN_MODEL player1 landstal
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG (BMX_2) 15000 2
 					//WAIT 0
 					LOAD_AND_LAUNCH_MISSION bmx_2.sc	//	ask James about the fades in this one?
@@ -5248,7 +5248,7 @@ SCRIPT_NAME o4x4_1
 			ENDIF
 			
 			IF flag_launch_4x4_1_ok = 1
-				flag_player_on_mission = 1 // FIXMIAMI
+				flag_player_on_mission = 1 // SCFIX
 				PRINT_BIG (T4X4_1) 15000 2
 				WAIT 0
 				LOAD_AND_LAUNCH_MISSION miami_4x4_1.sc	//	ask James about the fades in this one?
@@ -5288,7 +5288,7 @@ carpark1_loop_inner:
 
 			IF IS_PLAYER_IN_MODEL player1 STALLION
 			AND flag_carpark1_trigger = 0
-				flag_player_on_mission = 1 // FIXMIAMI
+				flag_player_on_mission = 1 // SCFIX
 				PRINT_BIG ( MM_1 ) 15000 2
 				WAIT 0
 				LOAD_AND_LAUNCH_MISSION carpark_1.sc	//	ask James about the fades in this one?
@@ -5326,7 +5326,7 @@ IF IS_PLAYER_PLAYING player1
             ENDIF
             IF IS_PLAYER_IN_MODEL player1 pizzaboy
             AND flag_pizza_trigger = 0
-				flag_player_on_mission = 1 // FIXMIAMI
+				flag_player_on_mission = 1 // SCFIX
             	PRINT_BIG ( PIZ1_A ) 15000 2 //PIZZA BOY MISSION
             	WAIT 0
 				LOAD_AND_LAUNCH_MISSION pizza.sc            
@@ -5362,7 +5362,7 @@ SCRIPT_NAME RCHELY1
 				IF has_player_just_done_rcheli_mission = 0
 					IF LOCATE_PLAYER_ANY_MEANS_2D player1 -1235.1 -1235.7 4.0 4.0 FALSE
 						IF IS_PLAYER_SITTING_IN_ANY_CAR player1
-							flag_player_on_mission = 1 // FIXMIAMI
+							flag_player_on_mission = 1 // SCFIX
 							SET_PLAYER_CONTROL player1 OFF
 							WAIT 100
 							SET_FADING_COLOUR 0 0 0
@@ -5411,7 +5411,7 @@ SCRIPT_NAME RC_RACE
 				IF has_player_just_done_rcrace_mission = 0
 					IF LOCATE_PLAYER_ANY_MEANS_2D player1 718.4650 701.3998 3.0 3.0 FALSE /*-376.074 1438.449*/
 						IF IS_PLAYER_SITTING_IN_ANY_CAR player1
-							flag_player_on_mission = 1 // FIXMIAMI
+							flag_player_on_mission = 1 // SCFIX
 							SET_PLAYER_CONTROL player1 OFF
 							WAIT 100
 							SET_FADING_COLOUR 0 0 0
@@ -5459,7 +5459,7 @@ SCRIPT_NAME RC_PLNE
 				IF has_player_just_done_rcplane_mission = 0
 					IF LOCATE_PLAYER_ANY_MEANS_3D player1 307.917 1254.622 27.595 4.0 4.0 4.0 FALSE
 						IF IS_PLAYER_SITTING_IN_ANY_CAR player1
-							flag_player_on_mission = 1 // FIXMIAMI
+							flag_player_on_mission = 1 // SCFIX
 							SET_PLAYER_CONTROL player1 OFF
 							WAIT 100
 							SET_FADING_COLOUR 0 0 0
@@ -5513,7 +5513,7 @@ SCRIPT_NAME COKRUN
 			IF cokerun_trigger = 0
 				IF IS_PLAYER_IN_MODEL player1 squalo
 				OR IS_PLAYER_IN_MODEL player1 jetmax
-					flag_player_on_mission = 1 // FIXMIAMI
+					flag_player_on_mission = 1 // SCFIX
 					SET_FADING_COLOUR 0 0 0
 					DO_FADE 1000 FADE_OUT
 					PRINT_BIG (BOAT_N) 15000 2
@@ -5603,9 +5603,9 @@ hotel_save_loop_inner:
 						WAIT 500
 
 						IF IS_PLAYER_PLAYING player1
-							flag_player_on_mission = 0 // FIXMIAMI: moved up
+							flag_player_on_mission = 0 // SCFIX: moved up
 
-							// FIXMIAMI: START - moved stuff from above so that marker would actually be shown
+							// SCFIX: START - moved stuff from above so that marker would actually be shown
 							IF flag_hotel_mission1_passed = 0
 							    PRINT_HELP ( HELP19 ) //Continue the game
 								TIMERA = 0
@@ -5625,9 +5625,9 @@ hotel_save_loop_inner:
 								SET_CAMERA_BEHIND_PLAYER
 							ENDIF
 						ENDIF
-						// FIXMIAMI: END
+						// SCFIX: END
 
-						IF IS_PLAYER_PLAYING player1 // FIXMIAMI: check again because of possible wait
+						IF IS_PLAYER_PLAYING player1 // SCFIX: check again because of possible wait
 							SET_PLAYER_CONTROL player1 on
 						ENDIF
 							
@@ -6514,7 +6514,7 @@ game_help_loop_inner:
 
 			IF IS_PLAYER_PLAYING player1
 				IF print_save_game_help = 0
-				AND flag_player_on_mission = 0 // FIXMIAMI: don't show this stuff on mission as it might break controls
+				AND flag_player_on_mission = 0 // SCFIX: don't show this stuff on mission as it might break controls
 					IF view_of_ocean_view = 0
 						IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player1 240.4 -1280.2 10.0 4.0 4.0 3.0 FALSE
 						OR LOCATE_PLAYER_ON_FOOT_3D player1 240.4 -1280.2 10.0 4.0 4.0 3.0 FALSE
@@ -7020,7 +7020,7 @@ save_the_game:
 	DO_FADE 1000 FADE_OUT
 
 	IF IS_PLAYER_PLAYING player1
-		// FIXMIAMI: START
+		// SCFIX: START
 		max_health = 100
 		IF flag_pizza_mission_passed = 1
 			max_health += 50
@@ -7029,9 +7029,9 @@ save_the_game:
 			max_health += 50
 		ENDIF
 		IF NOT IS_PLAYER_HEALTH_GREATER player1 max_health
-		// FIXMIAMI: END
+		// SCFIX: END
 			SET_PLAYER_HEALTH Player1 200
-		ENDIF // FIXMIAMI
+		ENDIF // SCFIX
 		SET_PLAYER_CONTROL player1 OFF
 	ENDIF
 
@@ -7053,7 +7053,7 @@ save_the_game2:
 
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 check_cuban_player:
 {
 
@@ -7088,5 +7088,5 @@ check_cuban_player_inner:
 
 GOTO check_cuban_player_inner
 }
-// FIXMIAMI: END
+// SCFIX: END
 

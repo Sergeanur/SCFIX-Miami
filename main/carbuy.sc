@@ -7,7 +7,7 @@ MISSION_START
 
 // Mission start stuff
 
-// FIXMIAMI: START - SSU fix
+// SCFIX: START - SSU fix
 GOSUB mission_start_carbuy
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
@@ -17,15 +17,15 @@ ENDIF
 GOSUB mission_cleanup_carbuy
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
 
 
 // Variables for mission
-{ // FIXMIAMI: add scope
+{ // SCFIX: add scope
 //CARS PEDS OBJECTS PICKUPS
-LVAR_INT csbj csplay // FIXMIAMI: make LVAR
+LVAR_INT csbj csplay // SCFIX: make LVAR
 //FLAGS COUNTERS TIMERS
-LVAR_INT flag_carbuy_set_as_owned // FIXMIAMI
+LVAR_INT flag_carbuy_set_as_owned // SCFIX
 //BLIPS
 //COORDS MATHS
 //VAR_FLOAT
@@ -36,11 +36,11 @@ mission_start_carbuy:
 
 flag_player_on_mission = 1
 
-flag_carbuy_set_as_owned = 0 // FIXMIAMI
+flag_carbuy_set_as_owned = 0 // SCFIX
 
 SCRIPT_NAME carbuy1
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
@@ -62,7 +62,7 @@ OR NOT HAS_MODEL_LOADED SENTINEL
 	WAIT 0
 ENDWHILE
 
-LVAR_INT showroom_car1 // FIXMIAMI: make LVAR
+LVAR_INT showroom_car1 // SCFIX: make LVAR
 CREATE_CAR SENTINEL -1033.2114 -856.8564 12.0452 showroom_car1
 SET_CAR_HEADING showroom_car1 210.2780
 MARK_MODEL_AS_NO_LONGER_NEEDED SENTINEL
@@ -227,7 +227,7 @@ MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: moved up before WAIT
+SET_PLAYER_CONTROL player1 OFF // SCFIX: moved up before WAIT
 
 //////////////////////////
 //////////////////////////
@@ -249,7 +249,7 @@ ENDWHILE
 
 PLAY_MISSION_PASSED_TUNE 1
 PRINT_WITH_NUMBER_BIG CARBUY carbuy_price 7000 6 //
-GOSUB carbuy_set_as_owned // FIXMIAMI: moved stuff into a subroutine
+GOSUB carbuy_set_as_owned // SCFIX: moved stuff into a subroutine
 
 WAIT 5000
 
@@ -260,14 +260,14 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-SWITCH_WIDESCREEN OFF // FIXMIAMI
-SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+SWITCH_WIDESCREEN OFF // SCFIX
+SET_PLAYER_CONTROL player1 ON // SCFIX
 
-RETURN // FIXMIAMI
+RETURN // SCFIX
 
-mission_cleanup_carbuy: // FIXMIAMI
+mission_cleanup_carbuy: // SCFIX
 
-LVAR_INT races_blip // FIXMIAMI: make LVAR
+LVAR_INT races_blip // SCFIX: make LVAR
 ADD_BLIP_FOR_CONTACT_POINT -967.7050 -827.3005 5.7702 races_blip
 CHANGE_BLIP_DISPLAY races_blip MARKER_ONLY
 
@@ -296,10 +296,10 @@ SET_GENERATE_CARS_AROUND_CAMERA FALSE
 RESTORE_CAMERA_JUMPCUT
 flag_player_on_mission = 0
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
+//MISSION_END // SCFIX: moved up
 RETURN
 
-// FIXMIAMI: START - stuff moved from above
+// SCFIX: START - stuff moved from above
 carbuy_set_as_owned:
 IF flag_carbuy_set_as_owned = 0
 	ADD_MONEY_SPENT_ON_PROPERTY carbuy_price
@@ -311,6 +311,6 @@ IF flag_carbuy_set_as_owned = 0
 	flag_carbuy_set_as_owned = 1
 ENDIF
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-} // FIXMIAMI: add scope
+} // SCFIX: add scope

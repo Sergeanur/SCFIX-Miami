@@ -39,7 +39,7 @@ VAR_INT	flag_mob_47
 VAR_INT	flag_mob_52
 //VAR_INT	flag_mob_54
 //VAR_INT	flag_mob_55
-VAR_INT	flag_mob_56 // FIXMIAMI
+VAR_INT	flag_mob_56 // SCFIX
 //VAR_INT	flag_mob_57
 //VAR_INT	flag_mob_58
 VAR_INT flag_mob_62
@@ -76,7 +76,7 @@ VAR_INT flag_mobile_timer flag_player_answered_phone
 VAR_INT flag_cell_nation
 VAR_INT flag_new_cont
 VAR_INT call_delay
-VAR_INT players_skipping_the_call // FIXMIAMI
+VAR_INT players_skipping_the_call // SCFIX
    
 //VAR_FLOAT player_heading
 
@@ -120,7 +120,7 @@ flag_mob_47	= 0
 flag_mob_52	= 0
 //flag_mob_54	= 0
 //flag_mob_55	= 0
-flag_mob_56	= 0 // FIXMIAMI
+flag_mob_56	= 0 // SCFIX
 //flag_mob_57	= 0
 //flag_mob_58	= 0
 flag_mob_62 = 0
@@ -159,7 +159,7 @@ flag_colonel_left_town = 0
 flag_cell_nation = 0
 
 call_delay = 20000
-players_skipping_the_call = 0 // FIXMIAMI
+players_skipping_the_call = 0 // SCFIX
 
 SCRIPT_NAME	CELLFON
 
@@ -706,7 +706,7 @@ cell_phone_inner:
 							GOSUB mobile_message_cleanup
 							GOTO cell_phone_inner
 						ENDIF
-					// FIXMIAMI: START
+					// SCFIX: START
 					ELSE
 						IF flag_mob_56 = 0
 							//RING_PLAYER_PHONE TRUE
@@ -752,7 +752,7 @@ cell_phone_inner:
 							GOSUB mobile_message_cleanup
 							GOTO cell_phone_inner
 						ENDIF
-					// FIXMIAMI: END
+					// SCFIX: END
 					ENDIF
 						
 					
@@ -1378,7 +1378,7 @@ cell_phone_inner:
 
 					// PAUL TELLS PLAYER ABOUT SWAT RETIREMENT FUND AT THE BANK -----------------------------------------------------
 					IF flag_mob_14 = 0
-					AND flag_bought_malibu = 1 // FIXMIAMI
+					AND flag_bought_malibu = 1 // SCFIX
 
 						//RING_PLAYER_PHONE TRUE
 						GOSUB mobile_rings
@@ -1428,10 +1428,10 @@ cell_phone_inner:
 						ENDIF
 						IF flag_player_answered_phone = 1	
 							flag_mob_14 = 1
-							// FIXMIAMI: Start
+							// SCFIX: Start
 							ADD_SPRITE_BLIP_FOR_CONTACT_POINT bankjobX bankjobY bankjobZ the_bankjob_blip bankjob_contact_blip
 							START_NEW_SCRIPT bankjob_mission1_loop
-							// FIXMIAMI: END
+							// SCFIX: END
 						ENDIF
 						mob_14_plonk:
 						GOSUB mobile_message_cleanup
@@ -2252,7 +2252,7 @@ cell_phone_inner:
 								ENDIF
 								IF flag_player_answered_phone = 1	
 									flag_mob_63 = 1
-									//call_delay = 60000 // FIXMIAMI: remove this
+									//call_delay = 60000 // SCFIX: remove this
 									//ADD_SPRITE_BLIP_FOR_CONTACT_POINT cubanX cubanY cubanZ the_cuban_blip cuban_contact_blip
 									//START_NEW_SCRIPT cuban_mission1_loop
 								ENDIF
@@ -2344,7 +2344,7 @@ cell_phone_inner:
 					
 						IF flag_mob_73 = 0
 						AND IS_PLAYER_PLAYING player1
-						AND flag_porn_mission4_passed = 1 // FIXMIAMI: fix Steve calling even if you don't own the film studio
+						AND flag_porn_mission4_passed = 1 // SCFIX: fix Steve calling even if you don't own the film studio
 							IF IS_PLAYER_IN_ZONE player1 PORNI
 								//RING_PLAYER_PHONE TRUE
 								GOSUB mobile_rings
@@ -2604,7 +2604,7 @@ mobile_rings:
 
 		WAIT 0
 		LOAD_MISSION_AUDIO audio_slot_mobile MOBRING
-		players_skipping_the_call = 0 // FIXMIAMI
+		players_skipping_the_call = 0 // SCFIX
 		GOSUB loading_and_playing_audio
 		++ ring_a_ding_ding
 
@@ -2638,7 +2638,7 @@ mobile_rings:
 //	IF IS_PLAYER_PLAYING player1
 //		SET_PLAYER_CONTROL player1 OFF
 //	ENDIF
-	players_skipping_the_call = 1 // FIXMIAMI
+	players_skipping_the_call = 1 // SCFIX
 	GET_GAME_TIMER timer_mobile_start
 	WHILE IS_BUTTON_PRESSED PAD1 LEFTSHOULDER1
 		WAIT 0
@@ -2666,8 +2666,8 @@ mobile_rings:
 		ENDIF
 
 		SET_CHAR_ANSWERING_MOBILE scplayer TRUE
-		SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // FIXMIAMI
-		STOP_PLAYER_LOOKING player1 // FIXMIAMI
+		SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // SCFIX
+		STOP_PLAYER_LOOKING player1 // SCFIX
 //		IF IS_PLAYER_PLAYING player1
 //			SET_PLAYER_CONTROL player1 ON
 //		ENDIF
@@ -2688,11 +2688,11 @@ RETURN
 
 
 loading_and_playing_audio:
-	// FIXMIAMI: START - call skip
+	// SCFIX: START - call skip
 	IF players_skipping_the_call = 2
 		RETURN
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 	WHILE NOT HAS_MISSION_AUDIO_LOADED audio_slot_mobile
 		WAIT 0
 
@@ -2716,14 +2716,14 @@ loading_and_playing_audio:
 				ENDIF
 			ENDIF
 		
-			// FIXMIAMI: START - call skip
+			// SCFIX: START - call skip
 			IF players_skipping_the_call = 1
 				IF IS_BUTTON_PRESSED PAD1 TRIANGLE
 					players_skipping_the_call = 2
 					RETURN	
 				ENDIF
 			ENDIF
-			// FIXMIAMI: END
+			// SCFIX: END
 		ENDIF
 	ENDWHILE
 	PLAY_MISSION_AUDIO audio_slot_mobile
@@ -2732,18 +2732,18 @@ RETURN
 
 
 has_audio_finished:
-	// FIXMIAMI: START - call skip
+	// SCFIX: START - call skip
 	IF players_skipping_the_call = 2
 		CLEAR_PRINTS
 		RETURN
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED audio_slot_mobile
 		WAIT 0
 
 		IF NOT IS_PLAYER_PLAYING player1
 			flag_player_answered_phone = 2
-			CLEAR_PRINTS // FIXMIAMI
+			CLEAR_PRINTS // SCFIX
 			RETURN
 		ELSE
 			//GOSUB pickup_checker
@@ -2751,7 +2751,7 @@ has_audio_finished:
 			OR NOT IS_CHAR_ON_FOOT scplayer
 			//OR flag_player_on_mission = 1
 				flag_player_answered_phone = 2
-				CLEAR_PRINTS // FIXMIAMI
+				CLEAR_PRINTS // SCFIX
 				RETURN
 			ENDIF
 			IF flag_player_answered_phone = 0
@@ -2764,7 +2764,7 @@ has_audio_finished:
 			ENDIF
 		ENDIF
 		
-		// FIXMIAMI: START - call skip
+		// SCFIX: START - call skip
 		IF players_skipping_the_call = 1
 			IF IS_BUTTON_PRESSED PAD1 TRIANGLE
 				players_skipping_the_call = 2
@@ -2772,7 +2772,7 @@ has_audio_finished:
 				RETURN	
 			ENDIF
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDWHILE
 RETURN
 
@@ -2799,14 +2799,14 @@ death_checker:
 			ENDIF
 		ENDIF
 		
-		// FIXMIAMI: START - call skip
+		// SCFIX: START - call skip
 		IF players_skipping_the_call = 1
 			IF IS_BUTTON_PRESSED PAD1 TRIANGLE
 				players_skipping_the_call = 2
 				RETURN	
 			ENDIF
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDIF
 RETURN
 

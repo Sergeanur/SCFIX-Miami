@@ -3,13 +3,13 @@ MISSION_START
 // *******************************   Hotel phone call cut scene    ************************* 
 // *****************************************************************************************
 
-// FIXMIAMI: START - SSU fix
+// SCFIX: START - SSU fix
 GOSUB mission_start_hotel
 
 GOSUB mission_cleanup_hotel
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
 
 
 // ****************************************Mission Start************************************
@@ -20,7 +20,7 @@ flag_player_on_mission = 1
 
 SCRIPT_NAME hotel
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
@@ -28,7 +28,7 @@ LOAD_MISSION_TEXT HOTEL
 
 {
 
-flag_player_in_hotel = 0 // FIXMIAMI: so that extra colours would switch
+flag_player_in_hotel = 0 // SCFIX: so that extra colours would switch
 SET_EXTRA_COLOURS 16 FALSE
 SET_EVERYONE_IGNORE_PLAYER player1 TRUE
 SET_PLAYER_CONTROL player1 OFF
@@ -298,29 +298,29 @@ SET_PLAYER_COORDINATES player1 223.1 -1276.7 11.0
 SET_PLAYER_HEADING player1 258.0 
 SET_CHAR_OBJ_NO_OBJ scplayer
 
-//CLEAR_EXTRA_COLOURS FALSE // FIXMIAMI: we are still in the hotel, so need extra colours
+//CLEAR_EXTRA_COLOURS FALSE // SCFIX: we are still in the hotel, so need extra colours
 
-// FIXMIAMI: START
+// SCFIX: START
 flag_player_in_hotel = 1
 SET_EXTRA_COLOURS 3 FALSE
 
 SET_PLAYER_CONTROL player1 ON
 
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-// FIXMIAMI: START - moved from above
+// SCFIX: START - moved from above
 mission_cleanup_hotel:
 SET_CAMERA_BEHIND_PLAYER
 RESTORE_CAMERA_JUMPCUT
 
 flag_player_on_mission = 0
 flag_hotel_mission1_passed = 1
-view_of_ocean_view = 1 // FIXMIAMI: don't ever show how to enter Ocean View
+view_of_ocean_view = 1 // SCFIX: don't ever show how to enter Ocean View
 
 RELEASE_WEATHER
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
-// FIXMIAMI: END
+//MISSION_END // SCFIX: moved up
+// SCFIX: END
 }
 RETURN

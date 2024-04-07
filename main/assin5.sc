@@ -1963,7 +1963,7 @@ GOTO assin5loop
 mission_assin5_failed:
 PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed"
 
-/* FIXMIAMI: replaced with SET_OBJECT_COORDINATES to remove WAIT
+/* SCFIX: replaced with SET_OBJECT_COORDINATES to remove WAIT
 WHILE NOT SLIDE_OBJECT ice_gate -973.664 -519.65 10.092 0.0 1.0 0.0 FALSE
 	WAIT 0								 
 ENDWHILE

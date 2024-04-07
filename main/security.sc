@@ -59,10 +59,10 @@ VAR_FLOAT cent_x cent_y theta_security theta_mod
 
 VAR_INT sec_counter
 
-VAR_INT security_disturbed // FIXMIAMI
-VAR_INT hack_play_on_a_mission // FIXMIAMI
-security_disturbed = 0 // FIXMIAMI
-hack_play_on_a_mission = 0 // FIXMIAMI
+VAR_INT security_disturbed // SCFIX
+VAR_INT hack_play_on_a_mission // SCFIX
+security_disturbed = 0 // SCFIX
+hack_play_on_a_mission = 0 // SCFIX
 
 flag_player_been_frisked = 0
 flag_zone = 0
@@ -95,7 +95,7 @@ mission_start_security:
 	START_NEW_SCRIPT security
 	//START_NEW_SCRIPT airport_security
 	//START_NEW_SCRIPT aport2_security
-	START_NEW_SCRIPT play_golf_security_audio // FIXMIAMI
+	START_NEW_SCRIPT play_golf_security_audio // SCFIX
 
 	MISSION_END
 }
@@ -211,7 +211,7 @@ security_inner:
 							GOSUB get_ammo
 							GOSUB security_pickups
 							GOSUB is_player_on_bike
-							// FIXMIAMI: START
+							// SCFIX: START
 							LVAR_INT flag_has_any_firearm
 							VAR_INT flag_playing_security_audio
 							flag_has_any_firearm = 0
@@ -247,7 +247,7 @@ security_inner:
 									ENDIF
 								ENDIF
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 						ENDIF
 					ELSE
 					
@@ -318,13 +318,13 @@ security_inner:
 									WAIT 0
 								ENDWHILE
 							ENDIF
-							security_disturbed = 0 // FIXMIAMI
-							CREATE_CHAR PEDTYPE_GANG_SECURITY GDa gate_security_1_x gate_security_1_y gate_security_1_z security_bloke1 // FIXMIAMI: use PEDTYPE_GANG_SECURITY
+							security_disturbed = 0 // SCFIX
+							CREATE_CHAR PEDTYPE_GANG_SECURITY GDa gate_security_1_x gate_security_1_y gate_security_1_z security_bloke1 // SCFIX: use PEDTYPE_GANG_SECURITY
 							SET_CHAR_PERSONALITY security_bloke1 PEDSTAT_TOUGH_GUY
 							SET_CHAR_HEADING security_bloke1 300.0
 							CHAR_SET_IDLE security_bloke1 
 							
-							CREATE_CHAR PEDTYPE_GANG_SECURITY GDa gate_security_2_x gate_security_2_y gate_security_2_z security_bloke2 // FIXMIAMI: use PEDTYPE_GANG_SECURITY
+							CREATE_CHAR PEDTYPE_GANG_SECURITY GDa gate_security_2_x gate_security_2_y gate_security_2_z security_bloke2 // SCFIX: use PEDTYPE_GANG_SECURITY
 							SET_CHAR_PERSONALITY security_bloke2 PEDSTAT_TOUGH_GUY
 							SET_CHAR_HEADING security_bloke2 130.0
 							CHAR_SET_IDLE security_bloke2
@@ -459,7 +459,7 @@ security_inner:
 		OR IS_PLAYER_IN_INFO_ZONE player1 GOLF2
 	
 			IF flag_golf_course_nodes = 0
-				// FIXMIAMI: START - new more accurate roads
+				// SCFIX: START - new more accurate roads
 				SWITCH_ROADS_ON -291.0 454.88 0.0 289.51 632.06 35.0
 				SWITCH_ROADS_ON 49.76 296.24 0.0 212.59 472.75 35.0
 				SWITCH_ROADS_ON -35.27 239.98 0.0 173.06 296.31 35.0
@@ -475,7 +475,7 @@ security_inner:
 				SWITCH_ROADS_ON -59.67 -148.44 0.0 -17.48 -48.79 35.0
 				SWITCH_ROADS_ON -0.97 188.27 0.0 42.15 221.92 35.0
 
-				// FIXMIAMI: END
+				// SCFIX: END
 
 				/*SWITCH_ROADS_ON -291.0 -287.0 0.0 208.0 648.0 35.0
 				SWITCH_ROADS_ON -291.0 -287.0 0.0 208.0 648.0 35.0
@@ -502,7 +502,7 @@ security_inner:
 			ENDIF
 		ELSE
 			IF flag_golf_course_nodes = 1
-				// FIXMIAMI: START - new more accurate roads
+				// SCFIX: START - new more accurate roads
 				SWITCH_ROADS_OFF -291.0 454.88 0.0 289.51 632.06 35.0
 				SWITCH_ROADS_OFF 49.76 296.24 0.0 212.59 472.75 35.0
 				SWITCH_ROADS_OFF -35.27 239.98 0.0 173.06 296.31 35.0
@@ -517,7 +517,7 @@ security_inner:
 				SWITCH_ROADS_OFF -33.24 -172.84 0.0 187.9 75.76 35.0
 				SWITCH_ROADS_OFF -59.67 -148.44 0.0 -17.48 -48.79 35.0
 				SWITCH_ROADS_OFF -0.97 188.27 0.0 42.15 221.92 35.0
-				// FIXMIAMI: END
+				// SCFIX: END
 
 				//SWITCH_ROADS_OFF -291.0 -287.0 0.0 208.0 648.0 35.0
 				//SWITCH_ROADS_OFF -291.0 -287.0 0.0 208.0 648.0 35.0
@@ -617,7 +617,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_3 > 0
-	AND ammo_slot_3 > 0 // FIXMIAMI
+	AND ammo_slot_3 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_3
@@ -633,7 +633,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_4 > 0
-	AND ammo_slot_4 > 0 // FIXMIAMI
+	AND ammo_slot_4 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_4
@@ -648,7 +648,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_5 > 0
-	AND ammo_slot_5 > 0 // FIXMIAMI
+	AND ammo_slot_5 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_5
@@ -663,7 +663,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_6 > 0
-	AND ammo_slot_6 > 0 // FIXMIAMI
+	AND ammo_slot_6 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_6
@@ -678,7 +678,7 @@ security_pickups:
 	ENDIF
 
 	IF weapon_model_slot_7 > 0
-	AND ammo_slot_7 > 0 // FIXMIAMI
+	AND ammo_slot_7 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_7
@@ -693,7 +693,7 @@ security_pickups:
 	ENDIF
 	
 	IF weapon_model_slot_8 > 0
-	AND ammo_slot_8 > 0 // FIXMIAMI
+	AND ammo_slot_8 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_8
@@ -708,7 +708,7 @@ security_pickups:
 	ENDIF
 
 	IF weapon_model_slot_9 > 0
-	AND ammo_slot_9 > 0 // FIXMIAMI
+	AND ammo_slot_9 > 0 // SCFIX
 		//++ outer_switch_quickstep
 			/*
 		REQUEST_MODEL weapon_model_slot_8
@@ -737,7 +737,7 @@ quick_stepping_inner:
 	++ outer_switch_quickstep
 	IF flag_zone = 1
 		IF outer_switch_quickstep > 1
-			// FIXMIAMI: START - simplified and fixed this bit
+			// SCFIX: START - simplified and fixed this bit
 			IF counter_quickstep = 1
 				pickup_x = pickup_x - 3.7
 				pickup_y = pickup_y - 1.5
@@ -751,7 +751,7 @@ quick_stepping_inner:
 					++ counter_quickstep
 				ENDIF
 			ENDIF
-			// FIXMIAMI: END
+			// SCFIX: END
 		ELSE
 			pickup_x = metal_detector_x - 1.4
 			pickup_y = metal_detector_y - 2.6
@@ -905,7 +905,7 @@ kill_them_all_1:
 	IF NOT IS_CHAR_DEAD security_bloke1
 		IF IS_PLAYER_PLAYING player1
 			SET_CHAR_OBJ_KILL_PLAYER_ANY_MEANS security_bloke1 player1
-			security_disturbed = 1 // FIXMIAMI
+			security_disturbed = 1 // SCFIX
 			IF flag_1_tooled = 0
 			AND HAS_MODEL_LOADED nitestick
 				GIVE_WEAPON_TO_CHAR security_bloke1 WEAPONTYPE_NIGHTSTICK 0	
@@ -922,7 +922,7 @@ kill_them_all_2:
 	IF NOT IS_CHAR_DEAD security_bloke2
 		IF IS_PLAYER_PLAYING player1
 			SET_CHAR_OBJ_KILL_PLAYER_ANY_MEANS security_bloke2 player1
-			security_disturbed = 1 // FIXMIAMI
+			security_disturbed = 1 // SCFIX
 			IF flag_2_tooled = 0
 				GIVE_WEAPON_TO_CHAR security_bloke2 WEAPONTYPE_NIGHTSTICK 0	
 				flag_2_tooled = 1
@@ -931,7 +931,7 @@ kill_them_all_2:
 	ENDIF
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 play_golf_security_audio:
 	IF flag_playing_security_audio = 1
 		GENERATE_RANDOM_INT_IN_RANGE 1 4 random_int
@@ -957,7 +957,7 @@ play_golf_security_audio:
 	WAIT 0
 	GOTO play_golf_security_audio
 	RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 
 }

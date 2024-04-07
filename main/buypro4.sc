@@ -1,6 +1,6 @@
 MISSION_START
 			  
-// FIXMIAMI: START - fix SSU shit
+// SCFIX: START - fix SSU shit
 GOSUB mission_start_buypro4
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
@@ -10,33 +10,33 @@ ENDIF
 GOSUB mission_cleanup_buypro4
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
 
 mission_start_buypro4:
 
 SCRIPT_NAME	buypro4
 
 flag_player_on_mission = 1
-{ // FIXMIAMI: scope moved up, was after WAIT 0
-GOTO buypro4 // FIXMIAMI: remove flag_player_on_mission = 0 check
+{ // SCFIX: scope moved up, was after WAIT 0
+GOTO buypro4 // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT strpbuyX strpbuyY strpbuyZ RADAR_SPRITE_STRIPCLUB strpbuy_blip 
 	CHANGE_BLIP_DISPLAY strpbuy_blip BLIP_ONLY
-buypro4: // FIXMIAMI: remove flag_player_on_mission = 0 check
+buypro4: // SCFIX: remove flag_player_on_mission = 0 check
 
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT flag_buypro4_set1
 LVAR_INT flag_buypro4_set2
 LVAR_INT flag_buypro4_set3
 flag_buypro4_set1 = 0
 flag_buypro4_set2 = 0
 flag_buypro4_set3 = 0
-// FIXMIAMI: END
+// SCFIX: END
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
-	GOSUB buypro4_set1 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro4_set1 // SCFIX: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -45,7 +45,7 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT strpbuyX strpbuyY strpbuyZ RADAR_SPRITE_STRIPCLUB strpbuy_blip 
 			CHANGE_BLIP_DISPLAY strpbuy_blip BLIP_ONLY
@@ -56,7 +56,7 @@ WAIT 0
 		*/
 	ENDWHILE
 
-	GOSUB buypro4_set2 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro4_set2 // SCFIX: moved stuff into a subroutine
 
 	CLEAR_AREA 100.9297 -1470.6222 9.3871 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 100.9297 -1470.6222 9.3871
@@ -71,7 +71,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
@@ -79,13 +79,13 @@ WAIT 0
 	ENDWHILE
 
 	PRINT_WITH_NUMBER_BIG STRPBUY strpbuy_price 5000 6 //"Pole Position Club membership purchased: $ 15000"
-	GOSUB buypro4_set3 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro4_set3 // SCFIX: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
 	WAIT 4000
 
-	/* FIXMIAMI: remove this shit
+	/* SCFIX: remove this shit
 	IF NOT IS_PLAYER_PLAYING player1
 		SET_MUSIC_DOES_FADE TRUE
 		TERMINATE_THIS_SCRIPT
@@ -103,7 +103,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
@@ -126,9 +126,9 @@ WAIT 0
 		WAIT 0
 	ENDWHILE
 
-	RETURN // FIXMIAMI
+	RETURN // SCFIX
 
-// FIXMIAMI: START
+// SCFIX: START
 buypro4_set1:
 IF flag_buypro4_set1 = 0
 	REMOVE_BLIP strpbuy_blip
@@ -165,17 +165,17 @@ GOSUB buypro4_set1
 GOSUB buypro4_set2
 GOSUB buypro4_set3
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 
-mission_cleanup_buypro4: // FIXMIAMI
+mission_cleanup_buypro4: // SCFIX
 	SET_MUSIC_DOES_FADE TRUE
 					
 												
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-//MISSION_END  // FIXMIAMI: moved up
+//MISSION_END  // SCFIX: moved up
 
 }
 RETURN 

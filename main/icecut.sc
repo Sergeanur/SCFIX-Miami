@@ -3,7 +3,7 @@ MISSION_START
 // *******************************   icecut phone call cut scene    ************************* 
 // *****************************************************************************************
 
-// FIXMIAMI: START - SSU fix
+// SCFIX: START - SSU fix
 
 GOSUB mission_start_icecut
 
@@ -15,7 +15,7 @@ GOSUB mission_cleanup_icecut
 
 MISSION_END
 
-// FIXMIAMI: END
+// SCFIX: END
 
 // ****************************************Mission Start************************************
 
@@ -27,12 +27,12 @@ flag_player_on_mission = 1
 
 //skip_flag = 0
 
-{ // FIXMIAMI: MOVED SCOPE UP HERE
+{ // SCFIX: MOVED SCOPE UP HERE
 
 LVAR_INT flag_icecut_set1
 flag_icecut_set1 = 0
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
@@ -44,10 +44,10 @@ SET_PLAYER_CONTROL player1 OFF
 SWITCH_STREAMING OFF
 SWITCH_RUBBISH OFF
 
-LVAR_INT cs_maude // FIXMIAMI: made LVAR
-LVAR_INT mcane // FIXMIAMI: made LVAR
-LVAR_INT icecut_van1 // FIXMIAMI: made LVAR
-//LVAR_INT icecut_van2 // FIXMIAMI: made LVAR
+LVAR_INT cs_maude // SCFIX: made LVAR
+LVAR_INT mcane // SCFIX: made LVAR
+LVAR_INT icecut_van1 // SCFIX: made LVAR
+//LVAR_INT icecut_van2 // SCFIX: made LVAR
 
 
 
@@ -392,7 +392,7 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-CLEAR_CUTSCENE // FIXMIAMI: moved up here to fix cutscene still seen after skip
+CLEAR_CUTSCENE // SCFIX: moved up here to fix cutscene still seen after skip
 
 
 SWITCH_RUBBISH ON
@@ -408,14 +408,14 @@ MARK_CAR_AS_NO_LONGER_NEEDED icecut_van1
 DELETE_CAR icecut_van1
 //DELETE_CAR icecut_van2
 
-GOSUB icecut_set1 // FIXMIAMI: moved stuff into a subroutine
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+GOSUB icecut_set1 // SCFIX: moved stuff into a subroutine
+SET_PLAYER_CONTROL player1 OFF // SCFIX
 
 WAIT 1000
 DO_FADE 1500 FADE_IN
-SWITCH_WIDESCREEN ON // FIXMIAMI
+SWITCH_WIDESCREEN ON // SCFIX
 
-SET_OBJECT_COORDINATES ice_door -866.689 -572.095 15.573 // FIXMIAMI: remove SLIDE_OBJECT
+SET_OBJECT_COORDINATES ice_door -866.689 -572.095 15.573 // SCFIX: remove SLIDE_OBJECT
 
 CLEAR_AREA -874.324 -565.683 11.194 1.0 TRUE
 SET_PLAYER_COORDINATES player1 -874.324 -565.683 11.194
@@ -430,13 +430,13 @@ PLAY_MISSION_PASSED_TUNE 1
 PRINT_WITH_NUMBER_BIG ICEBUY icebuy_price 7000 6 //purchased text
 WAIT 7000
 
-SET_PLAYER_CONTROL player1 ON // FIXMIAMI
-SWITCH_WIDESCREEN OFF // FIXMIAMI
-SET_EVERYONE_IGNORE_PLAYER player1 FALSE // FIXMIAMI
+SET_PLAYER_CONTROL player1 ON // SCFIX
+SWITCH_WIDESCREEN OFF // SCFIX
+SET_EVERYONE_IGNORE_PLAYER player1 FALSE // SCFIX
 
-RETURN // FIXMIAMI
+RETURN // SCFIX
 
-// FIXMIAMI: START
+// SCFIX: START
 icecut_set1:
 IF flag_icecut_set1 = 0
 	flag_icecut_mission1_passed = 1
@@ -460,21 +460,21 @@ IF flag_icecut_set1 = 0
 
 
 	START_NEW_SCRIPT icecream_save_loop
-	START_NEW_SCRIPT icecream_mission1_loop // FIXMIAMI: moved here from main.sc
+	START_NEW_SCRIPT icecream_mission1_loop // SCFIX: moved here from main.sc
 	flag_icecut_set1 = 1
 ENDIF
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-mission_cleanup_icecut: // FIXMIAMI
+mission_cleanup_icecut: // SCFIX
 flag_player_on_mission = 0
 
 PLAYER_MADE_PROGRESS 1
-SET_CAMERA_BEHIND_PLAYER // FIXMIAMI: moved before jumpcut
+SET_CAMERA_BEHIND_PLAYER // SCFIX: moved before jumpcut
 RESTORE_CAMERA_JUMPCUT
 
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
+//MISSION_END // SCFIX: moved up
  
 }
 RETURN

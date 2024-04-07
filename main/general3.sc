@@ -207,7 +207,7 @@ VAR_INT	getuphg12
 
 //buddy audio
 VAR_INT buddy1help bustthedealtext
-VAR_INT buddyshotbyplayer // FIXMIAMI
+VAR_INT buddyshotbyplayer // SCFIX
 
 //help
 VAR_INT removetempblip_g3 tempblip_g3
@@ -222,8 +222,8 @@ VAR_INT monoflag_g3
 ////////////////////////////////////////////////TEMP STUFF TO BE TAKEN OUT
 
 
-LVAR_INT flag_lance_was_damaged // FIXMIAMI
-flag_lance_was_damaged = 0 // FIXMIAMI
+LVAR_INT flag_lance_was_damaged // SCFIX
+flag_lance_was_damaged = 0 // SCFIX
 
 
 
@@ -364,7 +364,7 @@ you_got_the_case_back_g3 = 0
 buddy1help = 0
 bustthedealtext = 0
 removetempblip_g3 = 0
-buddyshotbyplayer = 0 // FIXMIAMI 
+buddyshotbyplayer = 0 // SCFIX 
 
 car1hasgone = 0
 
@@ -1347,7 +1347,7 @@ AND protect_deal_flag < 13
 			ENDIF
 		ENDIF
 
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF buddyshotbyplayer = 0
 			IF HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer
 				CLEAR_CHAR_LAST_WEAPON_DAMAGE buddy_g3
@@ -1359,14 +1359,14 @@ AND protect_deal_flag < 13
 				ENDIF
 			ENDIF
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 				
 			
 		IF buddy1help = 0
 			IF HAS_CHAR_BEEN_DAMAGED_BY_WEAPON buddy_g3 WEAPONTYPE_TEC9	 //Tommy need some help here
-			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // FIXMIAMI
+			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // SCFIX
 		 		CLEAR_CHAR_LAST_WEAPON_DAMAGE buddy_g3
-				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // FIXMIAMI
+				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // SCFIX
 				
 				IF playingaudio = 0
 					playingaudio = 3
@@ -1407,9 +1407,9 @@ AND protect_deal_flag < 13
 
 		IF buddy1help = 1
 			IF HAS_CHAR_BEEN_DAMAGED_BY_WEAPON buddy_g3 WEAPONTYPE_TEC9	 //DAMN
-			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // FIXMIAMI
+			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // SCFIX
 		 		CLEAR_CHAR_LAST_WEAPON_DAMAGE buddy_g3
-				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // FIXMIAMI
+				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // SCFIX
 				
 				IF playingaudio = 0
 					playingaudio = 6
@@ -1420,9 +1420,9 @@ AND protect_deal_flag < 13
 
 		IF buddy1help = 2
 			IF HAS_CHAR_BEEN_DAMAGED_BY_WEAPON buddy_g3 WEAPONTYPE_TEC9 //Tommy
-			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // FIXMIAMI
+			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // SCFIX
 		 		CLEAR_CHAR_LAST_WEAPON_DAMAGE buddy_g3
-				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // FIXMIAMI
+				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // SCFIX
 				
 				IF playingaudio = 0
 					playingaudio = 7
@@ -1433,9 +1433,9 @@ AND protect_deal_flag < 13
 
 		IF buddy1help = 3
 			IF HAS_CHAR_BEEN_DAMAGED_BY_WEAPON buddy_g3 WEAPONTYPE_TEC9 //Damn
-			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // FIXMIAMI
+			AND NOT HAS_CHAR_BEEN_DAMAGED_BY_CHAR buddy_g3 scplayer // SCFIX
 		 		CLEAR_CHAR_LAST_WEAPON_DAMAGE buddy_g3
-				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // FIXMIAMI
+				CLEAR_CHAR_LAST_DAMAGE_ENTITY buddy_g3 // SCFIX
 				
 				IF playingaudio = 0
 					playingaudio = 8
@@ -1706,7 +1706,7 @@ AND protect_deal_flag < 13
 			ENDIF
 		ENDIF
 /////////////////////////////////////////////////////////////////////////
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF playingaudio = 10
 		   	
 			 IF playingaudiostate = 0
@@ -1739,7 +1739,7 @@ AND protect_deal_flag < 13
 			ENDIF
 		ENDIF
 /////////////////////////////////////////////////////////////////////////
-		// FIXMIAMI: END
+		// SCFIX: END
 
 	ELSE	//	buddy_g3 dies
 		
@@ -1808,7 +1808,7 @@ AND protect_deal_flag < 13
 			buddyshootcounter = 3
 		ENDIF
 ////////////////////////////////////////////////
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF playingaudio = 10
 			playingaudiostate = 0
 			playingaudio = 0
@@ -1817,7 +1817,7 @@ AND protect_deal_flag < 13
 			buddyshootcounter = 3
 		ENDIF
 ////////////////////////////////////////////////
-		// FIXMIAMI: END
+		// SCFIX: END
 
 	ENDIF
 ENDIF
@@ -3760,8 +3760,8 @@ IF you_got_the_case_back_g3 = 4
 					STOP_CHAR_LOOKING coke_baron_g3
 				ENDIF
 
-				DELETE_CAR coke_barons_car // FIXMIAMI
-				coke_barons_car = -1 // FIXMIAMI
+				DELETE_CAR coke_barons_car // SCFIX
+				coke_barons_car = -1 // SCFIX
 				
 				RESTORE_CAMERA_JUMPCUT
 				SWITCH_WIDESCREEN OFF
@@ -4050,7 +4050,7 @@ ENDIF
 IF NOT IS_CAR_DEAD coke_barons_car
 	LOCK_CAR_DOORS coke_barons_car CARLOCK_UNLOCKED
 	FREEZE_CAR_POSITION coke_barons_car FALSE
-	SET_CAR_PROOFS coke_barons_car FALSE FALSE FALSE FALSE FALSE // FIXMIAMI
+	SET_CAR_PROOFS coke_barons_car FALSE FALSE FALSE FALSE FALSE // SCFIX
 ENDIF
 
  

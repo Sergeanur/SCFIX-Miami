@@ -371,7 +371,7 @@ security2_s3played = 0
 // ********************************** SCRIPTED CUT - AVERY'S STRETCH ARRIVES ***************
 
 FORCE_WEATHER_NOW WEATHER_EXTRA_SUNNY
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+SET_PLAYER_CONTROL player1 OFF // SCFIX
 SWITCH_WIDESCREEN ON
 
 CLEAR_AREA 299.0 -205.0 10.5 5.0 TRUE
@@ -597,7 +597,7 @@ RELEASE_WEATHER
 
 
 SET_AREA_VISIBLE VIS_MAIN_MAP
-SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+SET_PLAYER_CONTROL player1 ON // SCFIX
 
 DO_FADE 1500 FADE_IN
 
@@ -1801,16 +1801,16 @@ IF NOT IS_CHAR_DEAD builder1
 			ENDIF
 
 			IF playingaudio_s3state = 2
-				GET_CHAR_COORDINATES builder1 x y z // FIXMIAMI
-				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+				GET_CHAR_COORDINATES builder1 x y z // SCFIX
+				SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
-					GET_CHAR_COORDINATES builder1 x y z // FIXMIAMI
-					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+					GET_CHAR_COORDINATES builder1 x y z // SCFIX
+					SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -1863,16 +1863,16 @@ IF NOT IS_CHAR_DEAD builder3
 			ENDIF
 
 			IF playingaudio_s3state = 2
-				GET_CHAR_COORDINATES builder3 x y z // FIXMIAMI
-				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+				GET_CHAR_COORDINATES builder3 x y z // SCFIX
+				SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
-					GET_CHAR_COORDINATES builder3 x y z // FIXMIAMI
-					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+					GET_CHAR_COORDINATES builder3 x y z // SCFIX
+					SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -1923,16 +1923,16 @@ IF NOT IS_CHAR_DEAD builder7
 			ENDIF
 
 			IF playingaudio_s3state = 2
-				GET_CHAR_COORDINATES builder7 x y z // FIXMIAMI
-				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+				GET_CHAR_COORDINATES builder7 x y z // SCFIX
+				SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
-					GET_CHAR_COORDINATES builder7 x y z // FIXMIAMI
-					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+					GET_CHAR_COORDINATES builder7 x y z // SCFIX
+					SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -1983,16 +1983,16 @@ IF NOT IS_CHAR_DEAD builder13
 			ENDIF
 
 			IF playingaudio_s3state = 2
-				GET_CHAR_COORDINATES builder13 x y z // FIXMIAMI
-				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+				GET_CHAR_COORDINATES builder13 x y z // SCFIX
+				SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
-					GET_CHAR_COORDINATES builder13 x y z // FIXMIAMI
-					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+					GET_CHAR_COORDINATES builder13 x y z // SCFIX
+					SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -2043,16 +2043,16 @@ IF NOT IS_CHAR_DEAD builder9
 			ENDIF
 
 			IF playingaudio_s3state = 2
-				GET_CHAR_COORDINATES builder9 x y z // FIXMIAMI
-				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+				GET_CHAR_COORDINATES builder9 x y z // SCFIX
+				SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
-					GET_CHAR_COORDINATES builder9 x y z // FIXMIAMI
-					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+					GET_CHAR_COORDINATES builder9 x y z // SCFIX
+					SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -2103,16 +2103,16 @@ IF NOT IS_CHAR_DEAD security2_s3
 			ENDIF
 
 			IF playingaudio_s3state = 2
-				GET_CHAR_COORDINATES security2_s3 x y z // FIXMIAMI
-				SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+				GET_CHAR_COORDINATES security2_s3 x y z // SCFIX
+				SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 		 		PLAY_MISSION_AUDIO 1
 				playingaudio_s3state = 3
 			ENDIF
 
 			IF playingaudio_s3state = 3
 				IF HAS_MISSION_AUDIO_FINISHED 1
-					GET_CHAR_COORDINATES security2_s3 x y z // FIXMIAMI
-					SET_MISSION_AUDIO_POSITION 1 x y z // FIXMIAMI
+					GET_CHAR_COORDINATES security2_s3 x y z // SCFIX
+					SET_MISSION_AUDIO_POSITION 1 x y z // SCFIX
 					playingaudio_s3state = 0
 					playingaudio_s3 = 0
 					CLEAR_MISSION_AUDIO 1
@@ -2903,7 +2903,7 @@ GOTO mission_serg2_passed
 // Mission Serg failed
 
 mission_serg2_failed:
-REMOVE_RC_BUGGY // FIXMIAMI
+REMOVE_RC_BUGGY // SCFIX
 ALTER_WANTED_LEVEL player1 wanted_level_s3
 PRINT_BIG ( M_FAIL ) 2000 1
 
@@ -2925,7 +2925,7 @@ REGISTER_MISSION_PASSED TEX_3
 PLAYER_MADE_PROGRESS 1
 REMOVE_BLIP sergio_contact_blip
 
-// FIXMIAMI: START
+// SCFIX: START
 REMOVE_RC_BUGGY
 WHILE NOT GET_FADING_STATUS // wait until the engine code starts the fade
 	WAIT 0
@@ -2933,7 +2933,7 @@ ENDWHILE
 WHILE GET_FADING_STATUS // wait while the fading is ongoing
 	WAIT 0
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
 RETURN
 		
@@ -3273,7 +3273,7 @@ mission_cleanup_serg2:
 flag_player_on_mission = 0
 SWITCH_WIDESCREEN OFF
 SET_PLAYER_CONTROL player1 ON
-//REMOVE_RC_BUGGY // FIXMIAMI: moved to pass/fail
+//REMOVE_RC_BUGGY // SCFIX: moved to pass/fail
 
 flag_player_on_rc_mission = 0 //PC FIX PC FIX PC FIX PC FIX PC FIX PC FIX PC FIX
 

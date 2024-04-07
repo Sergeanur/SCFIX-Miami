@@ -186,7 +186,7 @@ LOAD_MISSION_TEXT BANKJ2
 
 SHUT_PLAYER_UP player1 TRUE
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+SET_PLAYER_CONTROL player1 OFF // SCFIX
 
 REQUEST_MODEL COLT45
 
@@ -239,19 +239,19 @@ SET_OBJECT_HEADING object1_bankjob2 90.0
 
 GET_CHAR_WEAPON_IN_SLOT scplayer 4 slot4_weapon_type_bank2 slot4_ammo_bank2 slot4_model_bank2
 
-// FIXMIAMI: START - make sure the model is not unloaded (COLT45 is already requested for the mission)
+// SCFIX: START - make sure the model is not unloaded (COLT45 is already requested for the mission)
 IF NOT slot4_model_bank2 = COLT45
 AND slot4_ammo_bank2 > 0
 	REQUEST_MODEL slot4_model_bank2
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
-// FIXMIAMI: START - nil player's ammo before attach
+// SCFIX: START - nil player's ammo before attach
 SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
 SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0
-// FIXMIAMI: END
+// SCFIX: END
 
-SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // FIXMIAMI: moved before attach
+SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // SCFIX: moved before attach
 ATTACH_CHAR_TO_OBJECT scplayer object1_bankjob2 0.0 -2.0 1.0 FACING_FORWARD 60.0 WEAPONTYPE_PISTOL
 SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
 SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 100
@@ -265,7 +265,7 @@ WAIT 500
 
 DO_FADE 1500 FADE_IN
 
-// FIXMIAMI: START - tidy up this big ass chunk
+// SCFIX: START - tidy up this big ass chunk
 LVAR_INT range_tutor_state
 range_tutor_state = 0
 
@@ -323,9 +323,9 @@ WHILE range_tutor_state < 6
 	ENDIF
 
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
-/* FIXMIAMI: all this was rewritten above
+/* SCFIX: all this was rewritten above
 WHILE GET_FADING_STATUS
 
 	WAIT 0
@@ -1237,15 +1237,15 @@ DELETE_OBJECT target3_part5_bankjob2
 DETACH_CHAR_FROM_CAR scplayer
 
 IF slot4_ammo_bank2 > 0
-	//REQUEST_MODEL slot4_model_bank2 // FIXMIAMI: removed now, we leave the model loaded
+	//REQUEST_MODEL slot4_model_bank2 // SCFIX: removed now, we leave the model loaded
 
-	//LOAD_ALL_MODELS_NOW // FIXMIAMI: removed now, we leave the model loaded
+	//LOAD_ALL_MODELS_NOW // SCFIX: removed now, we leave the model loaded
 
-	GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // FIXMIAMI: moved into if block
+	GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // SCFIX: moved into if block
 
-	IF NOT slot4_model_bank2 = COLT45 // FIXMIAMI: COLT45 will be unloaded below
-		MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2 // FIXMIAMI: moved into if block
-	ENDIF // FIXMIAMI
+	IF NOT slot4_model_bank2 = COLT45 // SCFIX: COLT45 will be unloaded below
+		MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2 // SCFIX: moved into if block
+	ENDIF // SCFIX
 ENDIF
 
 flag_player_on_mission = 0

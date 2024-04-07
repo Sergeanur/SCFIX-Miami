@@ -318,7 +318,7 @@ ADD_SPHERE -665.4 -1484.7 12.8 1.0 Sphere_cok3
 
 CREATE_CAR squalo -597.6 -1507.7 5.4 fastest_boat
 SET_CAR_HEADING fastest_boat 250.0
-FREEZE_CAR_POSITION fastest_boat TRUE // FIXMIAMI: to prevent the boat from being stolen early
+FREEZE_CAR_POSITION fastest_boat TRUE // SCFIX: to prevent the boat from being stolen early
 ADD_BLIP_FOR_CAR fastest_boat fastest_boat_blip  
 
 PRINT_NOW ( COK3_8 ) 10000 1 // Go to the boat yard at the dock and steal the fastest boat!
@@ -426,7 +426,7 @@ steel_boat_loop:
 
 	IF NOT IS_CAR_DEAD fastest_boat
 		IF IS_PLAYER_IN_CAR player1 fastest_boat
-		AND boat_button_pressed = 1 // FIXMIAMI: lower the boat first
+		AND boat_button_pressed = 1 // SCFIX: lower the boat first
 			GOTO get_boat_to_mansion
 		ENDIF
 	ENDIF
@@ -1041,11 +1041,11 @@ ADD_SCORE player1 4000
 REGISTER_MISSION_PASSED	COK_3
 PLAYER_MADE_PROGRESS 1
 
-// FIXMIAMI: START - save boat colour for the next mission
+// SCFIX: START - save boat colour for the next mission
 IF NOT IS_CAR_DEAD fastest_boat
 	GET_CAR_COLOURS fastest_boat fastest_boat_col1 fastest_boat_col2
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 START_NEW_SCRIPT baron_mission4_loop
 RETURN
@@ -1204,11 +1204,11 @@ boat_cut_scenes:
 
 		ENDWHILE
 
-		// FIXMIAMI: START - can drive the boat now
+		// SCFIX: START - can drive the boat now
 		IF NOT IS_CAR_DEAD fastest_boat
 			FREEZE_CAR_POSITION fastest_boat FALSE
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 
 		WAIT 4000
 

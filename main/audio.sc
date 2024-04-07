@@ -382,8 +382,8 @@ GOTO mission_start_aud_inner
 
 }
 
-// FIXMIAMI: Start - moved this stuff from porn3.sc to create a separate script thread
-load_camera_audio_loop: // FIXMIAMI
+// SCFIX: Start - moved this stuff from porn3.sc to create a separate script thread
+load_camera_audio_loop: // SCFIX
 {
 	SCRIPT_NAME PRN3CAM
 
@@ -391,12 +391,12 @@ load_camera_audio_loop_inner:
 
 	WAIT 0
 	IF cam_audio1 = 0
-		// FIXMIAMI - START
+		// SCFIX - START
 		WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 			WAIT 0
 		ENDWHILE 
 		CLEAR_MISSION_AUDIO 1
-		// FIXMIAMI - END
+		// SCFIX - END
 		LOAD_MISSION_AUDIO 1 CAML
 		WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 			WAIT 0
@@ -405,12 +405,12 @@ load_camera_audio_loop_inner:
 	ENDIF
 
 	IF cam_audio2 = 0
-		// FIXMIAMI - START
+		// SCFIX - START
 		WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 			WAIT 0
 		ENDWHILE 
 		CLEAR_MISSION_AUDIO 2
-		// FIXMIAMI - END
+		// SCFIX - END
 		LOAD_MISSION_AUDIO 2 CAMR
 		WHILE NOT HAS_MISSION_AUDIO_LOADED 2
 			WAIT 0
@@ -418,8 +418,8 @@ load_camera_audio_loop_inner:
 		cam_audio2 = 1
 	ENDIF
 
-	GOTO load_camera_audio_loop_inner // FIXMIAMI
+	GOTO load_camera_audio_loop_inner // SCFIX
 }
 
 RETURN
-// FIXMIAMI: End
+// SCFIX: End

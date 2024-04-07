@@ -473,13 +473,13 @@ CLEAR_CHAR_THREAT_SEARCH cuban_dude13
 SET_CHAR_WAIT_STATE cuban_dude13 WAITSTATE_USE_ATM 100
 //ADD_BLIP_FOR_CHAR cuban_dude13 cuban_dude13_blip
 
-GOTO hait2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO hait2_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_OBJECT rcbomb 0.0 0.0 0.0 primed_bomb_1
 	GET_REMOTE_CONTROLLED_CAR player1 rc_plane
 	ADD_BLIP_FOR_CAR cuban_jetmax cuban_jetmax_blip
 	ADD_BLIP_FOR_CAR cuban_speeder cuban_speeder_blip
 	ADD_BLIP_FOR_CAR cuban_coastg cuban_coastg_blip
-hait2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+hait2_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 SET_PLAYER_CONTROL player1 OFF
 SET_POLICE_IGNORE_PLAYER player1 ON
@@ -2737,11 +2737,11 @@ ADD_SCORE player1 2000
 REGISTER_MISSION_PASSED HAT_2
 PLAYER_MADE_PROGRESS 1
 PLAY_MISSION_PASSED_TUNE 1
-//IF NOT IS_GERMAN_GAME // FIXMIAMI: remove german censorshit
+//IF NOT IS_GERMAN_GAME // SCFIX: remove german censorshit
 	START_NEW_SCRIPT haitian_mission3_loop
-//ELSE // FIXMIAMI: remove german censorshit
-//	REMOVE_BLIP haitian_contact_blip // FIXMIAMI: remove german censorshit
-//ENDIF // FIXMIAMI: remove german censorshit
+//ELSE // SCFIX: remove german censorshit
+//	REMOVE_BLIP haitian_contact_blip // SCFIX: remove german censorshit
+//ENDIF // SCFIX: remove german censorshit
 
 RETURN
 		

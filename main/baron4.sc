@@ -321,16 +321,16 @@ REQUEST_MODEL speeder
 REQUEST_MODEL marquis 
 REQUEST_MODEL RUGER
 REQUEST_MODEL CBa
-LOAD_SPECIAL_CHARACTER 3 igbuddy // FIXMIAMI: moved up
+LOAD_SPECIAL_CHARACTER 3 igbuddy // SCFIX: moved up
 
-LOAD_ALL_MODELS_NOW // FIXMIAMI
+LOAD_ALL_MODELS_NOW // SCFIX
 
 WHILE NOT HAS_MODEL_LOADED squalo
 OR NOT HAS_MODEL_LOADED speeder
 OR NOT HAS_MODEL_LOADED marquis
 OR NOT HAS_MODEL_LOADED RUGER
 OR NOT HAS_MODEL_LOADED CBa
-OR NOT HAS_SPECIAL_CHARACTER_LOADED 3// FIXMIAMI: moved up
+OR NOT HAS_SPECIAL_CHARACTER_LOADED 3// SCFIX: moved up
 	WAIT 0
 
 ENDWHILE
@@ -341,7 +341,7 @@ CREATE_CAR squalo -378.5 -660.0 5.6 fastest_boat
 
 SET_CAR_HEADING fastest_boat 270.0
 
-// FIXMIAMI: START
+// SCFIX: START
 IF NOT fastest_boat_col1 = -1
 AND NOT fastest_boat_col2 = -1
 	CHANGE_CAR_COLOUR fastest_boat fastest_boat_col1 fastest_boat_col2
@@ -352,7 +352,7 @@ CLEAR_CHAR_THREAT_SEARCH buddy
 SET_CHAR_SUFFERS_CRITICAL_HITS buddy FALSE
 SET_CHAR_AS_PLAYER_FRIEND buddy Player1 TRUE
 SET_CHAR_NEVER_TARGETTED buddy TRUE
-// FIXMIAMI: END
+// SCFIX: END
 
 WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D player1 -378.5 -660.0 5.6 16.5 11.5 8.0 FALSE
 	WAIT 0
@@ -362,12 +362,12 @@ WHILE NOT LOCATE_PLAYER_ANY_MEANS_3D player1 -378.5 -660.0 5.6 16.5 11.5 8.0 FAL
 		GOTO mission_baron4_failed
 	ENDIF
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_CHAR_DEAD buddy
 		PRINT_NOW ( COK2_26 ) 5000 2 //YOUR BUDDY IS DEAD!
 		GOTO mission_baron4_failed
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
 ENDWHILE
 
@@ -402,7 +402,7 @@ IF NOT IS_CAR_DEAD fastest_boat
 	FREEZE_CAR_POSITION fastest_boat TRUE
 ENDIF
 
-DELETE_CHAR buddy // FIXMIAMI
+DELETE_CHAR buddy // SCFIX
 
 SWITCH_RUBBISH OFF
 SWITCH_STREAMING OFF
@@ -550,14 +550,14 @@ IF NOT IS_CAR_DEAD fastest_boat
 	SET_CHAR_HEADING buddy 270.0
 ENDIF
 
-LOAD_MISSION_AUDIO 1 COK4_8	// FIXMIAMI: moved up
-LOAD_MISSION_AUDIO 2 COK4_9	// FIXMIAMI: restore unused line
-// FIXMIAMI: START
+LOAD_MISSION_AUDIO 1 COK4_8	// SCFIX: moved up
+LOAD_MISSION_AUDIO 2 COK4_9	// SCFIX: restore unused line
+// SCFIX: START
 WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 OR NOT HAS_MISSION_AUDIO_LOADED 2
 	WAIT 0
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
 WAIT 500
 
@@ -590,7 +590,7 @@ ENDWHILE
 SET_CAR_DENSITY_MULTIPLIER 0.0
 SET_PED_DENSITY_MULTIPLIER 0.0
 
-CLEAR_AREA -274.6 -696.6 9.1 40.0 TRUE // FIXMIAMI: some random boats might be in there
+CLEAR_AREA -274.6 -696.6 9.1 40.0 TRUE // SCFIX: some random boats might be in there
 
 
 REMOVE_BLIP coke_boat_blip
@@ -618,7 +618,7 @@ SET_CAR_HEADING coke_boat2 330.0
 BOAT_GOTO_COORDS coke_boat2 -116.7 -458.3 5.6
 SET_BOAT_CRUISE_SPEED coke_boat2 40.0
 
-DO_FADE 1500 FADE_IN // FIXMIAMI: moved down post camera change, spawns, clears, etc etc
+DO_FADE 1500 FADE_IN // SCFIX: moved down post camera change, spawns, clears, etc etc
 
 WAIT 1000
 
@@ -634,15 +634,15 @@ SET_CAR_HEADING coke_boat4 270.0
 BOAT_GOTO_COORDS coke_boat4 90.0 -664.2 5.6
 SET_BOAT_CRUISE_SPEED coke_boat4 40.0
 
-//IF HAS_MISSION_AUDIO_LOADED	1 // FIXMIAMI: we know it's loaded
+//IF HAS_MISSION_AUDIO_LOADED	1 // SCFIX: we know it's loaded
 	PLAY_MISSION_AUDIO 1 //We got some competition!
-	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1 // FIXMIAMI
+	WHILE NOT HAS_MISSION_AUDIO_FINISHED 1 // SCFIX
 		PRINT_NOW ( COK4_8 ) 5000 2	
 		WAIT 0
-	ENDWHILE // FIXMIAMI
-//ENDIF // FIXMIAMI: we know it's loaded
+	ENDWHILE // SCFIX
+//ENDIF // SCFIX: we know it's loaded
 
-// FIXMIAMI: START
+// SCFIX: START
 WAIT 1000
 
 PLAY_MISSION_AUDIO 2 //Take 'em out!
@@ -650,9 +650,9 @@ WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 	PRINT_NOW ( COK4_9 ) 5000 2	
 	WAIT 0
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
-//WAIT 2000 // FIXMIAMI: we wait for audio to finish now instead
+//WAIT 2000 // SCFIX: we wait for audio to finish now instead
 
 PRINT_NOW ( COK4_28 ) 5000 2 //Get to the yacht before the other boats do!
 
@@ -758,25 +758,25 @@ OR NOT IS_PLAYER_IN_CAR player1 fastest_boat
 	IF TIMERA > 100
 
 		IF NOT IS_CAR_DEAD coke_boat1
-		AND NOT IS_CHAR_DEAD boat_pilot1 // FIXMIAMI
+		AND NOT IS_CHAR_DEAD boat_pilot1 // SCFIX
 			any_coke_boat = coke_boat1 
 			GOSUB race_to_coke_deal1
 		ENDIF
 			
 		IF NOT IS_CAR_DEAD coke_boat2
-		AND NOT IS_CHAR_DEAD boat_pilot2 // FIXMIAMI
+		AND NOT IS_CHAR_DEAD boat_pilot2 // SCFIX
 			any_coke_boat = coke_boat2
 			GOSUB race_to_coke_deal2
 		ENDIF
 
 		IF NOT IS_CAR_DEAD coke_boat3
-		AND NOT IS_CHAR_DEAD boat_pilot3 // FIXMIAMI
+		AND NOT IS_CHAR_DEAD boat_pilot3 // SCFIX
 			any_coke_boat = coke_boat3
 			GOSUB race_to_coke_deal2	
 		ENDIF
 
 		IF NOT IS_CAR_DEAD coke_boat4
-		AND NOT IS_CHAR_DEAD boat_pilot4 // FIXMIAMI
+		AND NOT IS_CHAR_DEAD boat_pilot4 // SCFIX
 			any_coke_boat = coke_boat4 
 			GOSUB race_to_coke_deal1
 		ENDIF
@@ -784,7 +784,7 @@ OR NOT IS_PLAYER_IN_CAR player1 fastest_boat
 		TIMERA = 0
 	ENDIF
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_CHAR_DEAD boat_pilot1
 	AND NOT IS_CAR_DEAD coke_boat1
 		CAR_SET_IDLE coke_boat1
@@ -808,7 +808,7 @@ OR NOT IS_PLAYER_IN_CAR player1 fastest_boat
 		CAR_SET_IDLE coke_boat4
 		SET_BOAT_CRUISE_SPEED coke_boat4 0.0
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
 	IF first_two_samples = 0
 		IF audio_is_loading = 0
@@ -837,7 +837,7 @@ OR NOT IS_PLAYER_IN_CAR player1 fastest_boat
 
 	IF first_two_samples = 1
 	AND second_two_samples = 0
-	AND TIMERB > 2500 // FIXMIAMI: change 2000 to 2500
+	AND TIMERB > 2500 // SCFIX: change 2000 to 2500
 		IF audio_is_loading = 0
 			LOAD_MISSION_AUDIO 1 COK4_4	
 			LOAD_MISSION_AUDIO 2 COK4_5	
@@ -894,7 +894,7 @@ SET_PLAYER_CONTROL player1 OFF
 SWITCH_WIDESCREEN ON
 
 IF NOT IS_CAR_DEAD fastest_boat
-	SET_CAR_FORWARD_SPEED fastest_boat 7.0 // FIXMIAMI
+	SET_CAR_FORWARD_SPEED fastest_boat 7.0 // SCFIX
 	BOAT_STOP fastest_boat	
 	SET_BOAT_CRUISE_SPEED fastest_boat 0.0
 ENDIF
@@ -902,7 +902,7 @@ ENDIF
 SET_FIXED_CAMERA_POSITION 278.740 579.153 26.070 0.0 0.0 0.0 
 POINT_CAMERA_AT_POINT 279.551 579.660 25.780 JUMP_CUT
 
-//WAIT 500 // FIXMIAMI: removed, waiting for mission audio now
+//WAIT 500 // SCFIX: removed, waiting for mission audio now
 
 LOAD_MISSION_AUDIO 1 COK4_11
 WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -921,7 +921,7 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-// FIXMIAMI: START
+// SCFIX: START
 IF IS_CAR_DEAD coke_boat1
 	CREATE_CAR speeder 301.3 476.9 5.6 coke_boat1
 ENDIF
@@ -950,16 +950,16 @@ CAR_SET_IDLE coke_boat3
 
 DELETE_CAR coke_boat4
 DELETE_CHAR	boat_pilot4
-// FIXMIAMI: END
+// SCFIX: END
 
 
-// FIXMIAMI: START restore the cutscene
+// SCFIX: START restore the cutscene
 IF NOT IS_CAR_DEAD fastest_boat
 	IF IS_PLAYER_IN_CAR	player1 fastest_boat
 		WARP_PLAYER_FROM_CAR_TO_COORD player1 261.3 542.6 -100.0//260.4 -1292.5 -100.0
-	ELSE // FIXMIAMI
-		SET_PLAYER_COORDINATES player1 261.3 542.6 -100.0 // FIXMIAMI
-	ENDIF // FIXMIAMI
+	ELSE // SCFIX
+		SET_PLAYER_COORDINATES player1 261.3 542.6 -100.0 // SCFIX
+	ENDIF // SCFIX
 	ANCHOR_BOAT fastest_boat TRUE
 	SET_CAR_HEALTH fastest_boat 1500
 	SET_CAR_COORDINATES fastest_boat 333.3 598.9 6.0
@@ -1076,13 +1076,13 @@ IF NOT IS_CAR_DEAD fastest_boat
 	ANCHOR_BOAT fastest_boat TRUE
 ENDIF
 
-// FIXMIAMI: START - moved down
+// SCFIX: START - moved down
 REQUEST_MODEL sparrow
 REQUEST_MODEL ruger
 REQUEST_MODEL barrel4
 REQUEST_MODEL TEC9
 REQUEST_MODEL UZI
-// FIXMIAMI: END
+// SCFIX: END
 
 WHILE NOT HAS_MODEL_LOADED sparrow
 OR NOT HAS_MODEL_LOADED ruger
@@ -1095,7 +1095,7 @@ ENDWHILE
 
 RESTORE_CAMERA_JUMPCUT
 
-//DELETE_CHAR	buddy // FIXMIAMI: moved up
+//DELETE_CHAR	buddy // SCFIX: moved up
 CREATE_CHAR_INSIDE_CAR fastest_boat PEDTYPE_CIVMALE SPECIAL03 buddy
 SET_CHAR_SUFFERS_CRITICAL_HITS buddy FALSE
 CLEAR_CHAR_THREAT_SEARCH buddy
@@ -1726,7 +1726,7 @@ RETURN
 
 mission_cleanup_baron4:
 
-// FIXMIAMI: START
+// SCFIX: START
 IF NOT IS_CAR_DEAD coke_boat1
 	CAR_WANDER_RANDOMLY coke_boat1
 ENDIF
@@ -1742,7 +1742,7 @@ ENDIF
 IF NOT IS_CAR_DEAD coke_boat4
 	CAR_WANDER_RANDOMLY coke_boat4
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 flag_player_on_mission = 0
 GET_GAME_TIMER timer_mobile_start
@@ -1780,7 +1780,7 @@ play_vance_dance_samp:
 
 	IF vance_dance_samp_play = 0
 		IF second_two_samples = 1
-		AND HAS_MISSION_AUDIO_FINISHED 2 // FIXMIAMI: fix audio overlap
+		AND HAS_MISSION_AUDIO_FINISHED 2 // SCFIX: fix audio overlap
 			
 			IF audio_is_loading = 0
 				LOAD_MISSION_AUDIO 1 COK4_9a	

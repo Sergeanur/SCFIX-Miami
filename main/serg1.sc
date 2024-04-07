@@ -157,7 +157,7 @@ WAIT 0
 WAIT 500
 
 IF NOT IS_CHAR_DEAD scplayer
-AND IS_PLAYER_WEARING player1 player4 // FIXMIAMI: add specific skin check
+AND IS_PLAYER_WEARING player1 player4 // SCFIX: add specific skin check
 
 	UNDRESS_CHAR scplayer player
 
@@ -305,8 +305,8 @@ golfcart4heading_s1	= 17.252
 
 SET_TIME_OF_DAY 10 00
 FORCE_WEATHER_NOW WEATHER_EXTRA_SUNNY
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
-SWITCH_WIDESCREEN ON // FIXMIAMI
+SET_PLAYER_CONTROL player1 OFF // SCFIX
+SWITCH_WIDESCREEN ON // SCFIX
 
 
 CLEAR_AREA 299.0 -205.0 10.5 5.0 TRUE
@@ -581,12 +581,12 @@ UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ02
-RELEASE_WEATHER // FIXMIAMI: moved here from cleanup
+RELEASE_WEATHER // SCFIX: moved here from cleanup
 
 
 
 SET_AREA_VISIBLE VIS_MAIN_MAP
-SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+SET_PLAYER_CONTROL player1 ON // SCFIX
 
 DO_FADE 1500 FADE_IN
 
@@ -753,7 +753,7 @@ IF has_player_been_to_clothes_shop = 1
 
 		IF niceaudio_s1 = 1
 			IF isnotme_s1 = 0
-				SET_MISSION_AUDIO_POSITION 2 311.06 218.27 11.74 // FIXMIAMI: fix mission audio slot
+				SET_MISSION_AUDIO_POSITION 2 311.06 218.27 11.74 // SCFIX: fix mission audio slot
 				PRINT_NOW ( TEX1_6 ) 5000 2
 				IF playingaudiostate2_s1 = 0
 						PLAY_MISSION_AUDIO 2
@@ -761,9 +761,9 @@ IF has_player_been_to_clothes_shop = 1
 					ENDIF
 					
 					IF playingaudiostate2_s1 = 1
-						IF HAS_MISSION_AUDIO_FINISHED 2 // FIXMIAMI: fix mission audio slot
+						IF HAS_MISSION_AUDIO_FINISHED 2 // SCFIX: fix mission audio slot
 							playingaudiostate2_s1 = 0
-							CLEAR_MISSION_AUDIO 2 // FIXMIAMI: fix mission audio slot
+							CLEAR_MISSION_AUDIO 2 // SCFIX: fix mission audio slot
 							playingaudio2_s1 = 1
 							isnotme_s1 = 1
 						ENDIF
@@ -799,7 +799,7 @@ ENDIF
 
 //get to golf club
 IF has_player_been_to_clothes_shop = 2
-	hack_play_on_a_mission = 1 // FIXMIAMI
+	hack_play_on_a_mission = 1 // SCFIX
 	IF TIMERA > 4000
 		STOP_PLAYER_LOOKING Player1
 		SET_CAMERA_IN_FRONT_OF_PLAYER
@@ -1695,10 +1695,10 @@ REMOVE_BLIP golfped_target_blip
 REMOVE_BLIP clothesblip
 REMOVE_BLIP golfblip
 CLEAR_MISSION_AUDIO 1
-IF hack_play_on_a_mission = 0 // FIXMIAMI
+IF hack_play_on_a_mission = 0 // SCFIX
 	CLEAR_MISSION_AUDIO 2
-ENDIF // FIXMIAMI
-hack_play_on_a_mission = 0 // FIXMIAMI
+ENDIF // SCFIX
+hack_play_on_a_mission = 0 // SCFIX
 
 IF mansion_clothes_created = 1
 	CREATE_CLOTHES_PICKUP -384.5 -591.9 25.3 1 mansion_clothes   
@@ -1727,7 +1727,7 @@ IF clothes4_created = 1
 ENDIF
 
 IF clothes5_created = 1
-   CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5 // FIXMIAMI: fix cuban skin pickup location
+   CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5 // SCFIX: fix cuban skin pickup location
 ENDIF
 
 IF clothes6_created = 1

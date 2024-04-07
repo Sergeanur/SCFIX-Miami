@@ -30,7 +30,7 @@ VAR_INT eviltaxi blip_eviltaxi
 VAR_INT cab1_obj_set cab2_obj_set cab3_obj_set cab4_obj_set cab5_obj_set cab6_obj_set
 
 LVAR_INT theVIP	got_into_players_taxi dead_eviltaxi	played_taxiwar1_samp
-LVAR_INT blip_eviltaxi_created // FIXMIAMI
+LVAR_INT blip_eviltaxi_created // SCFIX
 
 // ***************************************Mission Start*************************************
 
@@ -48,7 +48,7 @@ counter_taxiwar = 0
 dead_eviltaxi = 0
 got_into_players_taxi = 0
 played_taxiwar1_samp = 0
-blip_eviltaxi_created = 0 // FIXMIAMI
+blip_eviltaxi_created = 0 // SCFIX
 
 //SET_PLAYER_CONTROL player1 OFF
 
@@ -243,7 +243,7 @@ IF NOT IS_CHAR_DEAD theVIP
 	SET_CHAR_COORDINATES theVIP -576.2 -471.1 10.4
 	SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER theVIP eviltaxi
 	ADD_BLIP_FOR_CHAR theVIP blip_eviltaxi
-	blip_eviltaxi_created = 1 // FIXMIAMI
+	blip_eviltaxi_created = 1 // SCFIX
 ENDIF
 
 IF NOT IS_CAR_DEAD eviltaxi
@@ -342,7 +342,7 @@ WHILE NOT LOCATE_STOPPED_CHAR_ANY_MEANS_3D theVIP -1438.1 -833.6 11.3 5.0 5.0 5.
 		IF NOT IS_CAR_DEAD eviltaxi
 			IF NOT IS_CAR_HEALTH_GREATER eviltaxi 500
 			OR IS_CHAR_DEAD taximan1
-			OR IS_CAR_ON_FIRE eviltaxi // FIXMIAMI: everyone gets out if car is on fire anyway
+			OR IS_CAR_ON_FIRE eviltaxi // SCFIX: everyone gets out if car is on fire anyway
 				IF got_into_players_taxi = 0 
 
 					IF NOT IS_CAR_DEAD eviltaxi
@@ -415,16 +415,16 @@ WHILE NOT LOCATE_STOPPED_CHAR_ANY_MEANS_3D theVIP -1438.1 -833.6 11.3 5.0 5.0 5.
 
 			IF NOT IS_CAR_DEAD players_cab
 				IF IS_CHAR_IN_CAR theVIP players_cab
-					IF blip_eviltaxi_created = 1 // FIXMIAMI
+					IF blip_eviltaxi_created = 1 // SCFIX
 						REMOVE_BLIP blip_eviltaxi
-						blip_eviltaxi_created = 0 // FIXMIAMI
-					ENDIF // FIXMIAMI
+						blip_eviltaxi_created = 0 // SCFIX
+					ENDIF // SCFIX
 				ELSE
-					//REMOVE_BLIP blip_eviltaxi // FIXMIAMI: don't recreate the blip every frame
-					IF blip_eviltaxi_created = 0 // FIXMIAMI
+					//REMOVE_BLIP blip_eviltaxi // SCFIX: don't recreate the blip every frame
+					IF blip_eviltaxi_created = 0 // SCFIX
 						ADD_BLIP_FOR_CHAR theVIP blip_eviltaxi
-						blip_eviltaxi_created = 1 // FIXMIAMI
-					ENDIF // FIXMIAMI
+						blip_eviltaxi_created = 1 // SCFIX
+					ENDIF // SCFIX
 				ENDIF
 			ENDIF
 
@@ -459,7 +459,7 @@ the_end_of_taxiwar1:
 IF NOT IS_CAR_DEAD eviltaxi
 	IF NOT IS_CHAR_DEAD	theVIP
 		IF IS_CHAR_IN_CAR theVIP eviltaxi
-		AND got_into_players_taxi = 0 // FIXMIAMI 
+		AND got_into_players_taxi = 0 // SCFIX 
 		AND LOCATE_CAR_3D eviltaxi -1438.1 -833.6 11.3 5.0 5.0 5.0 TRUE
 			PRINT_NOW ( TAXW1_4 ) 5000 1  //The V.I.P. has been dropped off!
 			GOTO mission_taxiwar1_failed

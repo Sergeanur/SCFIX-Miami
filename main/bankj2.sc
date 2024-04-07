@@ -1591,7 +1591,7 @@ ADD_SPHERE -667.85 1211.9 10.08 1.5 sphere_bankjob2
 
 flag_player_on_bank_2 = 1 // Used for interior loading stuff   
 
-WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -667.8 1221.0 10.5 1.5 1.5 3.0 FALSE // FIXMIAMI: last arg was TRUE 
+WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -667.8 1221.0 10.5 1.5 1.5 3.0 FALSE // SCFIX: last arg was TRUE 
 
 	WAIT 0
 
@@ -1909,7 +1909,7 @@ SET_CAMERA_BEHIND_PLAYER
 UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
 UNLOAD_SPECIAL_CHARACTER 3
-//UNLOAD_SPECIAL_CHARACTER 4 // FIXMIAMI: using this guy in gameplay now
+//UNLOAD_SPECIAL_CHARACTER 4 // SCFIX: using this guy in gameplay now
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ02
 
@@ -1923,9 +1923,9 @@ SET_PLAYER_MOOD player1 PLAYER_MOOD_CALM 60000
 
 SHUT_PLAYER_UP player1 TRUE
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+SET_PLAYER_CONTROL player1 OFF // SCFIX
 
-//REQUEST_MODEL MALE01 // FIXMIAMI: not used anymore
+//REQUEST_MODEL MALE01 // SCFIX: not used anymore
 
 REQUEST_MODEL tar_gun1
 
@@ -1953,8 +1953,8 @@ LOAD_MISSION_AUDIO 1 ( BNK2_1 ) // Live Ammo
 
 LOAD_MISSION_AUDIO 2 ( BNK2_2 ) // Aim 3-2-1 fire 
 
-//WHILE NOT HAS_MODEL_LOADED MALE01 // FIXMIAMI: not used anymore
-WHILE NOT HAS_MODEL_LOADED COLT45 // FIXMIAMI: OR became WHILE
+//WHILE NOT HAS_MODEL_LOADED MALE01 // SCFIX: not used anymore
+WHILE NOT HAS_MODEL_LOADED COLT45 // SCFIX: OR became WHILE
 OR NOT HAS_MODEL_LOADED tar_gun1
 OR NOT HAS_SPECIAL_CHARACTER_LOADED 5
 OR NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1995,7 +1995,7 @@ SET_CHAR_HEADING phil_bankjob2 90.0
 
 // creates other shooters
 
-CREATE_CHAR PEDTYPE_CIVMALE SPECIAL04 -666.29 1229.32 10.08 gunner1_bankjob2 // FIXMIAMI: was MALE01
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL04 -666.29 1229.32 10.08 gunner1_bankjob2 // SCFIX: was MALE01
 
 CLEAR_CHAR_THREAT_SEARCH gunner1_bankjob2
 
@@ -2021,19 +2021,19 @@ SET_OBJECT_HEADING object3_bankjob2 0.0
 
 GET_CHAR_WEAPON_IN_SLOT scplayer 4 slot4_weapon_type_bank2 slot4_ammo_bank2 slot4_model_bank2
 
-// FIXMIAMI: START - make sure the model is not unloaded (COLT45 is already requested for the mission)
+// SCFIX: START - make sure the model is not unloaded (COLT45 is already requested for the mission)
 IF NOT slot4_model_bank2 = COLT45
 AND slot4_ammo_bank2 > 0
 	REQUEST_MODEL slot4_model_bank2
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
-// FIXMIAMI: START - nil player's ammo before attach
+// SCFIX: START - nil player's ammo before attach
 SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
 SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0
-// FIXMIAMI: END
+// SCFIX: END
 
-SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // FIXMIAMI: moved before attach
+SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_UNARMED // SCFIX: moved before attach
 ATTACH_CHAR_TO_OBJECT scplayer object1_bankjob2 0.0 -2.0 1.0 FACING_FORWARD 60.0 WEAPONTYPE_PISTOL
 SET_CURRENT_CHAR_WEAPON scplayer WEAPONTYPE_PISTOL
 SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 100
@@ -2047,7 +2047,7 @@ WAIT 500
 
 DO_FADE 2000 FADE_IN
 
-// FIXMIAMI: START - tidy up this big ass chunk
+// SCFIX: START - tidy up this big ass chunk
 LVAR_INT bank2_tutor_state
 bank2_tutor_state = 0
 
@@ -2139,9 +2139,9 @@ WHILE bank2_tutor_state < 9
 	ENDIF
 
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
-/* FIXMIAMI: all this was rewritten above
+/* SCFIX: all this was rewritten above
 WHILE GET_FADING_STATUS
 
 	WAIT 0
@@ -3238,9 +3238,9 @@ ammo_used_round1_bankjob2 = ammo_given_round1_bankjob2 - ammo_round1_bankjob
 
 DETACH_CHAR_FROM_CAR scplayer
 
-SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // FIXMIAMI
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // SCFIX
 
-SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // FIXMIAMI: move after detach since detach restores previous weapon
+SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // SCFIX: move after detach since detach restores previous weapon
 
 DELETE_OBJECT object1_bankjob2
 
@@ -3284,11 +3284,11 @@ REMOVE_BLIP radar_blip_coord3_bankjob2
 
 SET_PLAYER_CONTROL player1 OFF
 
-// FIXMIAMI: START - remove this and delete char later
+// SCFIX: START - remove this and delete char later
 //IF NOT IS_CHAR_DEAD gunner1_bankjob2
 //	MARK_CHAR_AS_NO_LONGER_NEEDED gunner1_bankjob2 
 //ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 IF NOT IS_CHAR_DEAD phil_bankjob2
 	SET_CHAR_HEADING phil_bankjob2 270.0
@@ -3312,7 +3312,7 @@ IF LOCATE_PLAYER_ANY_MEANS_3D player1 -667.8 1210.0 10.5 3.0 3.0 3.0 FALSE
 	GOTO mission_bankjob2_failed
 ENDIF
 
-DELETE_CHAR gunner1_bankjob2 // FIXMIAMI
+DELETE_CHAR gunner1_bankjob2 // SCFIX
 
 // sets up player1 in 1st person camera mode and locks him in position.
 
@@ -3339,7 +3339,7 @@ DELETE_OBJECT target3_part3_bankjob2
 DELETE_OBJECT target3_part4_bankjob2
 DELETE_OBJECT target3_part5_bankjob2
 
-// FIXMIAMI: START - tidy up this big ass chunk
+// SCFIX: START - tidy up this big ass chunk
 bank2_tutor_state = 0
 
 WHILE bank2_tutor_state < 4
@@ -3389,9 +3389,9 @@ WHILE bank2_tutor_state < 4
 		bank2_tutor_state = 4
 	ENDIF
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
-/* FIXMIAMI: all this was rewritten above
+/* SCFIX: all this was rewritten above
 PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
 
 timera = 0
@@ -4167,9 +4167,9 @@ ammo_used_round2_bankjob2 = ammo_given_round2_bankjob2 - ammo_round2_bankjob2
 
 DETACH_CHAR_FROM_CAR scplayer
 
-SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // FIXMIAMI
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // SCFIX
 
-SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // FIXMIAMI: move after detach since detach restores previous weapon
+SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // SCFIX: move after detach since detach restores previous weapon
 
 DELETE_OBJECT object2_bankjob2
 
@@ -4244,7 +4244,7 @@ DELETE_OBJECT target5_round2_bankjob2
 
 DELETE_OBJECT target6_round2_bankjob2
 
-// FIXMIAMI: START - tidy up this big ass chunk
+// SCFIX: START - tidy up this big ass chunk
 bank2_tutor_state = 0
 
 WHILE bank2_tutor_state < 4
@@ -4295,9 +4295,9 @@ WHILE bank2_tutor_state < 4
 	ENDIF
 ENDWHILE
 
-// FIXMIAMI: END
+// SCFIX: END
 
-/* FIXMIAMI: all this was rewritten above
+/* SCFIX: all this was rewritten above
 PRINT_NOW ( BJM2_19 ) 8000 1 //"Hit as many targets as you can in the time limit!
 
 timera = 0
@@ -5147,9 +5147,9 @@ CLEAR_THIS_BIG_PRINT ( BJM2_3 )
 
 DETACH_CHAR_FROM_CAR scplayer
 
-SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // FIXMIAMI
+SET_PLAYER_AMMO player1 WEAPONTYPE_PISTOL 0 // SCFIX
 
-SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // FIXMIAMI: move after detach since detach restores previous weapon
+SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED // SCFIX: move after detach since detach restores previous weapon
 
 DELETE_OBJECT object3_bankjob2 
 
@@ -5473,7 +5473,7 @@ mission_cleanup_bankjob2:
 
 REMOVE_SOUND target_moving_sound_bank2
 REMOVE_CHAR_ELEGANTLY phil_bankjob2 
-REMOVE_CHAR_ELEGANTLY gunner1_bankjob2 // FIXMIAMI
+REMOVE_CHAR_ELEGANTLY gunner1_bankjob2 // SCFIX
 
 DELETE_OBJECT target1_frame_bankjob2
 DELETE_OBJECT target1_part1_bankjob2
@@ -5511,17 +5511,17 @@ DELETE_OBJECT target13_round3_bankjob2
 DETACH_CHAR_FROM_CAR scplayer
 
 IF slot4_ammo_bank2 > 0
-	//REQUEST_MODEL slot4_model_bank2 // FIXMIAMI: removed now, we leave the model loaded
+	//REQUEST_MODEL slot4_model_bank2 // SCFIX: removed now, we leave the model loaded
 	
-	//LOAD_ALL_MODELS_NOW // FIXMIAMI: removed now, we leave the model loaded
+	//LOAD_ALL_MODELS_NOW // SCFIX: removed now, we leave the model loaded
 
-	GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // FIXMIAMI: moved into if block
+	GIVE_WEAPON_TO_PLAYER player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // SCFIX: moved into if block
 	
-	IF NOT slot4_model_bank2 = COLT45 // FIXMIAMI: COLT45 will be unloaded below
-		MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2 // FIXMIAMI: moved into if block
-	ENDIF // FIXMIAMI
+	IF NOT slot4_model_bank2 = COLT45 // SCFIX: COLT45 will be unloaded below
+		MARK_MODEL_AS_NO_LONGER_NEEDED slot4_model_bank2 // SCFIX: moved into if block
+	ENDIF // SCFIX
 
-	SET_PLAYER_AMMO player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // FIXMIAMI: make sure we aren't duping ammo
+	SET_PLAYER_AMMO player1 slot4_weapon_type_bank2 slot4_ammo_bank2 // SCFIX: make sure we aren't duping ammo
 ENDIF
 
 flag_player_on_mission = 0
@@ -5540,7 +5540,7 @@ CLEAR_ONSCREEN_COUNTER score_to_beat_bankjob2
 CLEAR_ONSCREEN_TIMER timer_round1_bankjob2
 CLEAR_ONSCREEN_TIMER timer_round2_bankjob2
 CLEAR_ONSCREEN_TIMER timer_round3_bankjob2
-//MARK_MODEL_AS_NO_LONGER_NEEDED MALE01 // FIXMIAMI: not used anymore
+//MARK_MODEL_AS_NO_LONGER_NEEDED MALE01 // SCFIX: not used anymore
 MARK_MODEL_AS_NO_LONGER_NEEDED COLT45
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_gun1
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_gun2
@@ -5551,7 +5551,7 @@ MARK_MODEL_AS_NO_LONGER_NEEDED tar_top
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_upleft
 MARK_MODEL_AS_NO_LONGER_NEEDED tar_upright
 MARK_MODEL_AS_NO_LONGER_NEEDED faketarget
-UNLOAD_SPECIAL_CHARACTER 4 // FIXMIAMI: cutscene ped used in gameplay now
+UNLOAD_SPECIAL_CHARACTER 4 // SCFIX: cutscene ped used in gameplay now
 UNLOAD_SPECIAL_CHARACTER 5
 GET_GAME_TIMER timer_mobile_start
 MISSION_HAS_FINISHED

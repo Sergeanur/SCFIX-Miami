@@ -252,7 +252,7 @@ SET_PED_DENSITY_MULTIPLIER 1.0
 SET_CAR_DENSITY_MULTIPLIER 1.0
 SET_AREA_VISIBLE VIS_MAIN_MAP
 flag_player_in_mansion = 0
-CLEAR_EXTRA_COLOURS FALSE // FIXMIAMI
+CLEAR_EXTRA_COLOURS FALSE // SCFIX
 
 // ******************************************END OF CUTSCENE********************************
 SET_FADING_COLOUR 0 0 0
@@ -261,7 +261,7 @@ SET_PLAYER_COORDINATES player1 -375.9 -544.6 16.2
 LOAD_SCENE -375.9 -510.6 16.2 
 SET_PLAYER_HEADING player1 360.0
 SET_CAMERA_BEHIND_PLAYER
-PRINT_BIG ( STARI ) 3000 2 // FIXMIAMI: we are teleported out of the interior
+PRINT_BIG ( STARI ) 3000 2 // SCFIX: we are teleported out of the interior
 //------------------REQUEST_MODELS ------------------------------
 {
 SET_PLAYER_MOOD player1 PLAYER_MOOD_PISSED_OFF 60000
@@ -294,9 +294,9 @@ OR NOT HAS_MODEL_LOADED securica
 	WAIT 0
 ENDWHILE
 
-GOTO prot2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO prot2_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD 240.9 -1241.8 10.8 news_cafe_blip
-prot2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+prot2_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 CREATE_CHAR PEDTYPE_GANG_PLAYER SPECIAL03 -368.8 -544.8 16.2 prot_cuban1
 SET_CHAR_AS_PLAYER_FRIEND prot_cuban1 player1 TRUE
@@ -1017,7 +1017,7 @@ SET_CAR_CRUISE_SPEED security_gang_leader_bike 0.0
 SET_CAR_ONLY_DAMAGED_BY_PLAYER security_gang_leader_bike TRUE  
 SET_CAR_PROOFS security_gang_leader_bike TRUE TRUE TRUE TRUE TRUE
 
-CREATE_CHAR_INSIDE_CAR security_gang_leader_bike PEDTYPE_CIVMALE GDb shop_defend_guard1 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR_INSIDE_CAR security_gang_leader_bike PEDTYPE_CIVMALE GDb shop_defend_guard1 // SCFIX: was PEDTYPE_CIVFEMALE
 GIVE_WEAPON_TO_CHAR shop_defend_guard1 WEAPONTYPE_M4 30000
 CLEAR_CHAR_THREAT_SEARCH shop_defend_guard1
 SET_CHAR_PERSONALITY shop_defend_guard1 PEDSTAT_TOUGH_GUY  
@@ -1040,7 +1040,7 @@ SET_CAR_CRUISE_SPEED no2_bike 0.0
 SET_CAR_ONLY_DAMAGED_BY_PLAYER no2_bike TRUE  
 SET_CAR_PROOFS no2_bike TRUE TRUE TRUE TRUE TRUE
 
-CREATE_CHAR_INSIDE_CAR no2_bike PEDTYPE_CIVMALE GDa shop_defend_guard2 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR_INSIDE_CAR no2_bike PEDTYPE_CIVMALE GDa shop_defend_guard2 // SCFIX: was PEDTYPE_CIVFEMALE
 GIVE_WEAPON_TO_CHAR shop_defend_guard2 WEAPONTYPE_M4 30000
 CLEAR_CHAR_THREAT_SEARCH shop_defend_guard2
 SET_CHAR_PERSONALITY shop_defend_guard2 PEDSTAT_TOUGH_GUY  
@@ -1069,7 +1069,7 @@ SET_CAR_DRIVING_STYLE dbpvan 2
 SET_CAR_CRUISE_SPEED dbpvan 0.0 
 SET_CAR_STRAIGHT_LINE_DISTANCE dbpvan 15 
 LOCK_CAR_DOORS dbpvan CARLOCK_LOCKED
-CREATE_CHAR_INSIDE_CAR dbpvan PEDTYPE_CIVMALE GDa dbpvan_driver // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR_INSIDE_CAR dbpvan PEDTYPE_CIVMALE GDa dbpvan_driver // SCFIX: was PEDTYPE_CIVFEMALE
 GIVE_WEAPON_TO_CHAR dbpvan_driver WEAPONTYPE_M4 30000
 CLEAR_CHAR_THREAT_SEARCH dbpvan_driver
 SET_CHAR_PERSONALITY dbpvan_driver PEDSTAT_TOUGH_GUY  

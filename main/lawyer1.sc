@@ -58,7 +58,7 @@ stored_any_vehicle = 0
 CLEAR_HELP
  
 IF NOT IS_CHAR_DEAD scplayer
-AND IS_PLAYER_WEARING player1 player2 // FIXMIAMI: add specific skin check
+AND IS_PLAYER_WEARING player1 player2 // SCFIX: add specific skin check
 
 	UNDRESS_CHAR scplayer player
 
@@ -1489,7 +1489,7 @@ OR NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 strip_clubX strip_clubY strip_
 			ENDIF
 	   	ENDIF
 	   	
-		// FIXMIAMI: Start
+		// SCFIX: Start
 		VAR_INT flag_play_dialogue, flag_play_dialogue2 // TODO: make LVAR
 		flag_play_dialogue = 0
 		flag_play_dialogue2 = 0
@@ -1508,10 +1508,10 @@ OR NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 strip_clubX strip_clubY strip_
 			ENDIF
 			
 		ENDIF
-		// FIXMIAMI: End
+		// SCFIX: End
 
 	   	//IF IS_CHAR_IN_ANY_CAR cols_daughter
-		IF flag_play_dialogue = 1 // FIXMIAMI
+		IF flag_play_dialogue = 1 // SCFIX
 			
 			IF first_two_samples = 0
 
@@ -1532,7 +1532,7 @@ OR NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 strip_clubX strip_clubY strip_
 
 			IF NOT IS_CHAR_DEAD cols_daughter
 				//IF NOT IS_CHAR_ON_ANY_BIKE cols_daughter
-				IF flag_play_dialogue2 = 1 // FIXMIAMI
+				IF flag_play_dialogue2 = 1 // SCFIX
 					IF second_two_samples = 0
 					AND first_two_samples = 1
 					AND TIMERB > 500 

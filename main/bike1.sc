@@ -372,7 +372,7 @@ WAIT 0
 
 LOAD_MISSION_TEXT BIKE1
 
-// FIXMIAMI: START - remove cop uniform from the player
+// SCFIX: START - remove cop uniform from the player
 IF NOT IS_CHAR_DEAD scplayer
 	IF IS_PLAYER_WEARING player1 player6
 		UNDRESS_CHAR scplayer player
@@ -382,7 +382,7 @@ IF NOT IS_CHAR_DEAD scplayer
 		ENDIF
 	ENDIF
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -609.723 658.861 9.908 279.440
 
@@ -1593,11 +1593,11 @@ ELSE
 	PRINT_WITH_2_NUMBERS_NOW ( RACETM2 ) race_timer_mins_bike1 race_timer_seconds_bike1 5000 1
 ENDIF
 
-//IF IS_GERMAN_GAME // FIXMIAMI: remove german censorshit
-//	START_NEW_SCRIPT bikers_mission3_loop // FIXMIAMI: remove german censorshit 
-//ELSE // FIXMIAMI: remove german censorshit 
+//IF IS_GERMAN_GAME // SCFIX: remove german censorshit
+//	START_NEW_SCRIPT bikers_mission3_loop // SCFIX: remove german censorshit 
+//ELSE // SCFIX: remove german censorshit 
 	START_NEW_SCRIPT bikers_mission2_loop
-//ENDIF/ / FIXMIAMI: remove german censorshit 
+//ENDIF // SCFIX: remove german censorshit 
 
 RETURN
 	

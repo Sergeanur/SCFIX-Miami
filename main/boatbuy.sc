@@ -5,7 +5,7 @@ MISSION_START
 // *****************************************************************************************
 // *****************************************************************************************
 
-// FIXMIAMI: START - fix SSU
+// SCFIX: START - fix SSU
 
 GOSUB mission_start_boaybuy
 
@@ -14,17 +14,17 @@ GOSUB mission_cleanup_boaybuy
 MISSION_END
 
 mission_start_boaybuy:
-// FIXMIAMI: END
+// SCFIX: END
 {
 LVAR_INT cutscene_boat csdwayn csjetro boatbuy_boat1 boatbuy_boat2  //csplay
 
 flag_player_on_mission = 1
 
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT flag_boatbuy_set1
 flag_boatbuy_set1 = 0
 SET_PLAYER_CONTROL player1 OFF
-// FIXMIAMI: END
+// SCFIX: END
 
 SCRIPT_NAME BOATBY					  
 
@@ -34,14 +34,14 @@ DELETE_OBJECT boat_closed
 
 LOAD_MISSION_TEXT BOATBUY
 
-// FIXMIAMI: START
+// SCFIX: START
 REQUEST_MODEL dk_reef
 LOAD_ALL_MODELS_NOW
 
 WHILE NOT HAS_MODEL_LOADED dk_reef
 	WAIT 0
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
 LOAD_SPECIAL_CHARACTER 1 csplay
 LOAD_SPECIAL_CHARACTER 2 csdwayn
@@ -50,11 +50,11 @@ LOAD_SPECIAL_CHARACTER 3 csjetro
 CREATE_OBJECT_NO_OFFSET dk_reef -651.0 -1481.21 16.647 cutscene_boat
 DONT_REMOVE_OBJECT cutscene_boat
 
-MARK_MODEL_AS_NO_LONGER_NEEDED dk_reef // FIXMIAMI
+MARK_MODEL_AS_NO_LONGER_NEEDED dk_reef // SCFIX
 
-GOTO boatbuy_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO boatbuy_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD -664.1 -1476.3 13.8 RADAR_SPRITE_LAWYER boatbuy_blip 
-boatbuy_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+boatbuy_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 WAIT 0
 
 LOAD_SCENE -649.7202 -1482.0997 14.9076//-640.3344 -1488.8250 14.2185
@@ -192,7 +192,7 @@ WHILE cs_time < 45000//45848
 	GET_CUTSCENE_TIME cs_time
 ENDWHILE
 
-CLEAR_PRINTS // FIXMIAMI
+CLEAR_PRINTS // SCFIX
  
 SET_FADING_COLOUR 0 0 1
 DO_FADE 1500 FADE_OUT
@@ -210,7 +210,7 @@ CLEAR_PRINTS
 CLEAR_CUTSCENE
 SET_CAMERA_BEHIND_PLAYER
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: moved up here from below
+SET_PLAYER_CONTROL player1 OFF // SCFIX: moved up here from below
 
 UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
@@ -239,7 +239,7 @@ WAIT 0
 SET_FADING_COLOUR 0 0 1
 DO_FADE 1500 FADE_IN
 SWITCH_WIDESCREEN ON
-//SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: moved up
+//SET_PLAYER_CONTROL player1 OFF // SCFIX: moved up
 LOAD_SCENE -565.647 -1506.333 8.906
 SET_FIXED_CAMERA_POSITION -564.650 -1506.310 8.990 0.0 0.0 0.0
 POINT_CAMERA_AT_POINT -565.647 -1506.333 8.906 JUMP_CUT
@@ -251,16 +251,16 @@ ENDWHILE
 PLAY_MISSION_PASSED_TUNE 1
 
 PRINT_WITH_NUMBER_BIG BOATBUY boatbuy_price 7000 6 //
-GOSUB boatbuy_set1 // FIXMIAMI: moved stuff into a subroutine
+GOSUB boatbuy_set1 // SCFIX: moved stuff into a subroutine
 
 WAIT 7000
 
-SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+SET_PLAYER_CONTROL player1 ON // SCFIX
 
 
-RETURN // FIXMIAMI
+RETURN // SCFIX
 
-// FIXMIAMI: START
+// SCFIX: START
 boatbuy_set1:
 IF flag_boatbuy_set1 = 0
 	ADD_MONEY_SPENT_ON_PROPERTY boatbuy_price
@@ -268,9 +268,9 @@ IF flag_boatbuy_set1 = 0
 	flag_boatbuy_set1 = 1
 ENDIF
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-// FIXMIAMI: START - moved stuff down here
+// SCFIX: START - moved stuff down here
 mission_cleanup_boaybuy:
 
 GET_GAME_TIMER timer_mobile_start
@@ -290,18 +290,18 @@ SWITCH_PED_ROADS_ON -692.193 -1522.901 0.0 -575.311 -1453.378 30.0//BOAT YARD
 START_NEW_SCRIPT boatbuy_save_loop
 START_NEW_SCRIPT boatyard_oddjob_loop
 
-SET_CAMERA_BEHIND_PLAYER // FIXMIAMI: moved before jumpcut
+SET_CAMERA_BEHIND_PLAYER // SCFIX: moved before jumpcut
 RESTORE_CAMERA_JUMPCUT
 
-//WAIT 0 // FIXMIAMI: removed
+//WAIT 0 // SCFIX: removed
 
 MARK_MODEL_AS_NO_LONGER_NEEDED jetmax
 MARK_MODEL_AS_NO_LONGER_NEEDED squalo
 flag_player_on_mission = 0
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
+//MISSION_END // SCFIX: moved up
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 
 

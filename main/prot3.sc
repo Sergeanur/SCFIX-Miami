@@ -83,13 +83,13 @@ REGISTER_MISSION_GIVEN
 WAIT 0
 LOAD_MISSION_TEXT PROT3 
 IF NOT IS_CHAR_DEAD scplayer
-	IF IS_PLAYER_WEARING player1 player6 // FIXMIAMI
+	IF IS_PLAYER_WEARING player1 player6 // SCFIX
 		UNDRESS_CHAR scplayer player
 		LOAD_ALL_MODELS_NOW
 		IF NOT IS_CHAR_DEAD scplayer
 			DRESS_CHAR scplayer
 		ENDIF
-	ENDIF // FIXMIAMI
+	ENDIF // SCFIX
 ENDIF
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -288.2 -487.5 9.8 275.0
 // *****************************************Set Flags/variables************************************
@@ -466,11 +466,11 @@ SET_ZONE_CIVILIAN_CAR_INFO SHOP1 NIGHT 250 250 200 0 100 0 200 0 0 500 500
 SET_ZONE_GROUP SHOP1 DAY SHOP1_PEDGRP
 SET_ZONE_GROUP SHOP1 NIGHT SHOP1_NIGHT_PEDGRP
 
-GOTO prot3_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO prot3_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD 471.0 1028.0 19.1 bombplace
 	GET_RANDOM_COP_IN_AREA 587.7 -70.7 551.6 -110.6 1 0 0 0 0 cop2
 	ADD_BLIP_FOR_COORD 157.4 -1277.0 9.4 boutique1
-prot3_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+prot3_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 CREATE_CHAR PEDTYPE_GANG_PLAYER SPECIAL01 -351.3 -525.1 11.7 buddy
 SET_CHAR_HEADING buddy 124.3 
@@ -1200,7 +1200,7 @@ IF disguise_goals = 2
 		
 	IF timer_flag = 1
 		IF speech_played3 = 0
-			REQUEST_MODEL ml_tarbrushdamage // FIXMIAMI
+			REQUEST_MODEL ml_tarbrushdamage // SCFIX
 
 			PRINT_NOW ( PRO3_17 ) 5000 1 //Ok, timers are set, 5 seconds and ticking.
 			PLAY_MISSION_AUDIO 1
@@ -1308,15 +1308,15 @@ IF disguise_goals = 2
 			
 			IF NOT IS_PLAYER_DEAD player1
 				IF NOT IS_CHAR_DEAD buddy
-					REQUEST_MODEL ml_tarbrush // FIXMIAMI
+					REQUEST_MODEL ml_tarbrush // SCFIX
 
-					WHILE NOT HAS_MODEL_LOADED ml_tarbrushdamage // FIXMIAMI
-						WAIT 0 // FIXMIAMI
-					ENDWHILE // FIXMIAMI
+					WHILE NOT HAS_MODEL_LOADED ml_tarbrushdamage // SCFIX
+						WAIT 0 // SCFIX
+					ENDWHILE // SCFIX
 
 					SWAP_NEAREST_BUILDING_MODEL 468.882 1006.67 20.681 80.0 ml_tarbrush ml_tarbrushdamage
 
-					MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // FIXMIAMI
+					MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // SCFIX
 
 					IF player_in_coffee_shop = 0
 						player_in_coffee_shop = 1
@@ -1494,13 +1494,13 @@ ENDIF
 //checking buddy is still in player1s group
 
 IF NOT IS_CHAR_DEAD buddy
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_WANTED_LEVEL_GREATER player1 0
 		SET_CHAR_THREAT_SEARCH buddy THREAT_COP
 	ELSE
 		CLEAR_CHAR_THREAT_SEARCH buddy
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 	IF flag_buddy_in_group_prot3 = 1
         IF NOT IS_CHAR_IN_PLAYERS_GROUP buddy player1
 			IF timera > 3000
@@ -1573,7 +1573,7 @@ REMOVE_BLIP baron_contact_blip
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD -378.4 -536.9 17.2 RADAR_SPRITE_TOMMY baron_contact_blip
 ++ counter_60_percent
 flag_protect_mission3_passed = 1 
-flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
+flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
 RETURN
 		
 
@@ -1596,8 +1596,8 @@ MARK_MODEL_AS_NO_LONGER_NEEDED police
 MARK_MODEL_AS_NO_LONGER_NEEDED dynamite							
 MARK_MODEL_AS_NO_LONGER_NEEDED nitestick
 MARK_MODEL_AS_NO_LONGER_NEEDED colt45
-MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrush // FIXMIAMI
-MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // FIXMIAMI
+MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrush // SCFIX
+MARK_MODEL_AS_NO_LONGER_NEEDED ml_tarbrushdamage // SCFIX
 DELETE_OBJECT dyn1
 DELETE_OBJECT dyn2
 DELETE_OBJECT dyn3
@@ -1644,7 +1644,7 @@ IF clothes4_created = 1
    CREATE_CLOTHES_PICKUP 106.5 253.0 21.7 4 clothes_pickup4
 ENDIF
 IF clothes5_created = 1
-   CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5 // FIXMIAMI: fix cuban skin pickup location
+   CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5 // SCFIX: fix cuban skin pickup location
 ENDIF
 IF flag_protect_mission3_passed = 0
 	IF clothes6_created = 1

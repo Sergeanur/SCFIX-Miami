@@ -274,7 +274,7 @@ SET_PLAYER_CONTROL player1 OFF
 SET_EVERYONE_IGNORE_PLAYER player1 TRUE
 SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 
-GOTO ovalring_fool_compiler  // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO ovalring_fool_compiler  // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_CHAR PEDTYPE_CIVMALE MALE01 0.0 0.0 0.0 gosub_driver
 	CREATE_CHAR PEDTYPE_CIVMALE MALE01 0.0 0.0 0.0 driver_car1
 	CREATE_CHAR PEDTYPE_CIVMALE MALE01 0.0 0.0 0.0 driver_car2
@@ -291,7 +291,7 @@ GOTO ovalring_fool_compiler  // FIXMIAMI: remove flag_player_on_mission = 0 chec
 	CREATE_CHAR PEDTYPE_CIVMALE MALE01 0.0 0.0 0.0 driver_car13
 	CREATE_CHAR PEDTYPE_CIVMALE MALE01 0.0 0.0 0.0 driver_car14
 	CREATE_CHAR PEDTYPE_CIVMALE MALE01 0.0 0.0 0.0 driver_car15
-ovalring_fool_compiler:  // FIXMIAMI: remove flag_player_on_mission = 0 check
+ovalring_fool_compiler:  // SCFIX: remove flag_player_on_mission = 0 check
 
 CREATE_CAR HOTRINA -1344.4868 1172.7334 263.8694 nascar1
 SET_CAR_HEADING nascar1 284.8876

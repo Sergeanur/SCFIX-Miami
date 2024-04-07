@@ -1149,13 +1149,13 @@ IF frame_counter = 2
 							SET_CHAR_OBJ_FLEE_PLAYER_ON_FOOT_TILL_SAFE tank_dude2 player1
 						ENDIF
 					ENDIF
-					IF NOT IS_CHAR_DEAD tank_dude1 // FIXMIAMI
-					OR NOT IS_CHAR_DEAD tank_dude2 // FIXMIAMI
+					IF NOT IS_CHAR_DEAD tank_dude1 // SCFIX
+					OR NOT IS_CHAR_DEAD tank_dude2 // SCFIX
 						IF audio_7_flag = 0
 							audio_7_flag = 1
 							audio_7_timeout = game_timer + 6000
 						ENDIF
-					ENDIF // FIXMIAMI
+					ENDIF // SCFIX
 					LOCK_CAR_DOORS tank CARLOCK_UNLOCKED
 					unlock_tank_flag = 2
 					IF attack_player = 0
@@ -1905,8 +1905,8 @@ IF frame_counter = 2
 			ENDIF
 			IF tank_mission_flag = 0
 				IF audio_4_flag = 0
-					//audio_4_flag = 1 // FIXMIAMI: removed
-					GOSUB check_any_alive_soldier_near_tank // FIXMIAMI
+					//audio_4_flag = 1 // SCFIX: removed
+					GOSUB check_any_alive_soldier_near_tank // SCFIX
 					audio_4_timeout = game_timer + 6000
 				ENDIF
 				initiate_seft_destruct_timer = game_timer + 6000
@@ -3985,7 +3985,7 @@ ENDIF
 
 RETURN
 
-// FIXMIAMI: BEGIN
+// SCFIX: BEGIN
 check_any_alive_soldier_near_tank:
 
 	IF NOT IS_CHAR_DEAD escort1_dude1
@@ -4143,5 +4143,5 @@ check_any_alive_soldier_near_tank:
 	ENDIF
 
 	RETURN
-// FIXMIAMI: END
+// SCFIX: END
 }

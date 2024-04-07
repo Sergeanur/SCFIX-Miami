@@ -935,7 +935,7 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-// FIXMIAMI: START - move post fade
+// SCFIX: START - move post fade
 DELETE_OBJECT malibu_doors 
 CREATE_OBJECT_NO_OFFSET od_clbdr_close 490.34 -77.017 11.598 malibu_doors
 DONT_REMOVE_OBJECT malibu_doors
@@ -943,7 +943,7 @@ flag_malibu_doors_closed = 1
 flag_malibu_doors_open = 0
 flag_player_on_counter_1 = 0
 flag_player_in_malibu = 0
-// FIXMIAMI: END
+// SCFIX: END
 
 PRINT_BIG ( BEACH3 ) 3000 2 //"Vice Point"
 

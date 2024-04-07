@@ -174,9 +174,9 @@ time_chunk /= 2
 
 DISPLAY_ONSCREEN_TIMER ped_time_limit TIMER_DOWN
 
-GOTO ambulance_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO ambulance_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD hospital_x hospital_y hospital_z hospital_blip
-ambulance_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+ambulance_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 GOTO ambulance_loop
 
@@ -649,7 +649,7 @@ AND ped_coord_y	> 32.1217
 AND ped_coord_y	< 126.1341
 	GOTO generate_random_coord
 ENDIF
-// FIXMIAMI: START
+// SCFIX: START
 //G-SPOTLIGHT OFFICE
 IF ped_coord_x >  -570.1256
 AND ped_coord_x < -453.1256
@@ -664,7 +664,7 @@ AND ped_coord_y	> 1250.5261
 AND ped_coord_y	< 1419.7261
 	GOTO generate_random_coord
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
  
  
   
@@ -1137,7 +1137,7 @@ injured_ped_checks:
 
 	IF ped_var_for_gosub_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player1 ped_var_for_gosub 10.0 10.0 2.0 0
-		AND IS_CAR_STOPPED players_ambulance // FIXMIAMI
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GET_NUMBER_OF_PASSENGERS players_ambulance peds_in_car
 			GET_MAXIMUM_NUMBER_OF_PASSENGERS players_ambulance max_peds_in_car
 

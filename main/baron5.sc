@@ -11,8 +11,8 @@ MISSION_START
 GOSUB mission_start_baron5
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
-	//GOSUB mission_baron5_failed // FIXMIAMI: not using this on deatharrest because of waits
-	PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed" // FIXMIAMI
+	//GOSUB mission_baron5_failed // SCFIX: not using this on deatharrest because of waits
+	PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed" // SCFIX
 ENDIF
 
 GOSUB mission_cleanup_baron5
@@ -1665,7 +1665,7 @@ IF IS_PLAYER_PLAYING player1
 	ENDIF
 ENDIF
 
-/* FIXMIAMI: moved to cleanup
+/* SCFIX: moved to cleanup
 CREATE_OBJECT_NO_OFFSET mansion_new_doors -391.19 -575.906 24.071 mansion_doors
 DONT_REMOVE_OBJECT mansion_doors
 flag_open_mansion = 0
@@ -1703,14 +1703,14 @@ mansion_clothes_created = 1
 SWITCH_CAR_GENERATOR gen_car51 0
 SWITCH_CAR_GENERATOR buddys_lambo 101
 
-// FIXMIAMI: Start
+// SCFIX: Start
 IF flag_general_mission5_passed = 1
 	SWITCH_CAR_GENERATOR col_speeder 101
 ENDIF
 IF flag_pizza_mission_passed = 1
 	SWITCH_CAR_GENERATOR gen_car5 101
 ENDIF
-// FIXMIAMI: End
+// SCFIX: End
 
 M4_in_stock = 1
 mp5_in_stock = 1
@@ -1730,13 +1730,13 @@ RETURN
 
 mission_cleanup_baron5:
 
-// FIXMIAMI: START - moved from mission_baron5_failed
+// SCFIX: START - moved from mission_baron5_failed
 IF flag_open_mansion = 1
 	CREATE_OBJECT_NO_OFFSET mansion_new_doors -391.19 -575.906 24.071 mansion_doors
 	DONT_REMOVE_OBJECT mansion_doors
 	flag_open_mansion = 0
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 flag_player_on_mission = 0
 GET_GAME_TIMER timer_mobile_start
 MARK_MODEL_AS_NO_LONGER_NEEDED CLa

@@ -675,9 +675,9 @@ SET_CHAR_PERSONALITY docks_guard PEDSTAT_TOUGH_GUY
 TIMERA = 3000
 TIMERB = 3000
 
-GOTO count2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO count2_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	CREATE_CAR MAVERICK 408.1980 -1726.1954 84.1376 courier_heli
-count2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+count2_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 	
 mission_counter2_loop:
 
@@ -2473,7 +2473,7 @@ SWITCH_WIDESCREEN OFF
 REMOVE_BLIP counter_contact_blip
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD counterX counterY counterZ the_counter_blip counter_contact_blip
 flag_counter_mission2_passed = 1
-flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
+flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
 ++ counter_60_percent
 REGISTER_MISSION_PASSED	CNT_2
 PLAYER_MADE_PROGRESS 1

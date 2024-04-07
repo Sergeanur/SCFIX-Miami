@@ -5,7 +5,7 @@ MISSION_START
 
 SCRIPT_NAME intro
 
-// FIXMIAMI: START
+// SCFIX: START
 GOSUB mission_start_intro
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
@@ -15,7 +15,7 @@ ENDIF
 GOSUB mission_cleanup_intro
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
  
 // ****************************************Mission Start************************************
 
@@ -24,7 +24,7 @@ mission_start_intro:
 flag_player_on_mission = 1
 skip_flag = 0
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before WAIT
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before WAIT
 
 WAIT 0
 
@@ -613,7 +613,7 @@ SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE 231.4 -1277.7 19.0 50.0 mob_detailsb FA
 
 SET_AREA_VISIBLE VIS_MAIN_MAP
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before WAIT
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before WAIT
 
 WAIT 0
 
@@ -961,7 +961,7 @@ MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ03
 MARK_MODEL_AS_NO_LONGER_NEEDED ap_radar1_01
 MARK_MODEL_AS_NO_LONGER_NEEDED veg_palm04
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before WAIT
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before WAIT
 
 WAIT 0								 
 
@@ -1976,7 +1976,7 @@ MARK_MODEL_AS_NO_LONGER_NEEDED doc_craneeggs04
 MARK_MODEL_AS_NO_LONGER_NEEDED doc_crane_cab04
 MARK_MODEL_AS_NO_LONGER_NEEDED dockfuel07
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before WAIT
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before WAIT
 
 WAIT 0
 
@@ -2049,7 +2049,7 @@ MARK_MODEL_AS_NO_LONGER_NEEDED veg_palm04
 SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE 231.4 -1277.7 19.0 50.0 mob_mobroom2 FALSE
 SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE 231.4 -1277.7 19.0 50.0 mob_detailsb FALSE
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before WAIT
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before WAIT
 
 WAIT 0
 
@@ -2102,20 +2102,20 @@ LOAD_SCENE 114.2 -823.3 9.7 //New lawyer start
 CLEAR_AREA 86.428 -852.238 9.325 50.0 TRUE
 SET_PED_DENSITY_MULTIPLIER 0.0
 SET_CAR_DENSITY_MULTIPLIER 0.0
-SET_PLAYER_COORDINATES player1 110.637 -798.590 9.325 // FIXMIAMI: was 86.428 -852.238 9.325 
+SET_PLAYER_COORDINATES player1 110.637 -798.590 9.325 // SCFIX: was 86.428 -852.238 9.325 
 CLEAR_AREA 110.637 -798.590 10.0 10.0 TRUE
 CLEAR_AREA 86.485 -851.933 10.0 10.0 TRUE
 CREATE_CAR admiral 83.540 -851.669 10.0 intro_car
 SET_CAR_PROOFS intro_car TRUE TRUE TRUE TRUE TRUE
 SET_CAR_HEADING intro_car 330.0
-//SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER scplayer intro_car // FIXMIAMI: removed
+//SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER scplayer intro_car // SCFIX: removed
 CREATE_CHAR_INSIDE_CAR intro_car PEDTYPE_CIVMALE SPECIAL10 lawyer_intro
 CLEAR_CHAR_THREAT_SEARCH lawyer_intro
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT intro_double
 CREATE_CHAR_AS_PASSENGER intro_car PEDTYPE_CIVMALE null 1 intro_double
 CLEAR_CHAR_THREAT_SEARCH intro_double
-// FIXMIAMI: END
+// SCFIX: END
 SET_CHAR_PROOFS lawyer_intro TRUE TRUE TRUE TRUE TRUE
 CAR_SET_IDLE intro_car 
 CHANGE_CAR_COLOUR intro_car 84 84
@@ -2125,9 +2125,9 @@ SET_RADIO_CHANNEL 9 -1
 MARK_MODEL_AS_NO_LONGER_NEEDED admiral
 MARK_MODEL_AS_NO_LONGER_NEEDED faggio
 
-//SET_PLAYER_COORDINATES player1 86.428 -852.238 9.325 // FIXMIAMI: test  
-//SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER scplayer intro_car // FIXMIAMI: test
-/* FIXMIAMI: removed
+//SET_PLAYER_COORDINATES player1 86.428 -852.238 9.325 // SCFIX: test  
+//SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER scplayer intro_car // SCFIX: test
+/* SCFIX: removed
 WHILE NOT IS_CHAR_IN_ANY_CAR scplayer
 
 	WAIT 0
@@ -2138,7 +2138,7 @@ WHILE NOT IS_CHAR_IN_ANY_CAR scplayer
 ENDWHILE
 */
 
-WAIT 700 // FIXMIAMI: wait till the car lands
+WAIT 700 // SCFIX: wait till the car lands
 
 DO_FADE 1000 FADE_IN
 
@@ -2162,14 +2162,14 @@ OR NOT car_in_position_intro = 4
 	
 	WAIT 0
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_BUTTON_PRESSED PAD1 CROSS
 		GOTO skip_lawyer_intro
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 			
 	IF IS_CAR_DEAD intro_car
-		GOTO skip_lawyer_intro // FIXMIAMI
+		GOTO skip_lawyer_intro // SCFIX
 	ELSE
 		 
 		IF car_in_position_intro = 1
@@ -2226,7 +2226,7 @@ OR NOT car_in_position_intro = 4
 	ENDIF
 
 	IF IS_CHAR_DEAD lawyer_intro
-		GOTO skip_lawyer_intro // FIXMIAMI
+		GOTO skip_lawyer_intro // SCFIX
 	ENDIF
 	
 	IF play_audio_intro = 0
@@ -2322,18 +2322,18 @@ WHILE timera < 300
 	
 	WAIT 0
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_BUTTON_PRESSED PAD1 CROSS
 		GOTO skip_lawyer_intro
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
 	IF IS_CAR_DEAD intro_car
-		GOTO skip_lawyer_intro // FIXMIAMI
+		GOTO skip_lawyer_intro // SCFIX
 	ENDIF
 
 	IF IS_CHAR_DEAD lawyer_intro
-		GOTO skip_lawyer_intro // FIXMIAMI
+		GOTO skip_lawyer_intro // SCFIX
 	ENDIF
 
 ENDWHILE
@@ -2343,36 +2343,36 @@ PRINT_NOW ( INTRO4 ) 10000 1 //" "
 
 WAIT 400
 
-// FIXMIAMI: START
+// SCFIX: START
 IF IS_BUTTON_PRESSED PAD1 CROSS
 	GOTO skip_lawyer_intro
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 IF IS_CAR_DEAD intro_car
-	GOTO skip_lawyer_intro // FIXMIAMI
+	GOTO skip_lawyer_intro // SCFIX
 ENDIF
 
 IF IS_CHAR_DEAD lawyer_intro
-	GOTO skip_lawyer_intro // FIXMIAMI
+	GOTO skip_lawyer_intro // SCFIX
 ENDIF
 
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 
 	WAIT 0
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_BUTTON_PRESSED PAD1 CROSS
 		GOTO skip_lawyer_intro
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
 	IF IS_CAR_DEAD intro_car
-		GOTO skip_lawyer_intro // FIXMIAMI
+		GOTO skip_lawyer_intro // SCFIX
 	ENDIF
 
 	IF IS_CHAR_DEAD lawyer_intro
-		GOTO skip_lawyer_intro // FIXMIAMI
+		GOTO skip_lawyer_intro // SCFIX
 	ENDIF
 
 ENDWHILE
@@ -2393,18 +2393,18 @@ IF NOT IS_CHAR_DEAD lawyer_intro
 
 		WAIT 0
 
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF IS_BUTTON_PRESSED PAD1 CROSS
 			GOTO skip_lawyer_intro
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 
 		IF IS_CAR_DEAD intro_car
-			GOTO skip_lawyer_intro // FIXMIAMI
+			GOTO skip_lawyer_intro // SCFIX
 		ENDIF
 
 		IF IS_CHAR_DEAD lawyer_intro
-			GOTO skip_lawyer_intro // FIXMIAMI
+			GOTO skip_lawyer_intro // SCFIX
 		ENDIF
 		
 	ENDWHILE
@@ -2422,15 +2422,15 @@ WHILE timera < 1500
 
 	WAIT 0
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF IS_BUTTON_PRESSED PAD1 CROSS
 		GOTO skip_lawyer_intro
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
 	IF NOT IS_CHAR_DEAD lawyer_intro
-	ELSE // FIXMIAMI
-		GOTO skip_lawyer_intro // FIXMIAMI
+	ELSE // SCFIX
+		GOTO skip_lawyer_intro // SCFIX
 	ENDIF
 	
 ENDWHILE
@@ -2462,10 +2462,10 @@ IF NOT IS_CHAR_IN_ANY_CAR scplayer
 	SET_CHAR_HEADING scplayer 225.495
 ENDIF
 
-// FIXMIAMI: START
+// SCFIX: START
 DELETE_CHAR intro_double
 SET_CHAR_OBJ_NO_OBJ scplayer
-// FIXMIAMI: END
+// SCFIX: END
 
 timerb = 0
 
@@ -2489,20 +2489,20 @@ WHILE timerb < 1350
 
 ENDWHILE
 
-RETURN // FIXMIAMI
+RETURN // SCFIX
 
-mission_cleanup_intro: // FIXMIAMI
+mission_cleanup_intro: // SCFIX
 SET_CAMERA_BEHIND_PLAYER
 RESTORE_CAMERA_JUMPCUT
 
-CLEAR_AREA 136.457 -817.37 9.44 10.0 TRUE // FIXMIAMI
+CLEAR_AREA 136.457 -817.37 9.44 10.0 TRUE // SCFIX
 
-CLEAR_MISSION_AUDIO 1 // FIXMIAMI
-CLEAR_MISSION_AUDIO 2 // FIXMIAMI
+CLEAR_MISSION_AUDIO 1 // SCFIX
+CLEAR_MISSION_AUDIO 2 // SCFIX
 
-CLEAR_THIS_PRINT ( INTRO1 ) // FIXMIAMI
-CLEAR_THIS_PRINT ( INTRO2 ) // FIXMIAMI
-CLEAR_THIS_PRINT ( INTRO3 ) // FIXMIAMI
+CLEAR_THIS_PRINT ( INTRO1 ) // SCFIX
+CLEAR_THIS_PRINT ( INTRO2 ) // SCFIX
+CLEAR_THIS_PRINT ( INTRO3 ) // SCFIX
 CLEAR_THIS_PRINT ( INTRO4 )
 
 SET_RADIO_CHANNEL FLASH_FM -1
@@ -2516,7 +2516,7 @@ MARK_CAR_AS_NO_LONGER_NEEDED intro_car
 MARK_CAR_AS_NO_LONGER_NEEDED intro_bike
 SWITCH_CAR_GENERATOR gen_car83 101
 
-DELETE_CHAR intro_double // FIXMIAMI
+DELETE_CHAR intro_double // SCFIX
 DELETE_CHAR lawyer_intro
 
 flag_intro_passed = 1
@@ -2538,7 +2538,7 @@ LOAD_SPLASH_SCREEN splash1
 SET_FADING_COLOUR 0 0 0
 
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
+//MISSION_END // SCFIX: moved up
 
 RETURN
 
@@ -2560,7 +2560,7 @@ ENDIF
 
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 skip_lawyer_intro:
 SET_FADING_COLOUR 0 0 0
 
@@ -2601,7 +2601,7 @@ WAIT 700
 
 DO_FADE 1000 FADE_IN
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 }
 

@@ -715,7 +715,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 	WAIT 0
 	
 	IF flag_cell_nation = 1
-	OR flag_player_on_mission = 1 // FIXMIAMI: paranoid check
+	OR flag_player_on_mission = 1 // SCFIX: paranoid check
 		CREATE_PICKUP killfrenzy PICKUP_ONCE rampage_pickup_x rampage_pickup_y rampage_pickup_z rampage_pickup
 		RETURN
 	ENDIF
@@ -735,7 +735,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 		ENDWHILE
 	ENDIF
 
-	// FIXMIAMI - Start: Fix rampage gang always being cubans, remove Diaz gang after Rub Out
+	// SCFIX - Start: Fix rampage gang always being cubans, remove Diaz gang after Rub Out
 	{
 	LVAR_INT flag_are_pedmodels_picked
 	flag_are_pedmodels_picked = 0
@@ -833,7 +833,7 @@ IF HAS_PICKUP_BEEN_COLLECTED rampage_pickup
 		ENDIF
 	ENDIF
 	}
-	// FIXMIAMI - END: Fix rampage gang always being cubans, remove Diaz gang after Rub Out
+	// SCFIX - END: Fix rampage gang always being cubans, remove Diaz gang after Rub Out
 	
 	IF rampage_pickup = rampage_19
 		START_KILL_FRENZY PAGE_00 rampage_weapontype 120000 rampage_kills rampage_pedmodel_1 rampage_pedmodel_2 rampage_pedmodel_3 rampage_pedmodel_4 FALSE

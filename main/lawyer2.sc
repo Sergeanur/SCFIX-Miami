@@ -29,7 +29,7 @@ VAR_FLOAT blokeX blokeY blokeZ bud_Heading
 LVAR_INT cs_bounca cs_ganga cs_gangb cs_gangc hotel_blip set_buddys_threat short_malibu_cut gun_blip_help
 LVAR_INT ambush_blokes_obj_set cs_guncolt players_cellphone players_cellphone_blip on_the_phone_again
 LVAR_INT set_players_control_back_on counter_badguys kent_paul1
-VAR_INT law2_broken_car_audio1_played law2_broken_car_audio2_played buddycar_health // FIXMIAMI
+VAR_INT law2_broken_car_audio1_played law2_broken_car_audio2_played buddycar_health // SCFIX
 
 // ***************************************Mission Start*************************************
 
@@ -73,9 +73,9 @@ set_players_control_back_on = 0
 played_sprint_help = 0
 drove_in_from_south = 0
 
-law2_broken_car_audio1_played = 0 // FIXMIAMI
-law2_broken_car_audio2_played = 0 // FIXMIAMI
-buddycar_health = 2000 // FIXMIAMI
+law2_broken_car_audio1_played = 0 // SCFIX
+law2_broken_car_audio2_played = 0 // SCFIX
+buddycar_health = 2000 // SCFIX
 
 
 CLEAR_HELP
@@ -617,7 +617,7 @@ DO_FADE 1500 FADE_IN
 
 REMOVE_BLIP kent_paul1
 
-CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 blokeX blokeY blokeZ ambush_bloke1 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 blokeX blokeY blokeZ ambush_bloke1 // SCFIX: was PEDTYPE_CIVFEMALE
 
 
 SET_CHAR_HEADING ambush_bloke1 70.0 
@@ -1080,7 +1080,7 @@ ENDIF
 SET_PLAYER_HEADING player1 327.0
 
 CLEAR_AREA 265.7 -929.3 9.7 4.0 FALSE
-CREATE_CHAR PEDTYPE_CIVMALE SPECIAL04 433.1 -575.8 9.6 buddy // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL04 433.1 -575.8 9.6 buddy // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING buddy 143.0 
 SET_CHAR_PERSONALITY buddy PEDSTAT_TOUGH_GUY
 SET_CHAR_AS_PLAYER_FRIEND buddy Player1 TRUE
@@ -1106,21 +1106,21 @@ GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 34
 SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
 
 CLEAR_AREA 439.0 -567.7 9.6 1.0 FALSE
-CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 439.2 -567.9 9.6 ambush_bloke2 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 439.2 -567.9 9.6 ambush_bloke2 // SCFIX: was PEDTYPE_CIVFEMALE
 CLEAR_CHAR_THREAT_SEARCH ambush_bloke2
 SET_CHAR_PERSONALITY ambush_bloke2 PEDSTAT_TOUGH_GUY
 GIVE_WEAPON_TO_CHAR ambush_bloke2 WEAPONTYPE_CLEAVER 0
 SET_CHAR_HEADING ambush_bloke2 154.0 
 
 CLEAR_AREA 437.4 -567.8 9.6 1.0 FALSE
-CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 438.2 -567.8 9.6 ambush_bloke3 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 438.2 -567.8 9.6 ambush_bloke3 // SCFIX: was PEDTYPE_CIVFEMALE
 CLEAR_CHAR_THREAT_SEARCH ambush_bloke3
 SET_CHAR_PERSONALITY ambush_bloke3 PEDSTAT_TOUGH_GUY
 GIVE_WEAPON_TO_CHAR ambush_bloke3 WEAPONTYPE_KNIFE 0
 SET_CHAR_HEADING ambush_bloke3 154.0 
 
 CLEAR_AREA 435.4 -566.2 9.6 1.0 FALSE
-CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 437.2 -567.4 9.6 ambush_bloke4 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 437.2 -567.4 9.6 ambush_bloke4 // SCFIX: was PEDTYPE_CIVFEMALE
 CLEAR_CHAR_THREAT_SEARCH ambush_bloke4
 SET_CHAR_PERSONALITY ambush_bloke4 PEDSTAT_TOUGH_GUY
 GIVE_WEAPON_TO_CHAR ambush_bloke4 WEAPONTYPE_CLEAVER 0
@@ -1164,11 +1164,11 @@ PRINT_NOW ( LAW2_4 ) 2000 2	//This way
 
 WAIT 500
 
-// FIXMIAMI: START
+// SCFIX: START
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 	WAIT 0
 ENDWHILE
-// FIXMIAMI: END
+// SCFIX: END
 
 GET_CONTROLLER_MODE controlmode
 IF controlmode = 0
@@ -1410,19 +1410,19 @@ PRINT_NOW ( LAW2_15 ) 10000 2  //Drive to AMMUNATION
 
 TIMERA = 0
 
-VAR_INT gunstore_sphere // FIXMIAMI
-ADD_SPHERE -53.7 -1482.9 10.4 4.0 gunstore_sphere // FIXMIAMI
-WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 3.0 FALSE // FIXMIAMI: last arg was TRUE
+VAR_INT gunstore_sphere // SCFIX
+ADD_SPHERE -53.7 -1482.9 10.4 4.0 gunstore_sphere // SCFIX
+WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 3.0 FALSE // SCFIX: last arg was TRUE
 	WAIT 0
 
 	IF IS_CHAR_DEAD	buddy
 		PRINT_NOW ( COK2_26 ) 5000 2 //YOUR BUDDY IS DEAD!
-		REMOVE_SPHERE gunstore_sphere // FIXMIAMI
+		REMOVE_SPHERE gunstore_sphere // SCFIX
 		GOTO mission_lawyer2_failed
 	ENDIF
 
 	IF IS_CAR_DEAD buddycar
-		REMOVE_SPHERE gunstore_sphere // FIXMIAMI
+		REMOVE_SPHERE gunstore_sphere // SCFIX
 		GOTO mission_lawyer2_failed
 	ENDIF
 
@@ -1437,8 +1437,8 @@ WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 
    		IF NOT IS_CAR_DEAD buddycar
 			IF NOT IS_CHAR_IN_CAR buddy buddycar
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER buddy buddycar
-			ELSE // FIXMIAMI
-				GOSUB law2_broken_car_audio // FIXMIAMI
+			ELSE // SCFIX
+				GOSUB law2_broken_car_audio // SCFIX
 			ENDIF
 			IF IS_PLAYER_IN_CAR	player1 buddycar
 				REMOVE_BLIP buddy_blip
@@ -1522,12 +1522,12 @@ WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 
 
 					IF IS_CHAR_DEAD	buddy
 						PRINT_NOW ( COK2_26 ) 5000 2 //YOUR BUDDY IS DEAD!
-						REMOVE_SPHERE gunstore_sphere // FIXMIAMI
+						REMOVE_SPHERE gunstore_sphere // SCFIX
 						GOTO mission_lawyer2_failed
 					ENDIF
 
 					IF IS_CAR_DEAD buddycar
-						REMOVE_SPHERE gunstore_sphere // FIXMIAMI
+						REMOVE_SPHERE gunstore_sphere // SCFIX
 						GOTO mission_lawyer2_failed
 					ENDIF
   
@@ -1539,7 +1539,7 @@ WHILE NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -53.7 -1482.9 10.4 3.0 4.0 
 	ENDIF
 
 ENDWHILE
-REMOVE_SPHERE gunstore_sphere // FIXMIAMI
+REMOVE_SPHERE gunstore_sphere // SCFIX
 
 LOAD_MISSION_AUDIO 2 LAW2_5
 
@@ -1957,7 +1957,7 @@ REMOVE_BLIP buddycar_blip
 MISSION_HAS_FINISHED
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 law2_broken_car_audio:
 	IF HAS_CAR_BEEN_DAMAGED_BY_WEAPON buddycar WEAPONTYPE_RAMMEDBYCAR
 		GET_CAR_HEALTH buddycar buddycar_health
@@ -1989,5 +1989,5 @@ law2_broken_car_audio:
 		ENDIF
 	ENDIF
 	RETURN
-// FIXMIAMI: END
+// SCFIX: END
 }

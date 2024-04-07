@@ -83,7 +83,7 @@ RELEASE_WEATHER
 WAIT 500
 
 IF NOT IS_CHAR_DEAD scplayer
-AND IS_PLAYER_WEARING player1 player5 // FIXMIAMI: add specific skin check
+AND IS_PLAYER_WEARING player1 player5 // SCFIX: add specific skin check
 
 	UNDRESS_CHAR scplayer player
 
@@ -171,7 +171,7 @@ tex2_time_dif = 0
 
 // ********************************** SCRIPTED CUT - AVERY'S STRETCH ARRIVES ***************
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI
+SET_PLAYER_CONTROL player1 OFF // SCFIX
 
 CLEAR_AREA 299.0 -205.0 10.5 5.0 TRUE
 CLEAR_AREA 305.0 -219.5 10.5 10.0 TRUE
@@ -416,7 +416,7 @@ UNLOAD_SPECIAL_CHARACTER 3
 MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 
 SET_AREA_VISIBLE VIS_MAIN_MAP
-SET_PLAYER_CONTROL player1 ON // FIXMIAMI
+SET_PLAYER_CONTROL player1 ON // SCFIX
 
 DO_FADE 1500 FADE_IN
 
@@ -883,7 +883,7 @@ mission_serg3_passed:
 CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5
 clothes5_created = 1
 START_NEW_SCRIPT cloth4
-START_NEW_SCRIPT check_cuban_player // FIXMIAMI
+START_NEW_SCRIPT check_cuban_player // SCFIX
 
  
 

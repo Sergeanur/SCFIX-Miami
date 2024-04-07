@@ -766,7 +766,7 @@ ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD taxiwarX taxiwarY taxiwarZ the_taxiwar_bli
 SWITCH_CAR_GENERATOR gen_car1 0
 SWITCH_CAR_GENERATOR gen_car110 101
 taxifirm_asset_acquired = 1
-flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
+flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
 ++ counter_60_percent
 REGISTER_MISSION_PASSED	TAXI_3
 SET_PLAYER_HAS_MET_DEBBIE_HARRY TRUE

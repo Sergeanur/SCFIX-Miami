@@ -1,6 +1,6 @@
 MISSION_START
 
-// FIXMIAMI: START - fix SSU shit
+// SCFIX: START - fix SSU shit
 GOSUB mission_start_buypro1
 
 IF HAS_DEATHARREST_BEEN_EXECUTED 
@@ -10,7 +10,7 @@ ENDIF
 GOSUB mission_cleanup_buypro1
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
 			  
 
 mission_start_buypro1:
@@ -18,21 +18,21 @@ mission_start_buypro1:
 SCRIPT_NAME	buypro1
 
 flag_player_on_mission = 1
-{ // FIXMIAMI: scope moved up, was after WAIT 0
+{ // SCFIX: scope moved up, was after WAIT 0
 
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT flag_buypro1_set1
 LVAR_INT flag_buypro1_set2
 LVAR_INT flag_buypro1_set3
 flag_buypro1_set1 = 0
 flag_buypro1_set2 = 0
 flag_buypro1_set3 = 0
-// FIXMIAMI: END
+// SCFIX: END
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
-	GOSUB buypro1_set1 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro1_set1 // SCFIX: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -41,7 +41,7 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SPRITE_BLIP_FOR_CONTACT_POINT counterX counterY counterZ the_counter_blip counter_contact_blip
 			START_NEW_SCRIPT counter_mission1_loop
@@ -63,7 +63,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SPRITE_BLIP_FOR_CONTACT_POINT counterX counterY counterZ the_counter_blip counter_contact_blip
 			START_NEW_SCRIPT counter_mission1_loop
@@ -73,14 +73,14 @@ WAIT 0
 	ENDWHILE
 
 	PRINT_WITH_NUMBER_BIG CNTBUY1 printworks_price 4000 6 //"Printworks purchased: $ 15000"
-	GOSUB buypro1_set2 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro1_set2 // SCFIX: moved stuff into a subroutine
 
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
 	WAIT 4000
 
-	/* FIXMIAMI: remove this shit
+	/* SCFIX: remove this shit
 	IF NOT IS_PLAYER_PLAYING player1
 		SET_MUSIC_DOES_FADE TRUE
 		ADD_SPRITE_BLIP_FOR_CONTACT_POINT counterX counterY counterZ the_counter_blip counter_contact_blip
@@ -94,7 +94,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove SSU shit
+		/* SCFIX: remove SSU shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			ADD_SPRITE_BLIP_FOR_CONTACT_POINT counterX counterY counterZ the_counter_blip counter_contact_blip
@@ -112,14 +112,14 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED TRUE
 	SWITCH_WIDESCREEN OFF
 
-	GOSUB buypro1_set3 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB buypro1_set3 // SCFIX: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_IN
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove SSU shit
+		/* SCFIX: remove SSU shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
@@ -127,9 +127,9 @@ WAIT 0
 		*/
 	ENDWHILE
 
-	RETURN // FIXMIAMI
+	RETURN // SCFIX
 
-// FIXMIAMI: START
+// SCFIX: START
 buypro1_set1:
 IF flag_buypro1_set1 = 0
 	REMOVE_BLIP counter_contact_blip
@@ -164,9 +164,9 @@ GOSUB buypro1_set1
 GOSUB buypro1_set2
 GOSUB buypro1_set3
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-mission_cleanup_buypro1: // FIXMIAMI
+mission_cleanup_buypro1: // SCFIX
 	SET_MUSIC_DOES_FADE TRUE
 
 START_NEW_SCRIPT printers_save_loop
@@ -174,7 +174,7 @@ START_NEW_SCRIPT printers_save_loop
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: done above now
+//MISSION_END // SCFIX: done above now
 
 }
 RETURN 

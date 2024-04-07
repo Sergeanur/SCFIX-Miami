@@ -349,9 +349,9 @@ WHILE NOT HAS_MISSION_AUDIO_LOADED 2
 ENDWHILE 
 
 //cheating the compilier into thinking i have created something which i havent (so it can be used later)
-GOTO phil2_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
+GOTO phil2_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD -1183.0 -664.2 10.5 radar_blip_hospital2
-phil2_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
+phil2_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 LOAD_SPECIAL_CHARACTER 1 IGPhil2
 WHILE NOT HAS_SPECIAL_CHARACTER_LOADED 1

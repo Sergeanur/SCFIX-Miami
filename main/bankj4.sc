@@ -13,9 +13,9 @@ MISSION_START
 GOSUB mission_start_bankjob4
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
-	//GOSUB mission_bankjob4_failed // FIXMIAMI: not using now because of waits
-	PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed" // FIXMIAMI
-	SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // FIXMIAMI
+	//GOSUB mission_bankjob4_failed // SCFIX: not using now because of waits
+	PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed" // SCFIX
+	SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // SCFIX
 ENDIF
 
 GOSUB mission_cleanup_bankjob4
@@ -55,7 +55,7 @@ VAR_INT bank_armour bank_health //bank_chaingun
 
 VAR_INT lift_door_1 lift_door_2
 
-VAR_INT counter_conv1 counter_conv2 counter_conv3 counter_conv4 //FIXMIAMI: uncomment counter_conv4
+VAR_INT counter_conv1 counter_conv2 counter_conv3 counter_conv4 //SCFIX: uncomment counter_conv4
 VAR_INT counter_temp1 counter_temp2 counter_temp3 counter_temp4
 VAR_INT flag_conv3 flag_watch_the_car flag_stopped
 
@@ -106,9 +106,9 @@ VAR_FLOAT phil_x phil_y  cam_x cam_y   //phil_z
 VAR_FLOAT player_heading_bj4
 
 
-VAR_INT flag_played_shake_cops // FIXMIAMI
-VAR_INT flag_alarm_enabled // FIXMIAMI
-VAR_INT mission_sphere // FIXMIAMI
+VAR_INT flag_played_shake_cops // SCFIX
+VAR_INT flag_alarm_enabled // SCFIX
+VAR_INT mission_sphere // SCFIX
 
 // ******** TEST FLAGS FOR 'LOAD AND LAUNCH EXCLUSIVE' **********************************
 
@@ -128,10 +128,10 @@ flag_player_in_malibu = 0
 REGISTER_MISSION_GIVEN 
 WAIT 0
 
-// FIXMIAMI: remove wanted level
+// SCFIX: remove wanted level
 CLEAR_WANTED_LEVEL player1
 
-// FIXMIAMI - Start: remove robber clothes from player
+// SCFIX - Start: remove robber clothes from player
 IF NOT IS_CHAR_DEAD scplayer
 AND IS_PLAYER_WEARING player1 player7
 
@@ -144,7 +144,7 @@ AND IS_PLAYER_WEARING player1 player7
 	ENDIF
 
 ENDIF
-// FIXMIAMI - End
+// SCFIX - End
 
 //flag_bank_job = 1
 audio_slot = 1
@@ -197,7 +197,7 @@ flag_switcharoo = 0
 counter_conv1 = 0
 counter_conv2 = 0
 counter_conv3 = 0
-counter_conv4 = 0 // FIXMIAMI
+counter_conv4 = 0 // SCFIX
 
 counter_temp1 = 0
 counter_temp2 = 0
@@ -236,9 +236,9 @@ flag_cam_downstairs = 0
 //flag_player_in_bank = 0
 
 flag_car_warp = 0
-flag_played_shake_cops = 0 // FIXMIAMI
-flag_alarm_enabled = 0 // FIXMIAMI
-mission_sphere = 0 //FIXMIAMI
+flag_played_shake_cops = 0 // SCFIX
+flag_alarm_enabled = 0 // SCFIX
+mission_sphere = 0 //SCFIX
 
 // ****************************************START OF CUTSCENE********************************
 
@@ -439,7 +439,7 @@ DO_FADE 1500 FADE_OUT
 
 CLEAR_PRINTS
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 
 SWITCH_RUBBISH ON
@@ -499,8 +499,8 @@ CREATE_CAR TAXI 496.5 -84.0 9.8 getaway_car
 SET_CAR_HEADING getaway_car 137.0
 ADD_UPSIDEDOWN_CAR_CHECK getaway_car
 
-SET_CAR_PROOFS getaway_car FALSE TRUE FALSE FALSE FALSE // FIXMIAMI
-SWITCH_CAR_GENERATOR gen_car23 0 // FIXMIAMI: remove securicar at bank entrance
+SET_CAR_PROOFS getaway_car FALSE TRUE FALSE FALSE FALSE // SCFIX
+SWITCH_CAR_GENERATOR gen_car23 0 // SCFIX: remove securicar at bank entrance
 
 LOAD_SPECIAL_CHARACTER 1 igphil
 LOAD_SPECIAL_CHARACTER 2 ighlary     
@@ -549,32 +549,32 @@ SET_CHAR_SUFFERS_CRITICAL_HITS cam FALSE
 //SET_CHAR_RUNNING cam TRUE
 
 
-// FIXMIAMI: START - make them not leave the car when we re-enter
+// SCFIX: START - make them not leave the car when we re-enter
 SET_CHAR_CANT_BE_DRAGGED_OUT phil TRUE
 SET_CHAR_STAY_IN_CAR_WHEN_JACKED phil TRUE
 SET_CHAR_CANT_BE_DRAGGED_OUT cam TRUE
 SET_CHAR_STAY_IN_CAR_WHEN_JACKED cam TRUE
 SET_CHAR_CANT_BE_DRAGGED_OUT hilary TRUE
 SET_CHAR_STAY_IN_CAR_WHEN_JACKED hilary TRUE
-// FIXMIAMI: END
+// SCFIX: END
 
-// FIXMIAMI: START - add more health to companions to reduce dying from accidents
+// SCFIX: START - add more health to companions to reduce dying from accidents
 SET_CHAR_HEALTH phil 300
 SET_CHAR_HEALTH cam 300
 SET_CHAR_HEALTH hilary 300
-// FIXMIAMI: END
+// SCFIX: END
 
 
-/* // FIXMIAMI: comment this block to not create the destination blip early
+/* // SCFIX: comment this block to not create the destination blip early
 ADD_BLIP_FOR_COORD -833.0 -348.0 11.0 mission_blip
-ADD_SPHERE -833.0 -348.0 10.0 4.0 mission_sphere // FIXMIAMI
+ADD_SPHERE -833.0 -348.0 10.0 4.0 mission_sphere // SCFIX
 locate_dome_flag = 1				
 */
 flag_area_check_1 = 1
 
 DO_FADE 750 FADE_IN
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 SET_PLAYER_CONTROL player1 ON
 SET_RADIO_CHANNEL 6 -1
@@ -584,10 +584,10 @@ LOAD_MISSION_AUDIO 2 BNK4_3a
 
 GET_GAME_TIMER timer_intro_start
 
-// FIXMIAMI: START
+// SCFIX: START
 VAR_INT flag_conv4
 flag_conv4 = 0
-// FIXMIAMI: END
+// SCFIX: END
 
 bank_job_loop1:	// GETTING TO THE BANK
 
@@ -600,7 +600,7 @@ bank_job_loop1:	// GETTING TO THE BANK
 	GOSUB cam_check
 	GOSUB hilary_check
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF flag_conv4 = 0
 	AND IS_WANTED_LEVEL_GREATER player1 0
 		flag_conv4 = 1
@@ -610,14 +610,14 @@ bank_job_loop1:	// GETTING TO THE BANK
 	AND flag_conv4 = 1
 		GOSUB Conversation_4
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 	
 	IF counter_conv1 < 7
 		GOSUB bank_job_timer
 		GOSUB Conversation_1
 	ENDIF
 	
-	IF counter_conv2 < 3 // FIXMIAMI: restore cut line
+	IF counter_conv2 < 3 // SCFIX: restore cut line
 		GOSUB bank_job_timer
 		GOSUB Conversation_2
 	ENDIF
@@ -692,20 +692,20 @@ bank_job_loop1:	// GETTING TO THE BANK
 								SET_CHAR_AS_PLAYER_FRIEND cam player1 TRUE
 								SET_CHAR_SUFFERS_CRITICAL_HITS cam FALSE
 
-								// FIXMIAMI: START - make them not leave the car when we re-enter
+								// SCFIX: START - make them not leave the car when we re-enter
 								SET_CHAR_CANT_BE_DRAGGED_OUT phil TRUE
 								SET_CHAR_STAY_IN_CAR_WHEN_JACKED phil TRUE
 								SET_CHAR_CANT_BE_DRAGGED_OUT cam TRUE
 								SET_CHAR_STAY_IN_CAR_WHEN_JACKED cam TRUE
 								SET_CHAR_CANT_BE_DRAGGED_OUT hilary TRUE
 								SET_CHAR_STAY_IN_CAR_WHEN_JACKED hilary TRUE
-								// FIXMIAMI: END
+								// SCFIX: END
 
-								// FIXMIAMI: START - add more health to companions to reduce dying from accidents
+								// SCFIX: START - add more health to companions to reduce dying from accidents
 								SET_CHAR_HEALTH phil 300
 								SET_CHAR_HEALTH cam 300
 								SET_CHAR_HEALTH hilary 300
-								// FIXMIAMI: END
+								// SCFIX: END
 
 								flag_switcharoo = 1
 							ENDIF
@@ -716,15 +716,15 @@ bank_job_loop1:	// GETTING TO THE BANK
 
 			IF locate_dome_flag = 0
 				ADD_BLIP_FOR_COORD -833.0 -348.0 10.0 mission_blip
-				ADD_SPHERE -833.0 -348.0 10.0 4.0 mission_sphere // FIXMIAMI
+				ADD_SPHERE -833.0 -348.0 10.0 4.0 mission_sphere // SCFIX
 				locate_dome_flag = 1
 			ENDIF
 			IF NOT IS_CAR_DEAD getaway_car
 			AND flag_switcharoo = 1
-				IF LOCATE_CAR_3D getaway_car -833.0 -348.0 10.0 4.0 4.0 4.0 FALSE // FIXMIAMI: made last arg FALSE
+				IF LOCATE_CAR_3D getaway_car -833.0 -348.0 10.0 4.0 4.0 4.0 FALSE // SCFIX: made last arg FALSE
 				AND IS_CAR_STOPPED getaway_car
 				AND NOT IS_CAR_UPSIDEDOWN getaway_car
-					// FIXMIAMI: START
+					// SCFIX: START
 					IF IS_WANTED_LEVEL_GREATER player1 0
 						IF flag_played_shake_cops = 0
 							audio_slot = 1
@@ -736,14 +736,14 @@ bank_job_loop1:	// GETTING TO THE BANK
 							flag_played_shake_cops = 1
 						ENDIF
 					ELSE
-						REMOVE_SPHERE mission_sphere // FIXMIAMI
+						REMOVE_SPHERE mission_sphere // SCFIX
 						GOTO biffa
 					ENDIF
-					// FIXMIAMI: END
+					// SCFIX: END
 				ENDIF
 			ENDIF			
-		ENDIF // FIXMIAMI: remove ELSE	
-		//ELSE // FIXMIAMI: remove ELSE
+		ENDIF // SCFIX: remove ELSE	
+		//ELSE // SCFIX: remove ELSE
 			IF flag_switcharoo = 1
 				IF NOT IS_CAR_DEAD getaway_car
 				AND NOT IS_CHAR_DEAD phil
@@ -758,7 +758,7 @@ bank_job_loop1:	// GETTING TO THE BANK
 					ENDIF
 				ENDIF
 			ENDIF
-		//ENDIF // FIXMIAMI: remove ELSE
+		//ENDIF // SCFIX: remove ELSE
 	ENDIF
 	
 	IF flag_bank_mission_failed = 1
@@ -857,7 +857,7 @@ biffa_loop:
 			SET_CHAR_OBJ_ENTER_CAR_AS_DRIVER hilary getaway_car
 		ENDIF
 		IF NOT IS_CHAR_DEAD scplayer
-			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT scplayer phil_x phil_y //world_x world_y // FIXMIAMI: goto Phil's destination to fix stuck anim
+			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT scplayer phil_x phil_y //world_x world_y // SCFIX: goto Phil's destination to fix stuck anim
 			//SET_CHAR_OBJ_FOLLOW_ROUTE scplayer route_1 FOLLOW_ROUTE_ONCE
 			//CHAR_FOLLOW_PATH scplayer world_x world_y -100.0 1.0 WALK
 		ENDIF
@@ -876,7 +876,7 @@ biffa_loop:
 	IF intro_time_lapsed > 4000	   
 	AND flag_intro = 3
 		IF NOT IS_CHAR_DEAD scplayer
-		//AND LOCATE_CHAR_ON_FOOT_2D scplayer	world_x world_y 3.0 3.0 FALSE // FIXMIAMI: removed - sometimes player might go slightly somewhere else and then the scene becomes a minute long clownfest
+		//AND LOCATE_CHAR_ON_FOOT_2D scplayer	world_x world_y 3.0 3.0 FALSE // SCFIX: removed - sometimes player might go slightly somewhere else and then the scene becomes a minute long clownfest
 			player_z = player_z + 0.25
 			SET_FIXED_CAMERA_POSITION player_x player_y player_z 0.0 0.0 0.0
 			player_z = player_z + 2.0
@@ -1165,7 +1165,7 @@ WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -896.0 -341.0 12.5 2.0 2.0 3.0 TRUE
 ENDWHILE
 
 DO_FADE 1000 FADE_OUT
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 REQUEST_MODEL WFYBU
 REQUEST_MODEL HFYBU
@@ -1189,67 +1189,67 @@ OR NOT HAS_MODEL_LOADED GDb
 	WAIT 0
 ENDWHILE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -904.7 -328.6 12.49 cashier1 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -904.7 -328.6 12.49 cashier1 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier1 190.0
 CLEAR_CHAR_THREAT_SEARCH cashier1
 SET_CHAR_PERSONALITY cashier1 PEDSTAT_GEEK_GIRL
 SET_CHAR_NEVER_TARGETTED cashier1 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -910.1 -328.6 12.49 cashier2 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -910.1 -328.6 12.49 cashier2 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier2 190.0
 CLEAR_CHAR_THREAT_SEARCH cashier2
 SET_CHAR_PERSONALITY cashier2 PEDSTAT_GEEK_GIRL
 SET_CHAR_NEVER_TARGETTED cashier2 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -912.5 -328.6 12.49 cashier3 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -912.5 -328.6 12.49 cashier3 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier3 190.0
 CLEAR_CHAR_THREAT_SEARCH cashier3
 SET_CHAR_PERSONALITY cashier3 PEDSTAT_SENSIBLE_GIRL
 SET_CHAR_NEVER_TARGETTED cashier3 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -907.5 -353.6 12.49 cashier4 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -907.5 -353.6 12.49 cashier4 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier4 10.0
 CLEAR_CHAR_THREAT_SEARCH cashier4
 SET_CHAR_PERSONALITY cashier4 PEDSTAT_GEEK_GIRL
 SET_CHAR_NEVER_TARGETTED cashier4 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -910.2 -353.6 12.49 cashier5 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -910.2 -353.6 12.49 cashier5 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier5 10.0
 CLEAR_CHAR_THREAT_SEARCH cashier5
 SET_CHAR_PERSONALITY cashier5 PEDSTAT_SENSIBLE_GIRL
 SET_CHAR_NEVER_TARGETTED cashier5 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -915.3 -353.6 12.49 cashier6 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -915.3 -353.6 12.49 cashier6 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier6 10.0
 CLEAR_CHAR_THREAT_SEARCH cashier6
 SET_CHAR_PERSONALITY cashier6 PEDSTAT_GEEK_GIRL
 SET_CHAR_NEVER_TARGETTED cashier6 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -920.36 -343.7 14.6 cashier7 // FIXMIAMI: was PEDTYPE_CIVFEMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -920.36 -343.7 14.6 cashier7 // SCFIX: was PEDTYPE_CIVFEMALE
 SET_CHAR_HEADING cashier7 65.0
 CLEAR_CHAR_THREAT_SEARCH cashier7
 SET_CHAR_PERSONALITY cashier7 PEDSTAT_SENSIBLE_GIRL
 SET_CHAR_NEVER_TARGETTED cashier7 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER WMORI -921.76 -345.15 12.49 cashier8 // FIXMIAMI: was PEDTYPE_CIVMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER WMORI -921.76 -345.15 12.49 cashier8 // SCFIX: was PEDTYPE_CIVMALE
 SET_CHAR_HEADING cashier8 310.0
 CLEAR_CHAR_THREAT_SEARCH cashier8
 SET_CHAR_PERSONALITY cashier8 PEDSTAT_SENSIBLE_GUY
 SET_CHAR_NEVER_TARGETTED cashier8 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -917.3 -340.0 12.49 bank_cop_1 // FIXMIAMI: was PEDTYPE_CIVMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -917.3 -340.0 12.49 bank_cop_1 // SCFIX: was PEDTYPE_CIVMALE
 CLEAR_CHAR_THREAT_SEARCH bank_cop_1 
 SET_CHAR_HEADING bank_cop_1 270.0
 CHAR_SET_IDLE bank_cop_1
 SET_CHAR_NEVER_TARGETTED bank_cop_1 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER	GDb -908.0 -347.77 12.49 bank_cop_2 // FIXMIAMI: was PEDTYPE_CIVMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER	GDb -908.0 -347.77 12.49 bank_cop_2 // SCFIX: was PEDTYPE_CIVMALE
 CLEAR_CHAR_THREAT_SEARCH bank_cop_2 
 SET_CHAR_HEADING bank_cop_2 270.0
 CHAR_SET_IDLE bank_cop_2
 SET_CHAR_NEVER_TARGETTED bank_cop_2 TRUE
 
-CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -919.14 -336.0 12.49 bank_cop_3 // FIXMIAMI: was PEDTYPE_CIVMALE
+CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -919.14 -336.0 12.49 bank_cop_3 // SCFIX: was PEDTYPE_CIVMALE
 CLEAR_CHAR_THREAT_SEARCH bank_cop_3 
 SET_CHAR_HEADING bank_cop_3 130.0
 SET_CHAR_STAY_IN_SAME_PLACE bank_cop_3 TRUE
@@ -1257,10 +1257,10 @@ SET_CHAR_NEVER_TARGETTED bank_cop_3 TRUE
 //CHAR_WANDER_DIR bank_cop_3 -1
 
 GOTO selkirk
-bank_cop_6 = scplayer // FIXMIAMI: fool compiler still but use less size
-bank_manager = scplayer // FIXMIAMI: fool compiler still but use less size
-swat_1 = scplayer // FIXMIAMI: fool compiler still but use less size
-swat_2 = scplayer // FIXMIAMI: fool compiler still but use less size
+bank_cop_6 = scplayer // SCFIX: fool compiler still but use less size
+bank_manager = scplayer // SCFIX: fool compiler still but use less size
+swat_1 = scplayer // SCFIX: fool compiler still but use less size
+swat_2 = scplayer // SCFIX: fool compiler still but use less size
 selkirk:
 
 flag_waitstate_1 = 25 //ATM
@@ -1327,12 +1327,12 @@ tha_inner:
 		ENDIF
 		IF NOT IS_CHAR_DEAD phil
 			SET_CHAR_COORDINATES phil -909.8 -339.0 12.5
-			SET_CHAR_HEALTH phil 200 // FIXMIAMI: why was it set to 100 if we had it at 200 just a moment ago?
+			SET_CHAR_HEALTH phil 200 // SCFIX: why was it set to 100 if we had it at 200 just a moment ago?
 			CHAR_SET_IDLE phil
 		ENDIF
 		IF NOT IS_CHAR_DEAD cam
 			SET_CHAR_COORDINATES cam -909.55 -341.6 12.5
-			SET_CHAR_HEALTH cam 200 // FIXMIAMI: why was it set to 100 if we had it at 200 just a moment ago?
+			SET_CHAR_HEALTH cam 200 // SCFIX: why was it set to 100 if we had it at 200 just a moment ago?
 			CHAR_SET_IDLE cam
 		ENDIF
 		SET_FIXED_CAMERA_POSITION -914.5 -341.1 12.7 0.0 0.0 0.0
@@ -1364,7 +1364,7 @@ tha_inner:
 			 //CHAR_LOOK_AT_CHAR_ALWAYS bank_cop_2 cam 
 		ENDIF
 		DO_FADE 1000 FADE_IN
-		GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+		GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 		flag_intro = 2
 	ENDIF
 	
@@ -1485,7 +1485,7 @@ tha_inner:
 	
 	IF intro_time_lapsed > 9000	  
 	AND flag_intro = 8
-		// FIXMIAMI: start - moved up before IS_CHAR_DEAD
+		// SCFIX: start - moved up before IS_CHAR_DEAD
 		IF NOT IS_CHAR_DEAD phil
 			SET_CHAR_COORDINATES phil -918.87 -336.2 12.4
 			SET_CHAR_HEADING phil 146.0
@@ -1494,121 +1494,121 @@ tha_inner:
 			SET_CHAR_COORDINATES cam -916.0 -340.0 12.4
 			SET_CHAR_HEADING cam 120.0
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 
 		IF NOT IS_CHAR_DEAD bank_cop_3
-			DELETE_CHAR bank_cop_3 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -924.0 -339.6 12.4 bank_cop_3 // FIXMIAMI
+			DELETE_CHAR bank_cop_3 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -924.0 -339.6 12.4 bank_cop_3 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	bank_cop_3
 			SET_CHAR_HEADING bank_cop_3 84.0
 			CHAR_SET_IDLE bank_cop_3
 			SET_CHAR_STAY_IN_SAME_PLACE bank_cop_3 TRUE
-			//SET_CHAR_COORDINATES bank_cop_3 -924.0 -339.6 12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES bank_cop_3 -924.0 -339.6 12.4 // SCFIX: removed
 			IF NOT IS_CHAR_DEAD phil
-				// SET_CHAR_COORDINATES phil -918.87 -336.2 12.4 // FIXMIAMI: start - moved up
-				// SET_CHAR_HEADING phil 146.0 // FIXMIAMI: start - moved up
+				// SET_CHAR_COORDINATES phil -918.87 -336.2 12.4 // SCFIX: start - moved up
+				// SET_CHAR_HEADING phil 146.0 // SCFIX: start - moved up
 				SET_CHAR_OBJ_AIM_GUN_AT_CHAR phil bank_cop_3
 			ENDIF
 		ENDIF
 		IF NOT IS_CHAR_DEAD bank_cop_2
-			DELETE_CHAR bank_cop_2 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER	GDb -923.5 -338.6 12.4 bank_cop_2 // FIXMIAMI
+			DELETE_CHAR bank_cop_2 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER	GDb -923.5 -338.6 12.4 bank_cop_2 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	bank_cop_2
 			SET_CHAR_HEADING bank_cop_2 93.0
 			CHAR_SET_IDLE bank_cop_2
 			SET_CHAR_STAY_IN_SAME_PLACE bank_cop_2 TRUE
-			//SET_CHAR_COORDINATES bank_cop_2 -923.5 -338.6 12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES bank_cop_2 -923.5 -338.6 12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD bank_cop_1
-			DELETE_CHAR bank_cop_1 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -923.0 -337.7 12.4 bank_cop_1 // FIXMIAMI
+			DELETE_CHAR bank_cop_1 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER	GDa -923.0 -337.7 12.4 bank_cop_1 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	bank_cop_1
 			SET_CHAR_HEADING bank_cop_1 90.0
 			CHAR_SET_IDLE bank_cop_1
 			SET_CHAR_STAY_IN_SAME_PLACE bank_cop_1 TRUE
-			//SET_CHAR_COORDINATES bank_cop_1 -923.0 -337.7 12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES bank_cop_1 -923.0 -337.7 12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier1
-			DELETE_CHAR cashier1 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -923.4 -336.6 12.4 cashier1 // FIXMIAMI
+			DELETE_CHAR cashier1 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -923.4 -336.6 12.4 cashier1 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier1
 			SET_CHAR_HEADING cashier1 88.0
 			CHAR_SET_IDLE cashier1
 			SET_CHAR_STAY_IN_SAME_PLACE cashier1 TRUE
-			//SET_CHAR_COORDINATES cashier1 -923.4 -336.6	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier1 -923.4 -336.6	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier2
-			DELETE_CHAR cashier2 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -923.0 -335.6	12.4 cashier2 // FIXMIAMI
+			DELETE_CHAR cashier2 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -923.0 -335.6	12.4 cashier2 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier2
 			SET_CHAR_HEADING cashier2 98.0
 			CHAR_SET_IDLE cashier2
 			SET_CHAR_STAY_IN_SAME_PLACE cashier2 TRUE
-			//SET_CHAR_COORDINATES cashier2 -923.0 -335.6	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier2 -923.0 -335.6	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier3
-			DELETE_CHAR cashier3 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -923.8 -334.3 12.4 cashier3 // FIXMIAMI
+			DELETE_CHAR cashier3 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -923.8 -334.3 12.4 cashier3 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier3
 			SET_CHAR_HEADING cashier3 90.0
 			CHAR_SET_IDLE cashier3
 			SET_CHAR_STAY_IN_SAME_PLACE cashier3 TRUE
-			//SET_CHAR_COORDINATES cashier3 -923.8 -334.3	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier3 -923.8 -334.3	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier4
-			DELETE_CHAR cashier4 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -918.2 -342.0	12.4 cashier4 // FIXMIAMI
+			DELETE_CHAR cashier4 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -918.2 -342.0	12.4 cashier4 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier4
 			SET_CHAR_HEADING cashier4 82.0
 			CHAR_SET_IDLE cashier4
 			SET_CHAR_STAY_IN_SAME_PLACE cashier4 TRUE
-			//SET_CHAR_COORDINATES cashier4 -918.2 -342.0	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier4 -918.2 -342.0	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier5
-			DELETE_CHAR cashier5 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -918.0 -344.0 12.4 cashier5 // FIXMIAMI
+			DELETE_CHAR cashier5 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -918.0 -344.0 12.4 cashier5 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier5
 			SET_CHAR_HEADING cashier5 90.0
 			CHAR_SET_IDLE cashier5
 			SET_CHAR_STAY_IN_SAME_PLACE cashier5 TRUE
-			//SET_CHAR_COORDINATES cashier5 -918.0 -344.0	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier5 -918.0 -344.0	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier6
-			DELETE_CHAR cashier6 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -917.8 -346.0 12.4 cashier6 // FIXMIAMI
+			DELETE_CHAR cashier6 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER HFYBU -917.8 -346.0 12.4 cashier6 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier6
 			SET_CHAR_HEADING cashier6 93.0
 			CHAR_SET_IDLE cashier6
 			SET_CHAR_STAY_IN_SAME_PLACE cashier6 TRUE
-			//SET_CHAR_COORDINATES cashier6 -917.8 -346.0	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier6 -917.8 -346.0	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier7
-			DELETE_CHAR cashier7 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -917.0 -345.0 12.4 cashier7 // FIXMIAMI
+			DELETE_CHAR cashier7 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER WFYBU -917.0 -345.0 12.4 cashier7 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier7
 			SET_CHAR_HEADING cashier7 93.0
 			CHAR_SET_IDLE cashier7
 			SET_CHAR_STAY_IN_SAME_PLACE cashier7 TRUE
-			//SET_CHAR_COORDINATES cashier7 -917.0 -345.0	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier7 -917.0 -345.0	12.4 // SCFIX: removed
 		ENDIF
 		IF NOT IS_CHAR_DEAD cashier8
-			DELETE_CHAR cashier8 // FIXMIAMI
-			CREATE_CHAR PEDTYPE_GANG_GOLFER WMORI -917.0 -343.0 12.4 cashier8 // FIXMIAMI
+			DELETE_CHAR cashier8 // SCFIX
+			CREATE_CHAR PEDTYPE_GANG_GOLFER WMORI -917.0 -343.0 12.4 cashier8 // SCFIX
 			SET_CHAR_OBJ_NO_OBJ	cashier8
 			SET_CHAR_HEADING cashier8 93.0
 			CHAR_SET_IDLE cashier8
 			SET_CHAR_STAY_IN_SAME_PLACE cashier8 TRUE
-			//SET_CHAR_COORDINATES cashier8 -917.0 -343.0	12.4 // FIXMIAMI: removed
+			//SET_CHAR_COORDINATES cashier8 -917.0 -343.0	12.4 // SCFIX: removed
 			IF NOT IS_CHAR_DEAD cam
-				// SET_CHAR_COORDINATES cam -916.0 -340.0 12.4 // FIXMIAMI: start - moved up
-				// SET_CHAR_HEADING cam 120.0 // FIXMIAMI: start - moved up
+				// SET_CHAR_COORDINATES cam -916.0 -340.0 12.4 // SCFIX: start - moved up
+				// SET_CHAR_HEADING cam 120.0 // SCFIX: start - moved up
 				SET_CHAR_OBJ_AIM_GUN_AT_CHAR cam cashier8
 			ENDIF
 		ENDIF
 		IF NOT IS_CHAR_DEAD scplayer
 			SET_CHAR_COORDINATES scplayer -918.55 -337.8 13.5
 			SET_CHAR_HEADING scplayer 80.0
-			SET_CHAR_OBJ_AIM_GUN_AT_CHAR scplayer bank_cop_1 // FIXMIAMI
+			SET_CHAR_OBJ_AIM_GUN_AT_CHAR scplayer bank_cop_1 // SCFIX
 		ENDIF
 		SET_FIXED_CAMERA_POSITION -911.5 -344.0 15.0 0.0 0.0 0.0
 		POINT_CAMERA_AT_POINT -922.0 -344.295 13.94 JUMP_CUT
@@ -1705,8 +1705,8 @@ IF NOT IS_CHAR_DEAD cam
 	SET_CHAR_OBJ_NO_OBJ cam
 	STOP_CHAR_LOOKING cam
 	SET_PLAYER_AS_LEADER cam player1
-	SET_CHAR_THREAT_SEARCH cam THREAT_GANG_SECURITY // FIXMIAMI: why was this off?
-	SET_CHAR_HEED_THREATS cam TRUE // FIXMIAMI
+	SET_CHAR_THREAT_SEARCH cam THREAT_GANG_SECURITY // SCFIX: why was this off?
+	SET_CHAR_HEED_THREATS cam TRUE // SCFIX
 ENDIF
 botty_head:
 IF flag_bank_mission_failed = 1
@@ -1717,7 +1717,7 @@ REMOVE_BLIP mission_blip
 ADD_BLIP_FOR_COORD -938.56 -351.5 16.8 mission_blip
 
 
-CREATE_CHAR PEDTYPE_GANG_SECURITY	GDa -961.75 -329.1 14.6 bank_cop_4 // managers office & surveillance room // FIXMIAMI: change to PEDTYPE_GANG_SECURITY
+CREATE_CHAR PEDTYPE_GANG_SECURITY	GDa -961.75 -329.1 14.6 bank_cop_4 // managers office & surveillance room // SCFIX: change to PEDTYPE_GANG_SECURITY
 CLEAR_CHAR_THREAT_SEARCH bank_cop_4
 SET_CHAR_THREAT_SEARCH bank_cop_4 THREAT_PLAYER1 
 SET_CHAR_HEADING bank_cop_4 240.0
@@ -1725,7 +1725,7 @@ SET_CHAR_HEADING bank_cop_4 240.0
 //CHAR_SET_IDLE bank_cop_4
 GIVE_WEAPON_TO_CHAR bank_cop_4 WEAPONTYPE_MP5 9999
 
-CREATE_CHAR PEDTYPE_GANG_SECURITY	GDb -956.75 -340.4 14.6 bank_cop_5 // managers office & surveillance room // FIXMIAMI: change to PEDTYPE_GANG_SECURITY
+CREATE_CHAR PEDTYPE_GANG_SECURITY	GDb -956.75 -340.4 14.6 bank_cop_5 // managers office & surveillance room // SCFIX: change to PEDTYPE_GANG_SECURITY
 CLEAR_CHAR_THREAT_SEARCH bank_cop_5
 SET_CHAR_THREAT_SEARCH bank_cop_5 THREAT_PLAYER1 
 SET_CHAR_HEADING bank_cop_5 10.0
@@ -1733,7 +1733,7 @@ SET_CHAR_HEADING bank_cop_5 10.0
 //CHAR_SET_IDLE bank_cop_5
 GIVE_WEAPON_TO_CHAR bank_cop_5 WEAPONTYPE_MP5 9999
 
-CREATE_CHAR PEDTYPE_GANG_SECURITY	GDa -935.73 -348.3 16.8 bank_cop_7 // by the lift // FIXMIAMI: change to PEDTYPE_GANG_SECURITY
+CREATE_CHAR PEDTYPE_GANG_SECURITY	GDa -935.73 -348.3 16.8 bank_cop_7 // by the lift // SCFIX: change to PEDTYPE_GANG_SECURITY
 CLEAR_CHAR_THREAT_SEARCH bank_cop_7
 SET_CHAR_THREAT_SEARCH bank_cop_7 THREAT_PLAYER1 
 SET_CHAR_HEADING bank_cop_7 266.0
@@ -1741,7 +1741,7 @@ SET_CHAR_CROUCH bank_cop_7 TRUE 300000
 //CHAR_SET_IDLE bank_cop_5
 GIVE_WEAPON_TO_CHAR bank_cop_7 WEAPONTYPE_MP5 9999
 
-CREATE_CHAR PEDTYPE_GANG_SECURITY	GDb -943.0 -343.9 6.3 bank_cop_8 // bank vault // FIXMIAMI: change to PEDTYPE_GANG_SECURITY
+CREATE_CHAR PEDTYPE_GANG_SECURITY	GDb -943.0 -343.9 6.3 bank_cop_8 // bank vault // SCFIX: change to PEDTYPE_GANG_SECURITY
 CLEAR_CHAR_THREAT_SEARCH bank_cop_8
 SET_CHAR_THREAT_SEARCH bank_cop_8 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH bank_cop_8 THREAT_SPECIAL
@@ -1876,10 +1876,10 @@ IF NOT IS_CHAR_DEAD cam
 		WAIT 0
 		IF timera > 2500
 			IF NOT IS_CHAR_DEAD cam
-				// FIXMIAMI: START
+				// SCFIX: START
 				//SET_FIXED_CAMERA_POSITION -930.0 -351.0 19.0 0.0 0.0 0.0
 				//POINT_CAMERA_AT_PLAYER player1 FIXED JUMP_CUT
-				// FIXMIAMI: END
+				// SCFIX: END
 				SET_CHAR_COORDINATES cam -932.9 -351.3 16.8
 				SET_CHAR_HEADING cam 90.0
 				CHAR_FOLLOW_PATH cam -938.56 -351.5 16.8 0.5 RUN
@@ -2055,10 +2055,10 @@ ENDWHILE
 GOSUB going_up
 GOSUB wait_state_loop
 
-// FIXMIAMI: START - delete this guy's corpse so he doesn't block the manager later in cutscene
+// SCFIX: START - delete this guy's corpse so he doesn't block the manager later in cutscene
 DELETE_CHAR bank_cop_8
 bank_cop_8 = -1
-// FIXMIAMI: END
+// SCFIX: END
 
 // ******************************************************************************************************
 
@@ -2078,7 +2078,7 @@ WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -964.0 -337.0 14.6 3.0 3.0 3.0 FALSE
 	
 	IF LOCATE_PLAYER_ON_FOOT_3D player1 -922.3 -348.2 16.6 3.0 3.0 3.0 FALSE
 	AND flag_dialogue = 0
-	AND flag_launch_hostage_attack = 0 // FIXMIAMI
+	AND flag_launch_hostage_attack = 0 // SCFIX
 		audio_slot = 1
 		LOAD_MISSION_AUDIO audio_slot BK4_14b
 		GOSUB audio_bank_loading
@@ -2145,9 +2145,9 @@ RESTORE_CAMERA
 // ************* PLAYER MUST TAKE MANAGER TO VAULT ****************************
 REMOVE_BLIP mission_blip
 ADD_BLIP_FOR_COORD -944.36 -342.0 6.3 mission_blip
-ADD_SPHERE -938.56 -351.5 16.8 1.5 mission_sphere // FIXMIAMI
+ADD_SPHERE -938.56 -351.5 16.8 1.5 mission_sphere // SCFIX
 
-WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -938.56 -351.5 16.8 1.5 1.5 1.5 FALSE // FIXMIAMI: change TRUE to FALSE here
+WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -938.56 -351.5 16.8 1.5 1.5 1.5 FALSE // SCFIX: change TRUE to FALSE here
 
 	WAIT 0
 	GOSUB stairs_cam
@@ -2164,7 +2164,7 @@ WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -938.56 -351.5 16.8 1.5 1.5 1.5 FALSE
 	
 	IF LOCATE_PLAYER_ON_FOOT_3D player1 -922.3 -348.3 17.8 3.0 3.0 3.0 FALSE
 	AND flag_dialogue = 0
-	AND flag_launch_hostage_attack = 0 // FIXMIAMI
+	AND flag_launch_hostage_attack = 0 // SCFIX
 		audio_slot = 1
 		LOAD_MISSION_AUDIO audio_slot BNK4_18
 		GOSUB audio_bank_loading
@@ -2173,7 +2173,7 @@ WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -938.56 -351.5 16.8 1.5 1.5 1.5 FALSE
 		flag_dialogue = 1
 	ENDIF
 ENDWHILE
-REMOVE_SPHERE mission_sphere // FIXMIAMI
+REMOVE_SPHERE mission_sphere // SCFIX
 
 // ************************************** PLAYER GOING DOWN IN LIFT WITH MANAGER ***********************************
 
@@ -2192,10 +2192,10 @@ IF NOT IS_CHAR_DEAD bank_manager
 		WAIT 0
 		IF timera > 2500
 			IF NOT IS_CHAR_DEAD bank_manager
-				// FIXMIAMI: START
+				// SCFIX: START
 				//SET_FIXED_CAMERA_POSITION -930.0 -351.0 19.0 0.0 0.0 0.0
 				//POINT_CAMERA_AT_PLAYER player1 FIXED JUMP_CUT
-				// FIXMIAMI: END
+				// SCFIX: END
 
 //				IF NOT IS_CHAR_ON_SCREEN bank_manager
 					SET_CHAR_COORDINATES bank_manager -932.9 -351.3 16.8
@@ -2474,21 +2474,21 @@ ENDWHILE
 
 ALTER_WANTED_LEVEL_NO_DROP player1 3 
 
-IF flag_launch_hostage_attack = 0 // FIXMIAMI
-	// FIXMIAMI: START - moved this block up
+IF flag_launch_hostage_attack = 0 // SCFIX
+	// SCFIX: START - moved this block up
 	CREATE_CHAR PEDTYPE_CIVMALE	GDa -920.6 -340.0 13.4 target_ped
 	SET_CHAR_HEALTH target_ped 50
 	SET_CHAR_HEADING target_ped 270.0
 	SET_CHAR_OBJ_RUN_TO_COORD target_ped -902.0 -340.0 
-	// FIXMIAMI: END - moved this block up
+	// SCFIX: END - moved this block up
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF NOT IS_CHAR_DEAD phil
 		SET_CHAR_OBJ_NO_OBJ phil
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
-	GOSUB trigger_alarm // FIXMIAMI
+	GOSUB trigger_alarm // SCFIX
 	LOAD_MISSION_AUDIO audio_slot BK4_24b
 	GOSUB audio_bank_loading
 	PRINT_NOW ( BK4_24b ) 10000 1//rhubarb rhubarb
@@ -2496,9 +2496,9 @@ IF flag_launch_hostage_attack = 0 // FIXMIAMI
 	CLEAR_PRINTS
 
 	IF NOT IS_CHAR_DEAD phil
-		IF NOT IS_CHAR_DEAD target_ped // FIXMIAMI
+		IF NOT IS_CHAR_DEAD target_ped // SCFIX
 			SET_CHAR_OBJ_KILL_CHAR_ON_FOOT phil target_ped
-		ENDIF // FIXMIAMI
+		ENDIF // SCFIX
 		SET_CHAR_ACCURACY phil 80
 	ENDIF
 
@@ -2513,16 +2513,16 @@ IF flag_launch_hostage_attack = 0 // FIXMIAMI
 			GOTO mission_bankjob4_failed
 		ENDIF
 		GOSUB hostage_checker
-		// FIXMIAMI: START - this dude can actually escape believe it or not
+		// SCFIX: START - this dude can actually escape believe it or not
 		IF NOT LOCATE_CHAR_ANY_MEANS_2D target_ped -911.5 -340.625 9.0 10.825 FALSE
 			EXPLODE_CHAR_HEAD target_ped
 		ENDIF
-		// FIXMIAMI: END - this dude can actually escape believe it or not
+		// SCFIX: END - this dude can actually escape believe it or not
 	ENDWHILE
 
-	MARK_CHAR_AS_NO_LONGER_NEEDED target_ped // FIXMIAMI
+	MARK_CHAR_AS_NO_LONGER_NEEDED target_ped // SCFIX
 ELSE
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF NOT IS_CHAR_DEAD phil
 		SET_CHAR_OBJ_NO_OBJ phil
 		SET_CHAR_COORDINATES phil -917.6 -337.57 13.46
@@ -2530,8 +2530,8 @@ ELSE
 		SET_CHAR_CROUCH phil TRUE 999999
 		SET_CHAR_STAY_IN_SAME_PLACE phil TRUE
 	ENDIF
-	// FIXMIAMI: END
-ENDIF // FIXMIAMI
+	// SCFIX: END
+ENDIF // SCFIX
 
 LOAD_MISSION_AUDIO audio_slot BNK4_25
 GOSUB audio_bank_loading
@@ -2543,10 +2543,10 @@ GOSUB audio_bank_loading
 PRINT_NOW ( BNK4_27 ) 10000 1//rhubarb rhubarb
 GOSUB has_audio_finished_bank
 
-make_sure_hostages_arent_a_threat: // FIXMIAMI
+make_sure_hostages_arent_a_threat: // SCFIX
 REMOVE_BLIP mission_blip
 
-// FIXMIAMI: START
+// SCFIX: START
 IF flag_launch_hostage_attack = 1
 	WHILE hostage_casualties < 11
 		WAIT 0
@@ -2559,7 +2559,7 @@ IF flag_launch_hostage_attack = 1
 		GOSUB hostage_checker
 	ENDWHILE
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 ADD_BLIP_FOR_COORD -907.8 -345.87 12.4 mission_blip
 
 WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -907.8 -345.87 12.4 1.5 1.5 1.5 TRUE
@@ -2574,12 +2574,12 @@ WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -907.8 -345.87 12.4 1.5 1.5 1.5 TRUE
 	ENDIF
 	GOSUB hostage_checker
 
-	// FIXMIAMI: START
+	// SCFIX: START
 	IF flag_launch_hostage_attack = 1
 	AND hostage_casualties < 11
 		GOTO make_sure_hostages_arent_a_threat
 	ENDIF
-	// FIXMIAMI: END
+	// SCFIX: END
 
 	IF NOT IS_CHAR_DEAD phil
 		IF NOT IS_CHAR_ON_SCREEN phil
@@ -2615,7 +2615,7 @@ IF NOT IS_CHAR_DEAD scplayer
 	SET_CHAR_OBJ_AIM_GUN_AT_CHAR scplayer target_ped
 ENDIF
 
-// FIXMIAMI: START - fix Phil being in random places in a cutscene
+// SCFIX: START - fix Phil being in random places in a cutscene
 IF flag_phil_warp = 0
 AND NOT IS_CHAR_DEAD phil
 	SET_CHAR_COORDINATES phil -917.6 -337.57 13.46
@@ -2624,7 +2624,7 @@ AND NOT IS_CHAR_DEAD phil
 	SET_CHAR_STAY_IN_SAME_PLACE phil TRUE
 	flag_phil_warp = 1
 ENDIF
-// FIXMIAMI: END - fix Phil being in random places in a cutscene
+// SCFIX: END - fix Phil being in random places in a cutscene
 
 SET_PLAYER_CONTROL player1 OFF
 SET_EVERYONE_IGNORE_PLAYER player1 ON 
@@ -2739,21 +2739,21 @@ OR NOT HAS_MODEL_LOADED gasgrenade
 	WAIT 0
 ENDWHILE
 
-IF flag_launch_hostage_attack = 0 // FIXMIAMI
+IF flag_launch_hostage_attack = 0 // SCFIX
 	flag_waitstate_1 = 0
 	flag_waitstate_2 = 0
 	flag_waitstate_3 = 0
 	flag_change_waitstate = 0
 	GOSUB wait_state_loop
 
-	// FIXMIAMI: remove this stuff as it doesn't do the intended stuff (duck peds)
+	// SCFIX: remove this stuff as it doesn't do the intended stuff (duck peds)
 	/*flag_waitstate_1 = 15
 	flag_waitstate_2 = 15
 	flag_waitstate_3 = 15
 	flag_change_waitstate = 0
 	GOSUB wait_state_loop*/
-	GOSUB hostages_post_swat_action // FIXMIAMI
-ENDIF // FIXMIAMI
+	GOSUB hostages_post_swat_action // SCFIX
+ENDIF // SCFIX
 //GOSUB flee_bank
 
 
@@ -2818,7 +2818,7 @@ WHILE IS_PLAYER_PLAYING player1
 
 	IF NOT IS_CHAR_DEAD phil
 	AND flag_swat_rope > 1
-	AND phils_target < 8 // FIXMIAMI
+	AND phils_target < 8 // SCFIX
 		IF phils_target = 0
 			GET_RANDOM_COP_IN_AREA -919.5 -329.8 -901.5 -351.45 0 1 0 0 0 target_ped1
 			GET_RANDOM_COP_IN_AREA -919.5 -329.8 -901.5 -351.45 0 1 0 0 0 target_ped2
@@ -2854,8 +2854,8 @@ WHILE IS_PLAYER_PLAYING player1
 							ENDIF
 						ELSE
 							MARK_CHAR_AS_NO_LONGER_NEEDED target_ped4
-							//phils_target = 6 // FIXMIAMI: this is original
-							// FIXMIAMI: START
+							//phils_target = 6 // SCFIX: this is original
+							// SCFIX: START
 							IF NOT IS_CHAR_DEAD swat_1
 								IF phils_target = 5
 									SET_CHAR_OBJ_KILL_CHAR_ON_FOOT phil swat_1
@@ -2873,7 +2873,7 @@ WHILE IS_PLAYER_PLAYING player1
 									phils_target = 8
 								ENDIF
 							ENDIF
-							// FIXMIAMI: END
+							// SCFIX: END
 						ENDIF
 					ENDIF
 				ENDIF
@@ -2887,19 +2887,19 @@ WHILE IS_PLAYER_PLAYING player1
 		IF flag_grill_collision = 0
 		AND timera > 2000	
 
-			// FIXMIAMI: START
+			// SCFIX: START
 			REQUEST_MODEL rocketed_win1
 
 			WHILE NOT HAS_MODEL_LOADED rocketed_win1 
 				WAIT 0
 			ENDWHILE
-			// FIXMIAMI: END
+			// SCFIX: END
 
 			DELETE_OBJECT bank_windows
 			CREATE_OBJECT_NO_OFFSET rocketed_win1 -899.851 -341.061 14.318 bank_windows
 			DONT_REMOVE_OBJECT bank_windows
 
-			MARK_MODEL_AS_NO_LONGER_NEEDED rocketed_win1 // FIXMIAMI
+			MARK_MODEL_AS_NO_LONGER_NEEDED rocketed_win1 // SCFIX
 			
 			CREATE_OBJECT_NO_OFFSET gasgrenade -900.7 -333.88 14.73 gas_1
 			SET_OBJECT_DYNAMIC gas_1 TRUE
@@ -2967,12 +2967,12 @@ WHILE IS_PLAYER_PLAYING player1
 		CREATE_SWAT_ROPE -915.401 -336.6184 26.0 
 		CREATE_SWAT_ROPE -915.401 -345.50 26.0   
 		flag_swat_rope = 1
-		// FIXMIAMI: START
+		// SCFIX: START
 		LOAD_MISSION_AUDIO audio_slot BNK4_26
 		GOSUB audio_bank_loading
 		PRINT_NOW ( BNK4_26 ) 10000 1//rhubarb rhubarb
 		GOSUB has_audio_finished_bank
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDIF
 	IF timera > 4000
 	AND flag_swat_rope = 1
@@ -3045,9 +3045,9 @@ WHILE IS_PLAYER_PLAYING player1
 		ENDIF
 	ENDIF
 
-	// FIXMIAMI: START - moved all this stuff up
-	IF phils_target = 8 // FIXMIAMI: change 6 to 8
-		phils_target = 9 // FIXMIAMI
+	// SCFIX: START - moved all this stuff up
+	IF phils_target = 8 // SCFIX: change 6 to 8
+		phils_target = 9 // SCFIX
 		LOAD_MISSION_AUDIO audio_slot BNK4_38
 		GOSUB audio_bank_loading
 		PRINT_NOW ( BNK4_38 ) 10000 1//rhubarb rhubarb
@@ -3056,7 +3056,7 @@ WHILE IS_PLAYER_PLAYING player1
 			SET_CHAR_CROUCH phil FALSE 0
 			SET_PLAYER_AS_LEADER phil player1
 		ENDIF
-		// FIXMIAMI: START - new line - find cam if he's lost
+		// SCFIX: START - new line - find cam if he's lost
 		IF NOT IS_CHAR_DEAD cam
 		AND flag_cam_at_target < 1
 			IF LOCATE_CHAR_ON_FOOT_3D cam player_x player_y player_z 5.0 5.0 2.0 FALSE
@@ -3082,12 +3082,12 @@ WHILE IS_PLAYER_PLAYING player1
 				GOSUB has_audio_finished_bank
 			ENDIF
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDIF
-	// FIXMIAMI: END 
+	// SCFIX: END 
 
 	IF flag_cam_at_target = 1
-		IF phils_target = 9 // FIXMIAMI: change 6 to 9
+		IF phils_target = 9 // SCFIX: change 6 to 9
 			REMOVE_BLIP mission_blip
 			ADD_BLIP_FOR_COORD -900.0 -341.0 13.4 mission_blip
 			flag_cam_at_target = 2
@@ -3120,8 +3120,8 @@ SET_PLAYER_CONTROL player1 OFF
 SET_EVERYONE_IGNORE_PLAYER player1 ON 
 SWITCH_WIDESCREEN ON
 
-LEAVE_GROUP phil // FIXMIAMI
-LEAVE_GROUP cam // FIXMIAMI
+LEAVE_GROUP phil // SCFIX
+LEAVE_GROUP cam // SCFIX
 
 GOSUB exit_bank
 
@@ -3136,7 +3136,7 @@ REMOVE_BLIP mission_blip
 //REMOVE_SPHERE mission_blob
 
 
-SET_CAR_DENSITY_MULTIPLIER 0.0 // FIXMIAMI
+SET_CAR_DENSITY_MULTIPLIER 0.0 // SCFIX
 CLEAR_AREA -863.0 -340.9 12.19 30.0 TRUE
 GOSUB delete_routine
 SET_FIXED_CAMERA_POSITION -889.57 -341.42 15.0 0.0 0.0 0.0
@@ -3152,14 +3152,14 @@ IF NOT IS_CHAR_DEAD phil
 	SET_CHAR_COORDINATES phil -892.8 -349.37 12.7
 	SET_CHAR_HEADING phil 317.0
 	SET_CHAR_CROUCH phil TRUE 999999
-	SET_CHAR_STAY_IN_SAME_PLACE phil TRUE // FIXMIAMI
+	SET_CHAR_STAY_IN_SAME_PLACE phil TRUE // SCFIX
 ENDIF
 IF NOT IS_CHAR_DEAD cam
 	SET_CHAR_OBJ_NO_OBJ cam
 	SET_CHAR_COORDINATES cam -894.3 -349.5 12.5
 	SET_CHAR_HEADING cam 330.0
 	SET_CHAR_CROUCH cam TRUE 999999
-	SET_CHAR_STAY_IN_SAME_PLACE cam TRUE // FIXMIAMI
+	SET_CHAR_STAY_IN_SAME_PLACE cam TRUE // SCFIX
 ELSE
 	MARK_CHAR_AS_NO_LONGER_NEEDED cam
 	flag_cam_dead = 1
@@ -3174,7 +3174,7 @@ IF NOT IS_CHAR_DEAD phil
 	POINT_CAMERA_AT_CHAR phil FIXED JUMP_CUT
 ENDIF
 
-// FIXMIAMI: START - tidy up some code
+// SCFIX: START - tidy up some code
 VAR_INT swat_ped_type
 swat_ped_type = PEDTYPE_CIVMALE
 
@@ -3184,7 +3184,7 @@ GOSUB create_outside_swat3
 GOSUB create_outside_swat4
 GOSUB create_outside_swat5
 GOSUB create_outside_swat6
-// FIXMIAMI: END
+// SCFIX: END
 
 CREATE_CAR enforcer -870.0 -344.5 10.2 cop_car1
 SET_CAR_HEADING cop_car1 124.0
@@ -3201,7 +3201,7 @@ LOCK_CAR_DOORS cop_car3 CARLOCK_UNLOCKED
 SET_FADING_COLOUR 0 0 1
 DO_FADE 1500 FADE_IN
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 //flag_bank_job = 0
 
@@ -3344,8 +3344,8 @@ IF NOT IS_CHAR_DEAD hilary
 	EXPLODE_CHAR_HEAD hilary
 ENDIF
 
-MARK_CHAR_AS_NO_LONGER_NEEDED hilary // FIXMIAMI: he's dead who cares
-hilary = -1 // FIXMIAMI: he's dead who cares
+MARK_CHAR_AS_NO_LONGER_NEEDED hilary // SCFIX: he's dead who cares
+hilary = -1 // SCFIX: he's dead who cares
 
 timera = 0
 WHILE timera < 1000
@@ -3354,7 +3354,7 @@ ENDWHILE
 
 swat_ped_type = PEDTYPE_COP
 
-// FIXMIAMI - Start: recreate these peds as cops now
+// SCFIX - Start: recreate these peds as cops now
 IF NOT IS_CHAR_DEAD bank_cop_1
 	DELETE_CHAR bank_cop_1
 	GOSUB create_outside_swat1
@@ -3396,9 +3396,9 @@ IF NOT IS_CHAR_DEAD bank_cop_6
 ENDIF
 MARK_CHAR_AS_NO_LONGER_NEEDED bank_cop_6
 bank_cop_6 = -1
-// FIXMIAMI - end
+// SCFIX - end
 
-SET_CAR_DENSITY_MULTIPLIER 1.0 // FIXMIAMI
+SET_CAR_DENSITY_MULTIPLIER 1.0 // SCFIX
 
 SET_CHAR_CROUCH scplayer FALSE 0
 SET_PLAYER_CONTROL player1 ON
@@ -3414,10 +3414,10 @@ SET_CAMERA_IN_FRONT_OF_PLAYER
 SET_RADIO_CHANNEL 6 -1
 
 IF NOT IS_CHAR_DEAD phil
-	SET_CHAR_STAY_IN_SAME_PLACE	phil FALSE // FIXMIAMI
+	SET_CHAR_STAY_IN_SAME_PLACE	phil FALSE // SCFIX
 	SET_CHAR_CROUCH phil FALSE 0
 	SET_PLAYER_AS_LEADER phil player1
-	CLEAR_CHAR_THREAT_SEARCH phil // FIXMIAMI: to forget about security
+	CLEAR_CHAR_THREAT_SEARCH phil // SCFIX: to forget about security
 	SET_CHAR_THREAT_SEARCH phil THREAT_COP
 	SET_CHAR_HEED_THREATS phil TRUE
 	SET_CHAR_RUNNING phil TRUE
@@ -3431,10 +3431,10 @@ IF NOT IS_CHAR_DEAD hilary
 ENDIF
 
 IF NOT IS_CHAR_DEAD cam
-	SET_CHAR_STAY_IN_SAME_PLACE	cam FALSE // FIXMIAMI
-	SET_CHAR_CROUCH cam FALSE 0 // FIXMIAMI
+	SET_CHAR_STAY_IN_SAME_PLACE	cam FALSE // SCFIX
+	SET_CHAR_CROUCH cam FALSE 0 // SCFIX
 	SET_CHAR_OBJ_NO_OBJ cam
-	CLEAR_CHAR_THREAT_SEARCH cam  // FIXMIAMI: to forget about security
+	CLEAR_CHAR_THREAT_SEARCH cam  // SCFIX: to forget about security
 	SET_CHAR_THREAT_SEARCH cam THREAT_COP
 	SET_CHAR_HEED_THREATS cam TRUE
 	SET_PLAYER_AS_LEADER cam player1
@@ -3457,12 +3457,12 @@ IF NOT IS_CHAR_DEAD bank_cop_4
 	SET_CHAR_STAY_IN_SAME_PLACE bank_cop_4 FALSE
 ENDIF
 
-IF NOT IS_CAR_DEAD getaway_car // FIXMIAMI
-	SET_CAR_PROOFS getaway_car FALSE FALSE FALSE FALSE FALSE // FIXMIAMI
-ENDIF // FIXMIAMI
+IF NOT IS_CAR_DEAD getaway_car // SCFIX
+	SET_CAR_PROOFS getaway_car FALSE FALSE FALSE FALSE FALSE // SCFIX
+ENDIF // SCFIX
 
 MARK_CAR_AS_NO_LONGER_NEEDED getaway_car
-getaway_car = -1 // FIXMIAMI
+getaway_car = -1 // SCFIX
 
 //DELETE_OBJECT cams_door
 //CREATE_OBJECT_NO_OFFSET dk_camjonesdoor -837.134 -901.672 12.03 cams_door
@@ -3598,17 +3598,17 @@ PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed"
 SET_FADING_COLOUR 0 0 1
 SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0
 
-/* FIXMIAMI: remove and redo this with teleporting outside of garage
+/* SCFIX: remove and redo this with teleporting outside of garage
 WHILE IS_PLAYER_IN_AREA_3D player1 -852.8 -915.0 10.0 -837.5 -897.2 13.0 FALSE // CHECKS IF PLAYER HAS FAILED BY STANDING IN GARAGE AND SHOOTING PHIL - STOPS PLAYER GETTING STUCK IN GARAGE.
 	WAIT 0
 ENDWHILE
 */
 
-// FIXMIAMI: START
+// SCFIX: START
 IF IS_PLAYER_PLAYING player1
 	IF IS_PLAYER_IN_AREA_3D player1 -852.8 -915.0 10.0 -837.4 -897.2 13.0 FALSE
 		DO_FADE 1500 FADE_OUT
-		GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+		GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 		CLEAR_AREA -832.2 -901.0 10.0 5.0 TRUE
 		SET_PLAYER_COORDINATES player1 -832.2 -901.0 10.0
 		SET_PLAYER_HEADING player1 270.0
@@ -3617,10 +3617,10 @@ IF IS_PLAYER_PLAYING player1
 		SET_CAMERA_IN_FRONT_OF_PLAYER
 		RESTORE_CAMERA_JUMPCUT
 		DO_FADE 1500 FADE_IN
-		GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+		GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 	ENDIF
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 IF IS_PLAYER_PLAYING player1
 AND flag_player_in_bank = 1
@@ -3629,7 +3629,7 @@ AND flag_player_in_bank = 1
 	GOSUB exit_bank
 	
 	DO_FADE 1500 FADE_IN
-	GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+	GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 ENDIF
 RETURN
 	   		
@@ -3643,12 +3643,12 @@ SET_EVERYONE_IGNORE_PLAYER player1 ON
 SWITCH_WIDESCREEN ON
 
 IF IS_PLAYER_IN_ANY_CAR player1
-// AND NOT IS_CAR_DEAD getaway_car // FIXMIAMI: removed
-	STORE_CAR_PLAYER_IS_IN_NO_SAVE player1 getaway_car // FIXMIAMI
-	IF NOT IS_CAR_DEAD getaway_car // FIXMIAMI
+// AND NOT IS_CAR_DEAD getaway_car // SCFIX: removed
+	STORE_CAR_PLAYER_IS_IN_NO_SAVE player1 getaway_car // SCFIX
+	IF NOT IS_CAR_DEAD getaway_car // SCFIX
 		SET_CHAR_OBJ_LEAVE_CAR scplayer getaway_car
-	ENDIF // FIXMIAMI
-	getaway_car = -1 // FIXMIAMI
+	ENDIF // SCFIX
+	getaway_car = -1 // SCFIX
 ENDIF
 
 SET_RADIO_CHANNEL 3 -1
@@ -3668,7 +3668,7 @@ POINT_CAMERA_AT_POINT -833.15 -899.4 17.6 JUMP_CUT
 
 DO_FADE 500 FADE_IN
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 DELETE_CHAR phil
 DELETE_CHAR cam
@@ -3738,29 +3738,29 @@ REQUEST_MODEL lodd_build2
 REQUEST_MODEL spad_buildnew
 REQUEST_MODEL veg_palmbig14
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 
 WHILE NOT HAS_MODEL_LOADED od_clubout_dy
-OR NOT HAS_MODEL_LOADED od_clubout_nt // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED od_clubneon // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED od_clubdoors // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED od_clbdr_close // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED od_clbdr_open // FIXMIAMI: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED od_clubout_nt // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED od_clubneon // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED od_clubdoors // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED od_clbdr_close // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED od_clbdr_open // SCFIX: moved from individual WHILE block to optimize the script size
 	WAIT 0
 ENDWHILE
 
 WHILE NOT HAS_MODEL_LOADED veg_palmkbb11
-OR NOT HAS_MODEL_LOADED odNroad01_nt // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED odNroad01_dy // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED od_clubback // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED miamiodnroadxa // FIXMIAMI: moved from individual WHILE block to optimize the script size
-OR NOT HAS_MODEL_LOADED lodd_build2 // FIXMIAMI: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED odNroad01_nt // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED odNroad01_dy // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED od_clubback // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED miamiodnroadxa // SCFIX: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED lodd_build2 // SCFIX: moved from individual WHILE block to optimize the script size
 	WAIT 0
 ENDWHILE
 
 WHILE NOT HAS_MODEL_LOADED spad_buildnew
-OR NOT HAS_MODEL_LOADED veg_palmbig14 // FIXMIAMI: moved from individual WHILE block to optimize the script size
+OR NOT HAS_MODEL_LOADED veg_palmbig14 // SCFIX: moved from individual WHILE block to optimize the script size
 	WAIT 0
 ENDWHILE
 
@@ -3777,7 +3777,7 @@ SET_TIME_OF_DAY 21 30
 
 DO_FADE 1000 FADE_IN
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 timera = 0
 WHILE timera < 2000
@@ -3810,12 +3810,12 @@ ENDWHILE
 
 DO_FADE 500 FADE_OUT
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 LOAD_SCENE -833.6 -908.5 11.11
 
 CLEAR_AREA -833.6 -908.5 11.11 2.0 TRUE
-CLEAR_AREA -863.0 -340.9 12.19 30.0 TRUE // FIXMIAMI
+CLEAR_AREA -863.0 -340.9 12.19 30.0 TRUE // SCFIX
  
 IF IS_PLAYER_IN_ANY_CAR player1
 	WARP_PLAYER_FROM_CAR_TO_COORD player1 -833.6 -908.5 11.11
@@ -3841,7 +3841,7 @@ CLEAR_PRINTS
 
 DO_FADE 1500 FADE_IN
 
-GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 SET_MUSIC_DOES_FADE TRUE
 SET_PLAYER_CONTROL player1 ON
@@ -3851,7 +3851,7 @@ SWITCH_WIDESCREEN OFF
 
 REGISTER_MISSION_PASSED	BANK_4
 malibu_asset_acquired = 1 
-flag_first_asset_complete = 1 // FIXMIAMI: fix Ken's phonecall
+flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
 ++ counter_60_percent
 flag_bankjob_mission4_passed = 1
 CLEAR_WANTED_LEVEL player1
@@ -3884,7 +3884,7 @@ RETURN
 
 exit_bank:
 	DO_FADE 1500 FADE_OUT
-	GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+	GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 	CLEAR_EXTRA_COLOURS FALSE
 	SET_CAR_DENSITY_MULTIPLIER 1.0
 	SWITCH_RUBBISH ON
@@ -3927,7 +3927,7 @@ IF flag_hilary_gone = 0
 			ENDIF
 			IF locate_dome_flag = 1
 				REMOVE_BLIP mission_blip
-				REMOVE_SPHERE mission_sphere // FIXMIAMI
+				REMOVE_SPHERE mission_sphere // SCFIX
 				locate_dome_flag = 0
 			ENDIF
 		ELSE
@@ -3936,16 +3936,16 @@ IF flag_hilary_gone = 0
 				REMOVE_BLIP blip_getaway_car
 				flag_blip_on_getaway_car = 0
 			ENDIF
-			// FIXMIAMI - START
+			// SCFIX - START
 			IF locate_dome_flag = 0
 			AND NOT flag_blip_on_phil = 1
 			AND NOT flag_blip_on_hilary = 1
 			AND NOT flag_blip_on_cam = 1
 				ADD_BLIP_FOR_COORD -833.0 -348.0 10.0 mission_blip
-				ADD_SPHERE -833.0 -348.0 10.0 4.0 mission_sphere // FIXMIAMI
+				ADD_SPHERE -833.0 -348.0 10.0 4.0 mission_sphere // SCFIX
 				locate_dome_flag = 1
 			ENDIF
-			// FIXMIAMI - END
+			// SCFIX - END
 		ENDIF
 		IF IS_CAR_UPSIDEDOWN getaway_car
 		AND IS_CAR_STOPPED getaway_car
@@ -3977,7 +3977,7 @@ phil_check:
 					ENDIF
 				ENDIF
 			ELSE
-				IF NOT IS_CHAR_IN_CAR phil getaway_car // FIXMIAMI
+				IF NOT IS_CHAR_IN_CAR phil getaway_car // SCFIX
 					IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 phil 4.0 4.0 FALSE
 						IF flag_player_leader_phil = 0
 							SET_CHAR_OBJ_NO_OBJ phil
@@ -3989,14 +3989,14 @@ phil_check:
 						SET_CHAR_OBJ_RUN_TO_COORD phil player_x player_y //player_z
 						flag_player_leader_phil = 0
 					ENDIF
-				ENDIF // FIXMIAMI
+				ENDIF // SCFIX
 			ENDIF
 			IF NOT LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 phil 20.0 20.0 FALSE
-			AND NOT IS_CHAR_IN_CAR phil getaway_car // FIXMIAMI
+			AND NOT IS_CHAR_IN_CAR phil getaway_car // SCFIX
 				IF flag_blip_on_phil = 0
 					PRINT_NOW P_HIND 5000 1 //"You have left Phil behind!"
 					REMOVE_BLIP mission_blip
-					REMOVE_SPHERE mission_sphere // FIXMIAMI
+					REMOVE_SPHERE mission_sphere // SCFIX
 					ADD_BLIP_FOR_CHAR phil phil_blip
 					flag_blip_on_phil = 1
 				ENDIF
@@ -4030,7 +4030,7 @@ cam_check:
 					ENDIF
 				ENDIF
 			ELSE
-				IF NOT IS_CHAR_IN_CAR cam getaway_car // FIXMIAMI
+				IF NOT IS_CHAR_IN_CAR cam getaway_car // SCFIX
 					IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 cam 4.0 4.0 FALSE
 						IF flag_player_leader_cam = 0
 							SET_CHAR_OBJ_NO_OBJ cam
@@ -4042,14 +4042,14 @@ cam_check:
 						SET_CHAR_OBJ_RUN_TO_COORD cam player_x player_y //player_z
 						flag_player_leader_cam = 0
 					ENDIF
-				ENDIF // FIXMIAMI
+				ENDIF // SCFIX
 			ENDIF
 			IF NOT LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 cam 20.0 20.0 FALSE
-			AND NOT IS_CHAR_IN_CAR cam getaway_car // FIXMIAMI
+			AND NOT IS_CHAR_IN_CAR cam getaway_car // SCFIX
 				IF flag_blip_on_cam = 0
 					PRINT_NOW C_HIND 5000 1 //"You have left Phil behind!"
 					REMOVE_BLIP mission_blip
-					REMOVE_SPHERE mission_sphere // FIXMIAMI
+					REMOVE_SPHERE mission_sphere // SCFIX
 					ADD_BLIP_FOR_CHAR cam cam_blip
 					flag_blip_on_cam = 1
 				ENDIF
@@ -4085,7 +4085,7 @@ hilary_check:
 					ENDIF
 				ENDIF
 			ELSE
-				IF NOT IS_CHAR_IN_CAR hilary getaway_car // FIXMIAMI
+				IF NOT IS_CHAR_IN_CAR hilary getaway_car // SCFIX
 					IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 hilary 4.0 4.0 FALSE
 						IF flag_player_leader_hilary = 0
 							SET_CHAR_OBJ_NO_OBJ hilary
@@ -4097,14 +4097,14 @@ hilary_check:
 						SET_CHAR_OBJ_RUN_TO_COORD hilary player_x player_y //player_z
 						flag_player_leader_hilary = 0
 					ENDIF
-				ENDIF // FIXMIAMI
+				ENDIF // SCFIX
 			ENDIF
 			IF NOT LOCATE_PLAYER_ANY_MEANS_CHAR_2D player1 hilary 20.0 20.0 FALSE
-			AND NOT IS_CHAR_IN_CAR hilary getaway_car // FIXMIAMI
+			AND NOT IS_CHAR_IN_CAR hilary getaway_car // SCFIX
 				IF flag_blip_on_hilary = 0
 					PRINT_NOW H_HIND 5000 1 //"You have left Phil behind!"
 					REMOVE_BLIP mission_blip
-					REMOVE_SPHERE mission_sphere // FIXMIAMI
+					REMOVE_SPHERE mission_sphere // SCFIX
 					ADD_BLIP_FOR_CHAR hilary hilary_blip
 					flag_blip_on_hilary = 1
 				ENDIF
@@ -4137,7 +4137,7 @@ plinkety_plonk:
 	
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 trigger_alarm:
 	IF flag_alarm_enabled = 0
 		ADD_CONTINUOUS_SOUND -916.0 -340.0 15.0 SOUND_BANK_ALARM_LOOP bank_alarm
@@ -4145,7 +4145,7 @@ trigger_alarm:
 	ENDIF
 
 	RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 // OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----
 // ----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO----OOOO
@@ -4163,7 +4163,7 @@ trigger_alarm:
 mission_cleanup_bankjob4:
 GET_GAME_TIMER timer_mobile_start
 
-//WAIT 5 // FIXMIAMI: remove this wait as it's not a good practice during cleanup
+//WAIT 5 // SCFIX: remove this wait as it's not a good practice during cleanup
 
 REMOVE_BLIP mission_blip
 REMOVE_BLIP phil_blip
@@ -4171,12 +4171,12 @@ REMOVE_BLIP cam_blip
 REMOVE_BLIP hilary_blip	 
 REMOVE_BLIP blip_getaway_car
 //REMOVE_SPHERE mission_blob
-REMOVE_SPHERE mission_sphere // FIXMIAMI
+REMOVE_SPHERE mission_sphere // SCFIX
 
 REMOVE_ROUTE 1
 REMOVE_ROUTE 2
 REMOVE_SOUND bank_alarm
-flag_alarm_enabled = 0 // FIXMIAMI
+flag_alarm_enabled = 0 // SCFIX
 
 
 IF NOT IS_CHAR_DEAD scplayer
@@ -4247,14 +4247,14 @@ MARK_CAR_AS_NO_LONGER_NEEDED cop_car1
 MARK_CAR_AS_NO_LONGER_NEEDED cop_car2
 MARK_CAR_AS_NO_LONGER_NEEDED cop_car3
 
-IF NOT IS_CAR_DEAD getaway_car // FIXMIAMI
-	SET_CAR_PROOFS getaway_car FALSE FALSE FALSE FALSE FALSE // FIXMIAMI
-ENDIF // FIXMIAMI
+IF NOT IS_CAR_DEAD getaway_car // SCFIX
+	SET_CAR_PROOFS getaway_car FALSE FALSE FALSE FALSE FALSE // SCFIX
+ENDIF // SCFIX
 
 MARK_CAR_AS_NO_LONGER_NEEDED getaway_car
 
 
-SWITCH_CAR_GENERATOR gen_car23 101 // FIXMIAMI: re-enable securicar at bank entrance
+SWITCH_CAR_GENERATOR gen_car23 101 // SCFIX: re-enable securicar at bank entrance
 
 UNLOAD_SPECIAL_CHARACTER 1
 UNLOAD_SPECIAL_CHARACTER 2
@@ -4356,7 +4356,7 @@ RETURN
 audio_bank_loading:
 	WHILE NOT HAS_MISSION_AUDIO_LOADED audio_slot
 		WAIT 0
-		/*IF flag_area_check_1 = 1  // FIXMIAMI: commented
+		/*IF flag_area_check_1 = 1  // SCFIX: commented
 			IF LOCATE_PLAYER_ANY_MEANS_3D player1 -833.0 -348.0 10.0 4.0 4.0 4.0 TRUE
 			ENDIF
 			//GOSUB car_check
@@ -4364,11 +4364,11 @@ audio_bank_loading:
 			//GOSUB cam_check
 			//GOSUB hilary_check
 		ENDIF*/
-		// FIXMIAMI: START - should probably check for the car still
+		// SCFIX: START - should probably check for the car still
 		IF flag_area_check_1 = 1 
 			GOSUB car_check
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDWHILE
 	PLAY_MISSION_AUDIO audio_slot
 RETURN
@@ -4379,7 +4379,7 @@ RETURN
 has_audio_finished_bank:
 	WHILE NOT HAS_MISSION_AUDIO_FINISHED audio_slot
 		WAIT 0
-		/*IF flag_area_check_1 = 1// FIXMIAMI: commented
+		/*IF flag_area_check_1 = 1// SCFIX: commented
 			IF LOCATE_PLAYER_ANY_MEANS_3D player1 -833.0 -348.0 10.0 4.0 4.0 4.0 TRUE
 			ENDIF
 			//GOSUB car_check
@@ -4387,11 +4387,11 @@ has_audio_finished_bank:
 			//GOSUB cam_check
 			//GOSUB hilary_check
 		ENDIF*/
-		// FIXMIAMI: START - should probably check for the car still
+		// SCFIX: START - should probably check for the car still
 		IF flag_area_check_1 = 1 
 			GOSUB car_check
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDWHILE
 	CLEAR_PRINTS
 RETURN
@@ -4466,7 +4466,7 @@ IF flag_change_waitstate = 0
 ENDIF
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 
 hostages_post_swat_action:
 	var_hostage = cashier1
@@ -4501,7 +4501,7 @@ post_swat_action_one_hostage:
 		SET_CHAR_STAY_IN_SAME_PLACE var_hostage FALSE
 	ENDIF
 	RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 hostage_checker:
 	IF IS_CHAR_DEAD cashier1
@@ -4587,20 +4587,20 @@ hostage_checker:
 		IF NOT IS_CHAR_DEAD phil
 			SET_CHAR_THREAT_SEARCH phil THREAT_GANG_SECURITY
 			SET_CHAR_THREAT_SEARCH phil THREAT_COP
-			SET_CHAR_THREAT_SEARCH phil THREAT_GANG_GOLFER // FIXMIAMI
+			SET_CHAR_THREAT_SEARCH phil THREAT_GANG_GOLFER // SCFIX
 			SET_CHAR_HEED_THREATS phil TRUE
-			// SET_PLAYER_AS_LEADER phil player1 // FIXMIAMI: don't follow me, just hold down the fort
+			// SET_PLAYER_AS_LEADER phil player1 // SCFIX: don't follow me, just hold down the fort
 		ENDIF
 		IF NOT IS_CHAR_DEAD cam
 		AND flag_cam_downstairs = 0
 			SET_CHAR_THREAT_SEARCH cam THREAT_GANG_SECURITY
 			SET_CHAR_THREAT_SEARCH cam THREAT_COP
-			SET_CHAR_THREAT_SEARCH cam THREAT_GANG_GOLFER // FIXMIAMI
+			SET_CHAR_THREAT_SEARCH cam THREAT_GANG_GOLFER // SCFIX
 			SET_CHAR_HEED_THREATS cam TRUE
-			//SET_PLAYER_AS_LEADER cam player1 // FIXMIAMI: this should already be set
+			//SET_PLAYER_AS_LEADER cam player1 // SCFIX: this should already be set
 		ENDIF
 		ALTER_WANTED_LEVEL_NO_DROP player1 3
-		GOSUB trigger_alarm // FIXMIAMI
+		GOSUB trigger_alarm // SCFIX
 		SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0
 		//flag_bank_mission_failed = 1 
 		flag_launch_hostage_attack = 1
@@ -4609,11 +4609,11 @@ RETURN
 
 hostage_attack:
 	IF NOT IS_CHAR_DEAD var_hostage
-	IF flag_cam_downstairs = 0 // FIXMIAMI
+	IF flag_cam_downstairs = 0 // SCFIX
 	GENERATE_RANDOM_INT_IN_RANGE 0 2 hostage_int 
-	ELSE // FIXMIAMI
-		hostage_int = 0 // FIXMIAMI
-	ENDIF // FIXMIAMI
+	ELSE // SCFIX
+		hostage_int = 0 // SCFIX
+	ENDIF // SCFIX
 		IF hostage_int = 0
 			IF NOT IS_CHAR_DEAD phil
 				SET_CHAR_WAIT_STATE var_hostage 0 0
@@ -4724,7 +4724,7 @@ RETURN
 
 phil_death_check_2:
 	IF NOT IS_CHAR_DEAD phil
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF IS_WANTED_LEVEL_GREATER player1 0
 			SET_CHAR_RUNNING phil TRUE
 			SET_CHAR_THREAT_SEARCH phil THREAT_COP
@@ -4733,7 +4733,7 @@ phil_death_check_2:
 			CLEAR_CHAR_THREAT_SEARCH phil
 			SET_CHAR_HEED_THREATS phil FALSE
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 		IF LOCATE_PLAYER_ANY_MEANS_CHAR_3D player1 phil 10.0 10.0 10.0 FALSE
 			IF flag_blip_on_phil = 1
 				REMOVE_BLIP phil_blip
@@ -4754,7 +4754,7 @@ phil_death_check_2:
 	IF IS_CHAR_DEAD cam
 		flag_cam_dead = 1
 	ELSE
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF IS_WANTED_LEVEL_GREATER player1 0
 			SET_CHAR_RUNNING cam TRUE
 			SET_CHAR_THREAT_SEARCH cam THREAT_COP
@@ -4763,7 +4763,7 @@ phil_death_check_2:
 			CLEAR_CHAR_THREAT_SEARCH cam
 			SET_CHAR_HEED_THREATS cam FALSE
 		ENDIF
-		// FIXMIAMI: END
+		// SCFIX: END
 	ENDIF
 RETURN	 
 
@@ -4784,13 +4784,13 @@ surveilance:
 			SWITCH_WIDESCREEN ON
 			SET_FADING_COLOUR 0 0 1
 			DO_FADE 250 FADE_OUT
-			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+			GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 			GET_GAME_TIMER timer_intro_start
 			SET_FIXED_CAMERA_POSITION -916.4 -330.55 15.86 0.0 0.0 0.0
 			POINT_CAMERA_AT_POINT -922.5 -338.75 13.44 JUMP_CUT
 			SWITCH_SECURITY_CAMERA ON
 			DO_FADE 250 FADE_IN
-			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+			GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 
 			PRINT_NOW ( EXIT_1 ) 5000 1
 			
@@ -4844,7 +4844,7 @@ surveilance:
 				WAIT 0
 			ENDWHILE
 			DO_FADE 250 FADE_OUT
-			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+			GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 			RESTORE_CAMERA_JUMPCUT
 			SET_PLAYER_CONTROL player1 ON
 			SET_EVERYONE_IGNORE_PLAYER player1 OFF
@@ -4853,7 +4853,7 @@ surveilance:
 			flag_surveilance = 0
 			flag_surveilance_trigger = 1
 			DO_FADE 250 FADE_IN
-			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+			GOSUB bj4_do_fade // SCFIX: made a sub to reduce script size
 		ENDIF
 	ELSE
 		flag_surveilance_trigger = 0
@@ -5051,7 +5051,7 @@ audio_slot = 1
 		counter_conv3 = 2
 	ENDIF
 	IF counter_conv3 = 0
-		// FIXMIAMI: START
+		// SCFIX: START
 		IF counter_conv1 < 5 // restart convo if interrupted before "shut up you two..."
 		AND counter_conv1 > 1
 			counter_conv1 = 1
@@ -5059,15 +5059,15 @@ audio_slot = 1
 		IF counter_conv2 > 1 // end convo if interrupted
 			counter_conv2 = 3
 		ENDIF
-		// FIXMIAMI: End
+		// SCFIX: End
 
 
-		// FIXMIAMI: START - moved down here
+		// SCFIX: START - moved down here
 		counter_temp1 = counter_conv1
 		counter_conv1 = 10
 		counter_temp2 = counter_conv2
 		counter_conv2 = 10
-		// FIXMIAMI: End
+		// SCFIX: End
 
 		LOAD_MISSION_AUDIO audio_slot BNK4_3m
 		GOSUB audio_bank_loading
@@ -5078,7 +5078,7 @@ audio_slot = 1
 	
 RETURN
 
-// FIXMIAMI: START
+// SCFIX: START
 
 Conversation_4:
 audio_slot = 1
@@ -5108,7 +5108,7 @@ IF counter_conv4 = 0
 ENDIF
 	
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 
 gas_canisters:
@@ -5140,7 +5140,7 @@ gas_generator:
 RETURN
 //ADD_MOVING_PARTICLE_EFFECT MovingParticleType X Y Z XSpeed YSpeed ZSpeed Radius R G B Time
 
-// FIXMIAMI: START - made a subroutine to reduce the script size
+// SCFIX: START - made a subroutine to reduce the script size
 close_lift_doors:
 	SET_FADING_COLOUR 0 0 1
 
@@ -5152,20 +5152,20 @@ close_lift_doors:
 		SLIDE_OBJECT lift_door_2  -936.964 -352.169 3.235 0.0 0.025 0.0 FALSE
 	ENDWHILE
 	RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
 going_up:
 	SET_PLAYER_CONTROL player1 OFF
 	SET_EVERYONE_IGNORE_PLAYER player1 ON 
 
-	GOSUB close_lift_doors // FIXMIAMI: moved code into a subroutine
+	GOSUB close_lift_doors // SCFIX: moved code into a subroutine
 
 
 	SET_PLAYER_COORDINATES player1 -938.56 -351.5 16.8
 	SET_PLAYER_HEADING player1 280.0
 	SET_CAMERA_IN_FRONT_OF_PLAYER
 
-/* FIXMIAMI: replace all this stuff with GOTO to reduce script size
+/* SCFIX: replace all this stuff with GOTO to reduce script size
 	DO_FADE 1500 FADE_IN
 
 	WHILE GET_FADING_STATUS
@@ -5178,12 +5178,12 @@ going_up:
 	SET_EVERYONE_IGNORE_PLAYER player1 OFF 
 RETURN
 */
-GOTO going_down_pt2 // FIXMIAMI
+GOTO going_down_pt2 // SCFIX
 
 going_down_pt1:
-	GOSUB close_lift_doors // FIXMIAMI: moved code into a subroutine
+	GOSUB close_lift_doors // SCFIX: moved code into a subroutine
 
-	//RESTORE_CAMERA_JUMPCUT // FIXMIAMI
+	//RESTORE_CAMERA_JUMPCUT // SCFIX
 
 	SET_PLAYER_COORDINATES player1 -937.84 -351.73 6.23
 	SET_PLAYER_HEADING player1 280.0
@@ -5301,9 +5301,9 @@ ENDIF
 RETURN
 */
 
-// FIXMIAMI: START
+// SCFIX: START
 
-// FIXMIAMI: the things you do to save the size...
+// SCFIX: the things you do to save the size...
 create_outside_swat1:
 	CREATE_CHAR swat_ped_type swat -875.9 -334.0 10.3 bank_cop_1
 	CLEAR_CHAR_THREAT_SEARCH bank_cop_1 
@@ -5381,6 +5381,6 @@ bj4_do_fade:
 	ENDWHILE
 	RETURN
 
-// FIXMIAMI: END
+// SCFIX: END
 
 }

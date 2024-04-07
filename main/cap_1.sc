@@ -260,7 +260,7 @@ cap_1_fool_compiler:
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-LOAD_MISSION_AUDIO 1 MONO12 // FIXMIAMI
+LOAD_MISSION_AUDIO 1 MONO12 // SCFIX
 
 LOAD_SPECIAL_CHARACTER 1 csplay
 LOAD_SPECIAL_CHARACTER 2 cskelly
@@ -429,7 +429,7 @@ REQUEST_MODEL SANCHEZ
 
 LOAD_ALL_MODELS_NOW
 
-// FIXMIAMI: START
+// SCFIX: START
 IF NOT WAS_CUTSCENE_SKIPPED
 	IF HAS_MISSION_AUDIO_LOADED	1
 		PLAY_MISSION_AUDIO 1
@@ -438,7 +438,7 @@ IF NOT WAS_CUTSCENE_SKIPPED
 		ENDWHILE
 	ENDIF
 ENDIF
-// FIXMIAMI: END
+// SCFIX: END
 
 WHILE NOT HAS_MODEL_LOADED M4
 OR NOT HAS_MODEL_LOADED CHROMEGUN
@@ -530,7 +530,7 @@ VAR_INT no_obj_timer
 waiting_for_second_collector = 0
 waiting_for_second_collector_timer = 0
 
-// FIXMIAMI: new code starts here
+// SCFIX: new code starts here
 cap1_mission_loop:
 	WAIT 0
 

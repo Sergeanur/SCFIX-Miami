@@ -1,6 +1,6 @@
 MISSION_START
 			  
-// FIXMIAMI: START - fix SSU shit
+// SCFIX: START - fix SSU shit
 GOSUB mission_start_vcptbuy
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
@@ -10,29 +10,29 @@ ENDIF
 GOSUB mission_cleanup_vcptbuy
 
 MISSION_END
-// FIXMIAMI: END
+// SCFIX: END
 
 mission_start_vcptbuy:
 
 SCRIPT_NAME	vcptbuy
 
 flag_player_on_mission = 1
-{ // FIXMIAMI: scope moved up, was after WAIT 0
+{ // SCFIX: scope moved up, was after WAIT 0
 
-// FIXMIAMI: START
+// SCFIX: START
 LVAR_INT flag_vcptbuy_set1
 LVAR_INT flag_vcptbuy_set2
 LVAR_INT flag_vcptbuy_set3
 flag_vcptbuy_set1 = 0
 flag_vcptbuy_set2 = 0
 flag_vcptbuy_set3 = 0
-// FIXMIAMI: END
+// SCFIX: END
 
-SET_PLAYER_CONTROL player1 OFF // FIXMIAMI: paranoid set before wait
+SET_PLAYER_CONTROL player1 OFF // SCFIX: paranoid set before wait
 
 WAIT 0
 
-	GOSUB vcptbuy_set1 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB vcptbuy_set1 // SCFIX: moved stuff into a subroutine
 
 	SET_FADING_COLOUR 0 0 1
 	DO_FADE 500 FADE_OUT
@@ -41,7 +41,7 @@ WAIT 0
 	SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT vcptbuyX vcptbuyY vcptbuyZ RADAR_SPRITE_SAVEHOUSE vcptbuy_blip 
 			CHANGE_BLIP_DISPLAY vcptbuy_blip BLIP_ONLY
@@ -51,7 +51,7 @@ WAIT 0
 		*/
 	ENDWHILE
 
-	GOSUB vcptbuy_set2 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB vcptbuy_set2 // SCFIX: moved stuff into a subroutine
 
 	CLEAR_AREA 529.6626 1272.1550 16.8220 1.0 TRUE
 	SET_PLAYER_COORDINATES player1 529.6626 1272.1550 16.8220
@@ -66,7 +66,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			TERMINATE_THIS_SCRIPT
 		ENDIF
@@ -74,7 +74,7 @@ WAIT 0
 	ENDWHILE
 
 	PRINT_WITH_NUMBER_BIG VCPTBUY vcptbuy_price 5000 6 //3321 Vice Point purchased: $ ~1~
-	GOSUB vcptbuy_set3 // FIXMIAMI: moved stuff into a subroutine
+	GOSUB vcptbuy_set3 // SCFIX: moved stuff into a subroutine
 	PLAY_MISSION_PASSED_TUNE 1
 	SET_MUSIC_DOES_FADE FALSE
 
@@ -97,7 +97,7 @@ WAIT 0
 
 	WHILE GET_FADING_STATUS
 		WAIT 0
-		/* FIXMIAMI: remove this shit
+		/* SCFIX: remove this shit
 		IF NOT IS_PLAYER_PLAYING player1
 			SET_MUSIC_DOES_FADE TRUE
 			TERMINATE_THIS_SCRIPT
@@ -118,9 +118,9 @@ WAIT 0
 
 	GOSUB get_fading_status
 
-	RETURN // FIXMIAMI
+	RETURN // SCFIX
 
-// FIXMIAMI: START
+// SCFIX: START
 vcptbuy_set1:
 IF flag_vcptbuy_set1 = 0
 	REMOVE_BLIP vcptbuy_blip
@@ -156,16 +156,16 @@ GOSUB vcptbuy_set1
 GOSUB vcptbuy_set2
 GOSUB vcptbuy_set3
 RETURN
-// FIXMIAMI: END
+// SCFIX: END
 
-mission_cleanup_vcptbuy: // FIXMIAMI
+mission_cleanup_vcptbuy: // SCFIX
 	SET_MUSIC_DOES_FADE TRUE
 					
 												
 flag_player_on_mission = 0
 
 MISSION_HAS_FINISHED
-//MISSION_END // FIXMIAMI: moved up
+//MISSION_END // SCFIX: moved up
 
 }
 RETURN 
