@@ -174,6 +174,14 @@ player_z = 0.0
 add_pizza_score = 0
 {
 
+// FIXMIAMI: START
+LVAR_INT pizza_audio_speech
+LVAR_INT pizza_audio_state
+pizza_audio_speech = 0
+pizza_audio_state = 5
+// FIXMIAMI: END
+
+
 //impossible if comment
 GOTO pizza_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_RANDOM_CHAR cust_coordx cust_coordy cust_coordz customer1
@@ -318,6 +326,7 @@ WHILE customers_created < pizza_goals
 	GOSUB plyr_off_moped
 	GOSUB plyr_quit_game
 	GOSUB dying_customers
+	GOSUB pizza_audio_process // FIXMIAMI
 ENDWHILE
 
 
@@ -344,6 +353,12 @@ ENDWHILE
 
 IF go_back_to_pizza_hut_flag = 0
 	IF pizza_delivered = pizza_goals
+		// FIXMIAMI: START - cosider mission passed as soon as the last pizza is delivered
+		IF pizza_goals = 10 
+		AND flag_pizza_mission_passed = 0
+			GOTO mission_passed_pizza
+		ENDIF
+		// FIXMIAMI: END
 		IF flag_player_not_in_pizza_moped = 0
 			PRINT_NOW ( PIZ1_33 ) 7000 1 //Return to the restaurant for more orders.
 			REMOVE_BLIP pizza_hut_blip 
@@ -440,6 +455,8 @@ ELSE
 		ENDIF
 	ENDIF
 ENDIF   
+
+GOSUB pizza_audio_process // FIXMIAMI
 
 GOTO start_pizza_mission 
 
@@ -1606,6 +1623,7 @@ MARK_OBJECT_AS_NO_LONGER_NEEDED pizza_box6
 GENERATE_RANDOM_INT_IN_RANGE 1 20 random_speech
 
 IF pizza_speech_played = 0
+	/* FIXMIAMI: removed
 	IF random_speech = 1 
 		LOAD_MISSION_AUDIO 1 PISS_01
 		WHILE NOT HAS_MISSION_AUDIO_LOADED 1
@@ -1853,7 +1871,13 @@ IF pizza_speech_played = 0
 		CLEAR_MISSION_AUDIO 1
 		CLEAR_THIS_PRINT PIZ1_31 
 	ENDIF
+	*/
+	// FIXMIAMI: START
 	pizza_speech_played = 1
+	GOSUB pizza_audio_clear
+	pizza_audio_speech = random_speech
+	pizza_audio_state = 0
+	// FIXMIAMI: END
 ENDIF
 //////////////////////////////////////////////////////////////////////
 RETURN////////////////////////////////////////////////////////////////
@@ -2033,6 +2057,275 @@ ENDIF
 //////////////////////////////////////////////////////////////////////
 RETURN////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+
+// FIXMIAMI: START
+pizza_audio_process:
+IF pizza_audio_state = 0
+	GOSUB pizza_audio_load
+	pizza_audio_state ++
+ENDIF
+IF pizza_audio_state = 1
+	IF HAS_MISSION_AUDIO_LOADED 1
+		pizza_audio_state ++
+	ENDIF
+	RETURN
+ENDIF
+IF pizza_audio_state = 2
+	GOSUB pizza_audio_print
+	PLAY_MISSION_AUDIO 1
+	pizza_audio_state ++
+ENDIF
+IF pizza_audio_state = 3
+	IF HAS_MISSION_AUDIO_FINISHED 1
+		pizza_audio_state ++
+	ENDIF
+	RETURN
+ENDIF
+IF pizza_audio_state = 4
+	GOSUB pizza_audio_clear
+	pizza_audio_state ++
+ENDIF
+RETURN
+
+pizza_audio_load:
+IF pizza_audio_speech = 1
+	LOAD_MISSION_AUDIO 1 PISS_01
+	RETURN
+ENDIF
+IF pizza_audio_speech = 2
+	LOAD_MISSION_AUDIO 1 PISS_02
+	RETURN
+ENDIF
+IF pizza_audio_speech = 3
+	LOAD_MISSION_AUDIO 1 PISS_03
+	RETURN
+ENDIF
+IF pizza_audio_speech = 4
+	LOAD_MISSION_AUDIO 1 PISS_04
+	RETURN
+ENDIF
+IF pizza_audio_speech = 5
+	LOAD_MISSION_AUDIO 1 PISS_05
+	RETURN
+ENDIF
+IF pizza_audio_speech = 6
+	LOAD_MISSION_AUDIO 1 PISS_06
+	RETURN
+ENDIF
+IF pizza_audio_speech = 7
+	LOAD_MISSION_AUDIO 1 PISS_07
+	RETURN
+ENDIF
+IF pizza_audio_speech = 8
+	LOAD_MISSION_AUDIO 1 PISS_08
+	RETURN
+ENDIF
+IF pizza_audio_speech = 9
+	LOAD_MISSION_AUDIO 1 PISS_09
+	RETURN
+ENDIF
+IF pizza_audio_speech = 10
+	LOAD_MISSION_AUDIO 1 PISS_10
+	RETURN
+ENDIF
+IF pizza_audio_speech = 11
+	LOAD_MISSION_AUDIO 1 PISS_11
+	RETURN
+ENDIF
+IF pizza_audio_speech = 12
+	LOAD_MISSION_AUDIO 1 PISS_12
+	RETURN
+ENDIF
+IF pizza_audio_speech = 13
+	LOAD_MISSION_AUDIO 1 PISS_13
+	RETURN
+ENDIF
+IF pizza_audio_speech = 14
+	LOAD_MISSION_AUDIO 1 PISS_14
+	RETURN
+ENDIF
+IF pizza_audio_speech = 15
+	LOAD_MISSION_AUDIO 1 PISS_15
+	RETURN
+ENDIF
+IF pizza_audio_speech = 16
+	LOAD_MISSION_AUDIO 1 PISS_16
+	RETURN
+ENDIF
+IF pizza_audio_speech = 17
+	LOAD_MISSION_AUDIO 1 PISS_17
+	RETURN
+ENDIF
+IF pizza_audio_speech = 18
+	LOAD_MISSION_AUDIO 1 PISS_18
+	RETURN
+ENDIF
+IF pizza_audio_speech = 19
+	LOAD_MISSION_AUDIO 1 PISS_19
+	RETURN
+ENDIF
+RETURN
+
+pizza_audio_print:
+IF pizza_audio_speech = 1
+	PRINT_NOW PIZ1_13 4000 1//Get these delivered nice and hot.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 2
+	PRINT_NOW PIZ1_14 4000 1//Pal, pizza's for you.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 3
+	PRINT_NOW PIZ1_15 4000 1//Hey, come on Mister, deliver these quick.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 4
+	PRINT_NOW PIZ1_16 4000 1//What are you waiting around for Mister?  You got pizza's to deliver.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 5
+	PRINT_NOW PIZ1_17 4000 1//I know you didn't want to be a pizza boy, well I don't give a damn.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 6
+	PRINT_NOW PIZ1_18 4000 1//Deliver these.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 7
+	PRINT_NOW PIZ1_19 4000 1//These need delivering.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 8
+	PRINT_NOW PIZ1_20 4000 1//Come on Mister, deliver these things or you're sacked.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 9
+	PRINT_NOW PIZ1_21 4000 1//We got people waiting pal.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 10
+	PRINT_NOW PIZ1_22 4000 1//What are you waiting around for?  These need delivering!
+	RETURN
+ENDIF
+IF pizza_audio_speech = 11
+	PRINT_NOW PIZ1_23 4000 1//Deliver the damn food Mister.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 12
+	PRINT_NOW PIZ1_24 4000 1//These need delivering pal.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 13
+	PRINT_NOW PIZ1_25 4000 1//Man, can you take these?
+	RETURN
+ENDIF
+IF pizza_audio_speech = 14
+	PRINT_NOW PIZ1_26 4000 1//Mister, deliver these pronto, avamos amigo.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 15
+	PRINT_NOW PIZ1_27 4000 1//Come on, we're in a rush, deliver these.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 16
+	PRINT_NOW PIZ1_28 4000 1//You again?  well deliver these quick pal.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 17
+	PRINT_NOW PIZ1_29 4000 1//No wasting time this time pal.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 18
+	PRINT_NOW PIZ1_30 4000 1//Come on you lazy bastard, deliver this crap on time.
+	RETURN
+ENDIF
+IF pizza_audio_speech = 19
+	PRINT_NOW PIZ1_31 4000 1//You'll never get a promotion unless you move faster this time.
+	RETURN
+ENDIF
+RETURN
+
+pizza_audio_clear:
+CLEAR_MISSION_AUDIO 1
+IF pizza_audio_speech = 1
+	CLEAR_THIS_PRINT PIZ1_13
+	RETURN
+ENDIF
+IF pizza_audio_speech = 2
+	CLEAR_THIS_PRINT PIZ1_14
+	RETURN
+ENDIF
+IF pizza_audio_speech = 3
+	CLEAR_THIS_PRINT PIZ1_15
+	RETURN
+ENDIF
+IF pizza_audio_speech = 4
+	CLEAR_THIS_PRINT PIZ1_16
+	RETURN
+ENDIF
+IF pizza_audio_speech = 5
+	CLEAR_THIS_PRINT PIZ1_17
+	RETURN
+ENDIF
+IF pizza_audio_speech = 6
+	CLEAR_THIS_PRINT PIZ1_18
+	RETURN
+ENDIF
+IF pizza_audio_speech = 7
+	CLEAR_THIS_PRINT PIZ1_19
+	RETURN
+ENDIF
+IF pizza_audio_speech = 8
+	CLEAR_THIS_PRINT PIZ1_20
+	RETURN
+ENDIF
+IF pizza_audio_speech = 9
+	CLEAR_THIS_PRINT PIZ1_21
+	RETURN
+ENDIF
+IF pizza_audio_speech = 10
+	CLEAR_THIS_PRINT PIZ1_22
+	RETURN
+ENDIF
+IF pizza_audio_speech = 11
+	CLEAR_THIS_PRINT PIZ1_23
+	RETURN
+ENDIF
+IF pizza_audio_speech = 12
+	CLEAR_THIS_PRINT PIZ1_24
+	RETURN
+ENDIF
+IF pizza_audio_speech = 13
+	CLEAR_THIS_PRINT PIZ1_25
+	RETURN
+ENDIF
+IF pizza_audio_speech = 14
+	CLEAR_THIS_PRINT PIZ1_26
+	RETURN
+ENDIF
+IF pizza_audio_speech = 15
+	CLEAR_THIS_PRINT PIZ1_27
+	RETURN
+ENDIF
+IF pizza_audio_speech = 16
+	CLEAR_THIS_PRINT PIZ1_28
+	RETURN
+ENDIF
+IF pizza_audio_speech = 17
+	CLEAR_THIS_PRINT PIZ1_29
+	RETURN
+ENDIF
+IF pizza_audio_speech = 18
+	CLEAR_THIS_PRINT PIZ1_30
+	RETURN
+ENDIF
+IF pizza_audio_speech = 19
+	CLEAR_THIS_PRINT PIZ1_31
+	RETURN
+ENDIF
+RETURN
+// FIXMIAMI: END
+
 }
 
 
