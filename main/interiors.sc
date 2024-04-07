@@ -169,6 +169,7 @@ mission_start_interiors:
 	START_NEW_SCRIPT interiors
 	//START_NEW_SCRIPT airport_security
 	//START_NEW_SCRIPT aport2_security
+	START_NEW_SCRIPT force_extra_colors_script // FIXMIAMI
 
 	MISSION_END
 }
@@ -194,8 +195,6 @@ interiors_inner:
 
 	WAIT 0
 	++ pooz_counter
-
-	GOSUB force_extra_colors // FIXMIAMI
 
 		// **************************** THE STRIP CLUB ********************************************
 		IF IS_PLAYER_PLAYING player1
@@ -1949,6 +1948,12 @@ RETURN
 interiors_cleanup:
 			
 	IF flag_interiors_cleanup = 0
+		// FIXMIAMI: START - wait until wasted/busted cam is over
+		WHILE NOT IS_PLAYER_PLAYING player1
+			WAIT 0
+		ENDWHILE
+		// FIXMIAMI: END
+
 		//SET_AREA_VISIBLE VIS_MAIN_MAP
 		SWITCH_RUBBISH ON
 		//CLEAR_MISSION_AUDIO 1
@@ -3566,12 +3571,19 @@ ENDIF
 
 WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 	WAIT 0
+	IF NOT IS_PLAYER_PLAYING player1
+		RETURN
+	ENDIF
 ENDWHILE
 
 PLAY_MISSION_AUDIO 1
 
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 	WAIT 0
+	IF NOT IS_PLAYER_PLAYING player1
+		CLEAR_MISSION_AUDIO 1
+		RETURN
+	ENDIF
 ENDWHILE
 
 RETURN
@@ -3620,6 +3632,11 @@ IF flag_player_in_mansion = 1
 ENDIF
 
 RETURN
+
+force_extra_colors_script:
+	GOSUB force_extra_colors
+	WAIT 0
+	GOTO force_extra_colors_script
 
 // FIXMIAMI: END
 
