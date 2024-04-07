@@ -1494,6 +1494,13 @@ ENDIF
 //checking buddy is still in player1s group
 
 IF NOT IS_CHAR_DEAD buddy
+	// FIXMIAMI: START
+	IF IS_WANTED_LEVEL_GREATER player1 0
+		SET_CHAR_THREAT_SEARCH buddy THREAT_COP
+	ELSE
+		CLEAR_CHAR_THREAT_SEARCH buddy
+	ENDIF
+	// FIXMIAMI: END
 	IF flag_buddy_in_group_prot3 = 1
         IF NOT IS_CHAR_IN_PLAYERS_GROUP buddy player1
 			IF timera > 3000
