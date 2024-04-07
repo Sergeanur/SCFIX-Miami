@@ -13,7 +13,9 @@ MISSION_START
 GOSUB mission_start_bankjob4
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
-	GOSUB mission_bankjob4_failed
+	//GOSUB mission_bankjob4_failed // FIXMIAMI: not using now because of waits
+	PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed" // FIXMIAMI
+	SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // FIXMIAMI
 ENDIF
 
 GOSUB mission_cleanup_bankjob4
@@ -437,9 +439,7 @@ DO_FADE 1500 FADE_OUT
 
 CLEAR_PRINTS
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 
 SWITCH_RUBBISH ON
@@ -574,9 +574,7 @@ flag_area_check_1 = 1
 
 DO_FADE 750 FADE_IN
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 SET_PLAYER_CONTROL player1 ON
 SET_RADIO_CHANNEL 6 -1
@@ -1167,9 +1165,7 @@ WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -896.0 -341.0 12.5 2.0 2.0 3.0 TRUE
 ENDWHILE
 
 DO_FADE 1000 FADE_OUT
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 REQUEST_MODEL WFYBU
 REQUEST_MODEL HFYBU
@@ -1368,9 +1364,7 @@ tha_inner:
 			 //CHAR_LOOK_AT_CHAR_ALWAYS bank_cop_2 cam 
 		ENDIF
 		DO_FADE 1000 FADE_IN
-		WHILE GET_FADING_STATUS
-			WAIT 0
-		ENDWHILE
+		GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 		flag_intro = 2
 	ENDIF
 	
@@ -3207,9 +3201,7 @@ LOCK_CAR_DOORS cop_car3 CARLOCK_UNLOCKED
 SET_FADING_COLOUR 0 0 1
 DO_FADE 1500 FADE_IN
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 //flag_bank_job = 0
 
@@ -3606,9 +3598,29 @@ PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed"
 SET_FADING_COLOUR 0 0 1
 SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0
 
+/* FIXMIAMI: remove and redo this with teleporting outside of garage
 WHILE IS_PLAYER_IN_AREA_3D player1 -852.8 -915.0 10.0 -837.5 -897.2 13.0 FALSE // CHECKS IF PLAYER HAS FAILED BY STANDING IN GARAGE AND SHOOTING PHIL - STOPS PLAYER GETTING STUCK IN GARAGE.
 	WAIT 0
 ENDWHILE
+*/
+
+// FIXMIAMI: START
+IF IS_PLAYER_PLAYING player1
+	IF IS_PLAYER_IN_AREA_3D player1 -852.8 -915.0 10.0 -837.4 -897.2 13.0 FALSE
+		DO_FADE 1500 FADE_OUT
+		GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+		CLEAR_AREA -832.2 -901.0 10.0 5.0 TRUE
+		SET_PLAYER_COORDINATES player1 -832.2 -901.0 10.0
+		SET_PLAYER_HEADING player1 270.0
+		SET_OBJECT_COORDINATES cams_door -837.134 -901.672 12.03 
+		WAIT 100
+		SET_CAMERA_IN_FRONT_OF_PLAYER
+		RESTORE_CAMERA_JUMPCUT
+		DO_FADE 1500 FADE_IN
+		GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
+	ENDIF
+ENDIF
+// FIXMIAMI: END
 
 IF IS_PLAYER_PLAYING player1
 AND flag_player_in_bank = 1
@@ -3617,9 +3629,7 @@ AND flag_player_in_bank = 1
 	GOSUB exit_bank
 	
 	DO_FADE 1500 FADE_IN
-	WHILE GET_FADING_STATUS
-		WAIT 0
-	ENDWHILE
+	GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 ENDIF
 RETURN
 	   		
@@ -3658,9 +3668,7 @@ POINT_CAMERA_AT_POINT -833.15 -899.4 17.6 JUMP_CUT
 
 DO_FADE 500 FADE_IN
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 DELETE_CHAR phil
 DELETE_CHAR cam
@@ -3730,9 +3738,7 @@ REQUEST_MODEL lodd_build2
 REQUEST_MODEL spad_buildnew
 REQUEST_MODEL veg_palmbig14
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 
 WHILE NOT HAS_MODEL_LOADED od_clubout_dy
@@ -3771,9 +3777,7 @@ SET_TIME_OF_DAY 21 30
 
 DO_FADE 1000 FADE_IN
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 timera = 0
 WHILE timera < 2000
@@ -3806,9 +3810,7 @@ ENDWHILE
 
 DO_FADE 500 FADE_OUT
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 LOAD_SCENE -833.6 -908.5 11.11
 
@@ -3839,9 +3841,7 @@ CLEAR_PRINTS
 
 DO_FADE 1500 FADE_IN
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 SET_MUSIC_DOES_FADE TRUE
 SET_PLAYER_CONTROL player1 ON
@@ -3884,9 +3884,7 @@ RETURN
 
 exit_bank:
 	DO_FADE 1500 FADE_OUT
-	WHILE GET_FADING_STATUS
-		WAIT 0
-	ENDWHILE
+	GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 	CLEAR_EXTRA_COLOURS FALSE
 	SET_CAR_DENSITY_MULTIPLIER 1.0
 	SWITCH_RUBBISH ON
@@ -4726,9 +4724,16 @@ RETURN
 
 phil_death_check_2:
 	IF NOT IS_CHAR_DEAD phil
-		IF IS_WANTED_LEVEL_GREATER player1 0 // FIXMIAMI
-			SET_CHAR_RUNNING phil TRUE // FIXMIAMI
-		ENDIF // FIXMIAMI
+		// FIXMIAMI: START
+		IF IS_WANTED_LEVEL_GREATER player1 0
+			SET_CHAR_RUNNING phil TRUE
+			SET_CHAR_THREAT_SEARCH phil THREAT_COP
+			SET_CHAR_HEED_THREATS phil TRUE
+		ELSE
+			CLEAR_CHAR_THREAT_SEARCH phil
+			SET_CHAR_HEED_THREATS phil FALSE
+		ENDIF
+		// FIXMIAMI: END
 		IF LOCATE_PLAYER_ANY_MEANS_CHAR_3D player1 phil 10.0 10.0 10.0 FALSE
 			IF flag_blip_on_phil = 1
 				REMOVE_BLIP phil_blip
@@ -4749,9 +4754,16 @@ phil_death_check_2:
 	IF IS_CHAR_DEAD cam
 		flag_cam_dead = 1
 	ELSE
-		IF IS_WANTED_LEVEL_GREATER player1 0 // FIXMIAMI
-			SET_CHAR_RUNNING cam TRUE // FIXMIAMI
-		ENDIF // FIXMIAMI
+		// FIXMIAMI: START
+		IF IS_WANTED_LEVEL_GREATER player1 0
+			SET_CHAR_RUNNING cam TRUE
+			SET_CHAR_THREAT_SEARCH cam THREAT_COP
+			SET_CHAR_HEED_THREATS cam TRUE
+		ELSE
+			CLEAR_CHAR_THREAT_SEARCH cam
+			SET_CHAR_HEED_THREATS cam FALSE
+		ENDIF
+		// FIXMIAMI: END
 	ENDIF
 RETURN	 
 
@@ -4772,17 +4784,13 @@ surveilance:
 			SWITCH_WIDESCREEN ON
 			SET_FADING_COLOUR 0 0 1
 			DO_FADE 250 FADE_OUT
-			WHILE GET_FADING_STATUS
-				WAIT 0
-			ENDWHILE
+			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 			GET_GAME_TIMER timer_intro_start
 			SET_FIXED_CAMERA_POSITION -916.4 -330.55 15.86 0.0 0.0 0.0
 			POINT_CAMERA_AT_POINT -922.5 -338.75 13.44 JUMP_CUT
 			SWITCH_SECURITY_CAMERA ON
 			DO_FADE 250 FADE_IN
-			WHILE GET_FADING_STATUS
-				WAIT 0
-			ENDWHILE
+			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 
 			PRINT_NOW ( EXIT_1 ) 5000 1
 			
@@ -4836,9 +4844,7 @@ surveilance:
 				WAIT 0
 			ENDWHILE
 			DO_FADE 250 FADE_OUT
-			WHILE GET_FADING_STATUS
-				WAIT 0
-			ENDWHILE
+			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 			RESTORE_CAMERA_JUMPCUT
 			SET_PLAYER_CONTROL player1 ON
 			SET_EVERYONE_IGNORE_PLAYER player1 OFF
@@ -4847,9 +4853,7 @@ surveilance:
 			flag_surveilance = 0
 			flag_surveilance_trigger = 1
 			DO_FADE 250 FADE_IN
-			WHILE GET_FADING_STATUS
-				WAIT 0
-			ENDWHILE
+			GOSUB bj4_do_fade // FIXMIAMI: made a sub to reduce script size
 		ENDIF
 	ELSE
 		flag_surveilance_trigger = 0
@@ -5136,10 +5140,8 @@ gas_generator:
 RETURN
 //ADD_MOVING_PARTICLE_EFFECT MovingParticleType X Y Z XSpeed YSpeed ZSpeed Radius R G B Time
 
-going_up:
-	SET_PLAYER_CONTROL player1 OFF
-	SET_EVERYONE_IGNORE_PLAYER player1 ON 
-
+// FIXMIAMI: START - made a subroutine to reduce the script size
+close_lift_doors:
 	SET_FADING_COLOUR 0 0 1
 
 	DO_FADE 1500 FADE_OUT
@@ -5149,12 +5151,21 @@ going_up:
 		SLIDE_OBJECT lift_door_1 -936.964 -350.688 3.235 0.0 0.025 0.0 FALSE
 		SLIDE_OBJECT lift_door_2  -936.964 -352.169 3.235 0.0 0.025 0.0 FALSE
 	ENDWHILE
+	RETURN
+// FIXMIAMI: END
+
+going_up:
+	SET_PLAYER_CONTROL player1 OFF
+	SET_EVERYONE_IGNORE_PLAYER player1 ON 
+
+	GOSUB close_lift_doors // FIXMIAMI: moved code into a subroutine
 
 
 	SET_PLAYER_COORDINATES player1 -938.56 -351.5 16.8
 	SET_PLAYER_HEADING player1 280.0
 	SET_CAMERA_IN_FRONT_OF_PLAYER
 
+/* FIXMIAMI: replace all this stuff with GOTO to reduce script size
 	DO_FADE 1500 FADE_IN
 
 	WHILE GET_FADING_STATUS
@@ -5166,17 +5177,11 @@ going_up:
 	SET_PLAYER_CONTROL player1 ON
 	SET_EVERYONE_IGNORE_PLAYER player1 OFF 
 RETURN
+*/
+GOTO going_down_pt2 // FIXMIAMI
 
 going_down_pt1:
-	SET_FADING_COLOUR 0 0 1
-
-	DO_FADE 1500 FADE_OUT
-
-	WHILE GET_FADING_STATUS
-		WAIT 0
-		SLIDE_OBJECT lift_door_1 -936.964 -350.688 3.235 0.0 0.025 0.0 FALSE
-		SLIDE_OBJECT lift_door_2  -936.964 -352.169 3.235 0.0 0.025 0.0 FALSE
-	ENDWHILE
+	GOSUB close_lift_doors // FIXMIAMI: moved code into a subroutine
 
 	//RESTORE_CAMERA_JUMPCUT // FIXMIAMI
 
@@ -5370,6 +5375,11 @@ create_outside_swat6:
 	SET_CHAR_HEED_THREATS bank_cop_6 TRUE
 	RETURN
 
+bj4_do_fade:
+	WHILE GET_FADING_STATUS
+		WAIT 0
+	ENDWHILE
+	RETURN
 
 // FIXMIAMI: END
 
