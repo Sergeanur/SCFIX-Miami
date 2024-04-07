@@ -2903,6 +2903,7 @@ GOTO mission_serg2_passed
 // Mission Serg failed
 
 mission_serg2_failed:
+REMOVE_RC_BUGGY // FIXMIAMI
 ALTER_WANTED_LEVEL player1 wanted_level_s3
 PRINT_BIG ( M_FAIL ) 2000 1
 
@@ -2923,6 +2924,17 @@ ADD_SCORE player1 1000
 REGISTER_MISSION_PASSED TEX_3
 PLAYER_MADE_PROGRESS 1
 REMOVE_BLIP sergio_contact_blip
+
+// FIXMIAMI: START
+REMOVE_RC_BUGGY
+WHILE NOT GET_FADING_STATUS // wait until the engine code starts the fade
+	WAIT 0
+ENDWHILE
+WHILE GET_FADING_STATUS // wait while the fading is ongoing
+	WAIT 0
+ENDWHILE
+// FIXMIAMI: END
+
 RETURN
 		
 
@@ -3261,7 +3273,7 @@ mission_cleanup_serg2:
 flag_player_on_mission = 0
 SWITCH_WIDESCREEN OFF
 SET_PLAYER_CONTROL player1 ON
-REMOVE_RC_BUGGY
+//REMOVE_RC_BUGGY // FIXMIAMI: moved to pass/fail
 
 flag_player_on_rc_mission = 0 //PC FIX PC FIX PC FIX PC FIX PC FIX PC FIX PC FIX
 
