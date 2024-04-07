@@ -1718,6 +1718,9 @@ ADD_SCORE player1 1000
 PLAYER_MADE_PROGRESS 1 
 REGISTER_MISSION_PASSED CUB_1
 START_NEW_SCRIPT cuban_mission2_loop
+// FIXMIAMI: START - open the gate for the next mission
+SET_OBJECT_COORDINATES haitian_gate -1114.5 73.0 10.1
+// FIXMIAMI: END - open the gate for the next mission
 flag_cuban_mission1_passed = 1
 RETURN
 		

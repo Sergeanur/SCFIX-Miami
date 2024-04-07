@@ -2505,6 +2505,10 @@ PLAYER_MADE_PROGRESS 1
 REGISTER_MISSION_PASSED CUB_2
 START_NEW_SCRIPT cuban_mission3_loop
 flag_cuban_mission2_passed = 1
+// FIXMIAMI: START - moved here from cleanup, also not using SLIDE_OBJECT anymore
+//closing gate
+SET_OBJECT_COORDINATES haitian_gate -1114.5 67.0 10.1
+// FIXMIAMI: END
 RETURN
 		
 
@@ -2519,9 +2523,10 @@ flag_is_on_cuban_mission = 0 // FIXMIAMI
 SET_PLAYER_CONTROL player1 on
 //andy_has_control = 0 //reseting gate
 //closing gate
+/* FIXMIAMI: closing only if mission passed now
 WHILE NOT SLIDE_OBJECT haitian_gate -1114.5 67.0 10.1 10.0 10.0 0.0 FALSE
 	WAIT 0
-ENDWHILE
+ENDWHILE*/
 MARK_MODEL_AS_NO_LONGER_NEEDED CBa
 MARK_MODEL_AS_NO_LONGER_NEEDED stinger
 MARK_MODEL_AS_NO_LONGER_NEEDED pony
