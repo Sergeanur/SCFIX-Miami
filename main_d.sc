@@ -3593,6 +3593,7 @@ WAIT 0
 	
 	IF IS_PLAYER_PLAYING player1
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 cubanX cubanY cubanZ 2.0 2.2 3.0 FALSE
+			/* FIXMIAMI: remove german censorshit
 			IF IS_GERMAN_GAME
 				IF flag_haitian_mission2_passed = 1
 					IF flag_player_on_mission = 0
@@ -3616,6 +3617,7 @@ WAIT 0
 					ENDWHILE
 				ENDIF
 			ELSE
+			*/
 				IF flag_haitian_mission3_passed = 1
 					IF flag_player_on_mission = 0
 						IF CAN_PLAYER_START_MISSION player1
@@ -3637,7 +3639,7 @@ WAIT 0
 						ENDIF
 					ENDWHILE
 				ENDIF
-			ENDIF
+			//ENDIF // FIXMIAMI: removed
 		ENDIF
 	ENDIF
 	

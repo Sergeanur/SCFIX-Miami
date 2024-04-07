@@ -1593,11 +1593,11 @@ ELSE
 	PRINT_WITH_2_NUMBERS_NOW ( RACETM2 ) race_timer_mins_bike1 race_timer_seconds_bike1 5000 1
 ENDIF
 
-IF IS_GERMAN_GAME
-	START_NEW_SCRIPT bikers_mission3_loop
-ELSE
+//IF IS_GERMAN_GAME // FIXMIAMI: remove german censorshit
+//	START_NEW_SCRIPT bikers_mission3_loop // FIXMIAMI: remove german censorshit 
+//ELSE // FIXMIAMI: remove german censorshit 
 	START_NEW_SCRIPT bikers_mission2_loop
-ENDIF
+//ENDIF/ / FIXMIAMI: remove german censorshit 
 
 RETURN
 	

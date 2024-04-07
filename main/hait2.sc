@@ -2737,11 +2737,11 @@ ADD_SCORE player1 2000
 REGISTER_MISSION_PASSED HAT_2
 PLAYER_MADE_PROGRESS 1
 PLAY_MISSION_PASSED_TUNE 1
-IF NOT IS_GERMAN_GAME
+//IF NOT IS_GERMAN_GAME // FIXMIAMI: remove german censorshit
 	START_NEW_SCRIPT haitian_mission3_loop
-ELSE
-	REMOVE_BLIP haitian_contact_blip
-ENDIF
+//ELSE // FIXMIAMI: remove german censorshit
+//	REMOVE_BLIP haitian_contact_blip // FIXMIAMI: remove german censorshit
+//ENDIF // FIXMIAMI: remove german censorshit
 
 RETURN
 		
