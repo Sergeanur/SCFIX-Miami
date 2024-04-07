@@ -434,6 +434,7 @@ SET_CAMERA_BEHIND_PLAYER
 //------------------REQUEST_MODELS ------------------------------
 SET_PLAYER_MOOD player1 PLAYER_MOOD_PISSED_OFF 60000
 
+flag_is_on_cuban_mission = 1 // FIXMIAMI
 SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1
 
 REQUEST_MODEL HNa
@@ -2458,6 +2459,7 @@ mission_cleanup_cuban4:
 CLEAR_THIS_PRINT CUB4_02
 CLEAR_THIS_PRINT CUB4_30
 CLEAR_THIS_PRINT CUB4_31
+flag_is_on_cuban_mission = 0
 // FIXMIAMI: END
 flag_player_on_mission = 0
 SET_PLAYER_CONTROL player1 on
