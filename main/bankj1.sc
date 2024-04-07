@@ -1506,7 +1506,16 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 // Safecracker in group
 
 		IF flag_safecracker_in_group_bankjob1 = 1
-			SET_CHAR_RUNNING safecracker_bankjob1 TRUE // FIXMIAMI: make sure he's always running
+			// FIXMIAMI: START
+			IF IS_WANTED_LEVEL_GREATER player1 0
+				SET_CHAR_RUNNING safecracker_bankjob1 TRUE // FIXMIAMI: make sure he's always running
+				SET_CHAR_THREAT_SEARCH safecracker_bankjob1 THREAT_COP
+				SET_CHAR_HEED_THREATS safecracker_bankjob1 TRUE
+			ELSE
+				CLEAR_CHAR_THREAT_SEARCH safecracker_bankjob1
+				SET_CHAR_HEED_THREATS safecracker_bankjob1 FALSE
+			ENDIF
+			// FIXMIAMI: END
 			IF flag_bloke_in_group_bankjob1 = 1
 			
 				IF IS_WANTED_LEVEL_GREATER player1 0
