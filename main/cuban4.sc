@@ -472,6 +472,13 @@ GOTO cuban4_fool_compiler // FIXMIAMI: remove flag_player_on_mission = 0 check
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa -1197.9 82.5 10.1 random_haitian1
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa -1189.0 83.6 10.1 random_haitian2
 	CREATE_CHAR PEDTYPE_GANG_HAITIAN HNa -1190.5 68.5 10.1 random_haitian3
+	haitian_doorman2 = scplayer // FIXMIAMI
+	hait_defender3 = scplayer // FIXMIAMI
+	hait_defender4 = scplayer // FIXMIAMI
+	hait_defender5 = scplayer // FIXMIAMI
+	random_haitian1 = scplayer // FIXMIAMI
+	random_haitian2 = scplayer // FIXMIAMI
+	random_haitian3 = scplayer // FIXMIAMI
 cuban4_fool_compiler: // FIXMIAMI: remove flag_player_on_mission = 0 check
 
 //closing gate
@@ -486,7 +493,7 @@ CREATE_CAR voodoo -1071.3 -608.4 9.7 testy_car
 
 
 //pepe
-CREATE_CHAR PEDTYPE_GANG_GOLFER CBb -1170.0 -607.0 10.6 cuban_trojan1
+CREATE_CHAR PEDTYPE_GANG_CUBAN CBb -1170.0 -607.0 10.6 cuban_trojan1 // FIXMIAMI: create as Cuban now, recreate as golfer later
 SET_CHAR_AS_PLAYER_FRIEND cuban_trojan1 player1 TRUE
 GIVE_WEAPON_TO_CHAR cuban_trojan1 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH cuban_trojan1
@@ -513,6 +520,7 @@ SET_CHAR_STAY_IN_SAME_PLACE haitian_doorman TRUE
 CREATE_CHAR PEDTYPE_GANG_HAITIAN HNb -1179.4 71.2 23.9 haitian_sniper
 SET_CHAR_HEADING haitian_sniper 270.0 
 GIVE_WEAPON_TO_CHAR haitian_sniper WEAPONTYPE_SNIPERRIFLE 30000
+SET_ANIM_GROUP_FOR_CHAR haitian_sniper ANIM_PLAYER_2ARMED_PED // FIXMIAMI
 CLEAR_CHAR_THREAT_SEARCH haitian_sniper
 SET_CHAR_PERSONALITY haitian_sniper PEDSTAT_TOUGH_GUY  
 SET_CHAR_HEED_THREATS haitian_sniper TRUE
@@ -667,6 +675,21 @@ IF plyr_in_hait_car = 1
 	// ******************************************START OF CUTSCENE******************************
 							SET_PLAYER_CONTROL player1 OFF
 							SWITCH_WIDESCREEN ON
+
+							// FIXMIAMI: START - recreate Pepe now as GOLFER
+							DELETE_CHAR cuban_trojan1
+							CREATE_CHAR_AS_PASSENGER trojan_horse PEDTYPE_GANG_GOLFER CBb 0 cuban_trojan1
+							SET_CHAR_AS_PLAYER_FRIEND cuban_trojan1 player1 TRUE
+							GIVE_WEAPON_TO_CHAR cuban_trojan1 WEAPONTYPE_tec9 30000
+							CLEAR_CHAR_THREAT_SEARCH cuban_trojan1
+							SET_CHAR_ONLY_DAMAGED_BY_PLAYER cuban_trojan1 TRUE
+							SET_CHAR_CANT_BE_DRAGGED_OUT cuban_trojan1 TRUE
+							SET_CHAR_PERSONALITY cuban_trojan1 PEDSTAT_TOUGH_GUY
+							SET_CHAR_HEED_THREATS cuban_trojan1 TRUE
+							SET_CHAR_RUNNING cuban_trojan1 TRUE
+							SET_CHAR_NEVER_TARGETTED cuban_trojan1 TRUE
+							SET_PLAYER_AS_LEADER cuban_trojan1 player1
+							// FIXMIAMI: END
 							
 							CLEAR_AREA_OF_CARS -1072.2 70.7 10.2 -1011.2 200.7 15.2
 							SET_FIXED_CAMERA_POSITION -1029.6 169.7 13.1 0.0 0.0 0.0 
@@ -1895,6 +1918,16 @@ IF NOT IS_CHAR_DEAD random_haitian3
 	MARK_CHAR_AS_NO_LONGER_NEEDED random_haitian3
 ENDIF
 IF NOT IS_CAR_DEAD trojan_horse2
+// FIXMIAMI: START
+	IF IS_PLAYER_IN_CAR player1 trojan_horse2
+		SET_CAR_PROOFS trojan_horse2 FALSE FALSE FALSE FALSE FALSE
+		MARK_CAR_AS_NO_LONGER_NEEDED trojan_horse2
+	ELSE
+		DELETE_CAR trojan_horse2
+	ENDIF
+ELSE
+	SET_CAR_PROOFS trojan_horse2 FALSE FALSE FALSE FALSE FALSE
+// FIXMIAMI: END
 	MARK_CAR_AS_NO_LONGER_NEEDED trojan_horse2
 ENDIF  
 
@@ -2337,6 +2370,7 @@ ADD_EXPLOSION -1188.06 105.74 20.34 EXPLOSION_HELI
 
 IF NOT IS_CAR_DEAD trojan_horse2 
 	IF NOT IS_PLAYER_IN_CAR player1 trojan_horse2
+	AND IS_CAR_IN_AREA_2D trojan_horse2 -1198.782 64.841 -1157.978 109.155 FALSE // FIXMIAMI
 		SET_CAR_CAN_BE_DAMAGED trojan_horse2 TRUE
 		EXPLODE_CAR trojan_horse2
 	ENDIF
@@ -2344,10 +2378,21 @@ ENDIF
 
 IF NOT IS_CAR_DEAD trojan_horse3
 	IF NOT IS_PLAYER_IN_CAR player1 trojan_horse3
+	AND IS_CAR_IN_AREA_2D trojan_horse3 -1198.782 64.841 -1157.978 109.155 FALSE // FIXMIAMI
 		SET_CAR_CAN_BE_DAMAGED trojan_horse3 TRUE
 		EXPLODE_CAR trojan_horse3
 	ENDIF
 ENDIF
+
+// FIXMIAMI: START
+IF NOT IS_CAR_DEAD trojan_horse
+	IF NOT IS_PLAYER_IN_CAR player1 trojan_horse
+	AND IS_CAR_IN_AREA_2D trojan_horse -1198.782 64.841 -1157.978 109.155 FALSE
+		SET_CAR_CAN_BE_DAMAGED trojan_horse TRUE
+		EXPLODE_CAR trojan_horse
+	ENDIF
+ENDIF
+// FIXMIAMI: END
 
 SET_FADING_COLOUR 255 255 255
 
@@ -2412,7 +2457,7 @@ GOTO trojan_horse_loop
 
 // Mission failed
 mission_failed_cuban4:
-
+CLEAR_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1 // FIXMIAMI
 PRINT_BIG ( M_FAIL ) 5000 1	//"Mission Failed!"
 RETURN
 
@@ -2460,6 +2505,42 @@ CLEAR_THIS_PRINT CUB4_02
 CLEAR_THIS_PRINT CUB4_30
 CLEAR_THIS_PRINT CUB4_31
 flag_is_on_cuban_mission = 0
+LVAR_INT gosub_haitian_char
+gosub_haitian_char = haitian_engineer3
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = haitian_engineer4
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = hait_defender1
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = hait_defender2
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = haitian_doorman
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = haitian_doorman2
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = hait_defender3
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = hait_defender4
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = hait_defender5
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = random_haitian1
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = random_haitian2
+GOSUB reset_haitian_char_threats
+gosub_haitian_char = random_haitian3
+GOSUB reset_haitian_char_threats
+IF NOT IS_CAR_DEAD trojan_horse2
+	SET_CAR_PROOFS trojan_horse2 FALSE FALSE FALSE FALSE FALSE
+ENDIF
+IF NOT IS_CAR_DEAD trojan_horse3
+	SET_CAR_PROOFS trojan_horse3 FALSE FALSE FALSE FALSE FALSE
+ENDIF
+REMOVE_CHAR_ELEGANTLY cuban_trojan1
+REMOVE_CHAR_ELEGANTLY cuban_trojan2
+REMOVE_CHAR_ELEGANTLY cuban_trojan3
+REMOVE_CHAR_ELEGANTLY cuban_trojan4
+REMOVE_CHAR_ELEGANTLY cuban_trojan5
 // FIXMIAMI: END
 flag_player_on_mission = 0
 SET_PLAYER_CONTROL player1 on
@@ -2501,6 +2582,7 @@ IF NOT IS_CHAR_DEAD cuban_trojan1
 ENDIF
 IF NOT IS_CHAR_DEAD haitian_engineer3 
 	SET_CHAR_THREAT_SEARCH haitian_engineer3 THREAT_GANG_CUBAN
+	SET_CHAR_THREAT_SEARCH haitian_engineer3 THREAT_GANG_GOLFER // FIXMIAMI
 	SET_CHAR_THREAT_SEARCH haitian_engineer3 THREAT_PLAYER1
 	SET_CHAR_THREAT_SEARCH haitian_engineer3 THREAT_COP
 	SET_CHAR_HEADING haitian_engineer3 4.7 
@@ -2508,6 +2590,7 @@ IF NOT IS_CHAR_DEAD haitian_engineer3
 ENDIF
 IF NOT IS_CHAR_DEAD haitian_engineer4 
 	SET_CHAR_THREAT_SEARCH haitian_engineer4 THREAT_GANG_CUBAN
+	SET_CHAR_THREAT_SEARCH haitian_engineer4 THREAT_GANG_GOLFER // FIXMIAMI
 	SET_CHAR_THREAT_SEARCH haitian_engineer4 THREAT_PLAYER1
 	SET_CHAR_THREAT_SEARCH haitian_engineer4 THREAT_COP
 	SET_CHAR_HEADING haitian_engineer4 4.7 
@@ -2515,6 +2598,7 @@ IF NOT IS_CHAR_DEAD haitian_engineer4
 ENDIF
 IF NOT IS_CHAR_DEAD hait_defender1 
 	SET_CHAR_THREAT_SEARCH hait_defender1 THREAT_GANG_CUBAN
+	SET_CHAR_THREAT_SEARCH hait_defender1 THREAT_GANG_GOLFER // FIXMIAMI
 	SET_CHAR_THREAT_SEARCH hait_defender1 THREAT_PLAYER1
 	SET_CHAR_THREAT_SEARCH hait_defender1 THREAT_COP
 	IF NOT IS_CHAR_DEAD hait_defender2  
@@ -2523,11 +2607,13 @@ IF NOT IS_CHAR_DEAD hait_defender1
 ENDIF
 IF NOT IS_CHAR_DEAD hait_defender2 
 	SET_CHAR_THREAT_SEARCH hait_defender2 THREAT_GANG_CUBAN
+	SET_CHAR_THREAT_SEARCH hait_defender2 THREAT_GANG_GOLFER // FIXMIAMI
 	SET_CHAR_THREAT_SEARCH hait_defender2 THREAT_PLAYER1
 	SET_CHAR_THREAT_SEARCH hait_defender2 THREAT_COP
 ENDIF
 IF NOT IS_CHAR_DEAD haitian_doorman 
 	SET_CHAR_THREAT_SEARCH haitian_doorman THREAT_GANG_CUBAN
+	SET_CHAR_THREAT_SEARCH haitian_doorman THREAT_GANG_GOLFER // FIXMIAMI
 	SET_CHAR_THREAT_SEARCH haitian_doorman THREAT_PLAYER1
 	SET_CHAR_THREAT_SEARCH haitian_doorman THREAT_COP
 	SET_CHAR_HEADING haitian_doorman 109.6 
@@ -2540,6 +2626,7 @@ GIVE_WEAPON_TO_CHAR haitian_doorman2 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH haitian_doorman2
 SET_CHAR_PERSONALITY haitian_doorman2 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH haitian_doorman2 THREAT_GANG_CUBAN										
+SET_CHAR_THREAT_SEARCH haitian_doorman2 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH haitian_doorman2 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH haitian_doorman2 THREAT_COP
 SET_CHAR_HEED_THREATS haitian_doorman2 TRUE 
@@ -2551,6 +2638,7 @@ GIVE_WEAPON_TO_CHAR hait_defender3 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH hait_defender3
 SET_CHAR_PERSONALITY hait_defender3 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH hait_defender3 THREAT_GANG_CUBAN
+SET_CHAR_THREAT_SEARCH hait_defender3 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH hait_defender3 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH hait_defender3 THREAT_COP
 SET_CHAR_HEED_THREATS hait_defender3 TRUE 
@@ -2562,6 +2650,7 @@ GIVE_WEAPON_TO_CHAR hait_defender4 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH hait_defender4
 SET_CHAR_PERSONALITY hait_defender4 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH hait_defender4 THREAT_GANG_CUBAN
+SET_CHAR_THREAT_SEARCH hait_defender4 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH hait_defender4 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH hait_defender4 THREAT_COP
 SET_CHAR_HEED_THREATS hait_defender4 TRUE 
@@ -2573,6 +2662,7 @@ GIVE_WEAPON_TO_CHAR hait_defender5 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH hait_defender5
 SET_CHAR_PERSONALITY hait_defender5 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH hait_defender5 THREAT_GANG_CUBAN
+SET_CHAR_THREAT_SEARCH hait_defender5 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH hait_defender5 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH hait_defender5 THREAT_COP
 SET_CHAR_HEED_THREATS hait_defender5 TRUE 
@@ -2584,6 +2674,7 @@ GIVE_WEAPON_TO_CHAR random_haitian1 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH random_haitian1
 SET_CHAR_PERSONALITY random_haitian1 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH random_haitian1 THREAT_GANG_CUBAN
+SET_CHAR_THREAT_SEARCH random_haitian1 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH random_haitian1 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH random_haitian1 THREAT_COP
 SET_CHAR_HEED_THREATS random_haitian1 TRUE 
@@ -2595,6 +2686,7 @@ GIVE_WEAPON_TO_CHAR random_haitian2 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH random_haitian2
 SET_CHAR_PERSONALITY random_haitian2 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH random_haitian2 THREAT_GANG_CUBAN
+SET_CHAR_THREAT_SEARCH random_haitian2 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH random_haitian2 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH random_haitian2 THREAT_COP
 SET_CHAR_HEED_THREATS random_haitian2 TRUE 
@@ -2606,6 +2698,7 @@ GIVE_WEAPON_TO_CHAR random_haitian3 WEAPONTYPE_tec9 30000
 CLEAR_CHAR_THREAT_SEARCH random_haitian3
 SET_CHAR_PERSONALITY random_haitian3 PEDSTAT_TOUGH_GUY  
 SET_CHAR_THREAT_SEARCH random_haitian3 THREAT_GANG_CUBAN
+SET_CHAR_THREAT_SEARCH random_haitian3 THREAT_GANG_GOLFER // FIXMIAMI
 SET_CHAR_THREAT_SEARCH random_haitian3 THREAT_PLAYER1
 SET_CHAR_THREAT_SEARCH random_haitian3 THREAT_COP
 SET_CHAR_HEED_THREATS random_haitian3 TRUE 
@@ -2638,4 +2731,15 @@ ENDWHILE
 ///////////////////////////////////////////////////////////////////////////////////////////
 RETURN/////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// FIXMIAMI: START
+reset_haitian_char_threats:
+IF NOT IS_CHAR_DEAD gosub_haitian_char
+	CLEAR_CHAR_THREAT_SEARCH gosub_haitian_char
+	SET_CHAR_THREAT_SEARCH gosub_haitian_char THREAT_GANG_CUBAN
+	SET_CHAR_THREAT_SEARCH gosub_haitian_char THREAT_PLAYER1
+	SET_CHAR_THREAT_SEARCH gosub_haitian_char THREAT_COP
+ENDIF
+RETURN
+// FIXMIAMI: END
 }
