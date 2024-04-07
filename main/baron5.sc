@@ -11,7 +11,8 @@ MISSION_START
 GOSUB mission_start_baron5
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
-	GOSUB mission_baron5_failed
+	//GOSUB mission_baron5_failed // FIXMIAMI: not using this on deatharrest because of waits
+	PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed" // FIXMIAMI
 ENDIF
 
 GOSUB mission_cleanup_baron5
@@ -1664,9 +1665,11 @@ IF IS_PLAYER_PLAYING player1
 	ENDIF
 ENDIF
 
+/* FIXMIAMI: moved to cleanup
 CREATE_OBJECT_NO_OFFSET mansion_new_doors -391.19 -575.906 24.071 mansion_doors
 DONT_REMOVE_OBJECT mansion_doors
 flag_open_mansion = 0
+*/
 
 RETURN
 
@@ -1727,6 +1730,13 @@ RETURN
 
 mission_cleanup_baron5:
 
+// FIXMIAMI: START - moved from mission_baron5_failed
+IF flag_open_mansion = 1
+	CREATE_OBJECT_NO_OFFSET mansion_new_doors -391.19 -575.906 24.071 mansion_doors
+	DONT_REMOVE_OBJECT mansion_doors
+	flag_open_mansion = 0
+ENDIF
+// FIXMIAMI: END
 flag_player_on_mission = 0
 GET_GAME_TIMER timer_mobile_start
 MARK_MODEL_AS_NO_LONGER_NEEDED CLa
