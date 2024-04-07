@@ -3486,6 +3486,7 @@ WAIT 0
 				IF CAN_PLAYER_START_MISSION player1
 					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
 					GOSUB cuban_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CUB_1 ) 15000 2 //"cuban mission 1"
@@ -3523,6 +3524,7 @@ WAIT 0
 				IF CAN_PLAYER_START_MISSION player1
 					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
 					GOSUB cuban_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CUB_2 ) 15000 2 //"cuban mission 2"
@@ -3560,6 +3562,7 @@ WAIT 0
 				IF CAN_PLAYER_START_MISSION player1
 					flag_player_on_mission = 1 // FIXMIAMI: paranoid set
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+					SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
 					GOSUB cuban_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( CUB_3 ) 15000 2 //"cuban mission 3"
@@ -3600,6 +3603,7 @@ WAIT 0
 						IF CAN_PLAYER_START_MISSION player1
 							flag_player_on_mission = 1 // FIXMIAMI: paranoid set
 							MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+							SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
 							GOSUB cuban_script_cut
 							GOSUB make_player_safe
 							PRINT_BIG ( CUB_4 ) 15000 2 //"cuban mission 4"
@@ -3623,6 +3627,7 @@ WAIT 0
 						IF CAN_PLAYER_START_MISSION player1
 							flag_player_on_mission = 1 // FIXMIAMI: paranoid set
 							MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // FIXMIAMI: paranoid set
+							SET_AREA_VISIBLE VIS_MAIN_MAP // FIXMIAMI: you could start the mission while being in the cafe
 							GOSUB cuban_script_cut
 							GOSUB make_player_safe
 							PRINT_BIG ( CUB_4 ) 15000 2 //"cuban mission 4"
