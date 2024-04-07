@@ -883,6 +883,7 @@ mission_serg3_passed:
 CREATE_CLOTHES_PICKUP -1025.2 -429.2 10.8 5 clothes_pickup5
 clothes5_created = 1
 START_NEW_SCRIPT cloth4
+START_NEW_SCRIPT check_cuban_player // FIXMIAMI
 
  
 

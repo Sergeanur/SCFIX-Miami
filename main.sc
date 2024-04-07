@@ -7047,5 +7047,40 @@ save_the_game2:
 
 RETURN
 
+// FIXMIAMI: START
+check_cuban_player:
+{
 
+//LVAR_INT flag_haitian_hatred_set
+//flag_haitian_hatred_set = 0
+
+VAR_INT flag_is_on_cuban_mission // for missions where threats are controlled by the script
+flag_is_on_cuban_mission = 0
+
+check_cuban_player_inner:
+	WAIT 100
+
+	IF flag_cuban_mission4_passed = 1 // After 'Trojan Voodoo' Haitians always hate the player
+		SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1
+		TERMINATE_THIS_SCRIPT
+	ENDIF
+
+	IF IS_PLAYER_PLAYING player1
+	AND flag_is_on_cuban_mission = 0
+		IF IS_PLAYER_WEARING player1 player5
+			//IF flag_haitian_hatred_set = 0
+				SET_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1
+			//	flag_haitian_hatred_set = 1
+			//ENDIF
+		ELSE
+			//IF flag_haitian_hatred_set = 1
+				CLEAR_THREAT_FOR_PED_TYPE PEDTYPE_GANG_HAITIAN THREAT_PLAYER1
+			//	flag_haitian_hatred_set = 0
+			//ENDIF
+		ENDIF
+	ENDIF
+
+GOTO check_cuban_player_inner
+}
+// FIXMIAMI: END
 
