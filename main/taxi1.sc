@@ -122,6 +122,15 @@ GET_RANDOM_CHAR_IN_ZONE VICE_C TRUE TRUE TRUE taxi_ped1
 IF taxi_ped1 = -1
 	WAIT 0
 	GOTO Start_taxi_mission	//	random_ped_grabber
+// SCFIX: START
+ELSE
+	IF IS_CHAR_MODEL taxi_ped1 WMOCA
+		MARK_CHAR_AS_NO_LONGER_NEEDED taxi_ped1
+		taxi_ped1 = -1
+		WAIT 0
+		GOTO Start_taxi_mission		//	random_ped_grabber
+	ENDIF
+// SCFIX: END
 ENDIF
 
 // START OF TAXI MISSION
