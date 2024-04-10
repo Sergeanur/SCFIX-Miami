@@ -6401,6 +6401,8 @@ game_help_loop_inner:
 			ELSE
 			
 				IF stop_in_marker = 0
+				AND flag_player_on_mission = 0 // SCFIX: you might be on the oddjob and there won't be any pink marker
+				AND view_of_ocean_view = 0 // SCFIX: marker is removed if the hotel was shown
 					IF LOCATE_PLAYER_ANY_MEANS_3D player1 240.4 -1280.2 10.0 25.0 25.0 5.0 FALSE 
 						PRINT_HELP ( HELP44 )
 						WAIT 3000
