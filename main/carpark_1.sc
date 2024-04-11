@@ -116,7 +116,7 @@ flag_cone_smashed = 0
 IF flag_carpark1_passed = 0
 	timer_bonus = 12000 //ammount added to timer for each pickup
 	print_bonus = 12
-	car_park_reward = 200
+	car_park_reward = 400 // SCFIX: was 200, now this is only used when new time record is set, thus 200*2
 ENDIF
 
 flag_truck_1 = 0
@@ -900,7 +900,7 @@ IF flag_carpark1_passed = 1
 	IF record_temp < record_carpark1
 		record_carpark1 = record_temp
 		REGISTER_FASTEST_TIME 19 record_carpark1
-		car_park_reward = car_park_reward * 2
+		//car_park_reward = car_park_reward * 2 // SCFIX: remove big money abuse
 		GOSUB car_park_record
 	ELSE 
 		PRINT_WITH_NUMBER_BIG ( M_PASS ) 200 5000 1 //"Mission Passed!"
