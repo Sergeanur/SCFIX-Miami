@@ -1535,7 +1535,7 @@ OR NOT LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 strip_clubX strip_clubY strip_
 				IF flag_play_dialogue2 = 1 // SCFIX
 					IF second_two_samples = 0
 					AND first_two_samples = 1
-					AND TIMERB > 500 
+					AND TIMERB > 1000 // SCFIX: change 500 to 1000
 						IF audio_is_loading = 0
 							LOAD_MISSION_AUDIO 1 LAW1_3
 							LOAD_MISSION_AUDIO 2 LAW1_2
