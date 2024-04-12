@@ -544,6 +544,7 @@ IF IS_CHAR_DEAD shop_defend_guard1
 
 					PRINT_NOW PRO2_02 4000 1//PLAYER: Your protection needs a little more protection.
 					PLAY_MISSION_AUDIO 1
+					button_pressed = 0 // SCFIX: fix skips not working
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 						WAIT 0
 						IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -568,6 +569,7 @@ IF IS_CHAR_DEAD shop_defend_guard1
 				
 					PRINT_NOW PRO2_03 4000 1//SHOPKEEP: Aw hell, not again! I don't need this crap!
 					PLAY_MISSION_AUDIO 2
+					button_pressed = 0 // SCFIX: fix skips not working
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 					AND NOT IS_CHAR_DEAD shop_keep  
 						WAIT 0
@@ -596,6 +598,7 @@ IF IS_CHAR_DEAD shop_defend_guard1
 
 					PRINT_NOW PRO2_04 4000 1//SHOPKEEP: These idiots operate out of DBP Security around the block.
 					PLAY_MISSION_AUDIO 1
+					button_pressed = 0 // SCFIX: fix skips not working
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 					AND NOT IS_CHAR_DEAD shop_keep  
 						WAIT 0
@@ -615,6 +618,7 @@ IF IS_CHAR_DEAD shop_defend_guard1
 				
 					PRINT_NOW PRO2_05 4000 1//SHOPKEEP: You guys just sort it out amongst yourselves.
 					PLAY_MISSION_AUDIO 2
+					button_pressed = 0 // SCFIX: fix skips not working
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 					AND NOT IS_CHAR_DEAD shop_keep  
 						WAIT 0
@@ -648,6 +652,7 @@ IF IS_CHAR_DEAD shop_defend_guard1
 			
 					PRINT_NOW PRO2_06 4000 1//PLAYER: I'll be seeing you later.
 					PLAY_MISSION_AUDIO 1
+					button_pressed = 0 // SCFIX: fix skips not working
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 						WAIT 0
 						IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -671,6 +676,7 @@ IF IS_CHAR_DEAD shop_defend_guard1
 					ENDIF
 					PRINT_NOW PRO2_07 4000 1//SHOPKEEP: Yeah, yeah, whatever.
 					PLAY_MISSION_AUDIO 2
+					button_pressed = 0 // SCFIX: fix skips not working
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 					AND NOT IS_CHAR_DEAD shop_keep  
 						WAIT 0

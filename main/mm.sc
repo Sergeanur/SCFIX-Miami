@@ -477,6 +477,7 @@ timera = 0
 
 PRINT_NOW ( BLOD_01 ) 5000 1 //Drive through the checkpoints to increase your overall time.
 
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE timera < 5000
 WAIT 0 	
 	IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -497,6 +498,7 @@ POINT_CAMERA_AT_POINT -1459.5 942.2 261.6 JUMP_CUT
 
 PRINT_NOW ( BLOD_02 ) 5000 1 //You will lose if your overall time reaches zero.
 
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE timera < 5000
 WAIT 0 	
 	IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -517,6 +519,7 @@ POINT_CAMERA_AT_POINT -1277.6 996.0 263.6 JUMP_CUT
 
 PRINT_NOW ( BLOD_03 ) 5000 1 //Get your overall time above the Target Time to win!
 
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE timera < 5000
 WAIT 0 	
 	IF IS_BUTTON_PRESSED PAD1 CROSS

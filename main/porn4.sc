@@ -484,6 +484,7 @@ OR porn4_goals = 2
 		CLEAR_PRINTS
 		
 		timera = 0
+		button_pressed = 0 // SCFIX: fix skips not working
 		WHILE timera < 1000
 			WAIT 0
 			IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -501,6 +502,7 @@ OR porn4_goals = 2
 		PRINT_NOW ( POR4_05 ) 5000 1 //These stairs will lead round to a lower office.
 
 		timera = 0
+		button_pressed = 0 // SCFIX: fix skips not working
 		WHILE timera < 5000
 			WAIT 0
 			IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -569,6 +571,7 @@ IF porn4_goals = 6
 			PRINT_NOW ( POR4_08 ) 5000 1 //Smash through the window to start the course.  You have until 07:00 before it gets too light to get up there unseen.
 
 			timera = 0
+			button_pressed = 0 // SCFIX: fix skips not working
 			WHILE timera < 5000
 				WAIT 0
 				IF IS_BUTTON_PRESSED PAD1 CROSS
@@ -589,6 +592,7 @@ IF porn4_goals = 6
 			PRINT_NOW ( POR4_09 ) 5000 1 //The pickups will show you which building to jump to next.
 			
 			timera = 0
+			button_pressed = 0 // SCFIX: fix skips not working
 			WHILE timera < 5000
 				WAIT 0
 				IF LOCATE_PLAYER_ANY_MEANS_3D player1 -526.2 886.2 70.0 10.0 10.0 10.0 TRUE

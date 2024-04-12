@@ -449,6 +449,7 @@ SET_CHAR_WAIT_STATE scplayer WAITSTATE_PLAYANIM_CHAT 10000
 
 PRINT_NOW CUB3_01 4000 1//Hey Rico. Nice boat, you ready?
 PLAY_MISSION_AUDIO 1
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 AND NOT IS_CHAR_DEAD boat_driver  
 	WAIT 0
@@ -476,6 +477,7 @@ ENDIF
 
 PRINT_NOW CUB3_05 4000 1//Si Tommy. Now you be a good shot today,
 PLAY_MISSION_AUDIO 2
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 AND NOT IS_CHAR_DEAD boat_driver  
 	WAIT 0
@@ -504,6 +506,7 @@ ENDWHILE
 
 PRINT_NOW CUB3_06 4000 1//My boat, she no good full of holes, ok?
 PLAY_MISSION_AUDIO 2
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 AND NOT IS_CHAR_DEAD boat_driver  
 	WAIT 0

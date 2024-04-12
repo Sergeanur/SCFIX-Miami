@@ -506,6 +506,7 @@ PRINT_NOW HAT2_B2 4500 1//"Kill the Cubans..."
 GET_GAME_TIMER game_timer
 timer = game_timer + 4500
 
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE game_timer < timer
 	WAIT 0
 	GET_GAME_TIMER game_timer
@@ -528,6 +529,7 @@ PRINT_NOW HAT2_B4 4000 1//"...and destroy their boats!"
 GET_GAME_TIMER game_timer
 timer = game_timer + 4000
 
+button_pressed = 0 // SCFIX: fix skips not working
 WHILE game_timer < timer
 	WAIT 0
 	GET_GAME_TIMER game_timer

@@ -673,7 +673,7 @@ IF NOT IS_CHAR_DEAD rico_passenger
 ENDIF 
 
 WAIT 2000
-
+button_pressed = 0 // SCFIX: fix skips not working
 PRINT_NOW CUB1_01 4000 1//Hey, I'm Rico. You the man with the cajones?
 PLAY_MISSION_AUDIO 1
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
@@ -692,6 +692,7 @@ AND NOT IS_CHAR_DEAD rico_passenger
 ENDWHILE
 CLEAR_MISSION_AUDIO 1
 CLEAR_THIS_PRINT CUB1_01 
+button_pressed = 0 // SCFIX: fix skips not working
 
 //SET_CHAR_WAIT_STATE scplayer WAITSTATE_PLAYANIM_CHAT 10000
 
@@ -721,6 +722,7 @@ WHILE NOT HAS_MISSION_AUDIO_LOADED 1
 	WAIT 0
 ENDWHILE 
 
+button_pressed = 0 // SCFIX: fix skips not working
 PRINT_NOW CUB1_02 4000 1//Ok man, treat her like a woman.
 PLAY_MISSION_AUDIO 1
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
