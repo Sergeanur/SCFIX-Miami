@@ -1098,7 +1098,7 @@ cut_skip_bike3:
 
 SET_CHAR_OBJ_NO_OBJ scplayer 
 
-CREATE_CHAR PEDTYPE_GANG_BIKER BKa -608.72 650.20 10.06 bike_driver_bike3
+CREATE_CHAR PEDTYPE_GANG_BIKER BKa -611.72 650.20 10.06 bike_driver_bike3 // SCFIX: x was -608.72
 CLEAR_CHAR_THREAT_SEARCH bike_driver_bike3
 SET_CHAR_RUNNING bike_driver_bike3 TRUE
 
