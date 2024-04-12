@@ -711,6 +711,7 @@ IF assetnoticegot = 0
 		PLAY_MISSION_PASSED_TUNE 1
 		icecream_asset_acquired = 1
 		flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
+		GET_GAME_TIMER timer_mobile_start // SCFIX
 		assetnoticegot = 1
 
 	ENDIF

@@ -2789,6 +2789,7 @@ IF IS_PLAYER_PLAYING player1
 		SWITCH_RUBBISH OFF
 		flag_strip_asset_cutscene = 1
 		flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
+		GET_GAME_TIMER timer_mobile_start // SCFIX
 		++ counter_60_percent
 		PLAYER_MADE_PROGRESS 1
 	ENDIF
