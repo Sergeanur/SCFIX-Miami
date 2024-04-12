@@ -64,7 +64,6 @@ import1_loop_inner:
 					DONT_REMOVE_OBJECT import_export_sign1
 					++ counter_60_percent
 					showroom_asset_acquired = 1
-					flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
 					CREATE_PROTECTION_PICKUP carbuyX carbuyY carbuyZ showroom_revenue showroom_revenue showroom_cash_pickup
 					REGISTER_MISSION_GIVEN
 					REGISTER_ODDJOB_MISSION_PASSED
@@ -147,14 +146,24 @@ import1_loop_inner:
 							RESTORE_CAMERA_JUMPCUT
 
 						ENDIF
-					
+					// SCFIX: START
+					ELSE
+						deluxo_car_been_created = 1
+						import_car_generator1_created = 1
+						SWITCH_CAR_GENERATOR deluxo_prize_car_gen 101
+					// SCFIX: END
 					ENDIF
 
 					GOSUB clean_up_import_varibles
 					
+					flag_first_asset_complete = 1 // SCFIX: fix Ken's phonecall
+					GET_GAME_TIMER timer_mobile_start // SCFIX
+					
 					PLAYER_MADE_PROGRESS 1
 					START_NEW_SCRIPT import2_loop
-					START_NEW_SCRIPT create_car_generator1
+					IF import_car_generator1_created = 0 // SCFIX
+						START_NEW_SCRIPT create_car_generator1
+					ENDIF // SCFIX
 					TERMINATE_THIS_SCRIPT
 				ENDIF
 
@@ -252,14 +261,21 @@ import2_loop_inner:
 							PRINT_WITH_NUMBER_NOW CAR_AS2 showroom_revenue 6000 1//The car showroom will now generate revenue upto a maximum of $~1~. Make sure you collect it regulary.
 
 						ENDIF
-
+					// SCFIX: START
+					ELSE
+						sabretur_car_been_created = 1
+						import_car_generator2_created = 1
+						SWITCH_CAR_GENERATOR sabretur_prize_car_gen 101
+					// SCFIX: END
 					ENDIF
 					
 					GOSUB clean_up_import_varibles
 
 					PLAYER_MADE_PROGRESS 1
 					START_NEW_SCRIPT import3_loop
-					START_NEW_SCRIPT create_car_generator2
+					IF import_car_generator2_created = 0 // SCFIX
+						START_NEW_SCRIPT create_car_generator2
+					ENDIF // SCFIX
 					TERMINATE_THIS_SCRIPT
 				ENDIF
 
@@ -356,13 +372,21 @@ import3_loop_inner:
 							PRINT_WITH_NUMBER_NOW CAR_AS2 showroom_revenue 6000 1//The car showroom will now generate revenue upto a maximum of $~1~. Make sure you collect it regulary.
 						ENDIF
 
+					// SCFIX: START
+					ELSE
+						sandking_car_been_created = 1
+						import_car_generator3_created = 1
+						SWITCH_CAR_GENERATOR sandking_prize_car_gen 101
+					// SCFIX: END
 					ENDIF
 					
 					GOSUB clean_up_import_varibles
 
 					PLAYER_MADE_PROGRESS 1
 					START_NEW_SCRIPT import4_loop
-					START_NEW_SCRIPT create_car_generator3
+					IF import_car_generator3_created = 0 // SCFIX
+						START_NEW_SCRIPT create_car_generator3
+					ENDIF // SCFIX
 					TERMINATE_THIS_SCRIPT
 				ENDIF
 
@@ -454,10 +478,18 @@ import4_loop_inner:
 							PRINT_WITH_NUMBER_NOW CAR_AS2 showroom_revenue 6000 1//The printworks will now generate revenue upto a maximum of $~1~. Make sure you collect it regulary.
 						ENDIF
 
+					// SCFIX: START
+					ELSE
+						Hotring_car_been_created = 1
+						import_car_generator4_created = 1
+						SWITCH_CAR_GENERATOR Hotring_prize_car_gen 101
+					// SCFIX: END
 					ENDIF
 
 					PLAYER_MADE_PROGRESS 1
-					START_NEW_SCRIPT create_car_generator4
+					IF import_car_generator4_created = 0 // SCFIX
+						START_NEW_SCRIPT create_car_generator4
+					ENDIF // SCFIX
 					TERMINATE_THIS_SCRIPT
 				ENDIF
 
