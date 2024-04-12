@@ -730,7 +730,7 @@ cell_phone_inner:
 
 								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56d
 								GOSUB loading_and_playing_audio
-								PRINT_NOW ( MOB5_6d ) 10000 1//rhubarb rhubarb
+								PRINT_NOW ( MOB56_d ) 10000 1//rhubarb rhubarb
 								GOSUB has_audio_finished
 								
 								LOAD_MISSION_AUDIO audio_slot_mobile MOB_56e
