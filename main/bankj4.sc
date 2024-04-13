@@ -564,6 +564,12 @@ SET_CHAR_HEALTH cam 300
 SET_CHAR_HEALTH hilary 300
 // SCFIX: END
 
+// SCFIX: START
+SET_CHAR_ONLY_DAMAGED_BY_PLAYER phil TRUE // SCFIX
+SET_CHAR_ONLY_DAMAGED_BY_PLAYER hilary TRUE // SCFIX
+SET_CHAR_ONLY_DAMAGED_BY_PLAYER cam TRUE // SCFIX
+// SCFIX: END
+
 
 /* // SCFIX: comment this block to not create the destination blip early
 ADD_BLIP_FOR_COORD -833.0 -348.0 11.0 mission_blip
@@ -705,6 +711,12 @@ bank_job_loop1:	// GETTING TO THE BANK
 								SET_CHAR_HEALTH phil 300
 								SET_CHAR_HEALTH cam 300
 								SET_CHAR_HEALTH hilary 300
+								// SCFIX: END
+
+								// SCFIX: START
+								SET_CHAR_ONLY_DAMAGED_BY_PLAYER phil TRUE // SCFIX
+								SET_CHAR_ONLY_DAMAGED_BY_PLAYER hilary TRUE // SCFIX
+								SET_CHAR_ONLY_DAMAGED_BY_PLAYER cam TRUE // SCFIX
 								// SCFIX: END
 
 								flag_switcharoo = 1
