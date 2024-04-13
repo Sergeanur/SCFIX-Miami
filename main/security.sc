@@ -555,6 +555,15 @@ GOTO security_inner
 
 
 get_ammo:
+	// SCFIX: START
+	LVAR_INT flag_used_slot1
+	flag_used_slot1 = 0
+	IF IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UNARMED
+	OR IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BRASSKNUCKLE
+		flag_used_slot1 = 1
+	ENDIF
+	// SCFIX: END
+
 	GET_CHAR_WEAPON_IN_SLOT scplayer 1 bollox_1 ammo_slot_1 weapon_model_slot_1
 	GET_CHAR_WEAPON_IN_SLOT scplayer 2 bollox_2 ammo_slot_2 weapon_model_slot_2
 	GET_CHAR_WEAPON_IN_SLOT scplayer 3 bollox_3 ammo_slot_3 weapon_model_slot_3
@@ -575,6 +584,12 @@ get_ammo:
 			GIVE_WEAPON_TO_PLAYER player1 bollox_2 ammo_slot_2
 		ENDIF
 	ENDIF
+
+	// SCFIX: START
+	IF flag_used_slot1 = 1
+		SET_CURRENT_PLAYER_WEAPON player1 bollox_1
+	ENDIF
+	// SCFIX: END
 	
 	//shotgun_ammo = 10 //test stuff to come out!
 	//PRINT_WITH_NUMBER_NOW QTY_1 shotgun_ammo 3000 2	// test stuff to come out!
