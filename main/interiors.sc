@@ -191,6 +191,9 @@ CREATE_OBJECT_NO_OFFSET cop_dr_closed 396.545 -472.883 12.6 cop_doors
 CREATE_OBJECT_NO_OFFSET strpbckdrclsd 68.988 -1444.242 10.727 strip_door_poledance
 bingle_bongle:
 
+VAR_INT flag_is_in_transition1
+flag_is_in_transition1 = 0
+
 interiors_inner:
 
 	WAIT 0
@@ -1886,6 +1889,7 @@ IF IS_PLAYER_PLAYING player1
 		ENDIF
 	ENDIF
 
+	flag_is_in_transition1 = 1 // SCFIX
 	WHILE GET_FADING_STATUS
 		WAIT 0
 		IF NOT IS_PLAYER_PLAYING player1
@@ -1901,6 +1905,7 @@ IF IS_PLAYER_PLAYING player1
 			GOSUB populate_malibu
 		ENDIF
 	ENDWHILE
+	flag_is_in_transition1 = 0 // SCFIX
 	SET_CAR_DENSITY_MULTIPLIER 0.0
 ENDIF
 RETURN
@@ -3588,8 +3593,13 @@ WHILE NOT HAS_MISSION_AUDIO_FINISHED 1
 ENDWHILE
 
 RETURN
+}
 
+{
 force_extra_colors: // SCFIX
+IF flag_is_in_transition1 = 1
+	RETURN
+ENDIF
 
 IF flag_player_in_malibu = 1
 	SET_EXTRA_COLOURS 1 FALSE
