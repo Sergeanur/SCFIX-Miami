@@ -51,6 +51,7 @@ flag_baron_mission4_passed = 0
 flag_baron_mission5_passed = 0
 start_baron1_script_flag = 0
 flag_kent_mission1_passed = 0
+flag_kent_script_cut = 0 // SCFIX
 flag_sergio_mission1_passed = 0
 flag_sergio_mission2_passed = 0
 flag_sergio_mission3_passed = 0

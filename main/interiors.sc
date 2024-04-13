@@ -742,6 +742,7 @@ interiors_inner:
 						IF flag_malibu_doors_closed = 0
 						AND	flag_player_on_lawyer_2 = 0
 						AND	flag_player_on_counter_1 = 0
+						AND	flag_kent_script_cut = 0 // SCFIX
 							DELETE_OBJECT malibu_doors 
 							CREATE_OBJECT_NO_OFFSET od_clbdr_close 490.34 -77.017 11.598 malibu_doors
 							SET_OBJECT_AREA_VISIBLE malibu_doors VIS_MAIN_MAP // SCFIX

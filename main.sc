@@ -291,6 +291,7 @@ fastest_boat_col2 = -1
 //Kent missions
 VAR_INT kent_contact_blip
 VAR_INT flag_kent_mission1_passed
+VAR_INT flag_kent_script_cut // SCFIX
 
 //Sergio missions
 VAR_INT sergio_contact_blip
@@ -1871,12 +1872,14 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player1 491.0 -77.7 10.4 2.5 2.5 2.5 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION player1
+					flag_kent_script_cut = 1 // SCFIX
 					flag_player_on_mission = 1 // SCFIX: paranoid set
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player1 // SCFIX: paranoid set
 					GOSUB kent_script_cut
 					GOSUB make_player_safe
 					PRINT_BIG ( KENT_1 ) 15000 2 //"kent mission 1"
 					GOSUB get_fading_status
+					flag_kent_script_cut = 0 // SCFIX
 				   	LOAD_AND_LAUNCH_MISSION kent1.sc
 				ENDIF
 			ENDIF
@@ -6899,8 +6902,8 @@ kent_script_cut:
 	SWITCH_WIDESCREEN ON
 	SET_FIXED_CAMERA_POSITION 499.781 -106.921 12.057 0.0 0.0 0.0
 	POINT_CAMERA_AT_POINT 499.357 -106.019 12.139 JUMP_CUT //View of Malibu
-	//SET_CHAR_OBJ_GOTO_COORD_ON_FOOT scplayer 487.8 -74.3
-	SET_CHAR_COORDINATES scplayer 482.2 -69.9 9.9
+	SET_CHAR_OBJ_GOTO_COORD_ON_FOOT scplayer 487.8 -74.3 // SCFIX: uncomment
+	//SET_CHAR_COORDINATES scplayer 482.2 -69.9 9.9 // SCFIX: removed
 	WAIT 1000
 
 RETURN
