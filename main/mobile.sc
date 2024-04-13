@@ -2180,6 +2180,7 @@ cell_phone_inner:
 							ENDIF
 							IF flag_player_answered_phone = 1	
 								flag_mob_47 = 1
+								REMOVE_BLIP baron_contact_blip // SCFIX: the revenue blip is actually created as baron blip. Genius, innit?
 								REMOVE_BLIP protect_contact_blip
 								ADD_SPRITE_BLIP_FOR_CONTACT_POINT -378.3 -579.8 24.5 the_protection_blip protect_contact_blip
 								START_NEW_SCRIPT finale_mission2_loop
