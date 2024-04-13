@@ -259,6 +259,7 @@ flag_player_on_lawyer_2 = 1
 
 DELETE_OBJECT malibu_doors 
 CREATE_OBJECT_NO_OFFSET od_clbdr_open 490.34 -77.017 11.598 malibu_doors
+SET_OBJECT_AREA_VISIBLE malibu_doors VIS_MAIN_MAP // SCFIX
 DONT_REMOVE_OBJECT malibu_doors
 flag_malibu_doors_open = 1
 flag_malibu_doors_closed = 0
@@ -322,6 +323,7 @@ flag_player_on_lawyer_2 = 0
 
 DELETE_OBJECT malibu_doors 
 CREATE_OBJECT_NO_OFFSET od_clbdr_close 490.34 -77.017 11.598 malibu_doors
+SET_OBJECT_AREA_VISIBLE malibu_doors VIS_MAIN_MAP // SCFIX
 DONT_REMOVE_OBJECT malibu_doors
 flag_malibu_doors_closed = 1
 flag_malibu_doors_open = 0
@@ -1931,6 +1933,7 @@ flag_player_on_mission = 0
 
 DELETE_OBJECT malibu_doors 
 CREATE_OBJECT_NO_OFFSET od_clbdr_close 490.34 -77.017 11.598 malibu_doors
+SET_OBJECT_AREA_VISIBLE malibu_doors VIS_MAIN_MAP // SCFIX
 DONT_REMOVE_OBJECT malibu_doors
 flag_malibu_doors_closed = 1
 flag_malibu_doors_open = 0
