@@ -645,6 +645,18 @@ LOAD_MISSION_TEXT HAIT1
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -957.904 122.843 8.278 356.948
 
 {
+// SCFIX: START
+LVAR_INT flag_moved_a_muscle
+flag_moved_a_muscle = 0
+LVAR_INT cop2_case2_wanderer_hait1 cop3_case2_wanderer_hait1
+cop2_case2_wanderer_hait1 = 0
+cop3_case2_wanderer_hait1 = 0
+LVAR_INT cop1_case3_wanderer_hait1 cop2_case3_wanderer_hait1
+cop1_case3_wanderer_hait1 = 0
+cop2_case3_wanderer_hait1 = 0
+// SCFIX: END
+
+SET_AREA_VISIBLE VIS_POLICE_STATION // this is correct // SCFIX: moved up before LOAD_SCENE
 
 // ****************************************START OF CUTSCENE********************************
  
@@ -655,8 +667,6 @@ LOAD_SPECIAL_MODEL CUTOBJ01 htable
 LOAD_SPECIAL_MODEL CUTOBJ02 kettle
 
 LOAD_SCENE -962.697 149.793 10.21
-
-SET_AREA_VISIBLE VIS_POLICE_STATION // this is correct
 
 SET_EXTRA_COLOURS 13 FALSE
 
@@ -1127,36 +1137,125 @@ WHILE all_cases_recoverd_hait1 = 0
 
 	IF flag_cutscene_case1_done_hait1 = 1
 
-		IF NOT LOCATE_PLAYER_ON_FOOT_2D player1 player_x_hait1 player_y_hait1 3.0 3.0 FALSE
-		OR IS_PLAYER_SHOOTING player1
-		OR IS_CHAR_DEAD cop5_case1_hait1 
+		// SCFIX: START
+		IF flag_moved_a_muscle = 0
+			IF NOT LOCATE_PLAYER_ON_FOOT_2D player1 player_x_hait1 player_y_hait1 3.0 3.0 FALSE
+				flag_moved_a_muscle = 1
+			ENDIF
+		ENDIF
+		// SCFIX: END
 
+		IF IS_WANTED_LEVEL_GREATER player1 0 // SCFIX
+			IF flag_moved_a_muscle = 1 // SCFIX: was IF NOT LOCATE_PLAYER_ON_FOOT_2D player1 player_x_hait1 player_y_hait1 3.0 3.0 FALSE
+			OR IS_PLAYER_SHOOTING player1
+			OR IS_CHAR_DEAD cop5_case1_hait1 
+
+				IF NOT IS_CHAR_DEAD cop1_case1_hait1
+					SET_CHAR_THREAT_SEARCH cop1_case1_hait1 THREAT_PLAYER1 // SCFIX
+					SET_CHAR_STAY_IN_SAME_PLACE cop1_case1_hait1 TRUE
+					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop1_case1_hait1 player1
+				ENDIF
+		
+				IF NOT IS_CHAR_DEAD cop2_case1_hait1
+					SET_CHAR_THREAT_SEARCH cop2_case1_hait1 THREAT_PLAYER1 // SCFIX
+					SET_CHAR_STAY_IN_SAME_PLACE cop2_case1_hait1 TRUE
+					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop2_case1_hait1 player1
+				ENDIF
+		
+				IF NOT IS_CHAR_DEAD cop3_case1_hait1
+					SET_CHAR_THREAT_SEARCH cop3_case1_hait1 THREAT_PLAYER1 // SCFIX
+					SET_CHAR_STAY_IN_SAME_PLACE cop3_case1_hait1 TRUE
+					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop3_case1_hait1 player1
+				ENDIF
+		
+				IF NOT IS_CHAR_DEAD cop4_case1_hait1
+					SET_CHAR_THREAT_SEARCH cop4_case1_hait1 THREAT_PLAYER1 // SCFIX
+					SET_CHAR_STAY_IN_SAME_PLACE cop4_case1_hait1 TRUE
+					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop4_case1_hait1 player1
+				ENDIF
+							
+			ENDIF
+		// SCFIX: START
+		ELSE
 			IF NOT IS_CHAR_DEAD cop1_case1_hait1
+				CLEAR_CHAR_THREAT_SEARCH cop1_case1_hait1
+				SET_CHAR_OBJ_NO_OBJ cop1_case1_hait1
 				SET_CHAR_STAY_IN_SAME_PLACE cop1_case1_hait1 TRUE
-				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop1_case1_hait1 player1
 			ENDIF
 	
 			IF NOT IS_CHAR_DEAD cop2_case1_hait1
+				CLEAR_CHAR_THREAT_SEARCH cop2_case1_hait1
+				SET_CHAR_OBJ_NO_OBJ cop2_case1_hait1
 				SET_CHAR_STAY_IN_SAME_PLACE cop2_case1_hait1 TRUE
-				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop2_case1_hait1 player1
 			ENDIF
 	
 			IF NOT IS_CHAR_DEAD cop3_case1_hait1
+				CLEAR_CHAR_THREAT_SEARCH cop3_case1_hait1
+				SET_CHAR_OBJ_NO_OBJ cop3_case1_hait1
 				SET_CHAR_STAY_IN_SAME_PLACE cop3_case1_hait1 TRUE
-				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop3_case1_hait1 player1
 			ENDIF
 	
 			IF NOT IS_CHAR_DEAD cop4_case1_hait1
+				CLEAR_CHAR_THREAT_SEARCH cop4_case1_hait1
+				SET_CHAR_OBJ_NO_OBJ cop4_case1_hait1
 				SET_CHAR_STAY_IN_SAME_PLACE cop4_case1_hait1 TRUE
-				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop4_case1_hait1 player1
 			ENDIF
-						
 		ENDIF
+		// SCFIX: END
 
 	ENDIF
 		
 	IF case2_created_hait1 = 1
 		GOSUB guards_case2_checks
+		// SCFIX: START
+		IF IS_WANTED_LEVEL_GREATER player1 0
+			IF NOT IS_CHAR_DEAD cop1_case2_hait1
+				SET_CHAR_THREAT_SEARCH cop1_case2_hait1 THREAT_PLAYER1
+				SET_CHAR_STAY_IN_SAME_PLACE cop1_case2_hait1 TRUE
+				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop1_case2_hait1 player1
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop2_case2_hait1
+				SET_CHAR_THREAT_SEARCH cop2_case2_hait1 THREAT_PLAYER1
+				SET_CHAR_HEED_THREATS cop2_case2_hait1 TRUE
+				cop2_case2_wanderer_hait1 = 0
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop3_case2_hait1
+				SET_CHAR_THREAT_SEARCH cop3_case2_hait1 THREAT_PLAYER1
+				SET_CHAR_HEED_THREATS cop2_case2_hait1 TRUE
+				cop3_case2_wanderer_hait1 = 0
+			ENDIF
+		ELSE
+			IF NOT IS_CHAR_DEAD cop1_case2_hait1
+				CLEAR_CHAR_THREAT_SEARCH cop1_case2_hait1
+				SET_CHAR_OBJ_NO_OBJ cop1_case2_hait1
+				SET_CHAR_STAY_IN_SAME_PLACE cop1_case2_hait1 TRUE
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop2_case2_hait1
+				SET_CHAR_HEED_THREATS cop2_case2_hait1 FALSE
+				CLEAR_CHAR_THREAT_SEARCH cop2_case2_hait1
+				IF case2_collected_hait1 = 1
+				OR case2_collected_again_hait1 = 1 
+					IF cop2_case2_wanderer_hait1 < 3
+						SET_CHAR_OBJ_NO_OBJ cop2_case2_hait1
+						CHAR_WANDER_DIR cop2_case2_hait1 -1
+						cop2_case2_wanderer_hait1 ++
+					ENDIF
+				ENDIF
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop3_case2_hait1
+				SET_CHAR_HEED_THREATS cop3_case2_hait1 FALSE
+				CLEAR_CHAR_THREAT_SEARCH cop3_case2_hait1
+				IF case2_collected_hait1 = 1
+				OR case2_collected_again_hait1 = 1 
+					IF cop3_case2_wanderer_hait1 < 3
+						SET_CHAR_OBJ_NO_OBJ cop3_case2_hait1
+						CHAR_WANDER_DIR cop3_case2_hait1 -1
+						cop3_case2_wanderer_hait1 ++
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+		// SCFIX: END
 	ENDIF
 	
 	IF case2_created_again_hait1 = 1
@@ -1319,6 +1418,45 @@ WHILE all_cases_recoverd_hait1 = 0
 
 	IF police_created_case3_hait1 = 1
 		GOSUB cops_case3_death_hait1
+		// SCFIX: START
+		IF IS_WANTED_LEVEL_GREATER player1 0
+			IF NOT IS_CHAR_DEAD cop1_case3_hait1
+				SET_CHAR_THREAT_SEARCH cop1_case3_hait1 THREAT_PLAYER1
+				SET_CHAR_HEED_THREATS cop1_case3_hait1 TRUE
+				cop1_case3_wanderer_hait1 = 0
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop2_case3_hait1
+				SET_CHAR_THREAT_SEARCH cop2_case3_hait1 THREAT_PLAYER1
+				SET_CHAR_HEED_THREATS cop2_case3_hait1 TRUE
+				cop2_case3_wanderer_hait1 = 0
+			ENDIF
+		ELSE
+			IF NOT IS_CHAR_DEAD cop1_case3_hait1
+				SET_CHAR_HEED_THREATS cop1_case3_hait1 FALSE
+				CLEAR_CHAR_THREAT_SEARCH cop1_case3_hait1
+				IF case3_collected_hait1 = 1
+				OR case3_collected_again_hait1 = 1 
+					IF cop1_case3_wanderer_hait1 < 3
+						SET_CHAR_OBJ_NO_OBJ cop1_case3_hait1
+						CHAR_WANDER_DIR cop1_case3_hait1 -1
+						cop1_case3_wanderer_hait1 ++
+					ENDIF
+				ENDIF
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop2_case3_hait1
+				SET_CHAR_HEED_THREATS cop2_case3_hait1 FALSE
+				CLEAR_CHAR_THREAT_SEARCH cop2_case3_hait1
+				IF case3_collected_hait1 = 1
+				OR case3_collected_again_hait1 = 1 
+					IF cop2_case3_wanderer_hait1 < 3
+						SET_CHAR_OBJ_NO_OBJ cop2_case3_hait1
+						CHAR_WANDER_DIR cop2_case3_hait1 -1
+						cop2_case3_wanderer_hait1 ++
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+		// SCFIX: END
 	ENDIF
 
 // adds blip for destination
@@ -1704,6 +1842,8 @@ IF flag_cutscene_case1_done_hait1 = 0
 	ENDWHILE
 		
 	end_cut_hait1:
+	CLEAR_MISSION_AUDIO 1 // SCFIX
+	CLEAR_THIS_PRINT ( HAT_1A ) // SCFIX
 
 	// cop2
 
@@ -1748,6 +1888,7 @@ IF flag_cutscene_case1_done_hait1 = 0
 	ALTER_WANTED_LEVEL_NO_DROP player1 2
 	PRINT_NOW ( HAM1_4 ) 5000 1 //"Good now get the next one!"
 	flag_cutscene_case1_done_hait1 = 1
+	flag_moved_a_muscle = 0 // SCFIX
 	
 ENDIF 
 
@@ -1830,6 +1971,7 @@ IF flag_cop2_case2_dead_hait1 = 0
 		OR flag_guards_case2_act_hait1 = 1
 
 			IF flag_cop3_case2_dead_hait1 = 0 
+			AND IS_WANTED_LEVEL_GREATER player1 0 // SCFIX
 				SET_CHAR_THREAT_SEARCH cop2_case2_hait1 THREAT_PLAYER1
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop2_case2_hait1 player1
 			ELSE
@@ -1851,6 +1993,7 @@ IF flag_cop2_case2_dead_hait1 = 0
 																					
 							IF flag_cop2_case2_location_hait1 = 1
 
+								/* SCFIX: removed as the path is pretty retarded
 								IF NOT IS_CHAR_WANDER_PATH_CLEAR cop2_case2_hait1 case2_x2_hait1 case2_y2_hait1 case2_z2_hait1 4.0 
 
 									IF cop2_case2_follow_1sttime_hait1 = 0
@@ -1862,11 +2005,11 @@ IF flag_cop2_case2_dead_hait1 = 0
 										CHAR_FOLLOW_PATH cop2_case2_hait1 case2_x2_hait1 case2_y2_hait1 case2_z2_hait1 0.1 RUN
 									ENDIF
 									
-								ELSE
+								ELSE*/
 									SET_CHAR_RUNNING cop2_case2_hait1 TRUE 
 									SET_CHAR_OBJ_RUN_TO_COORD cop2_case2_hait1 case2_x_hait1 case2_y_hait1
 									flag_cop2_case2_location_hait1 = 3	
-								ENDIF
+								//ENDIF // SCFIX: removed as the path is pretty retarded
 
 							ENDIF
 
@@ -1991,6 +2134,7 @@ IF flag_cop3_case2_dead_hait1 = 0
 																					
 						IF flag_cop3_case2_location_hait1 = 1
 
+							/* SCFIX: removed as the path is pretty retarded
 							IF NOT IS_CHAR_WANDER_PATH_CLEAR cop3_case2_hait1 case2_x2_hait1 case2_y2_hait1 case2_z2_hait1 4.0 
 
 								IF cop3_case2_follow_1sttime_hait1 = 0
@@ -2002,11 +2146,11 @@ IF flag_cop3_case2_dead_hait1 = 0
 									CHAR_FOLLOW_PATH cop3_case2_hait1 case2_x2_hait1 case2_y2_hait1 case2_z2_hait1 0.1 RUN
 								ENDIF
 
-							ELSE
+							ELSE*/
 								SET_CHAR_RUNNING cop3_case2_hait1 TRUE 
 								SET_CHAR_OBJ_RUN_TO_COORD cop3_case2_hait1 case2_x_hait1 case2_y_hait1
 								flag_cop3_case2_location_hait1 = 3
-							ENDIF
+							//ENDIF // SCFIX: removed as the path is pretty retarded
 
 						ENDIF
 
@@ -2053,6 +2197,7 @@ IF flag_cop3_case2_dead_hait1 = 0
 			ELSE
 
 				IF flag_cops_got_case2_hait1 = 0
+				AND IS_WANTED_LEVEL_GREATER player1 0 // SCFIX
 					SET_CHAR_THREAT_SEARCH cop3_case2_hait1 THREAT_PLAYER1
 					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop3_case2_hait1 player1
 				ENDIF
@@ -2170,6 +2315,7 @@ IF flag_cop1_case3_dead_hait1 = 0
 
 			IF flag_cop2_case3_dead_hait1 = 0
 				IF NOT IS_CHAR_DEAD cop1_case3_hait1 
+				AND IS_WANTED_LEVEL_GREATER player1 0 // SCFIX
 					SET_CHAR_THREAT_SEARCH cop1_case3_hait1 THREAT_PLAYER1 
 					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop1_case3_hait1 player1
 				ENDIF 
@@ -2212,8 +2358,9 @@ IF flag_cop1_case3_dead_hait1 = 0
 							ENDIF
 
 							IF flag_cop1_case3_location_hait1 = 1 
-								LOCATE_CHAR_ON_FOOT_3D cop1_case3_hait1 case3_x2_hait1 case3_y2_hait1 case3_z2_hait1 1.0 1.0 1.0 FALSE
-								flag_cop1_case3_location_hait1 = 2
+								IF LOCATE_CHAR_ON_FOOT_3D cop1_case3_hait1 case3_x2_hait1 case3_y2_hait1 case3_z2_hait1 2.0 2.0 2.0 FALSE // SCFIX: IF was missing; increase range from 1.0 to 2.0 as char might get softlocked
+									flag_cop1_case3_location_hait1 = 2
+								ENDIF // SCFIX: IF was missing
 							ENDIF	
 
 							IF flag_cop1_case3_location_hait1 = 2
@@ -2251,6 +2398,7 @@ IF flag_cop1_case3_dead_hait1 = 0
 				ELSE
 
 					IF flag_cops_got_case3_hait1 = 0
+					AND IS_WANTED_LEVEL_GREATER player1 0 // SCFIX
 						SET_CHAR_THREAT_SEARCH cop1_case3_hait1 THREAT_PLAYER1
 						SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop1_case3_hait1 player1
 					ENDIF
@@ -2354,7 +2502,7 @@ IF flag_cop2_case3_dead_hait1 = 0
 
 						IF flag_cop2_case3_location_hait1 = 1
 							
-							IF LOCATE_CHAR_ON_FOOT_3D cop2_case3_hait1 case3_x2_hait1 case3_y2_hait1 case3_z2_hait1 1.0 1.0 1.0 FALSE   
+							IF LOCATE_CHAR_ON_FOOT_3D cop2_case3_hait1 case3_x2_hait1 case3_y2_hait1 case3_z2_hait1 2.0 2.0 2.0 FALSE   // SCFIX: increase range from 1.0 to 2.0 as char might get softlocked
 								flag_cop2_case3_location_hait1 = 2
 							ENDIF
 
@@ -2395,6 +2543,7 @@ IF flag_cop2_case3_dead_hait1 = 0
 			ELSE
 
 				IF flag_cops_got_case3_hait1 = 0
+				AND IS_WANTED_LEVEL_GREATER player1 0 // SCFIX
 					SET_CHAR_THREAT_SEARCH cop2_case3_hait1 THREAT_PLAYER1
 					SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop2_case3_hait1 player1
 				ENDIF
