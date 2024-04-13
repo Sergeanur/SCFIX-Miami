@@ -216,6 +216,7 @@ interiors_inner:
 							ENDIF
 						ELSE
 							IF flag_strip_doors_closed = 0
+							AND flag_player_in_stripclub = 0 // SCFIX: we might be inside during a phonecall
 								DELETE_OBJECT strip_doors 
 								CREATE_OBJECT_NO_OFFSET stripclbdrclsd 97.203 -1469.731 10.578 strip_doors
 								DONT_REMOVE_OBJECT strip_doors
@@ -566,6 +567,7 @@ interiors_inner:
 						ENDIF
 					ELSE
 						IF flag_cop_doors_closed = 0
+						AND flag_player_in_cop_shop = 0 // SCFIX: we might be inside during a phonecall
 							DELETE_OBJECT cop_doors
 							CREATE_OBJECT_NO_OFFSET cop_dr_closed 396.545 -472.883 12.6 cop_doors
 							DONT_REMOVE_OBJECT cop_doors
