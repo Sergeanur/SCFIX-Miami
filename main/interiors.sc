@@ -19,6 +19,7 @@ VAR_INT flag_player_on_counter_1
 VAR_INT flag_player_on_bank_2
 VAR_INT flag_kent_mission_active
 VAR_INT flag_player_on_bank1_mission
+VAR_INT flag_player_on_finale // SCFIX
 VAR_INT flag_player_control
 VAR_INT flag_membership
 VAR_INT flag_player_on_colonel1_mission	flag_open_mansion
@@ -1574,7 +1575,7 @@ interiors_inner:
 										IF flag_eject = 0
 											SET_AREA_VISIBLE VIS_MANSION
 											flag_player_in_mansion = 1
-											IF flag_ped_roads_off_in_finale = 0 // SCFIX
+											IF flag_player_on_finale = 0 // SCFIX
 												SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
 											ENDIF // SCFIX
 											SWITCH_RUBBISH OFF
@@ -1600,7 +1601,7 @@ interiors_inner:
 									IF flag_eject = 0
 										GOSUB outgoing
 										flag_player_in_mansion = 0
-										IF flag_ped_roads_off_in_finale = 0 // SCFIX
+										IF flag_player_on_finale = 0 // SCFIX
 											SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
 										ENDIF // SCFIX
 										CLEAR_AREA -377.06 -545.43 17.0 1.0 FALSE
@@ -1653,7 +1654,7 @@ interiors_inner:
 									IF flag_eject = 0
 										SET_AREA_VISIBLE VIS_MANSION
 										flag_player_in_mansion = 1
-										IF flag_ped_roads_off_in_finale = 0 // SCFIX
+										IF flag_player_on_finale = 0 // SCFIX
 											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
 										ENDIF // SCFIX
 										SWITCH_RUBBISH OFF
@@ -1677,7 +1678,7 @@ interiors_inner:
 								IF flag_eject = 0
 									GOSUB outgoing
 									flag_player_in_mansion = 0
-									IF flag_ped_roads_off_in_finale = 0 // SCFIX
+									IF flag_player_on_finale = 0 // SCFIX
 										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
 									ENDIF // SCFIX
 									CLEAR_AREA -343.3 -572.8 36.0 1.0 FALSE
@@ -1732,7 +1733,7 @@ interiors_inner:
 									IF flag_eject = 0
 										SET_AREA_VISIBLE VIS_MANSION
 										flag_player_in_mansion = 1
-										IF flag_ped_roads_off_in_finale = 0 // SCFIX
+										IF flag_player_on_finale = 0 // SCFIX
 											SWITCH_PED_ROADS_ON -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
 										ENDIF // SCFIX
 										SWITCH_RUBBISH OFF
@@ -1758,7 +1759,7 @@ interiors_inner:
 								IF flag_eject = 0
 									GOSUB outgoing
 									flag_player_in_mansion = 0
-									IF flag_ped_roads_off_in_finale = 0 // SCFIX
+									IF flag_player_on_finale = 0 // SCFIX
 										SWITCH_PED_ROADS_OFF -414.0 -597.0 12.0 -332.0 -555.0 30.0 // LOWER FLOOR
 									ENDIF // SCFIX
 									CLEAR_AREA -354.0 -586.0 10.6 1.0 FALSE

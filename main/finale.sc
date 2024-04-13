@@ -242,10 +242,7 @@ SET_AREA_VISIBLE VIS_MANSION
 flag_player_in_mansion = 1
 SWITCH_PED_ROADS_OFF -522.414 -662.451 -9.357 -222.414 -502.451 90.643 // ENTIRE MANSION AREA
 
-// SCFIX - Start
-VAR_INT flag_ped_roads_off_in_finale
-flag_ped_roads_off_in_finale = 1
-// SCFIX - End
+flag_player_on_finale = 1 // SCFIX
 
 
 SWITCH_RUBBISH OFF
@@ -3618,7 +3615,7 @@ SET_ZONE_PED_INFO GANG1 NIGHT (12) 0 0 0 0 0 0 1000 0 0 0
 
 SWITCH_PED_ROADS_ON -522.414 -662.451 -9.357 -222.414 -502.451 90.643 // ENTIRE MANSION AREA
 
-flag_ped_roads_off_in_finale = 0 // SCFIX
+flag_player_on_finale = 0 // SCFIX
 
 MARK_MODEL_AS_NO_LONGER_NEEDED STRETCH
 MARK_MODEL_AS_NO_LONGER_NEEDED COLT45
