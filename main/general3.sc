@@ -3620,6 +3620,7 @@ IF you_got_the_case_back_g3 = 2
 	IF LOCATE_STOPPED_PLAYER_ON_FOOT_2D player1 462.846466 -488.8573 1.0 1.0 TRUE
 		IF NOT IS_CHAR_DEAD coke_baron_g3
 			IF NOT IS_CAR_DEAD coke_barons_car
+				DELETE_CHAR buddy_g3 // SCFIX: moved up right before the cutscene
 				
 				
 				CLEAR_AREA 461.1141 -483.7427 50.0 50.0 TRUE
@@ -3716,7 +3717,6 @@ IF you_got_the_case_back_g3 = 2
 				CLEAR_THIS_PRINT GEN3_11
 								
 				you_got_the_case_back_g3 = 3
-				DELETE_CHAR buddy_g3
 			ENDIF
 		ENDIF
 	ENDIF
