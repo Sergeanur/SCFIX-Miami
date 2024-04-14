@@ -567,6 +567,11 @@ ENDIF
 CLEAR_AREA_OF_CARS 361.9 269.1 26.0 336.5 380.8 15.0
 CLEAR_AREA_OF_CARS 334.4 381.4 26.0 383.9 478.7 15.0
 
+// SCFIX: START
+VAR_INT traitor_fell
+traitor_fell = 0
+// SCFIX: END
+
 WHILE NOT IS_CHAR_IN_CAR traitor traitors_car
 	WAIT 0
 
@@ -580,7 +585,45 @@ WHILE NOT IS_CHAR_IN_CAR traitor traitors_car
 			GOTO mission_baron1_failed	
 		ENDIF
 
+		// SCFIX: START
+		IF traitor_fell = 0
+			IF dumpster_cut = 0
+				GET_CHAR_COORDINATES traitor x y z
+				IF z < 15.0
+					traitor_fell = 1
+				ENDIF
+			ENDIF
+		ELSE
+			IF NOT IS_CHAR_DEAD traitor
+				SET_CHAR_OBJ_SPRINT_TO_COORD traitor 368.4 478.6
+
+				IF LOCATE_CHAR_ANY_MEANS_2D traitor 368.4 478.6 10.0 10.0 FALSE
+					IF dumpster_cut = 0
+						IF NOT IS_CAR_DEAD traitors_car
+							SET_CAR_STRONG traitors_car TRUE
+							SET_CAR_COORDINATES traitors_car 368.4 478.6 10.4
+							CREATE_CHAR_INSIDE_CAR traitors_car PEDTYPE_GANG_STREET SGa traitors_mate
+							GIVE_WEAPON_TO_CHAR traitors_mate WEAPONTYPE_RUGER 30000
+							SET_CHAR_PERSONALITY traitors_mate PEDSTAT_TOUGH_GUY
+							CLEAR_CHAR_THREAT_SEARCH traitors_mate
+							SET_CAR_HEADING traitors_car 311.0
+							SET_CAR_CRUISE_SPEED traitors_car 0.0
+							//SET_CHAR_OBJ_RUN_TO_COORD traitor 375.5 471.4 //SKIP
+							//SET_CHAR_USE_PEDNODE_SEEK traitor FALSE
+							SET_PLAYER_CONTROL player1 OFF
+							SWITCH_WIDESCREEN ON
+							SET_FIXED_CAMERA_POSITION 382.421 481.019 12.024 0.0 0.0 0.0 //JUMP ON TO DUMPSTER
+							POINT_CAMERA_AT_POINT 381.675 480.371 12.177 JUMP_CUT
+							dumpster_cut = 1
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+		// SCFIX: END
+
 		IF NOT IS_CHAR_DEAD traitor
+		AND traitor_fell = 0 // SCFIX
 
 			IF traitors_objectives_complete = 0
 
@@ -771,12 +814,23 @@ WHILE NOT IS_CHAR_IN_CAR traitor traitors_car
 
 		IF NOT IS_CHAR_DEAD	traitor 
 			IF traitors_objectives_complete = 0		
-				IF LOCATE_CHAR_ANY_MEANS_3D traitor 375.5 471.4 14.1 3.0 3.0 5.0 FALSE
-					IF NOT IS_CAR_DEAD traitors_car
-						SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER traitor traitors_car
-						traitors_objectives_complete = 1
+				IF traitor_fell = 0 // SCFIX
+					IF LOCATE_CHAR_ANY_MEANS_3D traitor 375.5 471.4 14.1 3.0 3.0 5.0 FALSE
+						IF NOT IS_CAR_DEAD traitors_car
+							SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER traitor traitors_car
+							traitors_objectives_complete = 1
+						ENDIF
+					ENDIF
+				// SCFIX: START
+				ELSE
+					IF LOCATE_CHAR_ANY_MEANS_3D traitor 368.4 478.6 10.4 3.0 3.0 5.0 FALSE
+						IF NOT IS_CAR_DEAD traitors_car
+							SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER traitor traitors_car
+							traitors_objectives_complete = 1
+						ENDIF
 					ENDIF
 				ENDIF
+				// SCFIX: END
 			ENDIF
 		ENDIF
 
