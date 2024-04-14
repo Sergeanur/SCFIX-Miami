@@ -896,6 +896,11 @@ IF porn4_goals > 24 //last jump
 			RESTORE_CLOCK
 			SET_PLAYER_CONTROL player1 ON
 			SWITCH_WIDESCREEN OFF
+
+			// SCFIX: START - bypass the widescreen bug
+			WAIT 0
+			WAIT 0
+			// SCFIX: END
 // ******************************************END OF CUTSCENE - CREATING FLIP-DOWN LADDER****************************************************
 			ladder2_down = 1
 		ENDIF	  
@@ -1437,17 +1442,25 @@ IF porn4_goals = 26
 		DONT_REMOVE_OBJECT spotlight_shining_onto_wall
 
 		WAIT 5000
-		CLEAR_CUTSCENE
+		//CLEAR_CUTSCENE // SCFIX: removed
 
-		RESTORE_CAMERA_JUMPCUT
-		SET_PLAYER_CONTROL player1 ON
-		SWITCH_WIDESCREEN OFF
+		//RESTORE_CAMERA_JUMPCUT // SCFIX: removed
+		//SET_PLAYER_CONTROL player1 ON // SCFIX: removed
+		//SWITCH_WIDESCREEN OFF // SCFIX: removed
 	// ******************************************END OF CUTSCENE - PLAYER TURNING TITS ON*****************************************************
 	// ******************************************START OF ASSET AQUIRED CUTSCENE********************************
 					DO_FADE 500 FADE_OUT
 					WHILE GET_FADING_STATUS
 						WAIT 0
 					ENDWHILE
+
+					// SCFIX: START
+					CLEAR_CUTSCENE
+					SET_PLAYER_CONTROL player1 OFF
+					WAIT 0
+					WAIT 0
+					SWITCH_WIDESCREEN ON
+					// SCFIX: END
 
 					SET_PLAYER_COORDINATES player1 -2.8 985.9 10.9
 					CREATE_PROTECTION_PICKUP porncashX porncashY porncashZ porn_revenue porn_revenue porn_cash_pickup
