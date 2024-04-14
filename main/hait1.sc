@@ -1826,14 +1826,30 @@ IF flag_cutscene_case1_done_hait1 = 0
 	SET_CHAR_WAIT_STATE scplayer WAITSTATE_PLAYANIM_HANDSUP 1000000
 
 	timera = 0
+	button_pressed = 0 // SCFIX
 
 	WHILE timera < 4000
 
 		WAIT 0
 
+		/* SCFIX: removed
 		IF IS_BUTTON_PRESSED PAD1 CROSS
 			GOTO end_cut_hait1
 		ENDIF
+		*/
+
+		// SCFIX: START
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+			IF button_pressed = 1
+				button_pressed = 0
+				GOTO end_cut_hait1
+			ENDIF
+		ELSE
+			IF button_pressed = 0
+				button_pressed = 1
+			ENDIF
+		ENDIF
+		// SCFIX: END
 
 		IF HAS_MISSION_AUDIO_FINISHED 1
 			CLEAR_THIS_PRINT ( HAT_1A )
