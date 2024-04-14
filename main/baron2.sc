@@ -1078,7 +1078,7 @@ IF NOT IS_CAR_DEAD buddy_heli
 	GIVE_WEAPON_TO_CHAR sgang3 WEAPONTYPE_TEC9 30000
 	SET_CHAR_HEALTH sgang3 50
 
-	CREATE_CHAR PEDTYPE_CIVMALE SGb -11.8 1208.5 22.5 sgang4 //Back of bobcat2
+	CREATE_CHAR PEDTYPE_CIVMALE SGa 27.3 1196.4 19.6 sgang4 // Next to swimming pool // SCFIX: ped swapped
 	SET_CHAR_STAY_IN_SAME_PLACE sgang4 TRUE
 	SET_CHAR_OBJ_DESTROY_CAR sgang4 buddy_heli
 	SET_CHAR_THREAT_SEARCH sgang4 THREAT_PLAYER1
@@ -1086,7 +1086,7 @@ IF NOT IS_CAR_DEAD buddy_heli
 	GIVE_WEAPON_TO_CHAR sgang4 WEAPONTYPE_TEC9 30000
 	SET_CHAR_HEALTH sgang4 50
 
-	CREATE_CHAR PEDTYPE_CIVMALE SGa -22.9 1198.6 22.1 sgang5 //next to bobcat3
+	CREATE_CHAR PEDTYPE_CIVMALE SGa 0.8 1212.9 20.4 sgang5 // infront of bobcats // SCFIX: ped swapped
 	SET_CHAR_STAY_IN_SAME_PLACE sgang5 TRUE
 	SET_CHAR_OBJ_DESTROY_CAR sgang5 buddy_heli
 	SET_CHAR_THREAT_SEARCH sgang5 THREAT_PLAYER1
@@ -1118,7 +1118,7 @@ IF NOT IS_CAR_DEAD buddy_heli
 	GIVE_WEAPON_TO_CHAR sgang8 WEAPONTYPE_TEC9 30000
 	SET_CHAR_HEALTH sgang8 50
 
-	CREATE_CHAR PEDTYPE_CIVMALE SGa 27.3 1196.4 19.6 sgang9 // Next to swimming pool
+	CREATE_CHAR PEDTYPE_CIVMALE SGb -11.8 1208.5 22.5 sgang9 //Back of bobcat2  // SCFIX: ped swapped
 	SET_CHAR_STAY_IN_SAME_PLACE sgang9 TRUE
 	SET_CHAR_OBJ_DESTROY_CAR sgang9 buddy_heli
 	SET_CHAR_THREAT_SEARCH sgang9 THREAT_PLAYER1
@@ -1126,7 +1126,7 @@ IF NOT IS_CAR_DEAD buddy_heli
 	GIVE_WEAPON_TO_CHAR sgang9 WEAPONTYPE_TEC9 30000
 	SET_CHAR_HEALTH sgang9 50
 
-	CREATE_CHAR PEDTYPE_CIVMALE SGa 0.8 1212.9 20.4 sgang10 // infront of bobcats
+	CREATE_CHAR PEDTYPE_CIVMALE SGa -22.9 1198.6 22.1 sgang10 //next to bobcat3 // SCFIX: ped swapped
 	SET_CHAR_STAY_IN_SAME_PLACE sgang10 TRUE
 	SET_CHAR_OBJ_DESTROY_CAR sgang10 buddy_heli
 	SET_CHAR_THREAT_SEARCH sgang10 THREAT_PLAYER1
@@ -1186,9 +1186,9 @@ ENDIF
 
 GOSUB zero_ints
 
-upped_to_ten_peds = 1
+//upped_to_ten_peds = 1 // SCFIX: moved down
 
-WHILE NOT deathkills > 9 //North of centre building (SWARM 3!!!)
+WHILE NOT deathkills > 4 //North of centre building (SWARM 3!!!) // SCFIX: was deathkills > 9
 	WAIT 0
 
 	IF IS_CAR_DEAD buddy_heli
@@ -1282,7 +1282,8 @@ ENDIF
 
 TIMERB = 0
 
-WHILE NOT deathkills > 9 //Next to basketball court (SWARM 3!!!)
+upped_to_ten_peds = 1 // SCFIX: moved here from before
+WHILE NOT deathkills = 10 //Next to basketball court (SWARM 3!!!) // SCFIX: was deathkills > 9
 	WAIT 0
 
 	IF IS_CAR_DEAD buddy_heli
