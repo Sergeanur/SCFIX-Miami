@@ -360,6 +360,7 @@ ENDWHILE
 
 //creating car and phil
 CREATE_CAR patriot -1097.0 334.0 10.8 phil2_car 
+SET_CAR_PROOFS phil2_car FALSE TRUE FALSE FALSE FALSE // SCFIX: make fireproof
 SET_CAR_HEADING phil2_car 269.2
 WARP_PLAYER_INTO_CAR player1 phil2_car 
 SET_CAMERA_BEHIND_PLAYER 
@@ -986,7 +987,11 @@ RETURN
 	   
 // mission cleanup
 mission_cleanup_phil2:
-
+// SCFIX: START
+IF NOT IS_CAR_DEAD phil2_car
+	SET_CAR_PROOFS phil2_car FALSE FALSE FALSE FALSE FALSE
+ENDIF
+// SCFIX: END
 flag_player_on_mission = 0
 SET_PLAYER_CONTROL player1 on
 MARK_MODEL_AS_NO_LONGER_NEEDED patriot
