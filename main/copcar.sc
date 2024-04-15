@@ -83,6 +83,18 @@ LVAR_INT criminal3_car_stuck_timer_start criminal3_car_stuck_flag
 
 LOAD_MISSION_TEXT COPCAR
 
+// SCFIX: START
+IF IS_PLAYER_IN_MODEL player1 HUNTER
+	PRINT_BIG COP_M3 6000 5
+ELSE
+	IF IS_PLAYER_IN_MODEL player1 CHEETAH
+		PRINT_BIG COP_M2 6000 5
+	ELSE
+		PRINT_BIG COP_M 6000 5
+	ENDIF
+ENDIF
+// SCFIX: END
+
 //flag_baron_mission2_passed = 1//DEBUG!!!!
 
 copcar_level = 0

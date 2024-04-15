@@ -67,6 +67,8 @@ LVAR_INT onfire_ped_5 onfire_ped_6 onfire_ped_7 onfire_ped_8 onfire_ped_9
 
 LOAD_MISSION_TEXT FIRETRK
 
+PRINT_BIG ( FIRE_M ) 6000 5 // SCFIX: prints are cleared by LOAD_MISSION_TEXT
+
 
 fire_time_limit			= 0
 score_ft				= 0

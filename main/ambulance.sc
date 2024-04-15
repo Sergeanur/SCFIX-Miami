@@ -59,6 +59,8 @@ LVAR_INT injured_ped_5 injured_ped_5_blip injured_ped_5_flag
 
 LOAD_MISSION_TEXT AMBULAE
 
+PRINT_BIG ( AMBUL_M ) 6000 5 // SCFIX: prints are cleared by LOAD_MISSION_TEXT
+
 ped_time_limit 			= 0
 players_ambulance  		= 0
 ambulance_health_last  	= 0
