@@ -443,7 +443,7 @@ security_inner:
 		IF IS_PLAYER_IN_ZONE player1 BEACH2
 			IF flag_player_in_cop_shop = 1
 				IF NOT IS_PLAYER_WEARING player1 player6
-					IF NOT LOCATE_PLAYER_ANY_MEANS_3D player1 392.0 -478.5 12.4 5.0 5.0 5.0 FALSE
+					IF NOT LOCATE_PLAYER_ANY_MEANS_3D player1 392.0 -478.5 12.4 6.0 6.0 5.0 FALSE
 						ALTER_WANTED_LEVEL_NO_DROP player1 2
 					ENDIF
 				ENDIF
