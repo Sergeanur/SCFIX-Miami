@@ -671,98 +671,98 @@ IF cust_coordx >  -757.335
 AND cust_coordx < -219.313
 AND cust_coordy	> -979.568
 AND cust_coordy	< -878.689
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //STARISLAND BRIDGE
 IF cust_coordx >  -180.88
 AND cust_coordx < 64.112
 AND cust_coordy	> -499.183
 AND cust_coordy	< -417.519
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //LIGHTHOUSE JETTYS
 IF cust_coordx >  511.112
 AND cust_coordx < 638.214
 AND cust_coordy	> -1815.644
 AND cust_coordy	< -1679.04
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //BOAT YARD
 IF cust_coordx >  -691.673
 AND cust_coordx < -581.673
 AND cust_coordy	> -1519.748
 AND cust_coordy	< -1449.748
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //PRINT WORKS
 IF cust_coordx >  -1176.038
 AND cust_coordx < -1012.796
 AND cust_coordy	> -266.898
 AND cust_coordy	< -158.26
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //CAR YARD
 IF cust_coordx >  -1031.494
 AND cust_coordx < -949.479
 AND cust_coordy	> -902.312
 AND cust_coordy	< -821.592
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //ICECREAM
 IF cust_coordx >  -896.098
 AND cust_coordx < -855.09
 AND cust_coordy	> -593.101
 AND cust_coordy	< -548.64
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //TAXIFIRM
 IF cust_coordx >  -1012.06
 AND cust_coordx < -982.06
 AND cust_coordy	> 181.561
 AND cust_coordy	< 216.561
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //PORN STUDIO
 IF cust_coordx >  -112.495
 AND cust_coordx < 9.705
 AND cust_coordy	> 920.349
 AND cust_coordy	< 1025.694
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //HOTEL WITH GLASSHOUSE & SWIMMING POOL OUT BACK
 IF cust_coordx >  533.891
 AND cust_coordx < 673.891
 AND cust_coordy	> -343.116
 AND cust_coordy	< -183.116
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //ARMY BASE
 IF cust_coordx >  -1783.2216 
 AND cust_coordx < -1586.5990 
 AND cust_coordy	> -307.5092
 AND cust_coordy	< -84.3105 
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //PIZZA SHOP DOWNTOWN
 IF cust_coordx >  -903.6972 
 AND cust_coordx < -882.7946 
 AND cust_coordy	> 791.7817
 AND cust_coordy	< 808.3229
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //PIZZA SHOP HAITI
 IF cust_coordx >  -1059.2343 
 AND cust_coordx < -1040.1482 
 AND cust_coordy	> 73.3646 
 AND cust_coordy	< 89.7497
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //HAITIAN BASE
 IF cust_coordx >  -1235.7916
 AND cust_coordx < -1110.9315
 AND cust_coordy	> 32.1217 
 AND cust_coordy	< 126.1341
-	GOTO generate_random_coord
+	GOTO get_rnd_locations
 ENDIF
 //G-SPOTLIGHT OFFICE
 IF cust_coordx >  -570.1256
