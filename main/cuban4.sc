@@ -377,17 +377,18 @@ ENDWHILE
 
 PRINT_NOW CUB4_W 10000 1 // He's not feeling so good.
 
-WHILE cs_time < 69153
+WHILE cs_time < 69924 // SCFIX: was 69153
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
 ENDWHILE
-
+/* SCFIX: removed
 CLEAR_PRINTS
 
 WHILE cs_time < 71424
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
 ENDWHILE
+*/
 
 DO_FADE 1500 FADE_OUT
 
