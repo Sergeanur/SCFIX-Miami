@@ -148,6 +148,9 @@ frame_counter = 0
 
 gosub_car_to_slow_speed = 0.0
 
+LVAR_INT courier_temp_car // SCFIX
+courier_temp_car = -1 // SCFIX
+
 //////////////////////////
 //////////////////////////
 
@@ -1233,11 +1236,14 @@ IF frame_counter = 1
 		IF IS_CHAR_IN_ANY_CAR courier
 			IF IS_CHAR_LEAVING_VEHICLE_TO_DIE courier
 				courier_in_car = 0
+				courier_temp_car = -1
 			ELSE
 				courier_in_car = 1
+				STORE_CAR_CHAR_IS_IN_NO_SAVE courier courier_temp_car // SCFIX
 			ENDIF
 		ELSE
 			courier_in_car = 0
+			courier_temp_car = -1
 			IF flee_car_timer > game_timer
 				GOSUB car2_occupants_kill_player
 			ENDIF
@@ -1387,8 +1393,29 @@ IF frame_counter = 1
 		ENDIF
 	ELSE
 		IF courier_in_car = 1
-			PRINT_NOW CNT2_04 5000 1//"You destroyed the plates in the explosion!"
-			GOTO mission_counter2_failed
+			IF IS_CAR_DEAD courier_temp_car // SCFIX
+				PRINT_NOW CNT2_04 5000 1//"You destroyed the plates in the explosion!"
+				GOTO mission_counter2_failed
+			// SCFIX: START
+			ELSE
+				IF NOT security_warning = 1
+					security_warning = 1
+				ENDIF
+				IF created_object_flag = 0
+					REMOVE_BLIP mission_blip
+					IF DOES_CHAR_EXIST courier
+						GET_DEAD_CHAR_PICKUP_COORDS courier x y z
+					ELSE
+						GET_CAR_COORDINATES courier_temp_car x y z
+					ENDIF
+					CREATE_PICKUP briefcase PICKUP_ONCE x y z plates
+					ADD_BLIP_FOR_PICKUP plates mission_blip
+					PRINT_NOW CNT2_06 5000 1//The courier has died and dropped the plates, get to them before anyone else.
+					courier_in_car = 2
+					created_object_flag = 1
+				ENDIF
+			ENDIF
+			// SCFIX: END
 		ELSE
 			IF NOT IS_CHAR_IN_WATER	courier
 				IF NOT security_warning = 1
