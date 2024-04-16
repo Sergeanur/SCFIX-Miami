@@ -332,7 +332,7 @@ WHILE cs_time < 49597
 ENDWHILE
 
 IF IS_AUSTRALIAN_GAME
-OR IS_JAPANESE_GAME
+//OR IS_JAPANESE_GAME // SCFIX-JAP: removed for compatibility with 1.0
 	WHILE cs_time < 49697
 		WAIT 0
 		GET_CUTSCENE_TIME cs_time

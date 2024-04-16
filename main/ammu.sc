@@ -2902,12 +2902,13 @@ RETURN
 
 check_dpad_state1:
 
+	/* SCFIX-JAP: removed for compatibility with 1.0
 	IF IS_JAPANESE_GAME
 		PRINT_HELP_FOREVER GUN_H2
-	ELSE
+	ELSE*/
 		//PRINT_HELP ( GUN_H1 )
 		PRINT_HELP_FOREVER GUN_H1
-	ENDIF
+	//ENDIF // SCFIX-JAP: removed for compatibility with 1.0
 
 	GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
@@ -2958,12 +2959,13 @@ RETURN
 
 check_dpad_state1_2:
 
+	/* SCFIX-JAP: removed for compatibility with 1.0
 	IF IS_JAPANESE_GAME
 		PRINT_HELP_FOREVER GUN_H2
-	ELSE
+	ELSE*/
 		//PRINT_HELP ( GUN_H1 )
 		PRINT_HELP_FOREVER GUN_H1
-	ENDIF
+	//ENDIF // SCFIX-JAP: removed for compatibility with 1.0
 
 	GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
@@ -3021,12 +3023,13 @@ RETURN
 
 check_dpad_state2:
 
+	/* SCFIX-JAP: removed for compatibility with 1.0
 	IF IS_JAPANESE_GAME
 		PRINT_HELP_FOREVER GUN_H2
-	ELSE
+	ELSE*/
 		//PRINT_HELP ( GUN_H1 )
 		PRINT_HELP_FOREVER GUN_H1
-	ENDIF
+	//ENDIF // SCFIX-JAP: removed for compatibility with 1.0
 
 	GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
