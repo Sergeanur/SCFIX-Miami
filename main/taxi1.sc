@@ -127,6 +127,7 @@ IF taxi_ped1 = -1
 // SCFIX: START
 ELSE
 	IF IS_CHAR_MODEL taxi_ped1 WMOCA
+	OR IS_CHAR_MODEL taxi_ped1 HMOCA
 		MARK_CHAR_AS_NO_LONGER_NEEDED taxi_ped1
 		taxi_ped1 = -1
 		WAIT 0
