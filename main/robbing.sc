@@ -454,12 +454,12 @@ shopware_inner5:
 				
 			IF IS_PLAYER_PLAYING player1
 				// Gash
-				IF LOCATE_PLAYER_ANY_MEANS_3D player1 423.5 1039.4 18.1 30.0 30.0 15.0 FALSE
+				IF LOCATE_PLAYER_ANY_MEANS_3D player1 424.0 1039.4 18.1 30.0 30.0 15.0 FALSE // SCFIX: x was 423.5
 					IF create_shop_keeper2 = 0
 						GOSUB load_shop_keeper
 						time_difference4 = current_time - time_since_murdering_shopkeeper4
 						IF time_difference4 > 60000
-							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 423.5 1039.4 18.1 shop_bloke1 
+							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 424.0 1039.4 18.1 shop_bloke1  // SCFIX: x was 423.5
 							SET_CHAR_HEADING shop_bloke1 136.0
 							GOSUB set_up_shopkeeper
 						ENDIF
@@ -467,7 +467,7 @@ shopware_inner5:
 					ELSE
 						IF time_difference4 > 60000	
 							IF NOT IS_CHAR_DEAD shop_bloke1 
-								IF LOCATE_PLAYER_ANY_MEANS_3D player1 423.5 1039.4 18.1 8.0 8.0 6.0 FALSE
+								IF LOCATE_PLAYER_ANY_MEANS_3D player1 424.0 1039.4 18.1 8.0 8.0 6.0 FALSE // SCFIX: x was 423.5
 									GOSUB shop_bloke_goes_radge
 								ENDIF
 							ELSE 
