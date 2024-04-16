@@ -559,7 +559,9 @@ IF counter_laps = 2
 		IF time_lapsed < record_bmx_2
 			record_bmx_2 = time_lapsed
 			flag_new_bmx_record_set	= 1
-			++ counter_bmx_2_reward
+			IF counter_bmx_2_reward < 4 // SCFIX
+				++ counter_bmx_2_reward
+			ENDIF // SCFIX
 			GOSUB time_malarkey
 		ENDIF
 	ENDIF
