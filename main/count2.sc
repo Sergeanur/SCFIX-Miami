@@ -1236,14 +1236,14 @@ IF frame_counter = 1
 		IF IS_CHAR_IN_ANY_CAR courier
 			IF IS_CHAR_LEAVING_VEHICLE_TO_DIE courier
 				courier_in_car = 0
-				courier_temp_car = -1
+				courier_temp_car = -1 // SCFIX
 			ELSE
 				courier_in_car = 1
 				STORE_CAR_CHAR_IS_IN_NO_SAVE courier courier_temp_car // SCFIX
 			ENDIF
 		ELSE
 			courier_in_car = 0
-			courier_temp_car = -1
+			courier_temp_car = -1 // SCFIX
 			IF flee_car_timer > game_timer
 				GOSUB car2_occupants_kill_player
 			ENDIF
