@@ -497,7 +497,7 @@ SET_CHAR_HEADING waitingarmy2 54.3
 SET_CHAR_ONLY_DAMAGED_BY_PLAYER waitingarmy2 TRUE 
 GIVE_WEAPON_TO_CHAR waitingarmy2 WEAPONTYPE_M4 30000
 SET_CHAR_STAY_IN_SAME_PLACE waitingarmy2 TRUE
-SET_CHAR_ACCURACY waitingarmy1 90
+SET_CHAR_ACCURACY waitingarmy2 90 // SCFIX: was waitingarmy1
 
 //creating dynamite
 CREATE_OBJECT dynamite 467.9 1004.8 18.9 dyn1 
