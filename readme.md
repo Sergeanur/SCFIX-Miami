@@ -17,6 +17,7 @@ Replace main.scm inside data directory, but read save files compatibility note b
 ## List of changes
 
 <details><summary>Click here to expand</summary>
+
 Intro:
 - Fixed SSU related things in the script
 - Added ability to skip the cutscene at lawyer's office (press cross or a sprint key)
