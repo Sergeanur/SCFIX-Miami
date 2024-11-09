@@ -15,6 +15,13 @@ VAR_INT ammu_gun1 ammu_gun2 ammu_gun3 ammu_gun4 ammu_gun5 ammu_gun6 ammu_gun7
 VAR_FLOAT shop_blokeX shop_blokeY shop_blokeZ playera_x playera_y playera_z
 VAR_INT shotgun_in_stock ruger_in_stock	bbat_in_stock machete_in_stock mp5_in_stock python_in_stock	frenzy_status_ammu
 
+// SCFIX: START
+VAR_INT ammu_gun_created_flag
+VAR_INT hard_weapon_created_flag
+VAR_INT ammu_shop_bloke1_created
+VAR_INT hard_shop_bloke1_created
+// SCFIX: END
+
 current_time = 0
 time_since_murdering_shopkeeper1 = -30000
 time_since_murdering_shopkeeper2 = -60000
@@ -47,7 +54,14 @@ katana_in_stock = 0
 robbed_hardshop_1 = 0
 robbed_hardshop_2 = 0
 robbed_hardshop_3 = 0
-													 
+
+// SCFIX: START
+ammu_gun_created_flag = 0
+hard_weapon_created_flag = 0
+ammu_shop_bloke1_created = 0
+hard_shop_bloke1_created = 0
+// SCFIX: END
+
 ADD_CONTINUOUS_SOUND shop_blokeX shop_blokeY shop_blokeZ SOUND_BANK_ALARM_LOOP shop_alarm
 REMOVE_SOUND shop_alarm
 
@@ -110,7 +124,10 @@ shop_ammu1_inner:
 					CREATE_OBJECT bodyarmour -66.629 -1488.0 12.113 ammu_gun5
 					SET_OBJECT_DYNAMIC ammu_gun5 FALSE
 
+					ammu_gun_created_flag = 1 // SCFIX
+
 					IF time_difference1 > 30000 
+						ammu_shop_bloke1_created = 1 // SCFIX
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL21 -62.5 -1485.1 9.6 ammu_shop_bloke1
 						CLEAR_CHAR_THREAT_SEARCH ammu_shop_bloke1
 						SET_CHAR_STAY_IN_SAME_PLACE ammu_shop_bloke1 TRUE
@@ -126,379 +143,382 @@ shop_ammu1_inner:
 
 				ENDIF // camera_ammu1 
 
+				IF ammu_shop_bloke1_created = 1 // SCFIX
 
-				IF NOT IS_CHAR_DEAD ammu_shop_bloke1 
+					IF NOT IS_CHAR_DEAD ammu_shop_bloke1 
 
-					IF ammu_bloke_kill_player = 0
+						IF ammu_bloke_kill_player = 0
 
-						IF flag_cell_nation = 0
+							IF flag_cell_nation = 0
 
-							READ_KILL_FRENZY_STATUS frenzy_status_ammu 
-							IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
+								READ_KILL_FRENZY_STATUS frenzy_status_ammu 
+								IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
 
-								IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 ammu1X ammu1Y ammu1Z 1.0 1.0 2.0 TRUE
-									
-									GOSUB ammu_chat
+									IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 ammu1X ammu1Y ammu1Z 1.0 1.0 2.0 TRUE
+										
+										GOSUB ammu_chat
 
-					 				WHILE in_shopping_mode1 = 0 
-									   	flag_cell_nation = 1
-										WAIT 0
+										WHILE in_shopping_mode1 = 0 
+											flag_cell_nation = 1
+											WAIT 0
 
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 0
-												SET_PLAYER_CONTROL player1 OFF
-												IF NOT IS_CHAR_DEAD	ammu_shop_bloke1
-													TURN_PLAYER_TO_FACE_CHAR Player1 ammu_shop_bloke1
-												ENDIF
-												//SET_PLAYER_HEADING player1 180.0
-												SET_FIXED_CAMERA_POSITION -60.508 -1486.245 12.428 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -60.593 -1487.241 12.433 INTERPOLATION //JUMP_CUT
-
-												IF first_interpolate = 0
-													SET_INTERPOLATION_PARAMETERS 0.0 1200
-													first_interpolate = 1
-												ELSE
-													SET_INTERPOLATION_PARAMETERS 0.0 800
-												ENDIF
-			  									second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-													FREEZE_CHAR_POSITION scplayer TRUE
-												ENDIF
-												WHILE dpad_stateX = 0
-													WAIT 0
-
-													PRINT_BIG ( PISTOL ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 4 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_PYTHON
-															PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
-															IF IS_SCORE_GREATER player1 99
-																IF ReturnedAmmo < 9999
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
-																	IF ReturnedAmmo > 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
-																	ENDIF
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -100
-																	ADD_MONEY_SPENT_ON_WEAPONS 100
-																	WAIT 300
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu1_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 1
-												SET_FIXED_CAMERA_POSITION -62.008 -1486.245 12.428 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -62.093 -1487.241 12.433 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-												ENDIF
-												WHILE dpad_stateX = 1
-													WAIT 0
-
-													PRINT_BIG ( INGRAM ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 300 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 6 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_MP5
-														OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_UZI
-														OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_TEC9
-															PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM ReturnedAmmo
-															IF IS_SCORE_GREATER player1 299
-																IF ReturnedAmmo < 9999
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 120
-																	IF ReturnedAmmo > 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 9999
-																	ENDIF
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -300
-																	ADD_MONEY_SPENT_ON_WEAPONS 300
-																	WAIT 300
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu1_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 2
-												SET_FIXED_CAMERA_POSITION -63.508 -1486.245 12.428 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -63.593 -1487.241 12.433 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-												ENDIF
-												WHILE dpad_stateX = 2
-													WAIT 0
-
-													PRINT_BIG ( SHOTGN1 ) 1000 4
-													IF shotgun_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1	
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 500 1000 1 
-													ENDIF
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 5 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF shotgun_in_stock = 1
-															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SPAS12_SHOTGUN
-															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_STUBBY_SHOTGUN
-																PRINT_WITH_NUMBER_NOW ( HELP54 ) 500 1000 1
-															ENDIF
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF shotgun_in_stock = 1
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN ReturnedAmmo
-																IF IS_SCORE_GREATER player1 499
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 32
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -500
-																		ADD_MONEY_SPENT_ON_WEAPONS 500
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu1_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 3
-												SET_FIXED_CAMERA_POSITION -65.008 -1486.245 12.428 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -65.093 -1487.241 12.433 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-												ENDIF
-												WHILE dpad_stateX = 3
-													WAIT 0
-
-													PRINT_BIG ( RUGER ) 1000 4
-													IF ruger_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1	
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 1000 1000 1 
-													ENDIF
-													
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 7 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF ruger_in_stock = 1
-															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_M4
-																PRINT_WITH_NUMBER_NOW ( HELP54 ) 1000 1000 1
-															ENDIF
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF ruger_in_stock = 1
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_RUGER ReturnedAmmo
-																IF IS_SCORE_GREATER player1 999
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 150
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_RUGER
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -1000
-																		ADD_MONEY_SPENT_ON_WEAPONS 1000
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu1_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 4
-												SET_FIXED_CAMERA_POSITION -66.508 -1486.245 12.428 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -66.593 -1487.241 12.433 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
-												ENDIF
-												WHILE dpad_stateX = 4
-													WAIT 0
-
-													PRINT_BIG ( ARMOUR ) 1000 4
-
-													IF armour_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1	
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 200 1000 1 
-													ENDIF
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1
-
-														GET_CHAR_ARMOUR scplayer players_armour
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF armour_in_stock = 1
-																IF IS_SCORE_GREATER player1 199
-																	IF players_armour < 100
-																		ADD_ARMOUR_TO_PLAYER Player1 200
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -200
-																		ADD_MONEY_SPENT_ON_WEAPONS 200
-																		WAIT 300
-																	ELSE
-																		IF done_copcar_progress = 1
-																			IF players_armour < 200
-																				ADD_ARMOUR_TO_PLAYER Player1 200
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -200
-																				ADD_MONEY_SPENT_ON_WEAPONS 200
-																				WAIT 300
-																			ENDIF
-																		ENDIF 
-																	ENDIF
-
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode1 = 1
-															GOTO shop_ammu1_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-									ENDWHILE //IF shopping_mode 
-
-								ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
-
-									IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 ammu1X ammu1Y ammu1Z 1.0 1.0 2.0 TRUE
-										IF in_shopping_mode1 = 1
 											IF IS_PLAYER_PLAYING player1
-												GOSUB not_in_wee_ammu_zone
+												IF dpad_stateX = 0
+													SET_PLAYER_CONTROL player1 OFF
+													IF NOT IS_CHAR_DEAD	ammu_shop_bloke1
+														TURN_PLAYER_TO_FACE_CHAR Player1 ammu_shop_bloke1
+													ENDIF
+													//SET_PLAYER_HEADING player1 180.0
+													SET_FIXED_CAMERA_POSITION -60.508 -1486.245 12.428 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -60.593 -1487.241 12.433 INTERPOLATION //JUMP_CUT
+
+													IF first_interpolate = 0
+														SET_INTERPOLATION_PARAMETERS 0.0 1200
+														first_interpolate = 1
+													ELSE
+														SET_INTERPOLATION_PARAMETERS 0.0 800
+													ENDIF
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
+														FREEZE_CHAR_POSITION scplayer TRUE
+													ENDIF
+													WHILE dpad_stateX = 0
+														WAIT 0
+
+														PRINT_BIG ( PISTOL ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 4 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_PYTHON
+																PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
+																IF IS_SCORE_GREATER player1 99
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
+																		ENDIF
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -100
+																		ADD_MONEY_SPENT_ON_WEAPONS 100
+																		WAIT 300
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu1_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 1
+													SET_FIXED_CAMERA_POSITION -62.008 -1486.245 12.428 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -62.093 -1487.241 12.433 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
+													ENDIF
+													WHILE dpad_stateX = 1
+														WAIT 0
+
+														PRINT_BIG ( INGRAM ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 300 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 6 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_MP5
+															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_UZI
+															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_TEC9
+																PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM ReturnedAmmo
+																IF IS_SCORE_GREATER player1 299
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 120
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SILENCED_INGRAM 9999
+																		ENDIF
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SILENCED_INGRAM
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -300
+																		ADD_MONEY_SPENT_ON_WEAPONS 300
+																		WAIT 300
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu1_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 2
+													SET_FIXED_CAMERA_POSITION -63.508 -1486.245 12.428 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -63.593 -1487.241 12.433 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
+													ENDIF
+													WHILE dpad_stateX = 2
+														WAIT 0
+
+														PRINT_BIG ( SHOTGN1 ) 1000 4
+														IF shotgun_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1	
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 500 1000 1 
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 5 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF shotgun_in_stock = 1
+																IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SPAS12_SHOTGUN
+																OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_STUBBY_SHOTGUN
+																	PRINT_WITH_NUMBER_NOW ( HELP54 ) 500 1000 1
+																ENDIF
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF shotgun_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 499
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 32
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SHOTGUN 9999
+																			ENDIF
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SHOTGUN
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -500
+																			ADD_MONEY_SPENT_ON_WEAPONS 500
+																			WAIT 300
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu1_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 3
+													SET_FIXED_CAMERA_POSITION -65.008 -1486.245 12.428 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -65.093 -1487.241 12.433 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
+													ENDIF
+													WHILE dpad_stateX = 3
+														WAIT 0
+
+														PRINT_BIG ( RUGER ) 1000 4
+														IF ruger_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1	
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 1000 1000 1 
+														ENDIF
+														
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 7 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF ruger_in_stock = 1
+																IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_M4
+																	PRINT_WITH_NUMBER_NOW ( HELP54 ) 1000 1000 1
+																ENDIF
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF ruger_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_RUGER ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 999
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 150
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_RUGER 9999
+																			ENDIF
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_RUGER
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -1000
+																			ADD_MONEY_SPENT_ON_WEAPONS 1000
+																			WAIT 300
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu1_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 4
+													SET_FIXED_CAMERA_POSITION -66.508 -1486.245 12.428 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -66.593 -1487.241 12.433 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu1X ammu1Y ammu1Z
+													ENDIF
+													WHILE dpad_stateX = 4
+														WAIT 0
+
+														PRINT_BIG ( ARMOUR ) 1000 4
+
+														IF armour_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1	
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 200 1000 1 
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1
+
+															GET_CHAR_ARMOUR scplayer players_armour
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF armour_in_stock = 1
+																	IF IS_SCORE_GREATER player1 199
+																		IF players_armour < 100
+																			ADD_ARMOUR_TO_PLAYER Player1 200
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -200
+																			ADD_MONEY_SPENT_ON_WEAPONS 200
+																			WAIT 300
+																		ELSE
+																			IF done_copcar_progress = 1
+																				IF players_armour < 200
+																					ADD_ARMOUR_TO_PLAYER Player1 200
+																					GOSUB buy_noise
+																					ADD_SCORE player1 -200
+																					ADD_MONEY_SPENT_ON_WEAPONS 200
+																					WAIT 300
+																				ENDIF
+																			ENDIF 
+																		ENDIF
+
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu1_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+										ENDWHILE //IF shopping_mode 
+
+									ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
+
+										IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 ammu1X ammu1Y ammu1Z 1.0 1.0 2.0 TRUE
+											IF in_shopping_mode1 = 1
+												IF IS_PLAYER_PLAYING player1
+													GOSUB not_in_wee_ammu_zone
+												ENDIF
 											ENDIF
 										ENDIF
-									ENDIF
 
-								ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
-							
-							ENDIF //Kill frenzie flag
+									ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
+								
+								ENDIF //Kill frenzie flag
 
-						ENDIF //Flag for mobile
+							ENDIF //Flag for mobile
 
-					ENDIF //ammubloke kills player
+						ENDIF //ammubloke kills player
 
-				ENDIF //IF NOT IS_CHAR_DEAD
+					ENDIF //IF NOT IS_CHAR_DEAD
+
+				ENDIF // SCFIX: ammu_shop_bloke1_created = 1
 
 		
 			ELSE //LOCATE_PLAYER_IN_AREA_3D	(big one)
@@ -566,7 +586,10 @@ shop_ammu2_inner:
 					CREATE_OBJECT bodyarmour 362.1 1049.5 20.9 ammu_gun7
 					SET_OBJECT_DYNAMIC ammu_gun7 FALSE
 
+					ammu_gun_created_flag = 3 // SCFIX
+
 					IF time_difference1 > 30000 
+						ammu_shop_bloke1_created = 1 // SCFIX
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL21 366.1 1052.2 18.2 ammu_shop_bloke1
 						CLEAR_CHAR_THREAT_SEARCH ammu_shop_bloke1
 						SET_CHAR_STAY_IN_SAME_PLACE ammu_shop_bloke1 TRUE
@@ -584,334 +607,74 @@ shop_ammu2_inner:
 				ENDIF // camera_ammu1 
 
 
-				IF NOT IS_CHAR_DEAD ammu_shop_bloke1 
+				IF ammu_shop_bloke1_created = 1 // SCFIX
 
-					IF ammu_bloke_kill_player = 0
+					IF NOT IS_CHAR_DEAD ammu_shop_bloke1 
 
-						IF flag_cell_nation = 0
+						IF ammu_bloke_kill_player = 0
 
-							READ_KILL_FRENZY_STATUS frenzy_status_ammu 
-							IF NOT frenzy_status_ammu = 1 //Kill frenzie flag
+							IF flag_cell_nation = 0
 
-								IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 ammu2X ammu2Y ammu2Z 1.0 1.0 2.0 TRUE
-									GOSUB ammu_chat
+								READ_KILL_FRENZY_STATUS frenzy_status_ammu 
+								IF NOT frenzy_status_ammu = 1 //Kill frenzie flag
 
-					 				WHILE in_shopping_mode1 = 0 
-										flag_cell_nation = 1
-										WAIT 0
+									IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 ammu2X ammu2Y ammu2Z 1.0 1.0 2.0 TRUE
+										GOSUB ammu_chat
 
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 0
-												SET_PLAYER_CONTROL player1 OFF
-												IF NOT IS_CHAR_DEAD	ammu_shop_bloke1
-													TURN_PLAYER_TO_FACE_CHAR Player1 ammu_shop_bloke1
-												ENDIF
-												SET_FIXED_CAMERA_POSITION 367.203 1051.161 21.269 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 367.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
+										WHILE in_shopping_mode1 = 0 
+											flag_cell_nation = 1
+											WAIT 0
 
-												IF first_interpolate = 0
-													SET_INTERPOLATION_PARAMETERS 0.0 1200
-													first_interpolate = 1
-												ELSE
-													SET_INTERPOLATION_PARAMETERS 0.0 800
-												ENDIF
-			  									second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-													FREEZE_CHAR_POSITION scplayer TRUE
-												ENDIF
-												WHILE dpad_stateX = 0
-													WAIT 0
-
-													PRINT_BIG ( PISTOL ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1_2
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 4 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_PYTHON
-															PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
-															IF IS_SCORE_GREATER player1 99
-																IF ReturnedAmmo < 9999
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
-																	IF ReturnedAmmo > 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
-																	ENDIF
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -100
-																	ADD_MONEY_SPENT_ON_WEAPONS 100
-																	WAIT 300
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu2_inner
-														ENDIF
-
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 0
+													SET_PLAYER_CONTROL player1 OFF
+													IF NOT IS_CHAR_DEAD	ammu_shop_bloke1
+														TURN_PLAYER_TO_FACE_CHAR Player1 ammu_shop_bloke1
 													ENDIF
+													SET_FIXED_CAMERA_POSITION 367.203 1051.161 21.269 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 367.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
 
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 1
-												SET_FIXED_CAMERA_POSITION 366.203 1051.161 21.269 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 366.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-												ENDIF
-												WHILE dpad_stateX = 1
-													WAIT 0
-
-													PRINT_BIG ( UZI ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 400 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1_2
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 6 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_MP5
-														OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SILENCED_INGRAM
-														OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_TEC9
-															PRINT_WITH_NUMBER_NOW ( HELP54 ) 400 1000 1
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_UZI ReturnedAmmo
-															IF IS_SCORE_GREATER player1 399
-																IF ReturnedAmmo < 9999
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 120
-																	IF ReturnedAmmo > 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 9999
-																	ENDIF
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UZI
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -400
-																	ADD_MONEY_SPENT_ON_WEAPONS 400
-																	WAIT 300
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu2_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 2
-												SET_FIXED_CAMERA_POSITION 365.203 1051.161 21.269 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 365.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-												ENDIF
-												WHILE dpad_stateX = 2
-													WAIT 0
-
-													PRINT_BIG ( SHOTGN3 ) 1000 4
-
-													IF stubby_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1	
+													IF first_interpolate = 0
+														SET_INTERPOLATION_PARAMETERS 0.0 1200
+														first_interpolate = 1
 													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 600 1000 1 
+														SET_INTERPOLATION_PARAMETERS 0.0 800
 													ENDIF
-
+													second_interpolate = 0
+													WAIT 800
 													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1_2
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 5 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF stubby_in_stock = 1
-															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SPAS12_SHOTGUN
-															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SHOTGUN
-																PRINT_WITH_NUMBER_NOW ( HELP54 ) 600 1000 1
-															ENDIF
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF stubby_in_stock = 1
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN ReturnedAmmo
-																IF IS_SCORE_GREATER player1 599
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 20
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -600
-																		ADD_MONEY_SPENT_ON_WEAPONS 600
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu2_inner
-														ENDIF
-
+														SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+														FREEZE_CHAR_POSITION scplayer TRUE
 													ENDIF
+													WHILE dpad_stateX = 0
+														WAIT 0
 
-												ENDWHILE
-											ENDIF
-										ENDIF
+														PRINT_BIG ( PISTOL ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
 
+														IF IS_PLAYER_PLAYING player1
 
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 3
-												SET_FIXED_CAMERA_POSITION 364.203 1051.161 21.269 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 364.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-												ENDIF
-												WHILE dpad_stateX = 3
-													WAIT 0
+															GOSUB check_dpad_state1_2
 
-													PRINT_BIG ( SNIPE ) 1000 4
+															GET_CHAR_WEAPON_IN_SLOT scplayer 4 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
 
-													IF sniper_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1	
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 1500 1000 1 
-													ENDIF
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1_2
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 9 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF sniper_in_stock = 1
-															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_LASERSCOPE
-																PRINT_WITH_NUMBER_NOW ( HELP54 ) 1500 1000 1
+															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_PYTHON
+																PRINT_WITH_NUMBER_NOW ( HELP54 ) 100 1000 1
 															ENDIF
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF sniper_in_stock = 1
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE ReturnedAmmo
-																IF IS_SCORE_GREATER player1 1499
-																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 40
-																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 9999
-																		ENDIF
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -1500
-																		ADD_MONEY_SPENT_ON_WEAPONS 1500
-																		WAIT 300
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode1 = 1
-															GOTO shop_ammu2_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 4
-												SET_FIXED_CAMERA_POSITION 363.203 1051.161 21.269 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 363.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
-												ENDIF
-												WHILE dpad_stateX = 4
-													WAIT 0
-
-													PRINT_BIG ( GRENADE ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 300 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state1_2
-
-														GET_CHAR_WEAPON_IN_SLOT scplayer 3 what_WeaponType ReturnedAmmo what_Model
-														GOSUB set_current_weapon
-
-														IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_DETONATOR_GRENADE
-														OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_MOLOTOV
-														OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_TEARGAS
-															PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
-														ENDIF
 
 															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_GRENADE ReturnedAmmo
-																IF IS_SCORE_GREATER player1 299
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL ReturnedAmmo
+																IF IS_SCORE_GREATER player1 99
 																	IF ReturnedAmmo < 9999
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_GRENADE 8
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 68
 																		IF ReturnedAmmo > 9999
-																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_GRENADE 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_PISTOL 9999
 																		ENDIF
-																		
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_PISTOL
 																		GOSUB buy_noise
-																		ADD_SCORE player1 -300
-																		ADD_MONEY_SPENT_ON_WEAPONS 300
+																		ADD_SCORE player1 -100
+																		ADD_MONEY_SPENT_ON_WEAPONS 100
 																		WAIT 300
 																	ENDIF
 																ELSE
@@ -919,106 +682,370 @@ shop_ammu2_inner:
 																ENDIF
 															ENDIF
 
-											   			IF in_shopping_mode1 = 1
-															GOTO shop_ammu2_inner
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu2_inner
+															ENDIF
+
 														ENDIF
-														  
-													ENDIF
 
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 5
-												SET_FIXED_CAMERA_POSITION 362.203 1051.161 21.269 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 362.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												in_this_state1 = 0
-												in_this_state2 = 0
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+													ENDWHILE
 												ENDIF
-												WHILE dpad_stateX = 5
-													WAIT 0
+											ENDIF
 
-													PRINT_BIG ( ARMOUR ) 1000 4
-
-													IF armour_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1	
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 200 1000 1 
-													ENDIF
-
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 1
+													SET_FIXED_CAMERA_POSITION 366.203 1051.161 21.269 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 366.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
 													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+													ENDIF
+													WHILE dpad_stateX = 1
+														WAIT 0
 
-														GOSUB check_dpad_state1_2
+														PRINT_BIG ( UZI ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 400 1000 1
 
-														GET_CHAR_ARMOUR scplayer players_armour
+														IF IS_PLAYER_PLAYING player1
 
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF armour_in_stock = 1
-																IF IS_SCORE_GREATER player1 199
-																	IF players_armour < 100
-																		ADD_ARMOUR_TO_PLAYER Player1 200
+															GOSUB check_dpad_state1_2
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 6 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_MP5
+															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SILENCED_INGRAM
+															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_TEC9
+																PRINT_WITH_NUMBER_NOW ( HELP54 ) 400 1000 1
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_UZI ReturnedAmmo
+																IF IS_SCORE_GREATER player1 399
+																	IF ReturnedAmmo < 9999
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 120
+																		IF ReturnedAmmo > 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_UZI 9999
+																		ENDIF
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_UZI
 																		GOSUB buy_noise
-																		ADD_SCORE player1 -200
-																		ADD_MONEY_SPENT_ON_WEAPONS 200
+																		ADD_SCORE player1 -400
+																		ADD_MONEY_SPENT_ON_WEAPONS 400
 																		WAIT 300
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu2_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 2
+													SET_FIXED_CAMERA_POSITION 365.203 1051.161 21.269 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 365.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+													ENDIF
+													WHILE dpad_stateX = 2
+														WAIT 0
+
+														PRINT_BIG ( SHOTGN3 ) 1000 4
+
+														IF stubby_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1	
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 600 1000 1 
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1_2
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 5 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF stubby_in_stock = 1
+																IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SPAS12_SHOTGUN
+																OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_SHOTGUN
+																	PRINT_WITH_NUMBER_NOW ( HELP54 ) 600 1000 1
+																ENDIF
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF stubby_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 599
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 20
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_STUBBY_SHOTGUN 9999
+																			ENDIF
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_STUBBY_SHOTGUN
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -600
+																			ADD_MONEY_SPENT_ON_WEAPONS 600
+																			WAIT 300
+																		ENDIF
 																	ELSE
-																		IF done_copcar_progress = 1
-																			IF players_armour < 200
-																				ADD_ARMOUR_TO_PLAYER Player1 200
-																				GOSUB buy_noise
-																				ADD_SCORE player1 -200
-																				ADD_MONEY_SPENT_ON_WEAPONS 200
-																				WAIT 300
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu2_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 3
+													SET_FIXED_CAMERA_POSITION 364.203 1051.161 21.269 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 364.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+													ENDIF
+													WHILE dpad_stateX = 3
+														WAIT 0
+
+														PRINT_BIG ( SNIPE ) 1000 4
+
+														IF sniper_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1	
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 1500 1000 1 
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1_2
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 9 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF sniper_in_stock = 1
+																IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_LASERSCOPE
+																	PRINT_WITH_NUMBER_NOW ( HELP54 ) 1500 1000 1
+																ENDIF
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF sniper_in_stock = 1
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 1499
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 40
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SNIPERRIFLE 9999
+																			ENDIF
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SNIPERRIFLE
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -1500
+																			ADD_MONEY_SPENT_ON_WEAPONS 1500
+																			WAIT 300
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu2_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 4
+													SET_FIXED_CAMERA_POSITION 363.203 1051.161 21.269 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 363.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+													ENDIF
+													WHILE dpad_stateX = 4
+														WAIT 0
+
+														PRINT_BIG ( GRENADE ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 300 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1_2
+
+															GET_CHAR_WEAPON_IN_SLOT scplayer 3 what_WeaponType ReturnedAmmo what_Model
+															GOSUB set_current_weapon
+
+															IF HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_DETONATOR_GRENADE
+															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_MOLOTOV
+															OR HAS_PLAYER_GOT_WEAPON Player1 WEAPONTYPE_TEARGAS
+																PRINT_WITH_NUMBER_NOW ( HELP54 ) 300 1000 1
+															ENDIF
+
+																IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																	GET_AMMO_IN_PLAYER_WEAPON player1 WEAPONTYPE_GRENADE ReturnedAmmo
+																	IF IS_SCORE_GREATER player1 299
+																		IF ReturnedAmmo < 9999
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_GRENADE 8
+																			IF ReturnedAmmo > 9999
+																				GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_GRENADE 9999
+																			ENDIF
+																			
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -300
+																			ADD_MONEY_SPENT_ON_WEAPONS 300
+																			WAIT 300
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu2_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 5
+													SET_FIXED_CAMERA_POSITION 362.203 1051.161 21.269 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 362.152 1050.163 21.291 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													in_this_state1 = 0
+													in_this_state2 = 0
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 ammu2X ammu2Y ammu2Z
+													ENDIF
+													WHILE dpad_stateX = 5
+														WAIT 0
+
+														PRINT_BIG ( ARMOUR ) 1000 4
+
+														IF armour_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1	
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 200 1000 1 
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state1_2
+
+															GET_CHAR_ARMOUR scplayer players_armour
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF armour_in_stock = 1
+																	IF IS_SCORE_GREATER player1 199
+																		IF players_armour < 100
+																			ADD_ARMOUR_TO_PLAYER Player1 200
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -200
+																			ADD_MONEY_SPENT_ON_WEAPONS 200
+																			WAIT 300
+																		ELSE
+																			IF done_copcar_progress = 1
+																				IF players_armour < 200
+																					ADD_ARMOUR_TO_PLAYER Player1 200
+																					GOSUB buy_noise
+																					ADD_SCORE player1 -200
+																					ADD_MONEY_SPENT_ON_WEAPONS 200
+																					WAIT 300
+																				ENDIF
 																			ENDIF
 																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
 																	ENDIF
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ELSE
-																GOSUB denied_noise
 															ENDIF
+
+															IF in_shopping_mode1 = 1
+																GOTO shop_ammu2_inner
+															ENDIF
+															
 														ENDIF
 
-											   			IF in_shopping_mode1 = 1
-															GOTO shop_ammu2_inner
-														ENDIF
-														  
-													ENDIF
+													ENDWHILE
+												ENDIF
+											ENDIF
 
-												ENDWHILE
+										ENDWHILE //IF shopping_mode 
+
+
+									ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
+											
+										IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 ammu2X ammu2Y ammu2Z 1.0 1.0 2.0 TRUE
+											IF in_shopping_mode1 = 1
+												IF IS_PLAYER_PLAYING player1
+													GOSUB not_in_wee_ammu_zone
+												ENDIF
 											ENDIF
 										ENDIF
 
-									ENDWHILE //IF shopping_mode 
+									ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
 
+								ENDIF //Kill frenzie flag
 
-								ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
-										
-									IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 ammu2X ammu2Y ammu2Z 1.0 1.0 2.0 TRUE
-										IF in_shopping_mode1 = 1
-											IF IS_PLAYER_PLAYING player1
-												GOSUB not_in_wee_ammu_zone
-											ENDIF
-										ENDIF
-									ENDIF
+							ENDIF //Flag for mobile
 
-								ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
+						ENDIF //ammubloke kills player
 
-							ENDIF //Kill frenzie flag
-
-						ENDIF //Flag for mobile
-
-					ENDIF //ammubloke kills player
-
-				ENDIF //IF NOT IS_CHAR_DEAD
+					ENDIF //IF NOT IS_CHAR_DEAD
+				
+				ENDIF // SCFIX: ammu_shop_bloke1_created = 1
 
 		
 			ELSE //LOCATE_PLAYER_IN_AREA_3D	(big one)
@@ -1087,8 +1114,11 @@ shop_ammu3_inner:
 					SET_OBJECT_DYNAMIC ammu_gun6 FALSE
 					SET_OBJECT_HEADING ammu_gun6 90.0
 
+					ammu_gun_created_flag = 2 // SCFIX
+
 					//IF flag_player_on_bank_2 = 0
 					IF time_difference1 > 30000 
+						ammu_shop_bloke1_created = 1 // SCFIX
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL21 -679.97 1203.5 10.0 ammu_shop_bloke1
 						SET_CHAR_HEADING ammu_shop_bloke1 270.0
 						CLEAR_CHAR_THREAT_SEARCH ammu_shop_bloke1
@@ -1107,6 +1137,7 @@ shop_ammu3_inner:
 				ENDIF // camera_ammu1 
 
 				IF flag_player_on_bank_2 = 0 //Willie's flag
+				AND ammu_shop_bloke1_created = 1 // SCFIX
 
 					IF NOT IS_CHAR_DEAD ammu_shop_bloke1
 				 
@@ -1629,7 +1660,10 @@ shop_hardware_inner1:
 					SET_OBJECT_DYNAMIC hard_weapon5 FALSE
 					SET_OBJECT_ROTATION hard_weapon5 0.0 90.0 0.0
 
+					hard_weapon_created_flag = 1 // SCFIX
+
 					IF time_difference2 > 60000
+						hard_shop_bloke1_created = 1 // SCFIX
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 202.4 -471.1 10.1 hard_shop_bloke1 
 						SET_CHAR_HEADING hard_shop_bloke1 180.1
 						GOSUB hard_shop_keeper_setup
@@ -1646,331 +1680,335 @@ shop_hardware_inner1:
 				ENDIF // camera_hard1 			
 
 
-				IF NOT IS_CHAR_DEAD hard_shop_bloke1 
+				IF hard_shop_bloke1_created = 1 // SCFIX
 
-					IF hard_bloke_hide = 0
+					IF NOT IS_CHAR_DEAD hard_shop_bloke1 
 
-						IF flag_cell_nation = 0
+						IF hard_bloke_hide = 0
 
-							READ_KILL_FRENZY_STATUS frenzy_status_ammu 
-							IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
+							IF flag_cell_nation = 0
 
-								IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player1 hard1X hard1Y hard1Z 1.0 1.0 2.0 TRUE
+								READ_KILL_FRENZY_STATUS frenzy_status_ammu 
+								IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
 
-									GOSUB hardware_chat
+									IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player1 hard1X hard1Y hard1Z 1.0 1.0 2.0 TRUE
 
-					 				WHILE in_shopping_mode2 = 0 
-										flag_cell_nation = 1
-										WAIT 0
+										GOSUB hardware_chat
 
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 0
-												SET_PLAYER_CONTROL player1 OFF
-												//SET_PLAYER_HEADING player1 180.0
-												IF NOT IS_CHAR_DEAD	hard_shop_bloke1
-													TURN_PLAYER_TO_FACE_CHAR Player1 hard_shop_bloke1
-												ENDIF
-												SET_FIXED_CAMERA_POSITION 201.616 -470.795 14.284 0.0 0.0 0.0						
-												POINT_CAMERA_AT_POINT 201.608 -469.797 14.217 INTERPOLATION //JUMP_CUT
+										WHILE in_shopping_mode2 = 0 
+											flag_cell_nation = 1
+											WAIT 0
 
-												IF first_interpolate = 0
-													SET_INTERPOLATION_PARAMETERS 0.0 1200
-													first_interpolate = 1
-												ELSE
-													SET_INTERPOLATION_PARAMETERS 0.0 800
-												ENDIF
-			  									second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-													FREEZE_CHAR_POSITION scplayer TRUE
-												ENDIF
-												WHILE dpad_stateX = 0
-													WAIT 0
-
-													PRINT_BIG ( SCREWD ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 10 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 10 
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 9
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -10
-																	ADD_MONEY_SPENT_ON_WEAPONS 10
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode2 = 1
-															GOTO shop_hardware_inner1
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 1
-												SET_FIXED_CAMERA_POSITION 202.616 -470.795 14.284 0.0 0.0 0.0						
-												POINT_CAMERA_AT_POINT 202.608 -469.797 14.217 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-												ENDIF
-												WHILE dpad_stateX = 1
-													WAIT 0
-
-													PRINT_BIG ( HAMMER ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 20 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 20
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 19
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -20
-																	ADD_MONEY_SPENT_ON_WEAPONS 20
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode2 = 1
-															GOTO shop_hardware_inner1
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 2
-												SET_FIXED_CAMERA_POSITION 203.616 -470.795 14.284 0.0 0.0 0.0						
-												POINT_CAMERA_AT_POINT 203.608 -469.797 14.217 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-												ENDIF
-												WHILE dpad_stateX = 2
-													WAIT 0
-
-													PRINT_BIG ( CLEVER ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 50 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 50
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 49
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -50
-																	ADD_MONEY_SPENT_ON_WEAPONS 50
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware_inner1
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 3
-												SET_FIXED_CAMERA_POSITION 204.816 -470.795 14.284 0.0 0.0 0.0						
-												POINT_CAMERA_AT_POINT 204.808 -469.797 14.217 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-												ENDIF
-												WHILE dpad_stateX = 3
-													WAIT 0
-
-													PRINT_BIG ( BASEBAT ) 1000 4
-
-													IF bbat_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1 
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 80 1000 1
-													ENDIF
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														IF bbat_in_stock = 1
-															cost_of_tool = 80
-															GOSUB you_have_a_weapon
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF bbat_in_stock = 1
-																IF IS_SCORE_GREATER player1 79
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_BASEBALLBAT 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -80
-																		ADD_MONEY_SPENT_ON_WEAPONS 80
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware_inner1
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 4
-												SET_FIXED_CAMERA_POSITION 206.116 -470.795 14.284 0.0 0.0 0.0						
-												POINT_CAMERA_AT_POINT 206.108 -469.797 14.217 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
-												ENDIF
-												WHILE dpad_stateX = 4
-													WAIT 0
-
-													PRINT_BIG ( MACHETE ) 1000 4
-													
-													IF machete_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1 
-													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
-													ENDIF
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														IF machete_in_stock = 1
-															cost_of_tool = 100
-															GOSUB you_have_a_weapon
-														ENDIF
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF machete_in_stock	= 1
-																IF IS_SCORE_GREATER player1 99
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																		GOSUB buy_noise
-																		ADD_SCORE player1 -100
-																		ADD_MONEY_SPENT_ON_WEAPONS 100
-																		WAIT 300
-																	ELSE
-																		GOSUB denied_noise
-																	ENDIF
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware_inner1
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-									ENDWHILE //IF shopping_mode 
-
-								ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
-
-									IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 hard1X hard1Y hard1Z 1.0 1.0 2.0 TRUE
-										IF in_shopping_mode2 = 1
 											IF IS_PLAYER_PLAYING player1
-												GOSUB not_in_wee_hard_zone
+												IF dpad_stateX = 0
+													SET_PLAYER_CONTROL player1 OFF
+													//SET_PLAYER_HEADING player1 180.0
+													IF NOT IS_CHAR_DEAD	hard_shop_bloke1
+														TURN_PLAYER_TO_FACE_CHAR Player1 hard_shop_bloke1
+													ENDIF
+													SET_FIXED_CAMERA_POSITION 201.616 -470.795 14.284 0.0 0.0 0.0						
+													POINT_CAMERA_AT_POINT 201.608 -469.797 14.217 INTERPOLATION //JUMP_CUT
+
+													IF first_interpolate = 0
+														SET_INTERPOLATION_PARAMETERS 0.0 1200
+														first_interpolate = 1
+													ELSE
+														SET_INTERPOLATION_PARAMETERS 0.0 800
+													ENDIF
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
+														FREEZE_CHAR_POSITION scplayer TRUE
+													ENDIF
+													WHILE dpad_stateX = 0
+														WAIT 0
+
+														PRINT_BIG ( SCREWD ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 10 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 10 
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 9
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -10
+																		ADD_MONEY_SPENT_ON_WEAPONS 10
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware_inner1
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 1
+													SET_FIXED_CAMERA_POSITION 202.616 -470.795 14.284 0.0 0.0 0.0						
+													POINT_CAMERA_AT_POINT 202.608 -469.797 14.217 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
+													ENDIF
+													WHILE dpad_stateX = 1
+														WAIT 0
+
+														PRINT_BIG ( HAMMER ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 20 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 20
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 19
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -20
+																		ADD_MONEY_SPENT_ON_WEAPONS 20
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware_inner1
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 2
+													SET_FIXED_CAMERA_POSITION 203.616 -470.795 14.284 0.0 0.0 0.0						
+													POINT_CAMERA_AT_POINT 203.608 -469.797 14.217 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
+													ENDIF
+													WHILE dpad_stateX = 2
+														WAIT 0
+
+														PRINT_BIG ( CLEVER ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 50 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 50
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 49
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -50
+																		ADD_MONEY_SPENT_ON_WEAPONS 50
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware_inner1
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 3
+													SET_FIXED_CAMERA_POSITION 204.816 -470.795 14.284 0.0 0.0 0.0						
+													POINT_CAMERA_AT_POINT 204.808 -469.797 14.217 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
+													ENDIF
+													WHILE dpad_stateX = 3
+														WAIT 0
+
+														PRINT_BIG ( BASEBAT ) 1000 4
+
+														IF bbat_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1 
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 80 1000 1
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															IF bbat_in_stock = 1
+																cost_of_tool = 80
+																GOSUB you_have_a_weapon
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF bbat_in_stock = 1
+																	IF IS_SCORE_GREATER player1 79
+																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_BASEBALLBAT 0
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_BASEBALLBAT
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -80
+																			ADD_MONEY_SPENT_ON_WEAPONS 80
+																			WAIT 300
+																		ELSE
+																			GOSUB denied_noise
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware_inner1
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 4
+													SET_FIXED_CAMERA_POSITION 206.116 -470.795 14.284 0.0 0.0 0.0						
+													POINT_CAMERA_AT_POINT 206.108 -469.797 14.217 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard1X hard1Y hard1Z
+													ENDIF
+													WHILE dpad_stateX = 4
+														WAIT 0
+
+														PRINT_BIG ( MACHETE ) 1000 4
+														
+														IF machete_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1 
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
+														ENDIF
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															IF machete_in_stock = 1
+																cost_of_tool = 100
+																GOSUB you_have_a_weapon
+															ENDIF
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF machete_in_stock	= 1
+																	IF IS_SCORE_GREATER player1 99
+																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -100
+																			ADD_MONEY_SPENT_ON_WEAPONS 100
+																			WAIT 300
+																		ELSE
+																			GOSUB denied_noise
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware_inner1
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+										ENDWHILE //IF shopping_mode 
+
+									ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
+
+										IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 hard1X hard1Y hard1Z 1.0 1.0 2.0 TRUE
+											IF in_shopping_mode2 = 1
+												IF IS_PLAYER_PLAYING player1
+													GOSUB not_in_wee_hard_zone
+												ENDIF
 											ENDIF
 										ENDIF
-									ENDIF
 
-								ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
+									ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
 
-							ENDIF //Kill frenzie flag
+								ENDIF //Kill frenzie flag
 
-						ENDIF //Flag for mobile
+							ENDIF //Flag for mobile
 
-					ENDIF //bloke kills player
+						ENDIF //bloke kills player
 
-				ENDIF //IF NOT IS_CHAR_DEAD
+					ENDIF //IF NOT IS_CHAR_DEAD
+
+				ENDIF // SCFIX: hard_shop_bloke1_created = 1
 
 		
 			ELSE //LOCATE_PLAYER_IN_AREA_3D	(big one)
@@ -2029,7 +2067,10 @@ shop_hardware2_inner:
 					SET_OBJECT_DYNAMIC hard_weapon5 FALSE
 					SET_OBJECT_ROTATION hard_weapon5 0.0 -20.0 0.0
 
+					hard_weapon_created_flag = 1 // SCFIX
+
 					IF time_difference2 > 60000 
+						hard_shop_bloke1_created = 1 // SCFIX
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 364.5 1074.3 18.0 hard_shop_bloke1
 						SET_CHAR_HEADING hard_shop_bloke1 358.1
 						GOSUB hard_shop_keeper_setup
@@ -2045,275 +2086,66 @@ shop_hardware2_inner:
 
 				ENDIF // camera_hard1 
 
+				IF hard_shop_bloke1_created = 1 // SCFIX
 
-				IF NOT IS_CHAR_DEAD hard_shop_bloke1 
+					IF NOT IS_CHAR_DEAD hard_shop_bloke1 
 
-					IF hard_bloke_hide = 0
+						IF hard_bloke_hide = 0
 
-						IF flag_cell_nation = 0
+							IF flag_cell_nation = 0
 
-							READ_KILL_FRENZY_STATUS frenzy_status_ammu 
-							IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
+								READ_KILL_FRENZY_STATUS frenzy_status_ammu 
+								IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
 
-								IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 hard2X hard2Y hard2Z 1.0 1.0 2.0 TRUE
+									IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 hard2X hard2Y hard2Z 1.0 1.0 2.0 TRUE
 
-									GOSUB hardware_chat
+										GOSUB hardware_chat
 
-					 				WHILE in_shopping_mode2 = 0 
-										flag_cell_nation = 1
-										WAIT 0
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 0
-												SET_PLAYER_CONTROL player1 OFF
-												IF NOT IS_CHAR_DEAD	hard_shop_bloke1
-													TURN_PLAYER_TO_FACE_CHAR Player1 hard_shop_bloke1
-												ENDIF
-												SET_FIXED_CAMERA_POSITION 366.100 1074.719 21.062 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 366.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
-
-												IF first_interpolate = 0
-													SET_INTERPOLATION_PARAMETERS 0.0 1200
-													first_interpolate = 1
-												ELSE
-													SET_INTERPOLATION_PARAMETERS 0.0 800
-												ENDIF
-			  									second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-													FREEZE_CHAR_POSITION scplayer TRUE
-												ENDIF
-												WHILE dpad_stateX = 0
-													WAIT 0
-
-													PRINT_BIG ( SCREWD ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 10 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 10
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 9
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -10
-																	ADD_MONEY_SPENT_ON_WEAPONS 10
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode2 = 1
-															GOTO shop_hardware2_inner
-														ENDIF
-
+										WHILE in_shopping_mode2 = 0 
+											flag_cell_nation = 1
+											WAIT 0
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 0
+													SET_PLAYER_CONTROL player1 OFF
+													IF NOT IS_CHAR_DEAD	hard_shop_bloke1
+														TURN_PLAYER_TO_FACE_CHAR Player1 hard_shop_bloke1
 													ENDIF
+													SET_FIXED_CAMERA_POSITION 366.100 1074.719 21.062 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 366.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
 
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 1
-												SET_FIXED_CAMERA_POSITION 365.100 1074.719 21.062 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 365.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-												ENDIF
-												WHILE dpad_stateX = 1
-													WAIT 0
-
-													PRINT_BIG ( HAMMER ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 20 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 20
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 19
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -20
-																	ADD_MONEY_SPENT_ON_WEAPONS 20
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode2 = 1
-															GOTO shop_hardware2_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 2
-												SET_FIXED_CAMERA_POSITION 364.100 1074.719 21.062 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 364.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-												ENDIF
-												WHILE dpad_stateX = 2
-													WAIT 0
-
-													PRINT_BIG ( CLEVER ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 50 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 50
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 49
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -50
-																	ADD_MONEY_SPENT_ON_WEAPONS 50
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware2_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 3
-												SET_FIXED_CAMERA_POSITION 363.100 1074.719 21.062 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 363.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-												ENDIF
-												WHILE dpad_stateX = 3
-													WAIT 0							   
-
-													PRINT_BIG ( KNIFE ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 90 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 90
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 89
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KNIFE 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -90
-																	ADD_MONEY_SPENT_ON_WEAPONS 90
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware2_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 4
-												SET_FIXED_CAMERA_POSITION 362.100 1074.719 21.062 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT 362.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
-												ENDIF
-												WHILE dpad_stateX = 4
-													WAIT 0
-
-													PRINT_BIG ( KATANA ) 1000 4
-
-													IF katana_in_stock = 0
-														PRINT_NOW ( STOCK ) 1000 1 
+													IF first_interpolate = 0
+														SET_INTERPOLATION_PARAMETERS 0.0 1200
+														first_interpolate = 1
 													ELSE
-														PRINT_WITH_NUMBER_NOW ( G_COST ) 300 1000 1
-													ENDIF												
-
+														SET_INTERPOLATION_PARAMETERS 0.0 800
+													ENDIF
+													second_interpolate = 0
+													WAIT 800
 													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
+														FREEZE_CHAR_POSITION scplayer TRUE
+													ENDIF
+													WHILE dpad_stateX = 0
+														WAIT 0
 
-														GOSUB check_dpad_state2
+														PRINT_BIG ( SCREWD ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 10 1000 1
 
-														IF katana_in_stock = 1
-															cost_of_tool = 300
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 10
 															GOSUB you_have_a_weapon
-														ENDIF
-													
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF katana_in_stock = 1
-																IF IS_SCORE_GREATER player1 299
-																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
-																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KATANA 0
-																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 9
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
 																		GOSUB buy_noise
-																		ADD_SCORE player1 -300
-																		ADD_MONEY_SPENT_ON_WEAPONS 300
+																		ADD_SCORE player1 -10
+																		ADD_MONEY_SPENT_ON_WEAPONS 10
 																		WAIT 300
 																	ELSE
 																		GOSUB denied_noise
@@ -2321,43 +2153,254 @@ shop_hardware2_inner:
 																ELSE
 																	GOSUB denied_noise
 																ENDIF
-															ELSE
-																GOSUB denied_noise
 															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware2_inner
+															ENDIF
+
 														ENDIF
 
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware2_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
+													ENDWHILE
+												ENDIF
 											ENDIF
-										ENDIF
 
-									ENDWHILE //IF shopping_mode 
 
-								ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
-
-									IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 hard2X hard2Y hard2Z 1.0 1.0 2.0 FALSE
-										IF in_shopping_mode2 = 1
 											IF IS_PLAYER_PLAYING player1
-												GOSUB not_in_wee_hard_zone
+												IF dpad_stateX = 1
+													SET_FIXED_CAMERA_POSITION 365.100 1074.719 21.062 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 365.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
+													ENDIF
+													WHILE dpad_stateX = 1
+														WAIT 0
+
+														PRINT_BIG ( HAMMER ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 20 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 20
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 19
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -20
+																		ADD_MONEY_SPENT_ON_WEAPONS 20
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware2_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 2
+													SET_FIXED_CAMERA_POSITION 364.100 1074.719 21.062 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 364.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
+													ENDIF
+													WHILE dpad_stateX = 2
+														WAIT 0
+
+														PRINT_BIG ( CLEVER ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 50 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 50
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 49
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -50
+																		ADD_MONEY_SPENT_ON_WEAPONS 50
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware2_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 3
+													SET_FIXED_CAMERA_POSITION 363.100 1074.719 21.062 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 363.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
+													ENDIF
+													WHILE dpad_stateX = 3
+														WAIT 0							   
+
+														PRINT_BIG ( KNIFE ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 90 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 90
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 89
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KNIFE 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KNIFE
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -90
+																		ADD_MONEY_SPENT_ON_WEAPONS 90
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware2_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 4
+													SET_FIXED_CAMERA_POSITION 362.100 1074.719 21.062 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT 362.089 1073.720 21.084 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard2X hard2Y hard2Z
+													ENDIF
+													WHILE dpad_stateX = 4
+														WAIT 0
+
+														PRINT_BIG ( KATANA ) 1000 4
+
+														IF katana_in_stock = 0
+															PRINT_NOW ( STOCK ) 1000 1 
+														ELSE
+															PRINT_WITH_NUMBER_NOW ( G_COST ) 300 1000 1
+														ENDIF												
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															IF katana_in_stock = 1
+																cost_of_tool = 300
+																GOSUB you_have_a_weapon
+															ENDIF
+														
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF katana_in_stock = 1
+																	IF IS_SCORE_GREATER player1 299
+																		IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
+																			GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_KATANA 0
+																			SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_KATANA
+																			GOSUB buy_noise
+																			ADD_SCORE player1 -300
+																			ADD_MONEY_SPENT_ON_WEAPONS 300
+																			WAIT 300
+																		ELSE
+																			GOSUB denied_noise
+																		ENDIF
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware2_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+										ENDWHILE //IF shopping_mode 
+
+									ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
+
+										IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 hard2X hard2Y hard2Z 1.0 1.0 2.0 FALSE
+											IF in_shopping_mode2 = 1
+												IF IS_PLAYER_PLAYING player1
+													GOSUB not_in_wee_hard_zone
+												ENDIF
 											ENDIF
 										ENDIF
-									ENDIF
 
-								ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
+									ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
 
-							ENDIF //Kill frenzie flag
+								ENDIF //Kill frenzie flag
 
-						ENDIF //Flag for mobile
+							ENDIF //Flag for mobile
 
-					ENDIF //bloke kills player
+						ENDIF //bloke kills player
 
-				ENDIF //IF NOT IS_CHAR_DEAD
+					ENDIF //IF NOT IS_CHAR_DEAD
 
+				ENDIF // SCFIX: IF hard_shop_bloke1_created = 1
 		
 			ELSE //LOCATE_PLAYER_IN_AREA_3D	(big one)
 
@@ -2419,7 +2462,10 @@ shop_hardware3_inner:
 					SET_OBJECT_DYNAMIC hard_weapon5 FALSE
 					SET_OBJECT_HEADING hard_weapon5 270.0
 
+					hard_weapon_created_flag = 1 // SCFIX
+
 					IF time_difference2 > 60000 			 
+						hard_shop_bloke1_created = 1 // SCFIX
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -963.8 -692.3 10.3 hard_shop_bloke1
 						SET_CHAR_HEADING hard_shop_bloke1 90.0
 						GOSUB hard_shop_keeper_setup
@@ -2436,308 +2482,312 @@ shop_hardware3_inner:
 				ENDIF // camera_hard1 
 
 
-				IF NOT IS_CHAR_DEAD hard_shop_bloke1 
+				IF hard_shop_bloke1_created = 1 // SCFIX
 
-					IF hard_bloke_hide = 0
+					IF NOT IS_CHAR_DEAD hard_shop_bloke1 
 
-						IF flag_cell_nation = 0
+						IF hard_bloke_hide = 0
 
-							READ_KILL_FRENZY_STATUS frenzy_status_ammu 
-							IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
+							IF flag_cell_nation = 0
 
-								IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 hard3X hard3Y hard3Z 1.0 1.0 2.0 TRUE
+								READ_KILL_FRENZY_STATUS frenzy_status_ammu 
+								IF NOT frenzy_status_ammu = 1 ////Kill frenzie flag
 
-									GOSUB hardware_chat
+									IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 hard3X hard3Y hard3Z 1.0 1.0 2.0 TRUE
 
-					 				WHILE in_shopping_mode2 = 0 
-										flag_cell_nation = 1
-										WAIT 0
+										GOSUB hardware_chat
 
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 0
-												SET_PLAYER_CONTROL player1 OFF
-												IF NOT IS_CHAR_DEAD	hard_shop_bloke1
-													TURN_PLAYER_TO_FACE_CHAR Player1 hard_shop_bloke1
-												ENDIF
-												SET_FIXED_CAMERA_POSITION -962.483 -690.104 14.470 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -961.485 -690.029 14.481 INTERPOLATION //JUMP_CUT
+										WHILE in_shopping_mode2 = 0 
+											flag_cell_nation = 1
+											WAIT 0
 
-												IF first_interpolate = 0
-													SET_INTERPOLATION_PARAMETERS 0.0 1200
-													first_interpolate = 1
-												ELSE
-													SET_INTERPOLATION_PARAMETERS 0.0 800
-												ENDIF
-													second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-													FREEZE_CHAR_POSITION scplayer TRUE
-												ENDIF
-												WHILE dpad_stateX = 0
-													WAIT 0
-
-													PRINT_BIG ( SCREWD ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 10 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 10
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 9
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -10
-																	ADD_MONEY_SPENT_ON_WEAPONS 10
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode2 = 1
-															GOTO shop_hardware3_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 1
-												SET_FIXED_CAMERA_POSITION -962.483 -691.104 14.470 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -961.485 -691.029 14.481 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-												ENDIF
-												WHILE dpad_stateX = 1
-													WAIT 0
-
-													PRINT_BIG ( HAMMER ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 20 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 20
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 19
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -20
-																	ADD_MONEY_SPENT_ON_WEAPONS 20
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-														IF in_shopping_mode2 = 1
-															GOTO shop_hardware3_inner
-														ENDIF
-
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 2
-												SET_FIXED_CAMERA_POSITION -962.483 -692.104 14.470 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -961.485 -692.029 14.481 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-												ENDIF
-												WHILE dpad_stateX = 2
-													WAIT 0
-
-													PRINT_BIG ( CLEVER ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 50 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 50
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 49
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -50
-																	ADD_MONEY_SPENT_ON_WEAPONS 50
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware3_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 3
-												SET_FIXED_CAMERA_POSITION -962.483 -693.204 14.470 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -961.485 -693.129 14.481 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-												ENDIF
-												WHILE dpad_stateX = 3
-													WAIT 0
-
-													PRINT_BIG ( MACHETE ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 100
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 99
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -100
-																	ADD_MONEY_SPENT_ON_WEAPONS 100
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware3_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-										IF IS_PLAYER_PLAYING player1
-											IF dpad_stateX = 4
-												SET_FIXED_CAMERA_POSITION -962.483 -694.504 14.470 0.0 0.0 0.0
-												POINT_CAMERA_AT_POINT -961.485 -694.429 14.481 INTERPOLATION //JUMP_CUT
-												SET_INTERPOLATION_PARAMETERS 0.0 800
-												second_interpolate = 0
-												WAIT 800
-												IF IS_PLAYER_PLAYING player1
-													SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
-												ENDIF
-												WHILE dpad_stateX = 4
-													WAIT 0
-
-													PRINT_BIG ( CHAINSA ) 1000 4
-													PRINT_WITH_NUMBER_NOW ( G_COST ) 500 1000 1
-
-													IF IS_PLAYER_PLAYING player1
-
-														GOSUB check_dpad_state2
-
-														cost_of_tool = 500
-														GOSUB you_have_a_weapon
-
-														IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
-															IF IS_SCORE_GREATER player1 499
-																IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
-																	GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CHAINSAW 0
-																	SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
-																	GOSUB buy_noise
-																	ADD_SCORE player1 -500
-																	ADD_MONEY_SPENT_ON_WEAPONS 500
-																	WAIT 300
-																ELSE
-																	GOSUB denied_noise
-																ENDIF
-															ELSE
-																GOSUB denied_noise
-															ENDIF
-														ENDIF
-
-											   			IF in_shopping_mode2 = 1
-															GOTO shop_hardware3_inner
-														ENDIF
-														  
-													ENDIF
-
-												ENDWHILE
-											ENDIF
-										ENDIF
-
-									ENDWHILE //IF shopping_mode 
-
-								ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
-
-									IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 hard3X hard3Y hard3Z 1.0 1.0 2.0 FALSE
-										IF in_shopping_mode2 = 1
 											IF IS_PLAYER_PLAYING player1
-												GOSUB not_in_wee_hard_zone
+												IF dpad_stateX = 0
+													SET_PLAYER_CONTROL player1 OFF
+													IF NOT IS_CHAR_DEAD	hard_shop_bloke1
+														TURN_PLAYER_TO_FACE_CHAR Player1 hard_shop_bloke1
+													ENDIF
+													SET_FIXED_CAMERA_POSITION -962.483 -690.104 14.470 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -961.485 -690.029 14.481 INTERPOLATION //JUMP_CUT
+
+													IF first_interpolate = 0
+														SET_INTERPOLATION_PARAMETERS 0.0 1200
+														first_interpolate = 1
+													ELSE
+														SET_INTERPOLATION_PARAMETERS 0.0 800
+													ENDIF
+														second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
+														FREEZE_CHAR_POSITION scplayer TRUE
+													ENDIF
+													WHILE dpad_stateX = 0
+														WAIT 0
+
+														PRINT_BIG ( SCREWD ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 10 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 10
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 9
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_SCREWDRIVER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_SCREWDRIVER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -10
+																		ADD_MONEY_SPENT_ON_WEAPONS 10
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware3_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 1
+													SET_FIXED_CAMERA_POSITION -962.483 -691.104 14.470 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -961.485 -691.029 14.481 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
+													ENDIF
+													WHILE dpad_stateX = 1
+														WAIT 0
+
+														PRINT_BIG ( HAMMER ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 20 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 20
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 19
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_HAMMER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_HAMMER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -20
+																		ADD_MONEY_SPENT_ON_WEAPONS 20
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware3_inner
+															ENDIF
+
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 2
+													SET_FIXED_CAMERA_POSITION -962.483 -692.104 14.470 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -961.485 -692.029 14.481 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
+													ENDIF
+													WHILE dpad_stateX = 2
+														WAIT 0
+
+														PRINT_BIG ( CLEVER ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 50 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 50
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 49
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CLEAVER 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CLEAVER
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -50
+																		ADD_MONEY_SPENT_ON_WEAPONS 50
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware3_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 3
+													SET_FIXED_CAMERA_POSITION -962.483 -693.204 14.470 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -961.485 -693.129 14.481 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
+													ENDIF
+													WHILE dpad_stateX = 3
+														WAIT 0
+
+														PRINT_BIG ( MACHETE ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 100 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 100
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 99
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_MACHETE 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_MACHETE
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -100
+																		ADD_MONEY_SPENT_ON_WEAPONS 100
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware3_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+											IF IS_PLAYER_PLAYING player1
+												IF dpad_stateX = 4
+													SET_FIXED_CAMERA_POSITION -962.483 -694.504 14.470 0.0 0.0 0.0
+													POINT_CAMERA_AT_POINT -961.485 -694.429 14.481 INTERPOLATION //JUMP_CUT
+													SET_INTERPOLATION_PARAMETERS 0.0 800
+													second_interpolate = 0
+													WAIT 800
+													IF IS_PLAYER_PLAYING player1
+														SET_PLAYER_COORDINATES Player1 hard3X hard3Y hard3Z
+													ENDIF
+													WHILE dpad_stateX = 4
+														WAIT 0
+
+														PRINT_BIG ( CHAINSA ) 1000 4
+														PRINT_WITH_NUMBER_NOW ( G_COST ) 500 1000 1
+
+														IF IS_PLAYER_PLAYING player1
+
+															GOSUB check_dpad_state2
+
+															cost_of_tool = 500
+															GOSUB you_have_a_weapon
+
+															IF IS_BUTTON_PRESSED PAD1 PAD_BTN_ACCEPT // SCFIX: use button variables instead of copypasted code for JP version
+																IF IS_SCORE_GREATER player1 499
+																	IF NOT IS_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
+																		GIVE_WEAPON_TO_PLAYER player1 WEAPONTYPE_CHAINSAW 0
+																		SET_CURRENT_PLAYER_WEAPON player1 WEAPONTYPE_CHAINSAW
+																		GOSUB buy_noise
+																		ADD_SCORE player1 -500
+																		ADD_MONEY_SPENT_ON_WEAPONS 500
+																		WAIT 300
+																	ELSE
+																		GOSUB denied_noise
+																	ENDIF
+																ELSE
+																	GOSUB denied_noise
+																ENDIF
+															ENDIF
+
+															IF in_shopping_mode2 = 1
+																GOTO shop_hardware3_inner
+															ENDIF
+															
+														ENDIF
+
+													ENDWHILE
+												ENDIF
+											ENDIF
+
+										ENDWHILE //IF shopping_mode 
+
+									ELSE //LOCATE_PLAYER_IN_AREA_3D	(wee one)
+
+										IF NOT LOCATE_PLAYER_ON_FOOT_3D player1 hard3X hard3Y hard3Z 1.0 1.0 2.0 FALSE
+											IF in_shopping_mode2 = 1
+												IF IS_PLAYER_PLAYING player1
+													GOSUB not_in_wee_hard_zone
+												ENDIF
 											ENDIF
 										ENDIF
-									ENDIF
 
-								ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
+									ENDIF //LOCATE_PLAYER_IN_AREA_3D (wee one)
 
-							ENDIF //Kill frenzie flag
+								ENDIF //Kill frenzie flag
 
-						ENDIF //Flag for mobile
+							ENDIF //Flag for mobile
 
-					ENDIF //bloke kills player
+						ENDIF //bloke kills player
 
-				ENDIF //IF NOT IS_CHAR_DEAD
-		
+					ENDIF //IF NOT IS_CHAR_DEAD
+				
+				ENDIF // SCFIX: IF hard_shop_bloke1_created = 1
+
 			ELSE //LOCATE_PLAYER_IN_AREA_3D	(big one)
 
 				IF camera_hard1 = 1
@@ -2762,6 +2812,12 @@ shop_hardware3_inner:
 
 ammu_bloke_goes_radge:
 
+	// SCFIX: START
+	IF ammu_shop_bloke1_created = 0
+		RETURN
+	ENDIF
+	// SCFIX: END
+
 	IF NOT IS_CHAR_DEAD ammu_shop_bloke1
 
 		IF IS_PLAYER_SHOOTING player1
@@ -2779,6 +2835,12 @@ ammu_bloke_goes_radge:
 RETURN
 
 hard_bloke_goes_radge:
+
+	// SCFIX: START
+	IF hard_shop_bloke1_created = 0
+		RETURN
+	ENDIF
+	// SCFIX: END
 
 	IF NOT IS_CHAR_DEAD hard_shop_bloke1
 
@@ -3112,6 +3174,13 @@ ammu_shop_keeper_setup:
 	WAIT 1500
 
 	IF IS_PLAYER_PLAYING player1
+	
+		// SCFIX: START
+		IF ammu_shop_bloke1_created = 0
+			RETURN
+		ENDIF
+		// SCFIX: END
+
 		IF NOT IS_CHAR_DEAD ammu_shop_bloke1
 			SET_CHAR_PERSONALITY ammu_shop_bloke1 PEDSTAT_TOUGH_GUY
 			IF IS_PLAYER_IN_ZONE player1 BEACH1
@@ -3149,22 +3218,41 @@ RETURN
 
 not_in_big_ammu_zone:
 
-	IF IS_CHAR_DEAD	ammu_shop_bloke1
+	// SCFIX: START
+	IF ammu_shop_bloke1_created = 0
 	AND	time_difference1 > 30000 //time_difference is greater than 30,000 means shopkeeper has been created 
 		GET_GAME_TIMER time_since_murdering_shopkeeper1 
-	ENDIF
-	DELETE_CHAR	ammu_shop_bloke1
+	ELSE
+	// SCFIX: END
+		IF IS_CHAR_DEAD	ammu_shop_bloke1
+		AND	time_difference1 > 30000 //time_difference is greater than 30,000 means shopkeeper has been created 
+			GET_GAME_TIMER time_since_murdering_shopkeeper1 
+		ENDIF
+	ENDIF // SCFIX
+	IF ammu_shop_bloke1_created = 1 // SCFIX
+		DELETE_CHAR	ammu_shop_bloke1
+		ammu_shop_bloke1_created = 0 // SCFIX
+	ENDIF // SCFIX
 	UNLOAD_SPECIAL_CHARACTER 21
 	IF IS_PLAYER_PLAYING player1
 		FREEZE_CHAR_POSITION scplayer FALSE
 	ENDIF
-	DELETE_OBJECT ammu_gun1
-	DELETE_OBJECT ammu_gun2
-	DELETE_OBJECT ammu_gun3
-	DELETE_OBJECT ammu_gun4				
-	DELETE_OBJECT ammu_gun5	
-	DELETE_OBJECT ammu_gun6	
-	DELETE_OBJECT ammu_gun7		
+	IF ammu_gun_created_flag > 0 // SCFIX: fix crash on deleting false objects
+		DELETE_OBJECT ammu_gun1
+		DELETE_OBJECT ammu_gun2
+		DELETE_OBJECT ammu_gun3
+		DELETE_OBJECT ammu_gun4				
+		DELETE_OBJECT ammu_gun5	
+		IF ammu_gun_created_flag > 1 // SCFIX: fix crash on deleting false objects
+			DELETE_OBJECT ammu_gun6	
+			IF ammu_gun_created_flag > 2 // SCFIX: fix crash on deleting false objects
+				DELETE_OBJECT ammu_gun7		
+// SCFIX: START
+			ENDIF
+		ENDIF
+		ammu_gun_created_flag = 0
+	ENDIF
+// SCFIX: END
 	ammu_bloke_kill_player = 0	
 	camera_ammu1 = 0
 	hands_up_before = 0
@@ -3177,6 +3265,12 @@ not_in_big_ammu_zone:
 RETURN
 
 hard_shop_keeper_setup:
+
+	// SCFIX: START
+	IF hard_shop_bloke1_created = 1
+		RETURN
+	ENDIF
+	// SCFIX: END
 		
 	IF NOT IS_CHAR_DEAD	hard_shop_bloke1								  
 		SET_CHAR_PERSONALITY hard_shop_bloke1 PEDSTAT_TOUGH_GUY 
@@ -3201,18 +3295,33 @@ RETURN
 
 not_in_big_hard_zone:
 
-	IF IS_CHAR_DEAD	hard_shop_bloke1
+	// SCFIX: START
+	IF hard_shop_bloke1_created = 0
 	OR hard_bloke_hide = 1
 		IF	time_difference2 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
 			GET_GAME_TIMER time_since_murdering_shopkeeper2 
 		ENDIF
-	ENDIF
-	DELETE_CHAR	hard_shop_bloke1
-	DELETE_OBJECT hard_weapon1
-	DELETE_OBJECT hard_weapon2
-	DELETE_OBJECT hard_weapon3
-	DELETE_OBJECT hard_weapon4
-	DELETE_OBJECT hard_weapon5
+	ELSE
+	// SCFIX: END
+		IF IS_CHAR_DEAD	hard_shop_bloke1
+		OR hard_bloke_hide = 1
+			IF	time_difference2 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
+				GET_GAME_TIMER time_since_murdering_shopkeeper2 
+			ENDIF
+		ENDIF
+	ENDIF // SCFIX
+	IF hard_shop_bloke1_created = 1 // SCFIX
+		DELETE_CHAR	hard_shop_bloke1
+		hard_shop_bloke1_created = 0 // SCFIX
+	ENDIF // SCFIX
+	IF hard_weapon_created_flag = 1 // SCFIX: fix crash on deleting false object
+		DELETE_OBJECT hard_weapon1
+		DELETE_OBJECT hard_weapon2
+		DELETE_OBJECT hard_weapon3
+		DELETE_OBJECT hard_weapon4
+		DELETE_OBJECT hard_weapon5
+		hard_weapon_created_flag = 0 // SCFIX
+	ENDIF // SCFIX: fix crash on deleting false object
 	UNLOAD_SPECIAL_CHARACTER 16
 	IF IS_PLAYER_PLAYING player1
 		FREEZE_CHAR_POSITION scplayer FALSE
@@ -3244,7 +3353,10 @@ load_up_sam:
 
 	GET_GAME_TIMER current_time
 
-	DELETE_CHAR ammu_shop_bloke1
+	IF ammu_shop_bloke1_created = 1 // SCFIX
+		DELETE_CHAR	ammu_shop_bloke1
+		ammu_shop_bloke1_created = 0 // SCFIX
+	ENDIF // SCFIX
 
 RETURN
 
@@ -3259,7 +3371,10 @@ load_up_hard_keeper:
 
 	GET_GAME_TIMER current_time
 
-	DELETE_CHAR	hard_shop_bloke1
+	IF hard_shop_bloke1_created = 1 // SCFIX
+		DELETE_CHAR	hard_shop_bloke1
+		hard_shop_bloke1_created = 0 // SCFIX
+	ENDIF // SCFIX
 
 RETURN
 
