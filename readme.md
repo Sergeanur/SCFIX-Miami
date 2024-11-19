@@ -346,6 +346,8 @@ Misc:
 - Health bonus gained from hooker will no longer reset when saving
 - Fixed hotel intro marker being invisible after saving in the hotel
 - Haitians now hate the player if he wears Cuban outfit
+- Fixed ability to collect checkpoint with any Sanchez in Dirtring
+- Fixed player teleporting with a vehicle into the stadium when starting Dirtring and entering a vehicle
 - Fixed Quadruple Insane Stunt
 - Fixed being able to see the void behind Robina Cafe when you start any Cuban mission from inside the cafe
 - 'Stop in the pink marker' message near hotel wouldn't show anymore if there is no pink marker

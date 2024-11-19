@@ -887,7 +887,11 @@ ENDWHILE
 SET_FIXED_CAMERA_POSITION -1339.475 1448.583 299.939 0.0 0.0 0.0
 POINT_CAMERA_AT_POINT -1338.617 1449.095 299.894 JUMP_CUT
 
-SET_PLAYER_COORDINATES player1 -1333.326 1451.837 298.161
+IF IS_PLAYER_IN_ANY_CAR player1 // SCFIX
+	WARP_PLAYER_FROM_CAR_TO_COORD player1 -1333.326 1451.837 298.161 // SCFIX
+ELSE // SCFIX
+	SET_PLAYER_COORDINATES player1 -1333.326 1451.837 298.161
+ENDIF // SCFIX
 SET_PLAYER_HEADING player1 0.0
 SET_CAMERA_BEHIND_PLAYER
 RESTORE_CAMERA_JUMPCUT
@@ -1548,7 +1552,7 @@ bike_check_kickstart:
 		player_in_end_area_kickstart = 1
 	ENDIF
 
-   	IF NOT IS_PLAYER_IN_MODEL player1 SANCHEZ
+   	IF NOT IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF NOT IS_PLAYER_IN_MODEL player1 SANCHEZ
 		
 		IF flag_bike_blip_on_kickstart = 0
 			ADD_BLIP_FOR_CAR bike_kickstart bike_blip_kickstart
@@ -1835,7 +1839,7 @@ bike_check_kickstart:
 	 		time_left_to_find_bike_secs_ks = time_left_to_find_bike_ks / 1000
 	 		PRINT_WITH_NUMBER_NOW ( GETBIKE ) time_left_to_find_bike_secs_ks 1000 1 //"time left to get onto bike!"
 
-	 		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+	 		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 				CLEAR_THIS_PRINT ( GETBIKE )
 	 			time_left_to_find_bike_ks = 1
 	 			GOTO bike_check_kickstart
@@ -2173,7 +2177,7 @@ IF flag_done_checkpoint1_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint1_x_kickstart checkpoint1_y_kickstart checkpoint1_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint1_x_kickstart checkpoint1_y_kickstart checkpoint1_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint1_blip_kickstart
@@ -2192,7 +2196,7 @@ IF flag_done_checkpoint2_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint2_x_kickstart checkpoint2_y_kickstart checkpoint2_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 
 			IF audio_flag_cheer_kick = 2
 
@@ -2224,7 +2228,7 @@ IF flag_done_checkpoint3_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint3_x_kickstart checkpoint3_y_kickstart checkpoint3_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint3_x_kickstart checkpoint3_y_kickstart checkpoint3_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint3_blip_kickstart
@@ -2243,7 +2247,7 @@ IF flag_done_checkpoint4_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint4_x_kickstart checkpoint4_y_kickstart checkpoint4_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint4_x_kickstart checkpoint4_y_kickstart checkpoint4_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint4_blip_kickstart
@@ -2262,7 +2266,7 @@ IF flag_done_checkpoint5_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint5_x_kickstart checkpoint5_y_kickstart checkpoint5_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint5_x_kickstart checkpoint5_y_kickstart checkpoint5_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint5_blip_kickstart
@@ -2281,7 +2285,7 @@ IF flag_done_checkpoint6_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint6_x_kickstart checkpoint6_y_kickstart checkpoint6_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 
 			IF audio_flag_cheer_kick = 2
 
@@ -2313,7 +2317,7 @@ IF flag_done_checkpoint7_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint7_x_kickstart checkpoint7_y_kickstart checkpoint7_z_kickstart 2.0 2.0 2.0 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 
 			IF audio_flag_cheer_kick = 2
 
@@ -2345,7 +2349,7 @@ IF flag_done_checkpoint8_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint8_x_kickstart checkpoint8_y_kickstart checkpoint8_z_kickstart 2.0 2.0 2.0 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 
 			IF audio_flag_cheer_kick = 2
 
@@ -2377,7 +2381,7 @@ IF flag_done_checkpoint9_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint9_x_kickstart checkpoint9_y_kickstart checkpoint9_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint9_x_kickstart checkpoint9_y_kickstart checkpoint9_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint9_blip_kickstart
@@ -2396,7 +2400,7 @@ IF flag_done_checkpoint10_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint10_x_kickstart checkpoint10_y_kickstart checkpoint10_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint10_x_kickstart checkpoint10_y_kickstart checkpoint10_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint10_blip_kickstart
@@ -2415,7 +2419,7 @@ IF flag_done_checkpoint11_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint11_x_kickstart checkpoint11_y_kickstart checkpoint11_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint11_x_kickstart checkpoint11_y_kickstart checkpoint11_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint11_blip_kickstart
@@ -2434,7 +2438,7 @@ IF flag_done_checkpoint12_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint12_x_kickstart checkpoint12_y_kickstart checkpoint12_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint12_x_kickstart checkpoint12_y_kickstart checkpoint12_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint12_blip_kickstart
@@ -2453,7 +2457,7 @@ IF flag_done_checkpoint13_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint13_x_kickstart checkpoint13_y_kickstart checkpoint13_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint13_x_kickstart checkpoint13_y_kickstart checkpoint13_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint13_blip_kickstart
@@ -2472,7 +2476,7 @@ IF flag_done_checkpoint14_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint14_x_kickstart checkpoint14_y_kickstart checkpoint14_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint14_x_kickstart checkpoint14_y_kickstart checkpoint14_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint14_blip_kickstart
@@ -2491,7 +2495,7 @@ IF flag_done_checkpoint15_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint15_x_kickstart checkpoint15_y_kickstart checkpoint15_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint15_x_kickstart checkpoint15_y_kickstart checkpoint15_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint15_blip_kickstart
@@ -2510,7 +2514,7 @@ IF flag_done_checkpoint16_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint16_x_kickstart checkpoint16_y_kickstart checkpoint16_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint16_x_kickstart checkpoint16_y_kickstart checkpoint16_z_kickstart SOUND_PART_MISSION_COMPLETE
 		   	PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint16_blip_kickstart
@@ -2529,7 +2533,7 @@ IF flag_done_checkpoint17_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint17_x_kickstart checkpoint17_y_kickstart checkpoint17_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint17_x_kickstart checkpoint17_y_kickstart checkpoint17_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint17_blip_kickstart
@@ -2548,7 +2552,7 @@ IF flag_done_checkpoint18_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint18_x_kickstart checkpoint18_y_kickstart checkpoint18_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint18_x_kickstart checkpoint18_y_kickstart checkpoint18_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint18_blip_kickstart
@@ -2567,7 +2571,7 @@ IF flag_done_checkpoint19_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint19_x_kickstart checkpoint19_y_kickstart checkpoint19_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint19_x_kickstart checkpoint19_y_kickstart checkpoint19_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint19_blip_kickstart
@@ -2586,7 +2590,7 @@ IF flag_done_checkpoint20_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint20_x_kickstart checkpoint20_y_kickstart checkpoint20_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint20_x_kickstart checkpoint20_y_kickstart checkpoint20_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint20_blip_kickstart
@@ -2605,7 +2609,7 @@ IF flag_done_checkpoint21_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint21_x_kickstart checkpoint21_y_kickstart checkpoint21_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint21_x_kickstart checkpoint21_y_kickstart checkpoint21_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint21_blip_kickstart
@@ -2624,7 +2628,7 @@ IF flag_done_checkpoint22_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint22_x_kickstart checkpoint22_y_kickstart checkpoint22_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint22_x_kickstart checkpoint22_y_kickstart checkpoint22_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint22_blip_kickstart
@@ -2643,7 +2647,7 @@ IF flag_done_checkpoint23_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint23_x_kickstart checkpoint23_y_kickstart checkpoint23_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint23_x_kickstart checkpoint23_y_kickstart checkpoint23_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint23_blip_kickstart
@@ -2662,7 +2666,7 @@ IF flag_done_checkpoint24_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint24_x_kickstart checkpoint24_y_kickstart checkpoint24_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint24_x_kickstart checkpoint24_y_kickstart checkpoint24_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint24_blip_kickstart
@@ -2681,7 +2685,7 @@ IF flag_done_checkpoint25_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint25_x_kickstart checkpoint25_y_kickstart checkpoint25_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint25_x_kickstart checkpoint25_y_kickstart checkpoint25_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint25_blip_kickstart
@@ -2700,7 +2704,7 @@ IF flag_done_checkpoint26_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint26_x_kickstart checkpoint26_y_kickstart checkpoint26_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint26_x_kickstart checkpoint26_y_kickstart checkpoint26_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint26_blip_kickstart
@@ -2719,7 +2723,7 @@ IF flag_done_checkpoint27_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint27_x_kickstart checkpoint27_y_kickstart checkpoint27_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint27_x_kickstart checkpoint27_y_kickstart checkpoint27_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint27_blip_kickstart
@@ -2738,7 +2742,7 @@ IF flag_done_checkpoint28_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint28_x_kickstart checkpoint28_y_kickstart checkpoint28_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint28_x_kickstart checkpoint28_y_kickstart checkpoint28_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint28_blip_kickstart
@@ -2757,7 +2761,7 @@ IF flag_done_checkpoint29_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint29_x_kickstart checkpoint29_y_kickstart checkpoint29_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint29_x_kickstart checkpoint29_y_kickstart checkpoint29_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint29_blip_kickstart
@@ -2776,7 +2780,7 @@ IF flag_done_checkpoint30_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint30_x_kickstart checkpoint30_y_kickstart checkpoint30_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint30_x_kickstart checkpoint30_y_kickstart checkpoint30_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint30_blip_kickstart
@@ -2795,7 +2799,7 @@ IF flag_done_checkpoint31_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint31_x_kickstart checkpoint31_y_kickstart checkpoint31_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint31_x_kickstart checkpoint31_y_kickstart checkpoint31_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint31_blip_kickstart
@@ -2814,7 +2818,7 @@ IF flag_done_checkpoint32_kickstart = 0
 	
 	IF LOCATE_PLAYER_ANY_MEANS_3D player1 checkpoint32_x_kickstart checkpoint32_y_kickstart checkpoint32_z_kickstart 1.5 1.5 1.5 FALSE
 
-		IF IS_PLAYER_IN_MODEL player1 SANCHEZ
+		IF IS_PLAYER_IN_CAR player1 bike_kickstart // SCFIX: was IF IS_PLAYER_IN_MODEL player1 SANCHEZ
 			ADD_ONE_OFF_SOUND checkpoint32_x_kickstart checkpoint32_y_kickstart checkpoint32_z_kickstart SOUND_PART_MISSION_COMPLETE
 			PRINT_NOW ( KICK1_6 ) 1000 1 //"Well done now on to the next checkpoint!"
 			REMOVE_BLIP checkpoint32_blip_kickstart
