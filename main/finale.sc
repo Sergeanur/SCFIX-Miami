@@ -87,7 +87,9 @@ LVAR_FLOAT mafia_3_stuck_x mafia_3_stuck_y mafia_3_stuck_z
 LVAR_FLOAT mafia_4_stuck_x mafia_4_stuck_y mafia_4_stuck_z
 LVAR_FLOAT mafia_5_stuck_x mafia_5_stuck_y mafia_5_stuck_z
 
-DELETE_OBJECT mansion_closed//DEBUG!!!!!!!!!!
+IF NOT flag_baron_mission5_passed = 1 // SCFIX: this object doesn't exist normally, might delete something else
+	DELETE_OBJECT mansion_closed//DEBUG!!!!!!!!!!
+ENDIF // SCFIX
 
 LOAD_MISSION_TEXT FINALE
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -288.2 -487.5 9.8 275.0
