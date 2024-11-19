@@ -31,6 +31,11 @@ robbed_shop_11 = 0
 robbed_shop_12 = 0
 robbed_every_shop = 0
 
+// SCFIX: START
+VAR_INT shop_bloke1_created
+shop_bloke1_created = 0
+// SCFIX: END
+
 SCRIPT_NAME	shops
 
 SET_DEATHARREST_STATE OFF
@@ -72,6 +77,7 @@ shopware_inner1:
 					time_difference3 = current_time - time_since_murdering_shopkeeper3
 					IF time_difference3 > 60000
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 450.0 782.5 12.2 shop_bloke1 
+						shop_bloke1_created = 1 // SCFIX
 						GOSUB set_up_shopkeeper
 					ENDIF
 					create_shop_keeper1 = 1
@@ -100,6 +106,7 @@ shopware_inner1:
 						time_difference4 = current_time - time_since_murdering_shopkeeper4
 						IF time_difference4 > 60000
 							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 383.2 759.7 11.0 shop_bloke1 
+							shop_bloke1_created = 1 // SCFIX
 							SET_CHAR_HEADING shop_bloke1 180.0
 							GOSUB set_up_shopkeeper
 						ENDIF
@@ -130,6 +137,7 @@ shopware_inner1:
 						time_difference5 = current_time - time_since_murdering_shopkeeper5
 						IF time_difference5 > 60000
 							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 379.9 210.2 10.6 shop_bloke1 
+							shop_bloke1_created = 1 // SCFIX
 							SET_CHAR_HEADING shop_bloke1 280.0
 							GOSUB set_up_shopkeeper
 						ENDIF
@@ -183,6 +191,7 @@ shopware_inner2:
 					time_difference3 = current_time - time_since_murdering_shopkeeper3
 					IF time_difference3 > 60000
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -846.6 -72.6 10.8 shop_bloke1 
+						shop_bloke1_created = 1 // SCFIX
 						SET_CHAR_HEADING shop_bloke1 166.0
 						GOSUB set_up_shopkeeper
 					ENDIF
@@ -234,6 +243,7 @@ shopware_inner3:
 					time_difference3 = current_time - time_since_murdering_shopkeeper3
 					IF time_difference3 > 60000
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -830.4 741.9 10.6 shop_bloke1 
+						shop_bloke1_created = 1 // SCFIX
 						SET_CHAR_HEADING shop_bloke1 90.0
 						GOSUB set_up_shopkeeper
 					ENDIF
@@ -263,6 +273,7 @@ shopware_inner3:
 						time_difference4 = current_time - time_since_murdering_shopkeeper4
 						IF time_difference4 > 60000
 							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -854.3 850.0 10.6 shop_bloke1 
+							shop_bloke1_created = 1 // SCFIX
 							SET_CHAR_HEADING shop_bloke1 110.0
 							GOSUB set_up_shopkeeper
 						ENDIF
@@ -315,6 +326,7 @@ shopware_inner4:
 					time_difference3 = current_time - time_since_murdering_shopkeeper3
 					IF time_difference3 > 60000
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -858.8 -632.66 10.6 shop_bloke1 
+						shop_bloke1_created = 1 // SCFIX
 						SET_CHAR_HEADING shop_bloke1 193.0
 						GOSUB set_up_shopkeeper
 					ENDIF
@@ -346,6 +358,7 @@ shopware_inner4:
 							time_difference4 = current_time - time_since_murdering_shopkeeper4
 							IF time_difference4 > 60000
 								CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -1167.1 -615.8 11.0 shop_bloke1 
+								shop_bloke1_created = 1 // SCFIX
 								SET_CHAR_HEADING shop_bloke1 90.0
 								GOSUB set_up_shopkeeper
 							ENDIF
@@ -378,6 +391,7 @@ shopware_inner4:
 							time_difference5 = current_time - time_since_murdering_shopkeeper5
 							IF time_difference5 > 60000
 								CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -1192.2 -323.7 11.1 shop_bloke1 
+								shop_bloke1_created = 1 // SCFIX
 								SET_CHAR_HEADING shop_bloke1 90.0
 								GOSUB set_up_shopkeeper
 							ENDIF
@@ -431,6 +445,7 @@ shopware_inner5:
 					time_difference3 = current_time - time_since_murdering_shopkeeper3
 					IF time_difference3 > 60000
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 352.7 1111.3 24.5 shop_bloke1
+						shop_bloke1_created = 1 // SCFIX
 						SET_CHAR_HEADING shop_bloke1 290.0
 						GOSUB set_up_shopkeeper
 					ENDIF
@@ -460,6 +475,7 @@ shopware_inner5:
 						time_difference4 = current_time - time_since_murdering_shopkeeper4
 						IF time_difference4 > 60000
 							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 424.0 1039.4 18.1 shop_bloke1  // SCFIX: x was 423.5
+							shop_bloke1_created = 1 // SCFIX
 							SET_CHAR_HEADING shop_bloke1 136.0
 							GOSUB set_up_shopkeeper
 						ENDIF
@@ -490,6 +506,7 @@ shopware_inner5:
 						time_difference5 = current_time - time_since_murdering_shopkeeper5
 						IF time_difference5 > 60000
 							CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 468.7 1206.6 19.0 shop_bloke1 
+							shop_bloke1_created = 1 // SCFIX
 							SET_CHAR_HEADING shop_bloke1 90.0
 							GOSUB set_up_shopkeeper
 						ENDIF
@@ -634,7 +651,11 @@ load_shop_keeper:
 	ENDWHILE
 
 	GET_GAME_TIMER current_time
-	DELETE_CHAR	shop_bloke1
+
+	IF shop_bloke1_created = 1 // SCFIX: make sure this char was created here
+		DELETE_CHAR	shop_bloke1
+		shop_bloke1_created = 0 // SCFIX
+	ENDIF // SCFIX
 
 RETURN
 
@@ -642,33 +663,63 @@ RETURN
 cleanup_shop_robbing:
 
 	IF create_shop_keeper1 = 1
-		IF IS_CHAR_DEAD	shop_bloke1
+		// SCFIX: START
+		IF shop_bloke1_created = 0
 		OR shop_bloke_hide = 1
 			IF time_difference3 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
 				GET_GAME_TIMER time_since_murdering_shopkeeper3 
 			ENDIF
 			
-		ENDIF
+		ELSE
+		// SCFIX: END
+			IF IS_CHAR_DEAD	shop_bloke1
+			OR shop_bloke_hide = 1
+				IF time_difference3 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
+					GET_GAME_TIMER time_since_murdering_shopkeeper3 
+				ENDIF
+				
+			ENDIF
+		ENDIF // SCFIX
 	ENDIF
 
 	IF create_shop_keeper2 = 1
-		IF IS_CHAR_DEAD	shop_bloke1
+		// SCFIX: START
+		IF shop_bloke1_created = 0
 		OR shop_bloke_hide = 1
 			IF time_difference4 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
 				GET_GAME_TIMER time_since_murdering_shopkeeper4 
 			ENDIF
 			
-		ENDIF
+		ELSE
+		// SCFIX: END
+			IF IS_CHAR_DEAD	shop_bloke1
+			OR shop_bloke_hide = 1
+				IF time_difference4 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
+					GET_GAME_TIMER time_since_murdering_shopkeeper4 
+				ENDIF
+				
+			ENDIF
+		ENDIF // SCFIX
 	ENDIF
 
 	IF create_shop_keeper3 = 1
-		IF IS_CHAR_DEAD	shop_bloke1
+		// SCFIX: START
+		IF shop_bloke1_created = 0
 		OR shop_bloke_hide = 1
 			IF time_difference5 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
 				GET_GAME_TIMER time_since_murdering_shopkeeper5
 			ENDIF
-				 
-		ENDIF
+			
+		ELSE
+		// SCFIX: END
+			IF IS_CHAR_DEAD	shop_bloke1
+			OR shop_bloke_hide = 1
+				IF time_difference5 > 60000 //time_difference is greater than 60,000 means shopkeeper has been created 
+					GET_GAME_TIMER time_since_murdering_shopkeeper5
+				ENDIF
+				
+			ENDIF
+		ENDIF // SCFIX
 	ENDIF
 
 	create_shop_keeper1 = 0
@@ -685,7 +736,10 @@ cleanup_shop_robbing:
 	REMOVE_PICKUP robbed_money3
 	REMOVE_PICKUP robbed_money4
 	UNLOAD_SPECIAL_CHARACTER 16
-	DELETE_CHAR	shop_bloke1
+	IF shop_bloke1_created = 1 // SCFIX
+		DELETE_CHAR	shop_bloke1
+		shop_bloke1_created = 0 // SCFIX
+	ENDIF // SCFIX
 	REMOVE_SOUND shop_alarm
 
 	IF NOT IS_PLAYER_PLAYING player1
