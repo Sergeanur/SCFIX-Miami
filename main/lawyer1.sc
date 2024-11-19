@@ -1626,6 +1626,7 @@ DO_FADE 1000 FADE_OUT
 WAIT 1000
 
 DELETE_OBJECT strip_doors
+strip_doors = -1 // SCFIX: prevent double object deletion
 
 IF NOT IS_CHAR_DEAD cols_daughter
 	IF IS_CHAR_IN_ANY_CAR cols_daughter
@@ -1805,7 +1806,9 @@ GET_GAME_TIMER timer_mobile_start
 REMOVE_BLIP lawyer_blip1
 REMOVE_BLIP colar_cuffs_blip
 REMOVE_BLIP merc_blip 
-DELETE_OBJECT strip_doors
+IF NOT strip_doors = -1 // SCFIX: don't delete if it's already delete
+	DELETE_OBJECT strip_doors
+ENDIF // SCFIX
 CREATE_OBJECT_NO_OFFSET stripclbdrclsd 97.203 -1469.731 10.578 strip_doors
 DONT_REMOVE_OBJECT strip_doors
 MARK_MODEL_AS_NO_LONGER_NEEDED freeway
