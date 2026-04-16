@@ -1195,8 +1195,9 @@ injured_ped_checks:
 	IF ped_var_for_gosub_flag = 4
 		SET_CHAR_OBJ_RUN_TO_COORD ped_var_for_gosub hospital_door_x hospital_door_y
 		IF NOT IS_CHAR_IN_ANY_CAR ped_var_for_gosub	
-			SET_CHAR_OBJ_RUN_TO_COORD ped_var_for_gosub hospital_door_x hospital_door_y
+			// SCFIX: Swap these two around so the objective isn't cancelled
 			MARK_CHAR_AS_NO_LONGER_NEEDED ped_var_for_gosub
+			SET_CHAR_OBJ_RUN_TO_COORD ped_var_for_gosub hospital_door_x hospital_door_y
 			PRINT_BIG A_PASS 3000 5
 			IF bonus_time_flag = 1
 				time_chunk_in_secs = time_chunk / 1000

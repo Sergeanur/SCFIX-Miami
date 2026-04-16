@@ -309,6 +309,7 @@ Phone calls:
 Misc:
 - Fixed side activity title being shown for a split second for Paramedic, Vigilante, Firefighter or Taxi Driver
 - Changed patients' behavior to only run towards stopped ambulance instead of while it's still moving in Paramedic
+- Fixed dropped off patients in Paramedic walking away instead of running to the hospital
 - Disabled patients spawn at a Hyman Memorial Stadium and a G-Spotlight office for Paramedic
 - Capped "Test Track" to $400 max
 - Changed "Cone Crazy" rewards to get rid of a huge money abuse. Now the player is rewarded with $400 for every new best time, and $200 for just beating the mission
