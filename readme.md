@@ -360,6 +360,7 @@ Misc:
 - Removed On Mission flag checks in some mission that were meant to bypass compiler errors
 - Refactored code bloat created by the Japanese support
 - Added checks before deletion of objects and peds in scripts: ammu, robbing, finale, lawyer1
+- Fixed unique VCPD Cheetah Vigilante sub-mission title
 </details>
 
 ## Save files compatibility
