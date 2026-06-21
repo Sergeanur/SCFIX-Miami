@@ -1876,7 +1876,7 @@ CREATE_PICKUP_WITH_AMMO colt45 PICKUP_ON_STREET_SLOW 34 340.5 -249.5 12.5 gun_be
 CREATE_PICKUP_WITH_AMMO chromegun PICKUP_ON_STREET_SLOW 16 42.3 -959.2 21.8 gun_beach4 //Top of Small Mall  
 CREATE_PICKUP_WITH_AMMO chromegun PICKUP_ON_STREET_SLOW 16 568.9 -449.3 11.1 gun_beach5 //Top of the walway along Beach
 CREATE_PICKUP_WITH_AMMO tec9 PICKUP_ON_STREET_SLOW 100 287.9 50.7 10.8 gun_beach6 //Just off small road that used to lead onto golfcourse
-CREATE_PICKUP_WITH_AMMO grenade PICKUP_ON_STREET_SLOW 4 362.2 -500.5 12.3 gun_beach7 //behind police station
+CREATE_PICKUP_WITH_AMMO teargas PICKUP_ON_STREET_SLOW 4 362.2 -500.5 12.3 gun_beach7 //behind police station // SCFIX: was grenade but reverted to Tear Gas
 CREATE_PICKUP cleaver PICKUP_ON_STREET_SLOW 402.6 102.5 11.4 gun_beach8 //Behind North Pizza Hut
 CREATE_PICKUP_WITH_AMMO ruger PICKUP_ON_STREET_SLOW 60 418.9 589.9 18.3 gun_beach9 //On top of swank house 
 CREATE_PICKUP katana PICKUP_ON_STREET_SLOW 476.9 1014.9 19.2 gun_beach10 //Inside Tarbrush Coffee   
