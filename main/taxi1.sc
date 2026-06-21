@@ -26,7 +26,7 @@ VAR_INT taxi_finish_time taxi_start_time total_taxi_time_taken
 VAR_INT score_for_this_fare	speedbonus in_a_row_cash in_a_row_number
 
 VAR_FLOAT taxi_destx1 taxi_desty1 taxi_destz1
-VAR_FLOAT taxi_blipx taxi_blipy taxi_blipz 
+//VAR_FLOAT taxi_blipx taxi_blipy taxi_blipz // SCFIX: III leftovers, now unused
 VAR_FLOAT taxi_ped_x taxi_ped_y taxi_ped_z
 VAR_FLOAT x_diff y_diff x_diff_sq y_diff_sq taxi_distance_sq taxi_distance 
 
@@ -707,8 +707,8 @@ IF IS_CAR_DEAD taxi_car1
 	GOTO mission_taxi1_failed
 ENDIF
 
-x_diff = taxi_ped_x - taxi_blipx
-y_diff = taxi_ped_y - taxi_blipy
+x_diff = taxi_ped_x - taxi_destx1 // SCFIX: Replaced 'taxi_blipx' with 'taxi_destx1'
+y_diff = taxi_ped_y - taxi_desty1 // SCFIX: Replaced 'taxi_blipy' with 'taxi_desty1'
 
 x_diff_sq = x_diff * x_diff
 y_diff_sq = y_diff * y_diff
