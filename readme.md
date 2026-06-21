@@ -341,6 +341,7 @@ Misc:
 - Improved road traffic at Leaf Links bridge
 - Fixed player gaining wanted level when leaving the police department interior
 - Fixed taxi driver being able to become your passenger in a Taxi Driver side activity
+- Fixed the Speed Bonus calculation in a Taxi Driver side activity
 - Cutscene Kaufman Cab is now being deleted after the Kaufman Cabs purchase cutscene
 - Disabled "To enter Ocean View hotel..." message when on mission and after "An Old Friend"
 - Improved the position of a bonus Hunter at a south beach
