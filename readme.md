@@ -361,7 +361,7 @@ Misc:
 - Fixed On Mission flag (flag_player_on_mission) sets to prevent any abuse of this flag
 - Removed On Mission flag checks in some mission that were meant to bypass compiler errors
 - Refactored code bloat created by the Japanese support
-- Added checks before deletion of objects and peds in scripts: ammu, robbing, finale, lawyer1
+- Added checks before deletion of objects, pickups and peds in scripts: ammu, robbing, finale, lawyer1, pickups
 - Fixed unique VCPD Cheetah Vigilante sub-mission title
 </details>
 
