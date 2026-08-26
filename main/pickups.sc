@@ -31,6 +31,38 @@ SET_DEATHARREST_STATE OFF
 WAIT 100
 START_NEW_SCRIPT check_packages
 
+// SCFIX: BEGIN
+bonus_armour1 = -1
+bonus_gun1 = -1
+bonus_gun2 = -1
+bonus_gun3 = -1
+bonus_gun4 = -1
+bonus_gun5 = -1
+bonus_gun6 = -1
+
+moneybag1 = -1
+boomshine1 = -1
+hockeymask1 = -1
+coketotem1 = -1
+shootingtrophy = -1
+suitbag1 = -1
+pornoposter1 = -1
+
+flamer = -1
+trophys = -1
+helibox = -1
+rubbish1 = -1
+shovel1 = -1
+gundocs = -1
+gash_bag1 = -1
+gash_bag2 = -1
+pizzmess1 = -1
+pizzmess2 = -1
+pizzbox = -1
+photos = -1
+initial_painting = -1
+new_painting = -1
+// SCFIX: END
 
 
 mission_packages_start:
@@ -101,13 +133,27 @@ IF shit_counter = 1
 			ENDIF
 		ELSE
 			IF trophy_created = 1
-				DELETE_OBJECT moneybag1  
-				DELETE_OBJECT boomshine1  
-				DELETE_OBJECT hockeymask1  
-				DELETE_OBJECT coketotem1  
-				DELETE_OBJECT shootingtrophy  
-				DELETE_OBJECT suitbag1  
-				DELETE_OBJECT pornoposter1
+				IF NOT moneybag1 = -1 // SCFIX
+					DELETE_OBJECT moneybag1
+				ENDIF // SCFIX
+				IF NOT boomshine1 = -1 // SCFIX
+					DELETE_OBJECT boomshine1
+				ENDIF // SCFIX
+				IF NOT hockeymask1 = -1 // SCFIX
+					DELETE_OBJECT hockeymask1
+				ENDIF // SCFIX
+				IF NOT coketotem1 = -1 // SCFIX
+					DELETE_OBJECT coketotem1
+				ENDIF // SCFIX
+				IF NOT shootingtrophy = -1 // SCFIX
+					DELETE_OBJECT shootingtrophy
+				ENDIF // SCFIX
+				IF NOT suitbag1 = -1 // SCFIX
+					DELETE_OBJECT suitbag1
+				ENDIF // SCFIX
+				IF NOT pornoposter1 = -1 // SCFIX
+					DELETE_OBJECT pornoposter1
+				ENDIF // SCFIX
 				trophy_created = 0
 			ENDIF 
 		ENDIF
@@ -163,20 +209,48 @@ IF shit_counter = 1
 			ENDIF
 		ELSE
 			IF crap_created = 1 
-				DELETE_OBJECT flamer
-				DELETE_OBJECT trophys
-				DELETE_OBJECT helibox
-				DELETE_OBJECT rubbish1
-				DELETE_OBJECT shovel1
-				DELETE_OBJECT gundocs
-				DELETE_OBJECT gash_bag1
-				DELETE_OBJECT gash_bag2
-				DELETE_OBJECT pizzmess1
-				DELETE_OBJECT pizzmess2
-				DELETE_OBJECT pizzbox
-				DELETE_OBJECT photos
-				DELETE_OBJECT initial_painting
-				DELETE_OBJECT new_painting
+				IF NOT flamer = -1 // SCFIX
+					DELETE_OBJECT flamer
+				ENDIF // SCFIX
+				IF NOT trophys = -1 // SCFIX
+					DELETE_OBJECT trophys
+				ENDIF // SCFIX
+				IF NOT helibox = -1 // SCFIX
+					DELETE_OBJECT helibox
+				ENDIF // SCFIX
+				IF NOT rubbish1 = -1 // SCFIX
+					DELETE_OBJECT rubbish1
+				ENDIF // SCFIX
+				IF NOT shovel1 = -1 // SCFIX
+					DELETE_OBJECT shovel1
+				ENDIF // SCFIX
+				IF NOT gundocs = -1 // SCFIX
+					DELETE_OBJECT gundocs
+				ENDIF // SCFIX
+				IF NOT gash_bag1 = -1 // SCFIX
+					DELETE_OBJECT gash_bag1
+				ENDIF // SCFIX
+				IF NOT gash_bag2 = -1 // SCFIX
+					DELETE_OBJECT gash_bag2
+				ENDIF // SCFIX
+				IF NOT pizzmess1 = -1 // SCFIX
+					DELETE_OBJECT pizzmess1
+				ENDIF // SCFIX
+				IF NOT pizzmess2 = -1 // SCFIX
+					DELETE_OBJECT pizzmess2
+				ENDIF // SCFIX
+				IF NOT pizzbox = -1 // SCFIX
+					DELETE_OBJECT pizzbox
+				ENDIF // SCFIX
+				IF NOT photos = -1 // SCFIX
+					DELETE_OBJECT photos
+				ENDIF // SCFIX
+				IF NOT initial_painting = -1 // SCFIX
+					DELETE_OBJECT initial_painting
+				ENDIF // SCFIX
+				IF NOT new_painting = -1 // SCFIX
+					DELETE_OBJECT new_painting
+				ENDIF // SCFIX
 				crap_created = 0
 			ENDIF
 		ENDIF
@@ -910,13 +984,27 @@ check_packages:
 
 remove_bonus_pickups:
 {
-REMOVE_PICKUP bonus_armour1
-REMOVE_PICKUP bonus_gun1      
-REMOVE_PICKUP bonus_gun2 
-REMOVE_PICKUP bonus_gun3
-REMOVE_PICKUP bonus_gun4
-REMOVE_PICKUP bonus_gun5
-REMOVE_PICKUP bonus_gun6
+IF NOT bonus_armour1 = -1 // SCFIX
+	REMOVE_PICKUP bonus_armour1
+ENDIF // SCFIX
+IF NOT bonus_gun1 = -1 // SCFIX
+	REMOVE_PICKUP bonus_gun1
+ENDIF // SCFIX
+IF NOT bonus_gun2 = -1 // SCFIX
+	REMOVE_PICKUP bonus_gun2
+ENDIF // SCFIX
+IF NOT bonus_gun3 = -1 // SCFIX
+	REMOVE_PICKUP bonus_gun3
+ENDIF // SCFIX
+IF NOT bonus_gun4 = -1 // SCFIX
+	REMOVE_PICKUP bonus_gun4
+ENDIF // SCFIX
+IF NOT bonus_gun5 = -1 // SCFIX
+	REMOVE_PICKUP bonus_gun5
+ENDIF // SCFIX
+IF NOT bonus_gun6 = -1 // SCFIX
+	REMOVE_PICKUP bonus_gun6
+ENDIF // SCFIX
 }
 RETURN
 
